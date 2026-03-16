@@ -10,5 +10,5 @@ title: Home page, TheSilverStone's website.
 <a href="/page1">Interests</a>
 <a href="/page2">Page 2</a>
 <a href="/page3">Page 3</a>
-<a href="/eiriaoloth">Eiriaoloth</a>
+<a href="/page4">Eiriaoloth</a>
 </nav>

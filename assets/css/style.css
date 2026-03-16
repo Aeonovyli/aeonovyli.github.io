@@ -1,7 +1,17 @@
---- 
---- 
-@import "{{ site.theme }}"; 
-
+/* Background for the entire page */
 body {
-  background-color: #040044; 
+  background-color: black; /* main background */
+  color: white;            /* text color */
+  margin: 0;
+  font-family: sans-serif;
+  line-height: 1.6;
+  padding: 20px;
+}
+
+/* Optional container for HTML blocks */
+.highlighted-section {
+  background-color: #222; /* slightly different for contrast */
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 8px;
 }

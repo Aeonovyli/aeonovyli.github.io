@@ -3,5 +3,5 @@
 @import "{{ site.theme }}";
 
 body {
-  background-color: #YOUR_HEX_CODE; /* Replace with your desired color code (e.g., #FFEBEE) */
+  background-color: #040044;
 }

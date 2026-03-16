@@ -1,9 +1,9 @@
 ---
 layout: default
-title: Page 1
+title: Intrests
 ---
 
-# Page 1
+#### My intrests are quiet varied, and if a weird sort. They include several old video games (Commander Keen among them) and a lot of Lego—building sorts.
 
 <nav class="nav">
 <a href="/">Home</a>

@@ -6,3 +6,4 @@ _My book is Eiriaoloth, an epic fantasy through the beautiful and lush land, soo
 
 _Certainly not the meek inhabitants of Fornitas, or even the more powerful Guardians. The doom marches on, unchecked._
 
+<link rel="stylesheet" href="assets/css/style.css">

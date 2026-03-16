@@ -14,8 +14,6 @@ title: Home page, TheSilverStone's website.
 
 #### I know a small bit of python, a reasonable (read virtually non-existant) knowledge of lua and C++, and a reasonable chance of surprising myself at any computer language—mainly by exactly how little I know about it.
 
-#### I don't like naming repositories after me which is why when you checked this account in 2022 you didn't see this.
-
 #### I am a fan of Legos and have created several (at least, to me) masterpieces including a futuristic sci-fi phantom fighter.
 
 #### I moved to Saudi at seven, when I started thinking of a book, which now exists elsewhere than my head. At least, mostly.

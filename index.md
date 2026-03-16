@@ -12,3 +12,4 @@ title: Home page, TheSilverStone's website.
 </nav>
 
 # Welcome
+#### I'm TheSilverStone, a teenage coder who likes writing. Eiriaoloth is a book I'm writing, an epic fantasy. Take a look!

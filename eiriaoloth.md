@@ -5,14 +5,6 @@ title: Eiriaoloth
 
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
 
-<nav class="nav">
-<a href="/">Home</a>
-<a href="/page1">Page 1</a>
-<a href="/page2">Page 2</a>
-<a href="/page3">Page 3</a>
-<a href="/page4">Page 4</a>
-</nav>
-
 # Hello!
 
 #### I'm TheSilverStone, creator of both Avenoria and Morntasna.
@@ -25,3 +17,10 @@ title: Eiriaoloth
 <h2>This book is not currently for sale.</h2>
 <h4>Eiriaoloth is still being polished up into its best state. This is just a teaser. Check back in another few months.</h4>
 </div>
+
+<nav class="nav">
+<a href="/">Home</a>
+<a href="/page1">Page 1</a>
+<a href="/page2">Page 2</a>
+<a href="/page3">Page 3</a>
+</nav>

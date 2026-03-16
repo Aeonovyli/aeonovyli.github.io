@@ -12,6 +12,6 @@ My book is *Eiriaoloth*, an epic fantasy through the beautiful and lush land, so
 Certainly not the meek inhabitants of Fornitas, or even the more powerful Guardians. The doom marches on, unchecked.
 
 <div class="highlighted-section">
-  <h2>Special HTML Section</h2>
-  <p>This is an example HTML block inside the Markdown file. You can style it independently.</p>
+  <h2>This book is not currently for sale.</h2>
+  <p>Eiriaoloth is still being polished up into its best state. This is just a teaser. Check back in another few years.</p>
 </div>

@@ -1,17 +1,31 @@
 /* Background for the entire page */
 body {
-  background-color: black; /* main background */
-  color: white;            /* text color */
+  background: linear-gradient(135deg, #0a0a0a, #1a1a1a, #111111);
+  color: #f0f0f0;
   margin: 0;
-  font-family: sans-serif;
+  font-family: 'Georgia', serif;
   line-height: 1.6;
   padding: 20px;
 }
 
+h1, h2, h3 {
+  font-family: 'Cinzel', serif; /* or any fantasy-style font */
+  color: #ffd700; /* golden highlights */
+  text-shadow: 1px 1px 2px #000;
+}
+
 /* Optional container for HTML blocks */
 .highlighted-section {
-  background-color: #222; /* slightly different for contrast */
+  background-color: rgba(34, 34, 34, 0.85); /* translucent dark box */
+  border-left: 4px solid #ffd700;
   padding: 20px;
   margin-top: 20px;
   border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+}
+
+h2:hover {
+  color: #ffcc00;
+  text-shadow: 2px 2px 4px #000;
+  transition: all 0.3s ease-in-out;
 }

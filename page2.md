@@ -9,5 +9,5 @@ title: Page 2
 <a href="/">Home</a>
 <a href="/page1">Interests</a>
 <a href="/page3">Page 3</a>
-<a href="/eiriaoloth">Eiriaoloth</a>
+<a href="/page4">Eiriaoloth</a>
 </nav>

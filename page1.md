@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Intrests
+title: Interests
 ---
 
 #### My intrests are quiet varied, and if a weird sort. They include several old video games (Commander Keen among them) and a lot of Lego—building sorts.

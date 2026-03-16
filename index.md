@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Home
+title: *Home page, TheSilverStone's website.*
 ---
 
 <nav class="nav">

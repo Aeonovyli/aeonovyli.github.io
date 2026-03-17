@@ -34,6 +34,7 @@ title: Interests
   * Fires (I am a (okay, not certified) pyromaniac. ***Don't come into my house. Ever***)
   * Reading
   * Curling up in weird places and going to sleep (This seems to be a non-personal favorite. It's not.)
+####   • Does it work?
 
 #### On second thoughts, it would almost be better to state what I *don't* like, but I'm not going into that here. 
 

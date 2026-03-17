@@ -31,7 +31,7 @@ title: Interests
   * Creating in general; hence Luanti in creative and packed with mods.
   * Photography
   * Climbing
-  * Fires (I am a (okay, not certified) pyromaniac. ***[Don't come into my house. Ever]***
+  * Fires (I am a (okay, not certified) pyromaniac. ***Don't come into my house. Ever***)
   * Reading
   * Curling up in weird places and going to sleep (This seems to be a non-personal favorite. It's not.)
 

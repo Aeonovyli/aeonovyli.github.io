@@ -49,7 +49,7 @@ body::after {
 h1, h2, h3, h4 {
   font-family: 'Cinzel', serif;
   color: #ffd700;
-  text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff; /* mix of fire and ice glow */
+  text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
 }
 
 /* Subtle hover effect for headings */
@@ -58,15 +58,30 @@ h2:hover {
   transition: all 0.3s ease-in-out;
 }
 
+a {
+  color: #ffd700;
+  text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+
+a:visited {
+  color: #ffd700;
+}
+
+a:hover {
+  color: #fff3a0;
+  text-shadow: 2px 2px 6px #ff6347, 0 0 14px #87cefa, 0 0 20px #00f0ff;
+}
+
 .nav a {
-color: #ffd700;
-text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
-text-decoration: none;
-cursor: default;
+  color: #ffd700;
+  text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
+  text-decoration: none;
+  cursor: default;
 }
 
 .nav a:hover {
-color: #ffd700;
-text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
-text-decoration: none;
+  color: #ffd700;
+  text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
 }

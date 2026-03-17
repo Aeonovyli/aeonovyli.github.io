@@ -10,8 +10,6 @@ title: Home page, TheSilverStone's website.
 
 #### I am mostly intrested in two things; creativeness and my book—not counting, of course, BZFlag.
 
-#### The first social account is a bzflag account—you'll have to be logged into the bzflag forums to view it. Sorry about that.
-
 #### I know a small bit of python, a reasonable (read virtually non-existant) knowledge of lua and C++, and a reasonable chance of surprising myself at any computer language—mainly by exactly how little I know about it.
 
 #### I am a fan of Legos and have created several (at least, to me) masterpieces including a futuristic sci-fi phantom fighter.
@@ -21,8 +19,6 @@ title: Home page, TheSilverStone's website.
 #### I am intrested in Luanti, BZFlag, and making mods/maps for both, provided I have time and a few croissants in sight.
 
 #### I am a 3D modeler, who works best in blender (That's where I devolop my 3D brain.) If you need models for pretty much anything besides comercial use, contact me and I'll try to make them, charge free, though please do note that it will take me several months to get back to you.
-
-#### Both chess.com and forums.bzflag.org require you to have an account to talk to other users, and accounts both require a valid email adress. You'll probably want to talk to me on the forums; I check it more often. (Although I hardly respond to strangers, and if you are on the forums you should play the game.)
 
 #### Religion is a hard one. Simply, to him, religion is why the universe is what it is—the truth to hinself. But there is only one Truth and Life and Spirit. These extracts from the rightfully most famous Book of all time explain the core——kinda.
 

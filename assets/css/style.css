@@ -79,9 +79,11 @@ a:hover {
   text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
   text-decoration: none;
   cursor: default;
+  outline: none;
 }
 
 .nav a:hover {
   color: #ffd700;
   text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
+  outline: none;
 }

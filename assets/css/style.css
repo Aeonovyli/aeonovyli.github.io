@@ -4,7 +4,7 @@ body {
   background: black;
   color: #f0f0f0;
   margin: 0;
-  font-family: 'Raleway', serif;
+  font-family: 'Dancing Script', cursive; /* UPDATED FONT */
   line-height: 1.6;
   padding: 20px;
   position: relative;
@@ -47,7 +47,7 @@ body::after {
 
 /* Headings with subtle glow for dragon magic */
 h1, h2, h3, h4 {
-  font-family: 'Cinzel', serif;
+  font-family: 'Dancing Script', cursive;
   color: #ffd700;
   text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
 }

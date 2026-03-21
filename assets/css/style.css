@@ -179,3 +179,41 @@ a:hover {
     opacity: 0;
   }
 }
+
+/* =========================
+   FULLSCREEN FLOATING RUNES
+   ========================= */
+.rune-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999; /* on top of everything */
+  overflow: hidden;
+}
+
+.rune {
+  position: absolute; /* absolutely positioned inside the rune-layer */
+  font-size: 14px;
+  color: rgba(0, 240, 255, 0.6);
+  text-shadow: 0 0 8px #00f0ff, 0 0 15px #00f0ff;
+  will-change: transform, opacity;
+  animation: floatUp linear forwards;
+}
+
+/* Floating motion for ambient runes */
+@keyframes floatUp {
+  0% {
+    transform: translateY(0px) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-120px) scale(1.3);
+    opacity: 0;
+  }
+}

@@ -57,7 +57,7 @@ h2:hover {
   text-shadow: 2px 2px 6px #ff6347, 0 0 12px #87cefa;
   transition: all 0.3s ease-in-out;
 }
-
+/*
 a {
   color: #ffd700;
   text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
@@ -92,30 +92,80 @@ a:focus {
   outline: none;
   box-shadow: 0 0 4px #ffd700;
 }
+*/
 
-
-/* This is a test. If it stops working, delete everything beneath this. */
-@keyframes linkGlow {
+/* This is a test. If it stops working, delete everything beneath this. Then uncomment things above.*/
+@keyframes clickGlow {
   0% {
     text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
   }
   50% {
-    text-shadow: 1px 1px 6px #ffffff, 0 0 12px #ffffff;
+    text-shadow: 1px 1px 8px #ffffff, 0 0 16px #ffffff;
   }
   100% {
     text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
   }
 }
 
-/* Links with glowing animation and hover effect */
-a {
-  color: #ffd700;
-  text-decoration: none;
-  animation: linkGlow 3s infinite ease-in-out;
-  transition: all 0.3s ease-in-out;
+/* Pulsing click animation for nav links */
+@keyframes navClickGlow {
+  0% {
+    text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
+  }
+  50% {
+    text-shadow: 1px 1px 8px #ffffff, 0 0 16px #ffffff;
+  }
+  100% {
+    text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
+  }
 }
 
-a:hover {
+/* -------------------------------
+   Regular links
+   ------------------------------- */
+a:link,
+a:visited {
+  color: #ffd700;
+  text-decoration: none;
+  text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
+  transition: all 0.3s ease-in-out;
+  outline: none;
+}
+
+a:hover,
+a:focus {
   color: #fff3a0;
-  text-shadow: 2px 2px 6px #ff6347, 0 0 14px #87cefa, 0 0 20px #00f0ff;
+  text-shadow: 2px 2px 6px #ff6347,
+               0 0 14px #87cefa,
+               0 0 20px #00f0ff;
+  outline: none;
+}
+
+a:active {
+  animation: clickGlow 0.6s ease-in-out 1;
+}
+
+/* -------------------------------
+   Navigation links
+   ------------------------------- */
+.nav a {
+  color: #ffd700;
+  text-decoration: none;
+  text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
+  cursor: default;
+  transition: all 0.3s ease-in-out;
+  outline: none;
+}
+
+.nav a:hover,
+.nav a:focus {
+  color: #ffd700;
+  text-shadow: 2px 2px 6px #ff6347,
+               0 0 14px #87cefa,
+               0 0 20px #00f0ff;
+  outline: none;
+}
+
+.nav a:active {
+  animation: navClickGlow 0.6s ease-in-out 1;
 }

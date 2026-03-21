@@ -75,13 +75,68 @@ a:hover {
 }
 
 .nav a {
+  position: relative;
   color: #ffd700;
-  text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
   text-decoration: none;
+  margin-right: 20px;
+  font-size: 1.1em;
+  letter-spacing: 1px;
+
+  /* Magical glow */
+  text-shadow:
+    0 0 5px #ff4500,
+    0 0 10px #00f0ff,
+    0 0 15px #00f0ff;
+
+  /* Subtle pulsing energy */
+  animation: arcanePulse 2.5s infinite alternate;
+
   cursor: default;
 }
 
+/* Energy underline */
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 2px;
+
+  background: linear-gradient(90deg, #ff4500, #00f0ff, #ffd700);
+  box-shadow: 0 0 10px #00f0ff;
+
+  transition: width 0.4s ease;
+}
+
+/* Hover = unleash magic */
 .nav a:hover {
-  color: #ffd700;
-  text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
+  color: #fff3a0;
+
+  text-shadow:
+    0 0 10px #ff6347,
+    0 0 20px #00f0ff,
+    0 0 30px #00f0ff,
+    0 0 40px #87cefa;
+
+  animation: none; /* stop pulse so hover feels stronger */
+}
+
+.nav a:hover::after {
+  width: 100%;
+}
+
+/* Pulse animation */
+@keyframes arcanePulse {
+  0% {
+    text-shadow:
+      0 0 5px #ff4500,
+      0 0 10px #00f0ff;
+  }
+  100% {
+    text-shadow:
+      0 0 10px #ff6347,
+      0 0 20px #00f0ff,
+      0 0 30px #00f0ff;
+  }
 }

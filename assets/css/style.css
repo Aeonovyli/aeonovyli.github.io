@@ -87,3 +87,8 @@ a:hover {
   text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
   outline: none;
 }
+
+a:focus {
+  outline: none;
+  box-shadow: 0 0 4px #ffd700;
+}

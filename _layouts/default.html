@@ -6,7 +6,47 @@
   <title>{{ page.title }}</title>
   <link rel="stylesheet" href="/assets/css/style.css">
 </head>
+
 <body>
   {{ content }}
+
+  <!-- 🔮 Arcane rune system -->
+  <script>
+    const runeSymbols = ["✧","✦","✶","✷","✹","✵","✸","✺"];
+
+    const layer = document.createElement("div");
+    layer.className = "rune-layer";
+    document.body.appendChild(layer);
+
+    function spawnRune(x, y, isCursor = false) {
+      const rune = document.createElement("div");
+      rune.className = "rune";
+      rune.textContent = runeSymbols[Math.floor(Math.random() * runeSymbols.length)];
+
+      rune.style.left = x + "px";
+      rune.style.top = y + "px";
+
+      const duration = isCursor ? 800 : 4000;
+      rune.style.animationDuration = duration + "ms";
+
+      layer.appendChild(rune);
+      setTimeout(() => rune.remove(), duration);
+    }
+
+    // Ambient runes
+    setInterval(() => {
+      const x = Math.random() * window.innerWidth;
+      const y = window.innerHeight;
+      spawnRune(x, y);
+    }, 300);
+
+    // Cursor trail
+    document.addEventListener("mousemove", (e) => {
+      const offsetX = (Math.random() - 0.5) * 20;
+      const offsetY = (Math.random() - 0.5) * 20;
+      spawnRune(e.clientX + offsetX, e.clientY + offsetY, true);
+    });
+  </script>
+
 </body>
 </html>

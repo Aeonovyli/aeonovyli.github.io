@@ -15,14 +15,6 @@ title: Eiriaoloth
 
 
 
-<div>
-<h2>This book is not currently for sale.</h2>
-<h4>Eiriaoloth is still being polished up into its best state. This is just a teaser. Check back in another few months.</h4>
-</div>
-
-
-
-
 
 <nav class="nav">
 <a href="/">Home</a>

@@ -6,8 +6,9 @@ title: Profiles
 ## My profiles span quite a large breach of the internet, but the ones I most frequently inhabit are listed below.
 
 #### • BZFlag profile, [red rider](https://forums.bzflag.org/memberlist.php?mode=viewprofile&u=60550)
-#### • Reddit profile, [knaTZB](https://www.reddit.com/user/knaTZB/)
 #### • GitHub profile, [TheSilverStone](https://github.com/TheSilverStone)
+#### • Wikipedia profile, [Aeonovyli](https://en.wikipedia.org/wiki/User:Aeonovyli)
+#### • Reddit profile, [knaTZB](https://www.reddit.com/user/knaTZB/)
 #### • Luanti profile, [red rider](https://forum.luanti.org/memberlist.php?mode=viewprofile&u=52979)
 #### • ContentDB (Luanti mods) [Aeonovyli](https://content.luanti.org/users/red_rider/)
 #### • Scratch3 profile, [knaTZB](https://scratch.mit.edu/users/knaTZB/)

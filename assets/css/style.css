@@ -154,7 +154,6 @@ p, li {
 /* Message Box Styling */
 .message-box {
   background-color: rgba(34, 34, 34, 0.9);
-  border-left: 4px solid #ffd700;
   border-radius: 8px;
   padding: 20px;
   margin-top: 20px;
@@ -223,7 +222,6 @@ p, li {
 
 .message-item {
   background-color: rgba(34, 34, 34, 0.8);
-  border-left: 3px solid #00f0ff;
   padding: 12px;
   margin-bottom: 10px;
   border-radius: 4px;

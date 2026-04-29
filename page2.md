@@ -1,14 +1,11 @@
+
 ---
 layout: default
 title: Contact me
 ---
 
 # Contact me
-#### You can either use one of my profiles, page 3, or you can leave a message for me here. Note that I may not immediately respond, and the messaging logic is still being implmented.
-
-#### Please use the same name as I know you by, and please do not change your name after using it once.
-
-## Leave a Message
+#### Leave a message below. These are stored in real-time using Supabase.
 
 <div class="message-box">
   <form id="messageForm">
@@ -22,57 +19,93 @@ title: Contact me
       <textarea id="userMessage" name="userMessage" rows="5" required placeholder="Leave a message..."></textarea>
     </div>
     
-    <button type="submit" class="submit-btn">Submit Message</button>
+    <button type="submit" id="submitBtn" class="submit-btn">Submit Message</button>
   </form>
   
   <div id="messagesDisplay" class="messages-display">
     <h3>Messages:</h3>
-    <div id="messagesList"></div>
+    <div id="messagesList">Loading messages...</div>
   </div>
 </div>
 
+<!-- 1. Load Supabase Library -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
-document.getElementById('messageForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  
-  const name = document.getElementById('userName').value;
-  const message = document.getElementById('userMessage').value;
-  const timestamp = new Date().toLocaleString();
-  
-  // Get existing messages from localStorage
-  let messages = JSON.parse(localStorage.getItem('messages')) || [];
-  
-  // Add new message
-  messages.push({ name, message, timestamp });
-  
-  // Save to localStorage
-  localStorage.setItem('messages', JSON.stringify(messages));
-  
-  // Clear form
-  document.getElementById('messageForm').reset();
-  
-  // Display messages
-  displayMessages();
-});
+  // 2. Initialize Supabase
+  // REPLACE THESE with your actual keys from Supabase Settings -> API
+  const SUPABASE_URL = 'https://flwbcrmjdulaefiyhdkh.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsd2Jjcm1qZHVsYWVmaXloZGtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0MzU3NjksImV4cCI6MjA5MzAxMTc2OX0.zQDAVn4ZhW7QSC_WajxinnBHvg5Ry09xOZjxHOVMK2A';
+  const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-function displayMessages() {
-  const messages = JSON.parse(localStorage.getItem('messages')) || [];
+  const messageForm = document.getElementById('messageForm');
   const messagesList = document.getElementById('messagesList');
-  messagesList.innerHTML = '';
-  
-  messages.forEach(msg => {
-    const msgElement = document.createElement('div');
-    msgElement.className = 'message-item';
-    msgElement.innerHTML = `
-      <strong>${msg.name}</strong> <span class="timestamp">${msg.timestamp}</span>
-      <p>${msg.message}</p>
-    `;
-    messagesList.appendChild(msgElement);
-  });
-}
 
-// Display messages on page load
-displayMessages();
+  // 3. Load existing messages
+  async function loadMessages() {
+    const { data, error } = await _supabase
+      .from('messages')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      messagesList.innerHTML = "Error loading messages. Check RLS settings.";
+      console.error(error);
+    } else {
+      messagesList.innerHTML = '';
+      data.forEach(msg => addMessageToUI(msg, false));
+    }
+  }
+
+  // 4. Add message to the UI
+  function addMessageToUI(msg, isNew = true) {
+    const div = document.createElement('div');
+    div.className = 'message-item';
+    div.innerHTML = `
+      <strong>${msg.username || 'Anonymous'}</strong> 
+      <span class="timestamp">${new Date(msg.created_at).toLocaleString()}</span>
+      <p>${msg.content}</p>
+    `;
+    
+    if (isNew) {
+      messagesList.prepend(div); // Add new messages to top
+    } else {
+      messagesList.appendChild(div); // Add old messages to bottom
+    }
+  }
+
+  // 5. Handle Form Submission
+  messageForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    const username = document.getElementById('userName').value;
+    const content = document.getElementById('userMessage').value;
+
+    btn.disabled = true;
+    btn.innerText = "Sending...";
+
+    const { error } = await _supabase
+      .from('messages')
+      .insert([{ username, content }]);
+
+    if (error) {
+      alert("Error: " + error.message);
+    } else {
+      messageForm.reset();
+    }
+    btn.disabled = false;
+    btn.innerText = "Submit Message";
+  });
+
+  // 6. Real-time Listener (Listen for new rows)
+  _supabase
+    .channel('public:messages')
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages' }, payload => {
+      addMessageToUI(payload.new, true);
+    })
+    .subscribe();
+
+  loadMessages();
 </script>
 
 <nav class="nav">

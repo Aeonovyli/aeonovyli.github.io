@@ -3,23 +3,80 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title }}</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Cormorant+Garamond&display=swap" rel="stylesheet">
+
+  <!-- Particles.js -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+
   <link rel="stylesheet" href="/assets/css/style.css">
-  
-  <!-- Supabase Library -->
-  <script src="https://jsdelivr.net"></script>
+
+  <style>
+    /* Floating dust background */
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    body {
+      position: relative;
+      z-index: 1;
+    }
+  </style>
 </head>
+
 <body>
 
-  <!-- Supabase Logic -->
+  <!-- Dust layer -->
+  <div id="particles-js"></div>
+
+  <!-- Page content -->
+  {{ content }}
+
+  <!-- Particle settings -->
   <script>
-    const SUPABASE_URL = 'https://supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsd2Jjcm1qZHVsYWVmaXloZGtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0MzU3NjksImV4cCI6MjA5MzAxMTc2OX0.zQDAVn4ZhW7QSC_WajxinnBHvg5Ry09xOZjxHOVMK2A';
-    
-    // Initializing with variable names to prevent the grey text error
-    const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-    
-    console.log("Supabase is active.");
+    particlesJS("particles-js", {
+      particles: {
+        number: {
+          value: 70
+        },
+        size: {
+          value: 2
+        },
+        move: {
+          speed: 0.3,
+          direction: "top",
+          random: true,
+          out_mode: "out"
+        },
+        opacity: {
+          value: 0.3,
+          random: true
+        },
+        color: {
+          value: ["#4da6ff", "#ff944d", "#ffffff"]
+        },
+        line_linked: {
+          enable: false
+        }
+      },
+      interactivity: {
+        events: {
+          onhover: {
+            enable: false
+          }
+        }
+      },
+      retina_detect: true
+    });
   </script>
+
 </body>
 </html>
-

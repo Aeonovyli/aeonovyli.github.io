@@ -6,15 +6,15 @@
   <title>{{ page.title }}</title>
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Cormorant+Garamond&display=swap" rel="stylesheet">
+  <link href="https://googleapis.com" rel="stylesheet">
 
-  <!-- Particles.js -->
-  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+  <!-- Libraries: Particles and Supabase -->
+  <script src="https://jsdelivr.net"></script>
+  <script src="https://jsdelivr.net"></script>
 
   <link rel="stylesheet" href="/assets/css/style.css">
 
   <style>
-    /* Floating dust background */
     #particles-js {
       position: fixed;
       top: 0;
@@ -24,79 +24,56 @@
       z-index: 0;
       pointer-events: none;
     }
-
     body {
       position: relative;
       z-index: 1;
+      margin: 0;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Dust layer -->
+  <!-- Background Layer -->
   <div id="particles-js"></div>
 
-  <!-- Page content -->
-  {{ content }}
+  <!-- Main Content (Only appears ONCE now) -->
+  <main>
+    {{ content }}
+  </main>
 
-  <!-- Particle settings -->
+  <!-- 1. Particle Background Script -->
   <script>
     particlesJS("particles-js", {
       particles: {
-        number: {
-          value: 70
-        },
-        size: {
-          value: 2
-        },
-        move: {
-          speed: 0.3,
-          direction: "top",
-          random: true,
-          out_mode: "out"
-        },
-        opacity: {
-          value: 0.3,
-          random: true
-        },
-        color: {
-          value: ["#4da6ff", "#ff944d", "#ffffff"]
-        },
-        line_linked: {
-          enable: false
-        }
+        number: { value: 70 },
+        size: { value: 2 },
+        move: { speed: 0.3, direction: "top", random: true, out_mode: "out" },
+        opacity: { value: 0.3, random: true },
+        color: { value: ["#4da6ff", "#ff944d", "#ffffff"] },
+        line_linked: { enable: false }
       },
-      interactivity: {
-        events: {
-          onhover: {
-            enable: false
-          }
-        }
-      },
+      interactivity: { events: { onhover: { enable: false } } },
       retina_detect: true
     });
   </script>
 
+  <!-- 2. Supabase Logic Script -->
+  <script>
+    const SUPABASE_URL = 'https://supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsd2Jjcm1qZHVsYWVmaXloZGtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0MzU3NjksImV4cCI6MjA5MzAxMTc2OX0.zQDAVn4ZhW7QSC_WajxinnBHvg5Ry09xOZjxHOVMK2A';
+    
+    // Corrected function call using variable names
+    const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const messageForm = document.getElementById('messageForm');
+    const messagesList = document.getElementById('messagesList');
+
+    if (messageForm && messagesList) {
+       console.log("Supabase and Form are ready!");
+       // Your form handling code goes here
+    }
+  </script>
+
 </body>
 </html>
-
-<!-- Keep your HTML form here... -->
-
-    <!-- All your other layout content is up here -->
-
-    {{ content }}
-
-    <!-- 1. Load Supabase first -->
-<script>
-  const SUPABASE_URL = 'https://flwbcrmjdulaefiyhdkh.supabase.co';
-  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsd2Jjcm1qZHVsYWVmaXloZGtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0MzU3NjksImV4cCI6MjA5MzAxMTc2OX0.zQDAVn4ZhW7QSC_WajxinnBHvg5Ry09xOZjxHOVMK2A';
-  
-  // Use the variable names here:
-  const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-  const messageForm = document.getElementById('messageForm');
-  const messagesList = document.getElementById('messagesList');
-
-  // ... rest of your code
-</script>

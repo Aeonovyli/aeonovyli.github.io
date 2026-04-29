@@ -5,74 +5,73 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ page.title }}</title>
 
-  <!-- Google Fonts -->
+  <!-- Fonts & Libraries -->
   <link href="https://googleapis.com" rel="stylesheet">
-
-  <!-- Libraries: Particles and Supabase -->
   <script src="https://jsdelivr.net"></script>
   <script src="https://jsdelivr.net"></script>
-
   <link rel="stylesheet" href="/assets/css/style.css">
 
   <style>
+    /* Fixed background that stays behind everything */
     #particles-js {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: 0;
-      pointer-events: none;
+      z-index: -1; /* Moved to -1 to stay behind content */
+      background-color: #050505;
     }
-    body {
+
+    /* This makes sure your GitHub Pages content is visible */
+    .main-wrapper {
       position: relative;
-      z-index: 1;
-      margin: 0;
+      z-index: 10;
+      color: white;
+      min-height: 100vh;
+      padding: 20px;
+      font-family: 'Cormorant Garamond', serif;
     }
   </style>
 </head>
-
 <body>
 
-  <!-- Background Layer -->
+  <!-- Dust Layer -->
   <div id="particles-js"></div>
 
-  <!-- Main Content (Only appears ONCE now) -->
-  <main>
+  <!-- This is where your GitHub Pages content (index.md, etc) injects -->
+  <div class="main-wrapper">
     {{ content }}
-  </main>
+  </div>
 
-  <!-- 1. Particle Background Script -->
+  <!-- Particle Setup -->
   <script>
     particlesJS("particles-js", {
       particles: {
-        number: { value: 70 },
-        size: { value: 2 },
-        move: { speed: 0.3, direction: "top", random: true, out_mode: "out" },
-        opacity: { value: 0.3, random: true },
+        number: { value: 60 },
         color: { value: ["#4da6ff", "#ff944d", "#ffffff"] },
-        line_linked: { enable: false }
-      },
-      interactivity: { events: { onhover: { enable: false } } },
-      retina_detect: true
+        opacity: { value: 0.4, random: true },
+        size: { value: 2 },
+        move: { speed: 0.5, direction: "top", out_mode: "out" }
+      }
     });
   </script>
 
-  <!-- 2. Supabase Logic Script -->
+  <!-- Supabase Setup -->
   <script>
     const SUPABASE_URL = 'https://supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsd2Jjcm1qZHVsYWVmaXloZGtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0MzU3NjksImV4cCI6MjA5MzAxMTc2OX0.zQDAVn4ZhW7QSC_WajxinnBHvg5Ry09xOZjxHOVMK2A';
     
-    // Corrected function call using variable names
+    // Using the variable names correctly now
     const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    const messageForm = document.getElementById('messageForm');
-    const messagesList = document.getElementById('messagesList');
-
-    if (messageForm && messagesList) {
-       console.log("Supabase and Form are ready!");
-       // Your form handling code goes here
-    }
+    // This checks if your page has the form before running script
+    document.addEventListener("DOMContentLoaded", () => {
+      const messageForm = document.getElementById('messageForm');
+      if (messageForm) {
+        console.log("Supabase linked and form detected!");
+      }
+    });
   </script>
 
 </body>

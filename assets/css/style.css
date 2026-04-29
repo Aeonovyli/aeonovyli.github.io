@@ -32,14 +32,24 @@ body::after {
 
 .highlighted-section {
   background-color: rgba(34, 34, 34, 0.85);
+  border-left: 4px solid #ffd700;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+}
 
 h1, h2, h3, h4 {
   font-family: 'MedievalSharp', cursive;
   color: #ffd700;
   text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
+}
 
 body {
   font-family: 'Cormorant Garamond', serif !important;
+  color: #ffd700;
+  text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
+}
 
 h2:hover {
   text-shadow: 2px 2px 6px #ff6347, 0 0 12px #87cefa;
@@ -76,12 +86,49 @@ a {
 
 a:link,
 a:visited {
-
-                                                       
-text-decoration: none;
+  color: #ffd700;
+  text-decoration: none;
   text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
   transition: all 0.3s ease-in-out;
   outline: none;
+}
+
+a:hover,
+a:focus {
+  color: #fff3a0;
+  text-shadow: 2px 2px 6px #ff6347,
+               0 0 14px #87cefa,
+               0 0 20px #00f0ff;
+  outline: none;
+}
+
+a:active {
+  animation: clickGlow 0.6s ease-in-out 1;
+}
+
+.nav a {
+  color: #ffd700;
+  text-decoration: none;
+  text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
+  cursor: default;
+  transition: all 0.3s ease-in-out;
+  outline: none;
+}
+
+.nav a:hover,
+.nav a:focus {
+  color: #ffd700;
+  text-shadow: 2px 2px 6px #ff6347,
+               0 0 14px #87cefa,
+               0 0 20px #00f0ff;
+  outline: none;
+}
+
+.nav a:active {
+  animation: navClickGlow 0.6s ease-in-out 1;
+}
+
+/* be ready to remove below this */
 
 #particles-js {
   position: fixed;
@@ -91,19 +138,19 @@ text-decoration: none;
   height: 100%;
   z-index: 0;
   pointer-events: none;
+}
 
 body > *:not(#particles-js) {
   position: relative;
   z-index: 1;
-.message-item strong {
-  color: #ff944d;
 }
 
 p, li {
   text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.6);
 }
-  
-  /* Message Box Styling */
+
+    
+/* Message Box Styling */
 .message-box {
   background-color: rgba(34, 34, 34, 0.9);
   border-left: 4px solid #ffd700;
@@ -190,14 +237,3 @@ p, li {
   color: rgba(255, 215, 0, 0.6);
   font-size: 0.85em;
 }
-
-
-  
-
-  a:active {
-  animation: clickGlow 0.6s ease-in-out 1;
-}
-
-
-.nav a:active {
-  animation: navClickGlow 0.6s ease-in-out 1;

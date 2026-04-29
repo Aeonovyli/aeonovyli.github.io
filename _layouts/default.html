@@ -80,3 +80,59 @@
 
 </body>
 </html>
+
+<!-- Keep your HTML form here... -->
+
+<!-- This part MUST stay in the HTML file, right before the </nav> -->
+<script src="https://jsdelivr.net"></script>
+
+<script>
+  // PASTE YOUR REAL KEYS HERE
+  const SUPABASE_URL = 'https://supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJ...'; 
+
+  const _supabase = supabase.createClient(flwbcrmjdulaefiyhdkh, eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsd2Jjcm1qZHVsYWVmaXloZGtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0MzU3NjksImV4cCI6MjA5MzAxMTc2OX0.zQDAVn4ZhW7QSC_WajxinnBHvg5Ry09xOZjxHOVMK2A);
+  const messageForm = document.getElementById('messageForm');
+  const messagesList = document.getElementById('messagesList');
+
+  messageForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name = document.getElementById('userName').value;
+    const message = document.getElementById('userMessage').value;
+
+    const { error } = await _supabase
+      .from('messages')
+      .insert([{ name: name, message: message }]);
+
+    if (error) {
+      alert("Error! Did you run the SQL code to create the 'messages' table?");
+    } else {
+      messageForm.reset();
+      fetchMessages();
+    }
+  });
+
+  async function fetchMessages() {
+    const { data, error } = await _supabase
+      .from('messages')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) return;
+
+    messagesList.innerHTML = '';
+    data.forEach(msg => {
+      const msgElement = document.createElement('div');
+      msgElement.className = 'message-item';
+      msgElement.innerHTML = `
+        <strong>${msg.name}</strong> 
+        <span class="timestamp">${new Date(msg.created_at).toLocaleString()}</span>
+        <p>${msg.message}</p>
+      `;
+      messagesList.appendChild(msgElement);
+    });
+  }
+
+  fetchMessages();
+  setInterval(fetchMessages, 5000);
+</script>

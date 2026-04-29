@@ -32,6 +32,63 @@ body::after {
 
 .highlighted-section {
   background-color: rgba(34, 34, 34, 0.85);
+
+h1, h2, h3, h4 {
+  font-family: 'MedievalSharp', cursive;
+  color: #ffd700;
+  text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
+
+body {
+  font-family: 'Cormorant Garamond', serif !important;
+
+h2:hover {
+  text-shadow: 2px 2px 6px #ff6347, 0 0 12px #87cefa;
+  transition: all 0.3s ease-in-out;
+}
+
+a {
+  color: #ffd700;
+  text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
+  
+@keyframes clickGlow {
+  0% {
+    text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
+  }
+  50% {
+    text-shadow: 1px 1px 8px #ffffff, 0 0 16px #ffffff;
+  }
+  100% {
+    text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
+  }
+}
+
+@keyframes navClickGlow {
+  0% {
+    text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
+  }
+  50% {
+    text-shadow: 1px 1px 8px #ffffff, 0 0 16px #ffffff;
+  }
+  100% {
+    text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
+  }
+}
+
+a:link,
+a:visited {
+
+                                                       
+text-decoration: none;
+  text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
+  transition: all 0.3s ease-in-out;
+  outline: none;
+
+a:hover,
+a:focus {
+  color: #fff3a0;
+  text-shadow: 2px 2px 6px #ff6347,
+               0 0 14px #87cefa,
+               0 0 20px #00f0ff;
   
   /* Message Box Styling */
 .message-box {

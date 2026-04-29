@@ -3,6 +3,8 @@ layout: default
 title: Contact me
 ---
 
+# github pages is not working, unless you see this message. If so, please state so with a new issue on the github project.
+
 # Contact me
 #### Leave a message below. These are stored in real-time using Supabase.
 

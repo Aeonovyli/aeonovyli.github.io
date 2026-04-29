@@ -1,9 +1,12 @@
 ---
 layout: default
-title: Page 2
+title: Contact me
 ---
 
-# Page 2
+# Contact me
+#### You can either use one of my profiles, page 3, or you can leave a message for me here. Note that I may not immediately respond, and the messaging logic is still being implmented.
+
+#### Please use the same name as I know you by, and please do not change your name after using it once.
 
 
 

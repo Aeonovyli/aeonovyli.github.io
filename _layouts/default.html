@@ -5,73 +5,66 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ page.title }}</title>
 
-  <!-- Fonts & Libraries -->
+  <!-- Fonts -->
   <link href="https://googleapis.com" rel="stylesheet">
+  
+  <!-- Scripts -->
   <script src="https://jsdelivr.net"></script>
   <script src="https://jsdelivr.net"></script>
+
+  <!-- Your CSS File (This handles the background) -->
   <link rel="stylesheet" href="/assets/css/style.css">
 
   <style>
-    /* Fixed background that stays behind everything */
+    /* Particles should be transparent and float over your style.css background */
     #particles-js {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: -1; /* Moved to -1 to stay behind content */
-      background-color: #050505;
+      z-index: 1; /* Sit just above the background */
+      pointer-events: none;
+      background: transparent !important; 
     }
 
-    /* This makes sure your GitHub Pages content is visible */
-    .main-wrapper {
+    /* Content must be on the very top layer */
+    .content-wrapper {
       position: relative;
-      z-index: 10;
-      color: white;
-      min-height: 100vh;
-      padding: 20px;
-      font-family: 'Cormorant Garamond', serif;
+      z-index: 2; 
     }
   </style>
 </head>
 <body>
 
-  <!-- Dust Layer -->
+  <!-- Dust Layer (Now transparent) -->
   <div id="particles-js"></div>
 
-  <!-- This is where your GitHub Pages content (index.md, etc) injects -->
-  <div class="main-wrapper">
+  <!-- Your GitHub Pages content -->
+  <div class="content-wrapper">
     {{ content }}
   </div>
 
-  <!-- Particle Setup -->
+  <!-- 1. Particle Config -->
   <script>
     particlesJS("particles-js", {
       particles: {
         number: { value: 60 },
         color: { value: ["#4da6ff", "#ff944d", "#ffffff"] },
-        opacity: { value: 0.4, random: true },
+        opacity: { value: 0.3 },
         size: { value: 2 },
         move: { speed: 0.5, direction: "top", out_mode: "out" }
       }
     });
   </script>
 
-  <!-- Supabase Setup -->
+  <!-- 2. Supabase Setup -->
   <script>
     const SUPABASE_URL = 'https://supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsd2Jjcm1qZHVsYWVmaXloZGtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0MzU3NjksImV4cCI6MjA5MzAxMTc2OX0.zQDAVn4ZhW7QSC_WajxinnBHvg5Ry09xOZjxHOVMK2A';
     
-    // Using the variable names correctly now
+    // Client initialization
     const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-    // This checks if your page has the form before running script
-    document.addEventListener("DOMContentLoaded", () => {
-      const messageForm = document.getElementById('messageForm');
-      if (messageForm) {
-        console.log("Supabase linked and form detected!");
-      }
-    });
   </script>
 
 </body>

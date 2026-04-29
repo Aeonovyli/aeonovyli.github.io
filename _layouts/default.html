@@ -83,56 +83,25 @@
 
 <!-- Keep your HTML form here... -->
 
-<script>
-  const SUPABASE_URL = 'https://supabase.co';
-  const SUPABASE_ANON_KEY = 'eyJ...'; 
-  const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    <!-- All your other layout content is up here -->
 
-  const messageForm = document.getElementById('messageForm');
-  const messagesList = document.getElementById('messagesList');
+    {{ content }}
 
-  // SAFETY CHECK: Only run the chat logic if the form actually exists on the page
-  if (messageForm && messagesList) {
-    
-    messageForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const name = document.getElementById('userName').value;
-      const message = document.getElementById('userMessage').value;
+    <!-- 1. Load Supabase first -->
+    <script src="https://jsdelivr.net"></script>
 
-      const { error } = await _supabase
-        .from('messages')
-        .insert([{ name: name, message: message }]);
+    <!-- 2. Your chat code second -->
+    <script>
+      const SUPABASE_URL = 'https://flwbcrmjdulaefiyhdkh.supabase.co';
+      const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsd2Jjcm1qZHVsYWVmaXloZGtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0MzU3NjksImV4cCI6MjA5MzAxMTc2OX0.zQDAVn4ZhW7QSC_WajxinnBHvg5Ry09xOZjxHOVMK2A';
+      const _supabase = supabase.createClient(SUPABASE_URL, eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsd2Jjcm1qZHVsYWVmaXloZGtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0MzU3NjksImV4cCI6MjA5MzAxMTc2OX0.zQDAVn4ZhW7QSC_WajxinnBHvg5Ry09xOZjxHOVMK2A);
 
-      if (error) {
-        console.error("Database error:", error);
-      } else {
-        messageForm.reset();
-        fetchMessages();
+      const messageForm = document.getElementById('messageForm');
+      const messagesList = document.getElementById('messagesList');
+
+      if (messageForm && messagesList) {
+        // ... (the rest of the code I gave you)
       }
-    });
-
-    async function fetchMessages() {
-      const { data, error } = await _supabase
-        .from('messages')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-      if (error) return;
-
-      messagesList.innerHTML = '';
-      data.forEach(msg => {
-        const msgElement = document.createElement('div');
-        msgElement.className = 'message-item';
-        msgElement.innerHTML = `
-          <strong>${msg.name}</strong> 
-          <span class="timestamp">${new Date(msg.created_at).toLocaleString()}</span>
-          <p>${msg.message}</p>
-        `;
-        messagesList.appendChild(msgElement);
-      });
-    }
-
-    fetchMessages();
-    setInterval(fetchMessages, 5000);
-  }
-</script>
+    </script>
+  </body> <!-- This is the very end of the file -->
+</html>

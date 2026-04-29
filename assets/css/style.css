@@ -83,12 +83,25 @@ text-decoration: none;
   transition: all 0.3s ease-in-out;
   outline: none;
 
-a:hover,
-a:focus {
-  color: #fff3a0;
-  text-shadow: 2px 2px 6px #ff6347,
-               0 0 14px #87cefa,
-               0 0 20px #00f0ff;
+#particles-js {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+
+body > *:not(#particles-js) {
+  position: relative;
+  z-index: 1;
+.message-item strong {
+  color: #ff944d;
+}
+
+p, li {
+  text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.6);
+}
   
   /* Message Box Styling */
 .message-box {
@@ -177,3 +190,14 @@ a:focus {
   color: rgba(255, 215, 0, 0.6);
   font-size: 0.85em;
 }
+
+
+  
+
+  a:active {
+  animation: clickGlow 0.6s ease-in-out 1;
+}
+
+
+.nav a:active {
+  animation: navClickGlow 0.6s ease-in-out 1;

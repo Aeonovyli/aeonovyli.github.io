@@ -43,7 +43,7 @@ title: Interests
 
 <nav class="nav">
 <a href="/">Home</a>
-<a href="/page2">Page 2</a>
+<a href="/page2">Contact me</a>
 <a href="/page3">Profiles</a>
 <a href="/page4">Eiriaoloth</a>
 </nav>

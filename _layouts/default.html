@@ -88,20 +88,15 @@
     {{ content }}
 
     <!-- 1. Load Supabase first -->
-    <script src="https://jsdelivr.net"></script>
+<script>
+  const SUPABASE_URL = 'https://flwbcrmjdulaefiyhdkh.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsd2Jjcm1qZHVsYWVmaXloZGtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0MzU3NjksImV4cCI6MjA5MzAxMTc2OX0.zQDAVn4ZhW7QSC_WajxinnBHvg5Ry09xOZjxHOVMK2A';
+  
+  // Use the variable names here:
+  const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    <!-- 2. Your chat code second -->
-    <script>
-      const SUPABASE_URL = 'https://flwbcrmjdulaefiyhdkh.supabase.co';
-      const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsd2Jjcm1qZHVsYWVmaXloZGtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0MzU3NjksImV4cCI6MjA5MzAxMTc2OX0.zQDAVn4ZhW7QSC_WajxinnBHvg5Ry09xOZjxHOVMK2A';
-      const _supabase = supabase.createClient(SUPABASE_URL, eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsd2Jjcm1qZHVsYWVmaXloZGtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0MzU3NjksImV4cCI6MjA5MzAxMTc2OX0.zQDAVn4ZhW7QSC_WajxinnBHvg5Ry09xOZjxHOVMK2A);
+  const messageForm = document.getElementById('messageForm');
+  const messagesList = document.getElementById('messagesList');
 
-      const messageForm = document.getElementById('messageForm');
-      const messagesList = document.getElementById('messagesList');
-
-      if (messageForm && messagesList) {
-        // ... (the rest of the code I gave you)
-      }
-    </script>
-  </body> <!-- This is the very end of the file -->
-</html>
+  // ... rest of your code
+</script>

@@ -3,69 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ page.title }}</title>
-
-  <!-- Fonts -->
-  <link href="https://googleapis.com" rel="stylesheet">
-  
-  <!-- Scripts -->
-  <script src="https://jsdelivr.net"></script>
-  <script src="https://jsdelivr.net"></script>
-
-  <!-- Your CSS File (This handles the background) -->
   <link rel="stylesheet" href="/assets/css/style.css">
-
-  <style>
-    /* Particles should be transparent and float over your style.css background */
-    #particles-js {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1; /* Sit just above the background */
-      pointer-events: none;
-      background: transparent !important; 
-    }
-
-    /* Content must be on the very top layer */
-    .content-wrapper {
-      position: relative;
-      z-index: 2; 
-    }
-  </style>
+  
+  <!-- Supabase Library -->
+  <script src="https://jsdelivr.net"></script>
 </head>
 <body>
 
-  <!-- Dust Layer (Now transparent) -->
-  <div id="particles-js"></div>
-
-  <!-- Your GitHub Pages content -->
-  <div class="content-wrapper">
-    {{ content }}
-  </div>
-
-  <!-- 1. Particle Config -->
-  <script>
-    particlesJS("particles-js", {
-      particles: {
-        number: { value: 60 },
-        color: { value: ["#4da6ff", "#ff944d", "#ffffff"] },
-        opacity: { value: 0.3 },
-        size: { value: 2 },
-        move: { speed: 0.5, direction: "top", out_mode: "out" }
-      }
-    });
-  </script>
-
-  <!-- 2. Supabase Setup -->
+  <!-- Supabase Logic -->
   <script>
     const SUPABASE_URL = 'https://supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsd2Jjcm1qZHVsYWVmaXloZGtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0MzU3NjksImV4cCI6MjA5MzAxMTc2OX0.zQDAVn4ZhW7QSC_WajxinnBHvg5Ry09xOZjxHOVMK2A';
     
-    // Client initialization
+    // Initializing with variable names to prevent the grey text error
     const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    
+    console.log("Supabase is active.");
   </script>
-
 </body>
 </html>
+

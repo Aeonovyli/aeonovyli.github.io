@@ -32,7 +32,7 @@ title: Contact me
 <script src="https://jsdelivr.net"></script>
 <script>
   // PASTE YOUR PROJECT URL AND ANON KEY IN THE QUOTES BELOW
-  const _supabase = supabase.createClient('URL_HERE', 'KEY_HERE');
+  const _supabase = supabase.createClient('https://flwbcrmjdulaefiyhdkh.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsd2Jjcm1qZHVsYWVmaXloZGtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0MzU3NjksImV4cCI6MjA5MzAxMTc2OX0.zQDAVn4ZhW7QSC_WajxinnBHvg5Ry09xOZjxHOVMK2A');
 
   const messageForm = document.getElementById('messageForm');
   const loginBtn = document.getElementById('loginBtn');

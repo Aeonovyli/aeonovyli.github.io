@@ -36,7 +36,7 @@ title: Contact me
 </div>
 
 <!-- SUPABASE LIBRARY - FIXED VERSION -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://flwbcrmjdulaefiyhdkh.supabase.co/auth/v1/callback"></script>
 
 <script>
   // Initialize Supabase

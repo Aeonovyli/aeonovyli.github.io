@@ -32,7 +32,6 @@ title: Contact me
     <div id="messagesList" style="display: flex; flex-direction: column; gap: 15px;">Loading messages...</div>
   </div>
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>

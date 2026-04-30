@@ -27,12 +27,9 @@ title: Contact me
   </div>
 </div>
 
-<!-- 1. Load Supabase Library -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-  // 2. Initialize Supabase
-  // REPLACE THESE with your actual keys from Supabase Settings -> API
   const SUPABASE_URL = 'https://flwbcrmjdulaefiyhdkh.supabase.co';
   const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsd2Jjcm1qZHVsYWVmaXloZGtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0MzU3NjksImV4cCI6MjA5MzAxMTc2OX0.zQDAVn4ZhW7QSC_WajxinnBHvg5Ry09xOZjxHOVMK2A';
   const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -40,7 +37,6 @@ title: Contact me
   const messageForm = document.getElementById('messageForm');
   const messagesList = document.getElementById('messagesList');
 
-  // 3. Load existing messages
   async function loadMessages() {
     const { data, error } = await _supabase
       .from('messages')
@@ -56,7 +52,6 @@ title: Contact me
     }
   }
 
-  // 4. Add message to the UI
   function addMessageToUI(msg, isNew = true) {
     const div = document.createElement('div');
     div.className = 'message-item';
@@ -67,13 +62,12 @@ title: Contact me
     `;
     
     if (isNew) {
-      messagesList.prepend(div); // Add new messages to top
+      messagesList.prepend(div);
     } else {
-      messagesList.appendChild(div); // Add old messages to bottom
+      messagesList.appendChild(div);
     }
   }
 
-  // 5. Handle Form Submission
   messageForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = document.getElementById('submitBtn');
@@ -96,7 +90,6 @@ title: Contact me
     btn.innerText = "Submit Message";
   });
 
-  // 6. Real-time Listener (Listen for new rows)
   _supabase
     .channel('public:messages')
     .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages' }, payload => {

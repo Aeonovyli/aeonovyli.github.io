@@ -20,7 +20,6 @@ title: Contact me
     </div>
   </div>
 
-  <!-- POSTING FORM -->
   <form id="messageForm" style="display:none; margin-bottom: 30px;">
     <div class="form-group">
       <textarea id="userMessage" rows="4" required placeholder="Type your message..." style="width:100%; padding:10px; border-radius:4px; border:2px solid #00f0ff; background: rgba(20, 20, 20, 0.8); color: #ffd700; font-family: 'Cormorant Garamond', serif;"></textarea>
@@ -28,18 +27,15 @@ title: Contact me
     <button type="submit" id="submitBtn" class="submit-btn" style="margin-top:10px;">Post Message</button>
   </form>
   
-  <!-- MESSAGES LIST -->
   <div id="messagesDisplay" class="messages-display">
     <h3>Live Messages:</h3>
     <div id="messagesList" style="display: flex; flex-direction: column; gap: 15px;">Loading messages...</div>
   </div>
 </div>
 
-<!-- SUPABASE LIBRARY - FIXED VERSION -->
 <script src="https://flwbcrmjdulaefiyhdkh.supabase.co/auth/v1/callback"></script>
 
 <script>
-  // Initialize Supabase
   const _supabase = supabase.createClient('https://flwbcrmjdulaeafiyhdkh.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsd2Jjcm1qZHVsYWVmaXloZGtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0MzU3NjksImV4cCI6MjA5MzAxMTc2OX0.zQDAVn4ZhW7QSC_WajxinnBHvg5Ry09xOZjxHOVMK2A');
 
   const messageForm = document.getElementById('messageForm');

@@ -5,6 +5,7 @@ title: Contact me
 
 # Contact me
 #### Leave a message below. Only logged-in users can post.
+#### Please tell me if anything isn't working. I can't fix it otherwise.
 
 <div class="message-box">
   <div id="auth-ui" style="margin-bottom: 20px; padding: 15px; background: #f4f4f4; border-radius: 8px;">

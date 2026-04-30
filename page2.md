@@ -149,7 +149,7 @@ title: Contact me
   loginBtn.onclick = () => {
     _supabase.auth.signInWithOAuth({ 
       provider: 'github',
-      options: { redirectTo: 'https://thesilverstone.github.io/contact' }
+      options: { redirectTo: 'https://thesilverstone.github.io/page2' }
     });
   };
 

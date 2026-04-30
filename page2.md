@@ -5,6 +5,8 @@ title: Contact me
 
 # Contact me
 #### Leave a message below. Only logged-in users can post.
+#### If there's anything wrong, please tell me.
+#### Currently this webpage is having problems. 
 
 <div class="message-box">
   <!-- AUTH SECTION -->

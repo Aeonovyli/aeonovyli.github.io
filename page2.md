@@ -140,11 +140,14 @@ title: Contact me
       if (error) alert("Delete failed: " + error.message);
     }
   }
-
+  
   loginBtn.onclick = () => {
     _supabase.auth.signInWithOAuth({ 
       provider: 'github',
-      options: { redirectTo: window.location.href } 
+      options: { 
+      // This automatically uses "https://github.io"
+        redirectTo: window.location.origin + window.location.pathname 
+     }
     });
   };
 

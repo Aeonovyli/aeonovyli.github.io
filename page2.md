@@ -5,7 +5,7 @@ title: Contact me
 
 # Contact me
 #### Leave a message below. Only logged-in users can post.
-#### Please tell me if anything isn't working. I can't fix it otherwise.
+#### This page is currently broken.
 
 <div class="message-box">
   <!-- AUTH SECTION -->
@@ -87,7 +87,7 @@ title: Contact me
     const user = currentSession?.user;
     const userMeta = user?.user_metadata;
     
-    const isAdmin = userMeta?.full_name === 'Aeonovyli' || userMeta?.user_name === 'Aeonovyli' || userMeta?.nickname === 'Aeonovyli';
+    const isAdmin = userMeta?.full_name === 'TheSilverStone' || userMeta?.user_name === 'TheSilverStone' || userMeta?.nickname === 'TheSilverStone';
     const isOwner = user?.id === msg.user_id;
 
     const div = document.createElement('div');
@@ -145,7 +145,6 @@ title: Contact me
     _supabase.auth.signInWithOAuth({ 
       provider: 'github',
       options: { 
-      // This automatically uses "https://github.io"
         redirectTo: window.location.origin + window.location.pathname 
      }
     });

@@ -82,6 +82,19 @@ title: BZFlag
 
 #### There are several  
 
+### To quote myself, in a PM;
+
+#### 'You do not get this in minecraft.
+
+#### Nor do you get this sense of old and new, old players who are fun to play around and players who have departed—literally. [redacted], for example. She’s still around, but she no longer plays——and some people miss that. I miss [redacted]. I don’t know whether he gave it up, stopped playing, for a bit or longer, or something happened to him.
+
+#### Anyone can make maps, then play on them.
+
+#### In Minecraft you play by making and destroying the environment.
+
+#### Anyone can submit code, talk to players, play a match.
+
+#### There’s hardly any competition in Minecraft, you can’t get friendships as easily (nothing like a L swap and then emoji all around), and they certainly don’t want you to see the base code.'
 
 <nav class="nav">
 <a href="/">Home</a>

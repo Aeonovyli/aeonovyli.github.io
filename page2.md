@@ -8,7 +8,6 @@ title: Contact me
 #### This page is currently broken.
 
 <div class="message-box">
-  <!-- AUTH SECTION -->
   <div id="auth-ui" style="margin-bottom: 20px; padding: 15px; background: rgba(20, 20, 20, 0.6); border-radius: 8px; border: 1px solid #00f0ff;">
     <button id="loginBtn" class="submit-btn" style="display:none;">Login with GitHub to Post</button>
     <div id="user-info" style="display:none; align-items: center; gap: 12px;">

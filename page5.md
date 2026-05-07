@@ -82,6 +82,23 @@ title: BZFlag
 
 #### There are several 'objects', obstacles tanks can run into. They are as follows. Bullets and tanks are not classified because bullets have rather dramatic effects and tanks can drive through each other.
 
+### box
+#### A box is a simple cube, the heartblood of many maps.
+
+### pyramid
+#### A pyramid is a four sided cone with a blue marble texture. It ricochets shots in odd angles, and some maps, such as Two Tanks, use trick shots from pyramids.
+
+### teleporter
+#### A teleporter is a strange and futuristic travel vortex. Map makers can link teleporters to each other; driving through one will cause a yellow veil to go acrosd your screen until you drive out the other side. Teleporters have a black and yellow striped border.
+
+### meshpyr
+#### A meshpyr has better capacities then a pyramid, but is slightly worse at textures, having them twisted on one side.
+
+### meshbox
+#### A more enhanced version of a box, much like a meshpyr.
+
+
+
 ### To quote myself, from a PM (Private Message; sometimes Direct Message);
 
 #### 'You do not get this in minecraft.

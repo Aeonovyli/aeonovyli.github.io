@@ -76,6 +76,12 @@ title: BZFlag
 ### Wings	
 #### Tank can drive in midair.
 
+### Now, through with that, you think that you have a fairly compentant understanding of the game? Think again.
+
+# Objects
+
+#### There are several  
+
 
 <nav class="nav">
 <a href="/">Home</a>

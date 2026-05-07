@@ -46,4 +46,5 @@ title: Interests
 <a href="/page2">Contact me</a>
 <a href="/page3">Profiles</a>
 <a href="/page4">Eiriaoloth</a>
+<a href="/page5">BZFlag</a>
 </nav>

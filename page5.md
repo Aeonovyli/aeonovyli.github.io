@@ -80,9 +80,9 @@ title: BZFlag
 
 # Objects
 
-#### There are several  
+#### There are several 'objects', obstacles tanks can run into. They are as follows. Bullets and tanks are not classified because bullets have rather dramatic effects and tanks can drive through each other.
 
-### To quote myself, in a PM;
+### To quote myself, from a PM (Private Message; sometimes Direct Message);
 
 #### 'You do not get this in minecraft.
 
@@ -95,6 +95,35 @@ title: BZFlag
 #### Anyone can submit code, talk to players, play a match.
 
 #### There’s hardly any competition in Minecraft, you can’t get friendships as easily (nothing like a L swap and then emoji all around), and they certainly don’t want you to see the base code.'
+
+#### There's also the small matter of the 
+
+# Radar
+
+#### Ooh, a radar panel! That makes a nice addition to the window, right?
+#### Wrong. As you may have discovered, your radar provides a 360° view, while your window provides a pitiful 60°.
+#### You can count yourself an experienced player if you use your radar more than your window; it should only be used for L, to deal with the occasional ST, and a few other things.
+
+#### BZFlag is easy, fun to play, and at the same time extremely complex. But those are just the basics. Now we'll be getting into 
+
+# Tactics
+
+#### Using a mouse for BZFlag is strongly recommended. You can map the mouse wheel to firing shots. Keys for control, that is, commands that you can bind to keys, are below.
+
+Binoculars
+Lock on
+Respawn
+Drop flag
+Fire
+Jump
+Moving
+Chat
+Team chat
+Send to Nemisis
+Hunt
+Radar zoom
+
+
 
 <nav class="nav">
 <a href="/">Home</a>

@@ -10,7 +10,7 @@ title: BZFlag
 
 ### Yes, it's true. In BZFlag, tanks can jump—they fly 18 (19, really) WU (World Units) up into the air. But beware—these tanks are not equipped with space engines and propellers. They will continue moving as they were when they jump—effectively, anyone can tell where your going to land. And they can spray bullets there. Don't jump.
 
-# Tactics
+# Flags
 
 ---
 
@@ -18,7 +18,8 @@ title: BZFlag
 
 ---
 
-#### Flag Alert! The warning flashes red above your 'mousebox', the brown square within which your mouse resides. Flag alert? How? What about it...? Well, it's time you knew about the complex world of flags. All good (or useless, as the case may be) flags are below, along with the description of them you see ingame.
+#### Flag Alert! The warning flashes red above your 'mousebox', the brown square within which your mouse resides. Flag alert? How? What about it...? 
+#### Well, it's time you knew about the complex world of flags. All good (or useless, as the case may be) flags are below, along with the description of them you see ingame.
 
 # Agility
 ## Tank is quick and nimble making it easier to dodge.

@@ -114,7 +114,7 @@ title: BZFlag
 
 #### Anyone can submit code, talk to players, play a match.
 
-#### There’s hardly any competition in Minecraft, you can’t get friendships as easily (nothing like a L swap and then emoji all around), and they certainly don’t want you to see the base code.'
+#### There’s hardly any competition in Minecraft, you can’t make friends as easily (nothing like a L swap and then emoji all around), and they certainly don’t want you to see the base code.'
 
 #### There's also the small matter of the 
 

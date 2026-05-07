@@ -97,7 +97,10 @@ title: BZFlag
 ### meshbox
 #### A more enhanced version of a box, much like a meshpyr.
 
+### mesh
+#### A mesh can be any shape. Most mapmakers use different 3D modelers to create an obj file, then use modeltool to convert it to a bzflag world (BZW).
 
+# Why there's a devoted community
 
 ### To quote myself, from a PM (Private Message; sometimes Direct Message);
 

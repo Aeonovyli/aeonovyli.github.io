@@ -128,20 +128,20 @@ title: BZFlag
 
 # Tactics
 
-#### Using a mouse for BZFlag is strongly recommended. You can map the mouse wheel to firing shots. Keys for control, that is, commands that you can bind to keys, are below.
+### Using a mouse for BZFlag is strongly recommended. You can map the mouse wheel to firing shots. Keys for control, that is, commands that you can bind to keys, are below.
 
-Binoculars
-Lock on
-Respawn
-Drop flag
-Fire
-Jump
-Moving
-Chat
-Team chat
-Send to Nemisis
-Hunt
-Radar zoom
+##### Binoculars
+##### Lock on
+##### Respawn
+##### Drop flag
+##### Fire
+##### Jump
+##### Moving
+##### Chat
+##### Team chat
+##### Send to Nemisis
+##### Hunt
+##### Radar zoom
 
 
 

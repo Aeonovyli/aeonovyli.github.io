@@ -3,8 +3,6 @@ layout: default
 title: Eiriaoloth
 ---
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
-
 # Hello!
 
 #### I'm TheSilverStone, creator of both Avenoria and Morntasna.

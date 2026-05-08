@@ -1,7 +1,6 @@
 ---
 layout: default
 title: Home page
-favicon: /favicon.ico?v=4
 ---
 
 # Welcome

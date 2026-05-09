@@ -164,11 +164,11 @@ title: Contact me
 <!-- Floating Profile Widget -->
 <div id="profile-widget" style="position: fixed; bottom: 20px; right: 20px; z-index: 10000; font-family: 'Cormorant Garamond', serif;">
   <button id="profileBtn" onclick="toggleProfiles()" style="background: rgba(20, 20, 20, 0.9); color: #ffd700; border: 1px solid #00f0ff; padding: 10px 18px; border-radius: 4px; cursor: pointer; font-weight: bold; box-shadow: 0 0 10px rgba(0,240,255,0.3);">
-    👤 Active Profiles
+    Profiles' History
   </button>
 
   <div id="profileList" style="display: none; background: rgba(10, 10, 10, 0.95); border: 1px solid #00f0ff; border-radius: 4px; width: 220px; max-height: 300px; overflow-y: auto; position: absolute; bottom: 50px; right: 0; box-shadow: 0 0 20px rgba(0,0,0,0.5);">
-    <div style="padding: 10px; border-bottom: 1px solid #00f0ff; background: rgba(0, 240, 255, 0.1); color: #ffd700; font-size: 0.9em; font-weight: bold;">Recently Active</div>
+    <div style="padding: 10px; border-bottom: 1px solid #00f0ff; background: rgba(0, 240, 255, 0.1); color: #ffd700; font-size: 0.9em; font-weight: bold;">Everyone who has logged on</div>
     <div id="profiles-container" style="padding: 5px 0;">
        <p style="color: #888; text-align: center; font-size: 0.8em; padding: 10px;">Loading...</p>
     </div>
@@ -179,31 +179,31 @@ title: Contact me
   async function fetchUniqueProfiles() {
     const container = document.getElementById('profiles-container');
     
+    // Fetch all usernames from the messages table
     const { data, error } = await _supabase
       .from('messages')
-      .select('username')
-      .order('created_at', { ascending: false });
+      .select('username');
 
     if (error) {
       container.innerHTML = '<p style="color:red; padding:10px;">Error loading</p>';
       return;
     }
 
-    const uniqueUsernames = [...new Set(data.map(function(m) { return m.username; }))].filter(Boolean);
+    // This 'Set' automatically removes duplicate names
+    const uniqueUsernames = [...new Set(data.map(m => m.username))].filter(Boolean).sort();
 
     if (uniqueUsernames.length > 0) {
       let html = '';
       for (let i = 0; i < uniqueUsernames.length; i++) {
-        let name = uniqueUsernames[i];
-        // Using standard quotes and + for joining to avoid browser/markdown confusion
-        html += '<a href="https://github.com' + name + '" target="_blank" style="text-decoration: none; display: flex; align-items: center; gap: 8px; padding: 8px 15px; border-bottom: 1px solid rgba(0,240,255,0.1);">';
+        // Just plain text display, no <a> tags
+        html += '<div style="padding: 8px 15px; color: #ffd700; border-bottom: 1px solid rgba(0,240,255,0.1); display: flex; align-items: center; gap: 8px;">';
         html += '<span style="color: #00f0ff;">•</span>';
-        html += '<span style="color: #ffd700; font-size: 0.95em;">' + name + '</span>';
-        html += '</a>';
+        html += '<span style="font-size: 0.95em;">' + uniqueUsernames[i] + '</span>';
+        html += '</div>';
       }
       container.innerHTML = html;
     } else {
-      container.innerHTML = '<p style="color:#888; padding:10px;">No one here yet.</p>';
+      container.innerHTML = '<p style="color:#888; padding:10px;">No users found.</p>';
     }
   }
 

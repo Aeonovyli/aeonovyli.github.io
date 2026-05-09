@@ -164,11 +164,11 @@ title: Contact me
 <!-- Floating Profile Widget -->
 <div id="profile-widget" style="position: fixed; bottom: 20px; right: 20px; z-index: 10000; font-family: 'Cormorant Garamond', serif;">
   <button id="profileBtn" onclick="toggleProfiles()" style="background: rgba(20, 20, 20, 0.9); color: #ffd700; border: 1px solid #00f0ff; padding: 10px 18px; border-radius: 4px; cursor: pointer; font-weight: bold; box-shadow: 0 0 10px rgba(0,240,255,0.3);">
-    Profiles' History
+    👤 Active Profiles
   </button>
 
-  <div id="profileList" style="display: none; background: rgba(10, 10, 10, 0.95); border: 1px solid #00f0ff; border-radius: 4px; width: 220px; max-height: 300px; overflow-y: auto; position: absolute; bottom: 50px; right: 0; box-shadow: 0 0 20px rgba(0,0,0,0.5);">
-    <div style="padding: 10px; border-bottom: 1px solid #00f0ff; background: rgba(0, 240, 255, 0.1); color: #ffd700; font-size: 0.9em; font-weight: bold;">Everyone who has logged on</div>
+  <div id="profileList" style="display: none; background: rgba(10, 10, 10, 0.95); border: 1px solid #00f0ff; border-radius: 4px; width: 240px; max-height: 300px; overflow-y: auto; position: absolute; bottom: 50px; right: 0; box-shadow: 0 0 20px rgba(0,0,0,0.5);">
+    <div style="padding: 10px; border-bottom: 1px solid #00f0ff; background: rgba(0, 240, 255, 0.1); color: #ffd700; font-size: 0.9em; font-weight: bold;">User Directory</div>
     <div id="profiles-container" style="padding: 5px 0;">
        <p style="color: #888; text-align: center; font-size: 0.8em; padding: 10px;">Loading...</p>
     </div>
@@ -176,29 +176,55 @@ title: Contact me
 </div>
 
 <script>
+  async function banUser(username) {
+    if (!confirm("Ban " + username + " and blacklist them?")) return;
+
+    // 1. Add to blacklist table
+    const { error: banError } = await _supabase
+      .from('blacklist')
+      .insert([{ username: username }]);
+
+    if (banError) {
+      alert("Error blacklisting: " + banError.message);
+      return;
+    }
+
+    // 2. Remove their messages (Optional, but usually part of a ban)
+    await _supabase.from('messages').delete().eq('username', username);
+
+    alert(username + " has been blacklisted.");
+    fetchUniqueProfiles(); // Refresh list
+  }
+
   async function fetchUniqueProfiles() {
     const container = document.getElementById('profiles-container');
     
-    // Fetch all usernames from the messages table
-    const { data, error } = await _supabase
-      .from('messages')
-      .select('username');
+    // Check if the current logged-in user is the Admin
+    const { data: { session } } = await _supabase.auth.getSession();
+    const isAdmin = session?.user?.user_metadata?.user_name === 'Aeonovyli' || 
+                    session?.user?.user_metadata?.full_name === 'Aeonovyli';
+
+    const { data, error } = await _supabase.from('messages').select('username');
 
     if (error) {
       container.innerHTML = '<p style="color:red; padding:10px;">Error loading</p>';
       return;
     }
 
-    // This 'Set' automatically removes duplicate names
     const uniqueUsernames = [...new Set(data.map(m => m.username))].filter(Boolean).sort();
 
     if (uniqueUsernames.length > 0) {
       let html = '';
       for (let i = 0; i < uniqueUsernames.length; i++) {
-        // Just plain text display, no <a> tags
-        html += '<div style="padding: 8px 15px; color: #ffd700; border-bottom: 1px solid rgba(0,240,255,0.1); display: flex; align-items: center; gap: 8px;">';
-        html += '<span style="color: #00f0ff;">•</span>';
-        html += '<span style="font-size: 0.95em;">' + uniqueUsernames[i] + '</span>';
+        let name = uniqueUsernames[i];
+        html += '<div style="padding: 8px 15px; color: #ffd700; border-bottom: 1px solid rgba(0,240,255,0.1); display: flex; justify-content: space-between; align-items: center;">';
+        html += '<span><span style="color: #00f0ff;">•</span> ' + name + '</span>';
+        
+        // Show ban button ONLY to Aeonovyli
+        if (isAdmin && name !== 'Aeonovyli') {
+          html += '<button onclick="banUser(\'' + name + '\')" style="background:none; border:1px solid #ff4500; color:#ff4500; font-size:0.7em; cursor:pointer; padding:2px 5px; border-radius:3px;">BAN</button>';
+        }
+        
         html += '</div>';
       }
       container.innerHTML = html;
@@ -207,21 +233,28 @@ title: Contact me
     }
   }
 
+  // --- ADD THIS TO YOUR EXISTING messageForm.onsubmit LOGIC ---
+  // You need to wrap your message posting logic with a check:
+  /*
+    const { data: isBanned } = await _supabase
+      .from('blacklist')
+      .select('*')
+      .eq('username', user.user_metadata.user_name)
+      .single();
+
+    if (isBanned) {
+      alert("Your account is blacklisted.");
+      return;
+    }
+  */
+
   function toggleProfiles() {
     const list = document.getElementById('profileList');
     const isOpening = (list.style.display === 'none');
     list.style.display = isOpening ? 'block' : 'none';
     if (isOpening) fetchUniqueProfiles();
   }
-
-  window.addEventListener('click', function(e) {
-    const widget = document.getElementById('profile-widget');
-    if (widget && !widget.contains(e.target)) {
-      document.getElementById('profileList').style.display = 'none';
-    }
-  });
 </script>
-
 
 <nav class="nav">
 <a href="/">Home</a>

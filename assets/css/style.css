@@ -236,3 +236,29 @@ p, li {
   color: rgba(255, 215, 0, 0.6);
   font-size: 0.85em;
 }
+
+@keyframes banClickGlow {
+  0% { text-shadow: 1px 1px 4px #ff0000, 0 0 8px #ff4500; }
+  50% { text-shadow: 1px 1px 15px #ff0000, 0 0 25px #ff0000; }
+  100% { text-shadow: 1px 1px 4px #ff0000, 0 0 8px #ff4500; }
+}
+
+.ban-btn:active {
+  animation: banClickGlow 0.6s ease-in-out 1;
+}
+
+.ban-btn {
+  background: none; 
+  border: 1px solid #ff4500; 
+  color: #ff4500; 
+  cursor: pointer; 
+  font-size: 0.7em; 
+  border-radius: 3px; 
+  padding: 2px 5px;
+  transition: all 0.2s;
+}
+
+.ban-btn:hover {
+  background: rgba(255, 69, 0, 0.2);
+  box-shadow: 0 0 8px #ff4500;
+}

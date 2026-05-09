@@ -163,14 +163,16 @@ title: Contact me
 
 <!-- Floating Profile Widget -->
 <div id="profile-widget" style="position: fixed; bottom: 20px; right: 20px; z-index: 10000; font-family: 'Cormorant Garamond', serif;">
+  <!-- The Main Button -->
   <button id="profileBtn" onclick="toggleProfiles()" style="background: rgba(20, 20, 20, 0.9); color: #ffd700; border: 1px solid #00f0ff; padding: 10px 18px; border-radius: 4px; cursor: pointer; font-weight: bold; box-shadow: 0 0 10px rgba(0,240,255,0.3);">
     👤 Active Profiles
   </button>
 
+  <!-- The Popup List -->
   <div id="profileList" style="display: none; background: rgba(10, 10, 10, 0.95); border: 1px solid #00f0ff; border-radius: 4px; width: 220px; max-height: 300px; overflow-y: auto; position: absolute; bottom: 50px; right: 0; box-shadow: 0 0 20px rgba(0,0,0,0.5);">
     <div style="padding: 10px; border-bottom: 1px solid #00f0ff; background: rgba(0, 240, 255, 0.1); color: #ffd700; font-size: 0.9em; font-weight: bold;">Recently Active</div>
     <div id="profiles-container" style="padding: 5px 0;">
-       <p style="color: #888; text-align: center; font-size: 0.8em;">Loading...</p>
+       <p style="color: #888; text-align: center; font-size: 0.8em; padding: 10px;">Loading...</p>
     </div>
   </div>
 </div>
@@ -179,7 +181,7 @@ title: Contact me
   async function fetchUniqueProfiles() {
     const container = document.getElementById('profiles-container');
     
-    // Fetch unique usernames from the messages table
+    // Fetch unique usernames from your messages table
     const { data, error } = await _supabase
       .from('messages')
       .select('username')
@@ -190,16 +192,19 @@ title: Contact me
       return;
     }
 
+    // Get unique names and filter out any empties
     const uniqueUsernames = [...new Set(data.map(m => m.username))].filter(Boolean);
 
     if (uniqueUsernames.length > 0) {
-      // Maps each username to a clickable GitHub link
-      container.innerHTML = uniqueUsernames.map(name => `
-        <a href="https://github.com{name}" target="_blank" style="text-decoration: none; display: flex; align-items: center; gap: 8px; padding: 8px 15px; border-bottom: 1px solid rgba(0,240,255,0.1); transition: background 0.2s;">
-          <span style="color: #00f0ff;">•</span>
-          <span style="color: #ffd700; font-size: 0.95em;">${name}</span>
-        </a>
-      `).join('');
+      // THE FIX: Using exact backticks (`) and ${variable} syntax
+      container.innerHTML = uniqueUsernames.map(name => {
+        return `
+          <a href="https://github.com{name}" target="_blank" style="text-decoration: none; display: flex; align-items: center; gap: 8px; padding: 8px 15px; border-bottom: 1px solid rgba(0,240,255,0.1);">
+            <span style="color: #00f0ff;">•</span>
+            <span style="color: #ffd700; font-size: 0.95em;">${name}</span>
+          </a>
+        `;
+      }).join('');
     } else {
       container.innerHTML = '<p style="color:#888; padding:10px;">No one here yet.</p>';
     }
@@ -209,9 +214,11 @@ title: Contact me
     const list = document.getElementById('profileList');
     const isOpening = list.style.display === 'none';
     list.style.display = isOpening ? 'block' : 'none';
+    
     if (isOpening) fetchUniqueProfiles();
   }
 
+  // Close the list if you click anywhere else on the screen
   window.addEventListener('click', function(e) {
     const widget = document.getElementById('profile-widget');
     if (widget && !widget.contains(e.target)) {
@@ -219,7 +226,6 @@ title: Contact me
     }
   });
 </script>
-
 
 <nav class="nav">
 <a href="/">Home</a>

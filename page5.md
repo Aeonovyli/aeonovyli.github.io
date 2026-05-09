@@ -143,7 +143,7 @@ title: BZFlag
 ##### Hunt
 ##### Radar zoom
 
-
+# Note that once you're in there's no point of return. BZFlag will hold you forever, so it might be a good idea to get used to your new permanant—and possibly unwonted—home. 
 
 <nav class="nav">
 <a href="/">Home</a>

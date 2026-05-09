@@ -162,6 +162,19 @@ title: Contact me
 </script>
 
 <!-- Floating Profile Widget -->
+<style>
+  @keyframes banClickGlow {
+    0% { text-shadow: 1px 1px 4px #ff0000, 0 0 8px #ff4500; }
+    50% { text-shadow: 1px 1px 15px #ff0000, 0 0 25px #ff0000; }
+    100% { text-shadow: 1px 1px 4px #ff0000, 0 0 8px #ff4500; }
+  }
+  .ban-btn {
+    background: none; border: 1px solid #ff4500; color: #ff4500; 
+    cursor: pointer; font-size: 0.7em; border-radius: 3px; padding: 2px 5px;
+  }
+  .ban-btn:active { animation: banClickGlow 0.6s ease-in-out 1; }
+</style>
+
 <div id="profile-widget" style="position: fixed; bottom: 20px; right: 20px; z-index: 10000; font-family: 'Cormorant Garamond', serif;">
   <button id="profileBtn" onclick="toggleProfiles()" style="background: rgba(20, 20, 20, 0.9); color: #ffd700; border: 1px solid #00f0ff; padding: 10px 18px; border-radius: 4px; cursor: pointer; font-weight: bold; box-shadow: 0 0 10px rgba(0,240,255,0.3);">
     👤 Active Profiles
@@ -177,84 +190,59 @@ title: Contact me
 
 <script>
   async function banUser(username) {
-    if (!confirm("Ban " + username + " and blacklist them?")) return;
+    const confirmBan = confirm(`🛑 ELDRITCH JUDGMENT: Are you absolutely sure you want to ban "${username}"? This will blacklist them from posting forever.`);
+    if (!confirmBan) return;
 
-    // 1. Add to blacklist table
-    const { error: banError } = await _supabase
-      .from('blacklist')
-      .insert([{ username: username }]);
+    const { error: banError } = await _supabase.from('blacklist').insert([{ username: username }]);
+    if (banError) return alert("Error blacklisting: " + banError.message);
 
-    if (banError) {
-      alert("Error blacklisting: " + banError.message);
-      return;
-    }
-
-    // 2. Remove their messages (Optional, but usually part of a ban)
     await _supabase.from('messages').delete().eq('username', username);
-
-    alert(username + " has been blacklisted.");
-    fetchUniqueProfiles(); // Refresh list
+    alert(username + " has been cast into the void.");
+    fetchUniqueProfiles();
   }
 
   async function fetchUniqueProfiles() {
     const container = document.getElementById('profiles-container');
-    
-    // Check if the current logged-in user is the Admin
     const { data: { session } } = await _supabase.auth.getSession();
-    const isAdmin = session?.user?.user_metadata?.user_name === 'Aeonovyli' || 
-                    session?.user?.user_metadata?.full_name === 'Aeonovyli';
+    
+    const userMeta = session?.user?.user_metadata;
+    const isAdmin = userMeta?.user_name === 'Aeonovyli' || userMeta?.full_name === 'Aeonovyli' || userMeta?.nickname === 'Aeonovyli';
 
-    const { data, error } = await _supabase.from('messages').select('username');
-
+    const { data: messages, error } = await _supabase.from('messages').select('username');
     if (error) {
-      container.innerHTML = '<p style="color:red; padding:10px;">Error loading</p>';
+      container.innerHTML = '<p style="color:red; text-align:center;">Error loading</p>';
       return;
     }
 
-    const uniqueUsernames = [...new Set(data.map(m => m.username))].filter(Boolean).sort();
-
-    if (uniqueUsernames.length > 0) {
-      let html = '';
-      for (let i = 0; i < uniqueUsernames.length; i++) {
-        let name = uniqueUsernames[i];
-        html += '<div style="padding: 8px 15px; color: #ffd700; border-bottom: 1px solid rgba(0,240,255,0.1); display: flex; justify-content: space-between; align-items: center;">';
-        html += '<span><span style="color: #00f0ff;">•</span> ' + name + '</span>';
-        
-        // Show ban button ONLY to Aeonovyli
-        if (isAdmin && name !== 'Aeonovyli') {
-          html += '<button onclick="banUser(\'' + name + '\')" style="background:none; border:1px solid #ff4500; color:#ff4500; font-size:0.7em; cursor:pointer; padding:2px 5px; border-radius:3px;">BAN</button>';
-        }
-        
-        html += '</div>';
-      }
-      container.innerHTML = html;
-    } else {
-      container.innerHTML = '<p style="color:#888; padding:10px;">No users found.</p>';
-    }
+    const uniqueUsers = [...new Set(messages.map(m => m.username))].filter(Boolean);
+    container.innerHTML = uniqueUsers.length ? uniqueUsers.map(name => `
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-bottom: 1px solid rgba(0, 240, 255, 0.1);">
+        <span style="color: #ffd700; font-size: 0.9em;">${name}</span>
+        ${isAdmin ? `<button class="ban-btn" onclick="banUser('${name}')">BAN</button>` : ''}
+      </div>
+    `).join('') : '<p style="color:#888; text-align:center; padding:10px;">No souls found.</p>';
   }
-
-  // --- ADD THIS TO YOUR EXISTING messageForm.onsubmit LOGIC ---
-  // You need to wrap your message posting logic with a check:
-  /*
-    const { data: isBanned } = await _supabase
-      .from('blacklist')
-      .select('*')
-      .eq('username', user.user_metadata.user_name)
-      .single();
-
-    if (isBanned) {
-      alert("Your account is blacklisted.");
-      return;
-    }
-  */
 
   function toggleProfiles() {
     const list = document.getElementById('profileList');
-    const isOpening = (list.style.display === 'none');
-    list.style.display = isOpening ? 'block' : 'none';
-    if (isOpening) fetchUniqueProfiles();
+    list.style.display = list.style.display === 'none' ? 'block' : 'none';
+    if (list.style.display === 'block') fetchUniqueProfiles();
   }
+
+  // Intercept form to enforce the ban
+  const originalOnSubmit = messageForm.onsubmit;
+  messageForm.onsubmit = async (e) => {
+    e.preventDefault();
+    const user = currentSession?.user;
+    const username = user?.user_metadata?.full_name || user?.user_metadata?.user_name;
+
+    const { data: isBanned } = await _supabase.from('blacklist').select('username').eq('username', username).single();
+    if (isBanned) return alert("Your access has been revoked by Aeonovyli.");
+    
+    await originalOnSubmit(e);
+  };
 </script>
+
 
 <nav class="nav">
 <a href="/">Home</a>

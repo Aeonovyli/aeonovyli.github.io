@@ -43,12 +43,28 @@ title: Contact me
   const messagesList = document.getElementById('messagesList');
   let currentSession = null;
 
+  // Record user login to user_visits table
+  async function recordUserLogin(user) {
+    const { error } = await _supabase.from('user_visits').upsert([{
+      github_user_id: user.id,
+      github_username: user.user_metadata.user_name || user.user_metadata.login,
+      full_name: user.user_metadata.full_name,
+      avatar_url: user.user_metadata.avatar_url,
+      last_login: new Date().toISOString()
+    }], { onConflict: 'github_user_id' });
+    
+    if (error) console.error('Error recording login:', error);
+  }
+
   async function checkUser() {
     const { data: { session } } = await _supabase.auth.getSession();
     currentSession = session;
 
     if (session) {
       const user = session.user;
+      // Record this login
+      await recordUserLogin(user);
+      
       loginBtn.style.display = 'none';
       userInfo.style.display = 'flex';
       messageForm.style.display = 'block';
@@ -218,8 +234,8 @@ title: Contact me
     Profiles' History
   </button>
 
-  <div id="profileList" style="display: none; background: rgba(10, 10, 10, 0.95); border: 1px solid #00f0ff; border-radius: 4px; width: 240px; max-height: 300px; overflow-y: auto; position: absolute; bottom: 50px; right: 0; box-shadow: 0 0 20px rgba(0,0,0,0.5);">
-    <div style="padding: 10px; border-bottom: 1px solid #00f0ff; background: rgba(0, 240, 255, 0.1); color: #ffd700; font-size: 0.9em; font-weight: bold;">User Directory</div>
+  <div id="profileList" style="display: none; background: rgba(10, 10, 10, 0.95); border: 1px solid #00f0ff; border-radius: 4px; width: 280px; max-height: 400px; overflow-y: auto; position: absolute; bottom: 50px; right: 0; box-shadow: 0 0 20px rgba(0,0,0,0.5);">
+    <div style="padding: 10px; border-bottom: 1px solid #00f0ff; background: rgba(0, 240, 255, 0.1); color: #ffd700; font-size: 0.9em; font-weight: bold; position: sticky; top: 0;">User Directory (All-Time)</div>
     <div id="profiles-container" style="padding: 5px 0;">
        <p style="color: #888; text-align: center; font-size: 0.8em; padding: 10px;">Loading...</p>
     </div>
@@ -236,36 +252,76 @@ title: Contact me
 
     await _supabase.from('messages').delete().eq('username', username);
     alert(username + " has been cast into the void.");
-    fetchUniqueProfiles();
+    fetchAllVisitors();
   }
 
-  async function fetchUniqueProfiles() {
+  // Fetch all users who have ever logged in from user_visits table
+  async function fetchAllVisitors() {
     const container = document.getElementById('profiles-container');
     const { data: { session } } = await _supabase.auth.getSession();
     
     const userMeta = session?.user?.user_metadata;
     const isAdmin = userMeta?.user_name === 'Aeonovyli' || userMeta?.full_name === 'Aeonovyli' || userMeta?.nickname === 'Aeonovyli';
 
-    const { data: messages, error } = await _supabase.from('messages').select('username');
+    // Query user_visits table to get all-time visitors
+    const { data: visitors, error } = await _supabase
+      .from('user_visits')
+      .select('github_user_id, github_username, full_name, avatar_url')
+      .order('github_username', { ascending: true });
+    
     if (error) {
-      container.innerHTML = '<p style="color:red; text-align:center;">Error loading</p>';
+      container.innerHTML = '<p style="color:red; text-align:center; padding:10px;">Error loading visitors</p>';
+      console.error(error);
       return;
     }
 
-    const uniqueUsers = [...new Set(messages.map(m => m.username))].filter(Boolean);
-    container.innerHTML = uniqueUsers.length ? uniqueUsers.map(name => `
-      <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-bottom: 1px solid rgba(0, 240, 255, 0.1);">
-        <span style="color: #ffd700; font-size: 0.9em;">${name}</span>
-        ${isAdmin ? `<button class="ban-btn" onclick="banUser('${name}')">BAN</button>` : ''}
-      </div>
-    `).join('') : '<p style="color:#888; text-align:center; padding:10px;">No souls found.</p>';
+    // Remove duplicates by github_user_id (in case of multiple entries)
+    const uniqueVisitors = [];
+    const seenIds = new Set();
+    
+    visitors?.forEach(visitor => {
+      if (!seenIds.has(visitor.github_user_id)) {
+        uniqueVisitors.push(visitor);
+        seenIds.add(visitor.github_user_id);
+      }
+    });
+
+    if (uniqueVisitors.length === 0) {
+      container.innerHTML = '<p style="color:#888; text-align:center; padding:10px;">No visitors yet.</p>';
+      return;
+    }
+
+    container.innerHTML = uniqueVisitors.map(visitor => {
+      const currentUsername = visitor.github_username || visitor.full_name || 'Unknown User';
+      const githubProfileUrl = `https://github.com/${visitor.github_username}`;
+      
+      return `
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-bottom: 1px solid rgba(0, 240, 255, 0.1); gap: 8px;">
+          <div style="display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0;">
+            ${visitor.avatar_url ? `<img src="${visitor.avatar_url}" alt="${currentUsername}" style="width: 24px; height: 24px; border-radius: 50%; border: 1px solid #ffd700;">` : ''}
+            <a href="${githubProfileUrl}" target="_blank" style="color: #00f0ff; text-decoration: none; font-size: 0.85em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${currentUsername}">
+              @${currentUsername}
+            </a>
+          </div>
+          ${isAdmin ? `<button class="ban-btn" onclick="banUser('${currentUsername}')">BAN</button>` : ''}
+        </div>
+      `;
+    }).join('');
   }
 
   function toggleProfiles() {
     const list = document.getElementById('profileList');
     list.style.display = list.style.display === 'none' ? 'block' : 'none';
-    if (list.style.display === 'block') fetchUniqueProfiles();
+    if (list.style.display === 'block') fetchAllVisitors();
   }
+
+  // Real-time updates for user_visits table
+  _supabase.channel('public:user_visits')
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'user_visits' }, () => {
+      const list = document.getElementById('profileList');
+      if (list.style.display === 'block') fetchAllVisitors();
+    })
+    .subscribe();
 
   const originalOnSubmit = messageForm.onsubmit;
   messageForm.onsubmit = async (e) => {

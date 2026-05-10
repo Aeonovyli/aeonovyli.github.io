@@ -47,7 +47,7 @@ title: Contact me
   async function recordUserLogin(user) {
     const { error } = await _supabase.from('user_visits').upsert([{
       github_user_id: user.id,
-      github_username: user.user_metadata.user_name || user.user_metadata.login,
+      github_username: user.user_metadata.full_name || user.user_metadata.user_name || user.user_metadata.login,
       full_name: user.user_metadata.full_name,
       avatar_url: user.user_metadata.avatar_url,
       last_login: new Date().toISOString()
@@ -69,7 +69,7 @@ title: Contact me
       userInfo.style.display = 'flex';
       messageForm.style.display = 'block';
       
-      const name = user.user_metadata.full_name || user.user_metadata.user_name || "GitHub User";
+      const name = user.user_metadata.full_name || user.user_metadata.user_name;
       document.getElementById('user-name').innerText = name;
       document.getElementById('user-avatar').src = user.user_metadata.avatar_url;
     } else {
@@ -103,7 +103,7 @@ title: Contact me
     const user = currentSession?.user;
     const userMeta = user?.user_metadata;
     
-    const isAdmin = userMeta?.full_name === 'Aeonovyli' || userMeta?.user_name === 'Aeonovyli' || userMeta?.nickname === 'Aeonovyli' || userMeta?.name === 'Aeonovyli';
+    const isAdmin = userMeta?.full_name === 'Aeonovyli' || userMeta?.user_name === 'Aeonovyli';
     const isOwner = user?.id === msg.user_id;
 
     const div = document.createElement('div');

@@ -85,7 +85,7 @@ title: Contact me
     const user = currentSession?.user;
     const userMeta = user?.user_metadata;
     
-    const isAdmin = userMeta?.full_name === 'Aeonovyli' || userMeta?.user_name === 'Aeonovyli' || userMeta?.nickname === 'Aeonovyli';
+    const isAdmin = userMeta?.full_name === 'Aeonovyli' || userMeta?.user_name === 'Aeonovyli' || userMeta?.nickname === 'Aeonovyli' || userMeta?.name === 'Aeonovyli';
     const isOwner = user?.id === msg.user_id;
 
     const div = document.createElement('div');

@@ -4,7 +4,7 @@ title: Contact me
 ---
 
 # Contact me
-##### Leave a message below. Only logged-in github users can use this feature. Remember that as an all-powerful admin, I can lock you out of this forever. ;)
+##### Leave a message below. Only logged-in github users can use this feature. Remember that as an all-powerful admin, I can lock you out of this forever. 😉
 
 <div class="message-box">
   <div id="auth-ui" style="margin-bottom: 20px; padding: 15px; background: rgba(20, 20, 20, 0.6); border-radius: 8px; border: 1px solid #00f0ff;">
@@ -27,7 +27,7 @@ title: Contact me
   
   <div id="messagesDisplay" class="messages-display">
     <h3>Live Messages:</h3>
-    <div id="messagesList" style="display: flex; flex-direction: column; gap: 15px;">Loading messages...</div>
+    <div id="messagesList" style="display: flex; flex-direction: column; gap: 15px;">Messages loading...</div>
   </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -106,7 +106,7 @@ title: Contact me
       <strong style="color:#ff944d;">${msg.username || 'Anonymous'}</strong> 
       <small class="timestamp" style="margin-left:8px;">${new Date(msg.created_at).toLocaleString()}</small>
       <p style="margin: 10px 0 0 0; color:#ffd700; line-height:1.5;">
-        <span id="text-${msg.id}">${msg.content}</span> <!-- Added this span wrapper -->
+        <span id="text-${msg.id}">${msg.content}</span>
       </p>
     `;
     messagesList.appendChild(div);

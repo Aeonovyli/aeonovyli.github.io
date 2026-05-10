@@ -97,7 +97,7 @@ title: Contact me
     const editBtn = canEdit ? `<button onclick="toggleEdit('${msg.id}')" style="position:absolute; top:10px; right:75px; color:#ffd700; border:none; background:none; cursor:pointer; font-weight:bold;">Edit</button>` : '';
     
     const deleteBtn = (isOwner || isAdmin) 
-      ? `<button onclick="deleteMsg('${msg.id}')" style="position:absolute; top:10px; right:10px; color:#ff4500; border:none; background:none; cursor:pointer; font-weight:bold;>&times;">Delete</button>` 
+      ? `<button onclick="deleteMsg('${msg.id}')" style="position:absolute; top:10px; right:10px; color:#ff4500; border:none; background:none; cursor:pointer; font-weight:bold;">Delete</button>` 
       : '';
 
         div.innerHTML = `

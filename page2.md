@@ -147,11 +147,10 @@ title: Contact me
 
   // This function swaps the message <p> tag with a textarea for editing
   function toggleEdit(id) {
-    const msgDiv = document.getElementById(`msg-${id}`);
-    const pTag = msgDiv.querySelector('p');
-    const currentContent = pTag.innerText;
+    const textSpan = document.getElementById(`text-${id}`); 
+    const currentContent = textSpan.innerText;
 
-    pTag.innerHTML = `
+    textSpan.parentElement.innerHTML = `
       <textarea id="edit-input-${id}" style="width:100%; margin-top:10px; background:rgba(20,20,20,0.8); color:#ffd700; border:1px solid #00f0ff; padding:8px; font-family:inherit;">${currentContent}</textarea>
       <div style="margin-top:5px;">
         <button onclick="saveEdit('${id}')" style="color:#00f0ff; background:none; border:1px solid #00f0ff; cursor:pointer; padding:2px 10px; border-radius:4px;">Save</button>
@@ -159,6 +158,7 @@ title: Contact me
       </div>
     `;
   }
+
 
   // This function sends the updated text back to Supabase
   async function saveEdit(id) {

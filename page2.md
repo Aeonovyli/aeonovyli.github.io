@@ -101,6 +101,7 @@ title: Contact me
       : '';
 
     div.innerHTML = `
+      ${editBtn}
       ${deleteBtn}
       <strong style="color:#ff944d;">${msg.username || 'Anonymous'}</strong> 
       <small class="timestamp" style="margin-left:8px;">${new Date(msg.created_at).toLocaleString()}</small>
@@ -195,7 +196,9 @@ title: Contact me
   checkUser();
 </script>
 
-<!-- Floating Profile Widget -->
+
+<!-- Ban logic -->
+
 <style>
   @keyframes banClickGlow {
     0% { text-shadow: 1px 1px 4px #ff0000, 0 0 8px #ff4500; }

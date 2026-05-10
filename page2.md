@@ -141,6 +141,37 @@ title: Contact me
       if (error) alert("Delete failed: " + error.message);
     }
   }
+
+  // This function swaps the message <p> tag with a textarea for editing
+  function toggleEdit(id) {
+    const msgDiv = document.getElementById(`msg-${id}`);
+    const pTag = msgDiv.querySelector('p');
+    const currentContent = pTag.innerText;
+
+    pTag.innerHTML = `
+      <textarea id="edit-input-${id}" style="width:100%; margin-top:10px; background:rgba(20,20,20,0.8); color:#ffd700; border:1px solid #00f0ff; padding:8px; font-family:inherit;">${currentContent}</textarea>
+      <div style="margin-top:5px;">
+        <button onclick="saveEdit('${id}')" style="color:#00f0ff; background:none; border:1px solid #00f0ff; cursor:pointer; padding:2px 10px; border-radius:4px;">Save</button>
+        <button onclick="loadMessages()" style="color:gray; background:none; border:none; cursor:pointer; margin-left:10px;">Cancel</button>
+      </div>
+    `;
+  }
+
+  // This function sends the updated text back to Supabase
+  async function saveEdit(id) {
+    const newContent = document.getElementById(`edit-input-${id}`).value;
+    const { error } = await _supabase
+      .from('messages')
+      .update({ content: newContent })
+      .eq('id', id);
+
+    if (error) {
+      alert("Update failed: " + error.message);
+    } else {
+      loadMessages();
+    }
+  }
+
   
   loginBtn.onclick = () => {
     _supabase.auth.signInWithOAuth({ 

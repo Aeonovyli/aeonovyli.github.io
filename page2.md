@@ -6,6 +6,8 @@ title: Contact me
 # Contact me
 ##### Leave a message below. Only logged-in github users can use this feature. Remember that as an all-powerful admin, I can lock you out of this forever. 😉
 
+##### If there are any issues, tell me and I'll try to fix it. Suggestions extremely welcome, as well as pull requests.
+
 <div class="message-box">
   <div id="auth-ui" style="margin-bottom: 20px; padding: 15px; background: rgba(20, 20, 20, 0.6); border-radius: 8px; border: 1px solid #00f0ff;">
     <button id="loginBtn" class="submit-btn" style="display:none;">Login with GitHub</button>
@@ -145,7 +147,6 @@ title: Contact me
     }
   }
 
-  // This function swaps the message <p> tag with a textarea for editing
   function toggleEdit(id) {
     const textSpan = document.getElementById(`text-${id}`); 
     const currentContent = textSpan.innerText;
@@ -159,8 +160,6 @@ title: Contact me
     `;
   }
 
-
-  // This function sends the updated text back to Supabase
   async function saveEdit(id) {
     const newContent = document.getElementById(`edit-input-${id}`).value;
     const { error } = await _supabase
@@ -268,7 +267,6 @@ title: Contact me
     if (list.style.display === 'block') fetchUniqueProfiles();
   }
 
-  // Intercept form to enforce the ban
   const originalOnSubmit = messageForm.onsubmit;
   messageForm.onsubmit = async (e) => {
     e.preventDefault();
@@ -281,7 +279,6 @@ title: Contact me
     await originalOnSubmit(e);
   };
 </script>
-
 
 <nav class="nav">
 <a href="/">Home</a>

@@ -100,12 +100,14 @@ title: Contact me
       ? `<button onclick="deleteMsg('${msg.id}')" style="position:absolute; top:10px; right:10px; color:#ff4500; border:none; background:none; cursor:pointer; font-weight:bold;">&times; Delete</button>` 
       : '';
 
-    div.innerHTML = `
+        div.innerHTML = `
       ${editBtn}
       ${deleteBtn}
       <strong style="color:#ff944d;">${msg.username || 'Anonymous'}</strong> 
       <small class="timestamp" style="margin-left:8px;">${new Date(msg.created_at).toLocaleString()}</small>
-      <p style="margin: 10px 0 0 0; color:#ffd700; line-height:1.5;">${msg.content}</p>
+      <p style="margin: 10px 0 0 0; color:#ffd700; line-height:1.5;">
+        <span id="text-${msg.id}">${msg.content}</span> <!-- Added this span wrapper -->
+      </p>
     `;
     messagesList.appendChild(div);
   }

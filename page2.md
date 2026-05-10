@@ -177,7 +177,7 @@ title: Contact me
 
 <div id="profile-widget" style="position: fixed; bottom: 20px; right: 20px; z-index: 10000; font-family: 'Cormorant Garamond', serif;">
   <button id="profileBtn" onclick="toggleProfiles()" style="background: rgba(20, 20, 20, 0.9); color: #ffd700; border: 1px solid #00f0ff; padding: 10px 18px; border-radius: 4px; cursor: pointer; font-weight: bold; box-shadow: 0 0 10px rgba(0,240,255,0.3);">
-    👤 Active Profiles
+    Profiles' History
   </button>
 
   <div id="profileList" style="display: none; background: rgba(10, 10, 10, 0.95); border: 1px solid #00f0ff; border-radius: 4px; width: 240px; max-height: 300px; overflow-y: auto; position: absolute; bottom: 50px; right: 0; box-shadow: 0 0 20px rgba(0,0,0,0.5);">

@@ -8,7 +8,7 @@ title: Contact me
 
 <div class="message-box">
   <div id="auth-ui" style="margin-bottom: 20px; padding: 15px; background: rgba(20, 20, 20, 0.6); border-radius: 8px; border: 1px solid #00f0ff;">
-    <button id="loginBtn" class="submit-btn" style="display:none;">Login with GitHub to Post</button>
+    <button id="loginBtn" class="submit-btn" style="display:none;">Login with GitHub</button>
     <div id="user-info" style="display:none; align-items: center; gap: 12px;">
       <img id="user-avatar" src="" style="width:35px; border-radius:50%; border: 1px solid #ffd700;">
       <div>
@@ -74,7 +74,7 @@ title: Contact me
     } else {
       messagesList.innerHTML = '';
       if (data.length === 0) {
-        messagesList.innerHTML = '<p style="color:gray;">No messages yet. Be the first!</p>';
+        messagesList.innerHTML = '<p style="color:gray;">No messages yet.</p>';
       } else {
         data.forEach(msg => addMessageToUI(msg));
       }
@@ -190,7 +190,7 @@ title: Contact me
 
 <script>
   async function banUser(username) {
-    const confirmBan = confirm(`Are you sure you want to ban "${username}"? This will blacklist him or her from posting forever or unless you unlock the blacklist.`);
+    const confirmBan = confirm(`Are you sure you want to ban "${username}"? This will cast "${username}" into the fiery void of dipleasure.`);
     if (!confirmBan) return;
 
     const { error: banError } = await _supabase.from('blacklist').insert([{ username: username }]);
@@ -237,7 +237,7 @@ title: Contact me
     const username = user?.user_metadata?.full_name || user?.user_metadata?.user_name;
 
     const { data: isBanned } = await _supabase.from('blacklist').select('username').eq('username', username).single();
-    if (isBanned) return alert("Your access has been revoked by Aeonovyli.");
+    if (isBanned) return alert("Your access has been revoked by Aeonovyli. If you feel that you should not have been banned, start an issue on the github repository.");
     
     await originalOnSubmit(e);
   };

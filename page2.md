@@ -47,7 +47,7 @@ title: Contact me
   async function recordUserLogin(user) {
     const { error } = await _supabase.from('user_visits').upsert([{
       github_user_id: user.id,
-      github_username: user.user_metadata.user_name || user.user_metadata.login,
+      real_name: user.user_metadata.user_name || user.user_metadata.login,
       full_name: user.user_metadata.full_name,
       avatar_url: user.user_metadata.avatar_url,
       last_login: new Date().toISOString()
@@ -267,8 +267,8 @@ title: Contact me
     // Query user_visits table to get all-time visitors
     const { data: visitors, error } = await _supabase
       .from('user_visits')
-      .select('github_user_id, github_username, full_name, avatar_url')
-      .order('github_username', { ascending: true });
+      .select('github_user_id, real_name, full_name, avatar_url')
+      .order('real_name', { ascending: true });
     
     if (error) {
       container.innerHTML = '<p style="color:red; text-align:center; padding:10px;">Error loading visitors</p>';
@@ -293,8 +293,8 @@ title: Contact me
     }
 
     container.innerHTML = uniqueVisitors.map(visitor => {
-      const visitorUsername = visitor.github_username || visitor.full_name || 'Unknown User';
-      const githubProfileUrl = `https://github.com/${visitor.github_username}`;
+      const visitorUsername = visitor.real_name || visitor.full_name || 'Unknown User';
+      const githubProfileUrl = `https://github.com/${visitor.real_name}`;
       const canBanUser = isAdmin && visitorUsername !== currentUsername;
       
       return `

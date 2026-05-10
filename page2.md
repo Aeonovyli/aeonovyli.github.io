@@ -261,6 +261,7 @@ title: Contact me
     const { data: { session } } = await _supabase.auth.getSession();
     
     const userMeta = session?.user?.user_metadata;
+    const currentUsername = userMeta?.user_name || userMeta?.full_name;
     const isAdmin = userMeta?.user_name === 'Aeonovyli' || userMeta?.full_name === 'Aeonovyli' || userMeta?.nickname === 'Aeonovyli';
 
     // Query user_visits table to get all-time visitors
@@ -292,18 +293,19 @@ title: Contact me
     }
 
     container.innerHTML = uniqueVisitors.map(visitor => {
-      const currentUsername = visitor.github_username || visitor.full_name || 'Unknown User';
+      const visitorUsername = visitor.github_username || visitor.full_name || 'Unknown User';
       const githubProfileUrl = `https://github.com/${visitor.github_username}`;
+      const canBanUser = isAdmin && visitorUsername !== currentUsername;
       
       return `
         <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-bottom: 1px solid rgba(0, 240, 255, 0.1); gap: 8px;">
           <div style="display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0;">
-            ${visitor.avatar_url ? `<img src="${visitor.avatar_url}" alt="${currentUsername}" style="width: 24px; height: 24px; border-radius: 50%; border: 1px solid #ffd700;">` : ''}
-            <a href="${githubProfileUrl}" target="_blank" style="color: #00f0ff; text-decoration: none; font-size: 0.85em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${currentUsername}">
-              @${currentUsername}
+            ${visitor.avatar_url ? `<img src="${visitor.avatar_url}" alt="${visitorUsername}" style="width: 24px; height: 24px; border-radius: 50%; border: 1px solid #ffd700;">` : ''}
+            <a href="${githubProfileUrl}" target="_blank" style="color: #00f0ff; text-decoration: none; font-size: 0.85em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${visitorUsername}">
+              ${visitorUsername}
             </a>
           </div>
-          ${isAdmin ? `<button class="ban-btn" onclick="banUser('${currentUsername}')">BAN</button>` : ''}
+          ${canBanUser ? `<button class="ban-btn" onclick="banUser('${visitorUsername}')">BAN</button>` : ''}
         </div>
       `;
     }).join('');

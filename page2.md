@@ -190,7 +190,7 @@ title: Contact me
 
 <script>
   async function banUser(username) {
-    const confirmBan = confirm(`🛑 ELDRITCH JUDGMENT: Are you absolutely sure you want to ban "${username}"? This will blacklist them from posting forever.`);
+    const confirmBan = confirm(`Are you sure you want to ban "${username}"? This will blacklist him or her from posting forever or unless you unlock the blacklist.`);
     if (!confirmBan) return;
 
     const { error: banError } = await _supabase.from('blacklist').insert([{ username: username }]);

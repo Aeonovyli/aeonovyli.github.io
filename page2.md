@@ -43,11 +43,10 @@ title: Contact me
   const messagesList = document.getElementById('messagesList');
   let currentSession = null;
 
-  // Record user login to user_visits table
   async function recordUserLogin(user) {
     const { error } = await _supabase.from('user_visits').upsert([{
       github_user_id: user.id,
-      github_username: user.user_metadata.full_name || user.user_metadata.user_name || user.user_metadata.login,
+      github_username: user.user_metadata.user_name || user.user_metadata.login,
       full_name: user.user_metadata.full_name,
       avatar_url: user.user_metadata.avatar_url,
       last_login: new Date().toISOString()
@@ -62,14 +61,13 @@ title: Contact me
 
     if (session) {
       const user = session.user;
-      // Record this login
       await recordUserLogin(user);
       
       loginBtn.style.display = 'none';
       userInfo.style.display = 'flex';
       messageForm.style.display = 'block';
       
-      const name = user.user_metadata.full_name || user.user_metadata.user_name;
+      const name = user.user_metadata.full_name || user.user_metadata.user_name || "GitHub User";
       document.getElementById('user-name').innerText = name;
       document.getElementById('user-avatar').src = user.user_metadata.avatar_url;
     } else {
@@ -103,7 +101,7 @@ title: Contact me
     const user = currentSession?.user;
     const userMeta = user?.user_metadata;
     
-    const isAdmin = userMeta?.full_name === 'Aeonovyli' || userMeta?.user_name === 'Aeonovyli';
+    const isAdmin = userMeta?.full_name === 'Aeonovyli' || userMeta?.user_name === 'Aeonovyli' || userMeta?.nickname === 'Aeonovyli' || userMeta?.name === 'Aeonovyli';
     const isOwner = user?.id === msg.user_id;
 
     const div = document.createElement('div');
@@ -255,7 +253,6 @@ title: Contact me
     fetchAllVisitors();
   }
 
-  // Fetch all users who have ever logged in from user_visits table
   async function fetchAllVisitors() {
     const container = document.getElementById('profiles-container');
     const { data: { session } } = await _supabase.auth.getSession();
@@ -264,7 +261,6 @@ title: Contact me
     const currentUsername = userMeta?.user_name || userMeta?.full_name;
     const isAdmin = userMeta?.user_name === 'Aeonovyli' || userMeta?.full_name === 'Aeonovyli' || userMeta?.nickname === 'Aeonovyli';
 
-    // Query user_visits table to get all-time visitors
     const { data: visitors, error } = await _supabase
       .from('user_visits')
       .select('github_user_id, github_username, full_name, avatar_url')
@@ -276,7 +272,6 @@ title: Contact me
       return;
     }
 
-    // Remove duplicates by github_user_id (in case of multiple entries)
     const uniqueVisitors = [];
     const seenIds = new Set();
     
@@ -317,7 +312,6 @@ title: Contact me
     if (list.style.display === 'block') fetchAllVisitors();
   }
 
-  // Real-time updates for user_visits table
   _supabase.channel('public:user_visits')
     .on('postgres_changes', { event: '*', schema: 'public', table: 'user_visits' }, () => {
       const list = document.getElementById('profileList');

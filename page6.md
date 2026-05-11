@@ -1,7 +1,9 @@
 ---
 layout: default
-title: Flash Scoresheet
+title: Flash
 ---
+
+##### Flash is a 2-6 player dice rolling game. There are not teams; each player is given six colored dice, while six 'chips', 1-6 are placed in the center. On the count of three, all players roll their dice until their dice match the combo set for that round. Winner of last round chooses a combo that hasn't been used.
 
 <style>
     .score-container { background: #1a1a1a; padding: 2rem; border-radius: 12px; color: white; max-width: 450px; margin: 20px auto; border: 1px solid #333; }

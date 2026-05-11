@@ -19,5 +19,5 @@ title: Eiriaoloth
 <a href="/page1">Interests</a>
 <a href="/page2">Contact me</a>
 <a href="/page3">Profiles</a>
-<a href="/page5">BZFlag</a>
+<a href="/page5">Games</a>
 </nav>

@@ -75,7 +75,6 @@ title: Profiles
     <div class="book-page active-page p1" onclick="flip(this)">
       <div class="page-face page-front">
         <a class="profile-link" href="https://bzflag.org">BZFlag: red rider</a>
-        <p class="desc-area">Click to flip. The book will move right to show both sides clearly.</p>
       </div>
       <div class="page-face page-back">
         <p class="desc-area">Back side of BZFlag profile description.</p>
@@ -85,7 +84,6 @@ title: Profiles
     <div class="book-page p2" onclick="flip(this)">
       <div class="page-face page-front">
         <a class="profile-link" href="https://github.com">GitHub: TheSilverStone</a>
-        <p class="desc-area">The text below this was hidden until you flipped the first page.</p>
       </div>
       <div class="page-face page-back"></div>
     </div>
@@ -93,7 +91,6 @@ title: Profiles
     <div class="book-page p3" onclick="flip(this)">
       <div class="page-face page-front">
         <a class="profile-link" href="https://wikipedia.org">Wikipedia: Aeonovyli</a>
-        <p class="desc-area">No more jumbled text or overlapping words.</p>
       </div>
       <div class="page-face page-back"></div>
     </div>

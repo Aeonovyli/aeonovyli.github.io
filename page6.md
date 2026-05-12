@@ -107,7 +107,7 @@ title: Flash
             </tr>
         </tfoot>
     </table>
-    <button class="btn-reset" onclick="confirm('Clear board?') && window.location.reload()">Reload Page</button>
+    <h4 onclick="confirm('Clear board?') && window.location.reload()" style="cursor:pointer; text-align:center; font-family: 'MedievalSharp', cursive; letter-spacing: 2px;">RELOAD PAGE</h4>
 </div>
 
 <script>

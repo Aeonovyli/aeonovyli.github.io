@@ -9,6 +9,12 @@ title: Profiles
     display: flex;
     justify-content: center;
     padding: 80px 0;
+    transition: transform 1s ease-in-out;
+  }
+
+  /* Shift book right when a page is flipped to keep it centered */
+  .book-container.shifted {
+    transform: translateX(175px); 
   }
 
   .book {
@@ -26,80 +32,101 @@ title: Profiles
     transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
     transform-style: preserve-3d;
     cursor: pointer;
+    /* Hide all pages by default to prevent bleed-through */
+    visibility: hidden;
   }
 
-  /* Spreading effect: pages shifted along Z-axis based on position */
-  .p1 { transform: translateZ(20px); z-index: 5; }
-  .p2 { transform: translateZ(15px); z-index: 4; }
-  .p3 { transform: translateZ(10px); z-index: 3; }
-  .p4 { transform: translateZ(5px); z-index: 2; }
-  .p5 { transform: translateZ(0px); z-index: 1; }
-
-  /* Jump/Flip action on click */
+  /* Logic: Only the top-most un-flipped page and the last flipped page are visible */
+  .book-page.active-page,
   .book-page.flipped {
-    transform: rotateY(-170deg) translateZ(0px) !important;
-    z-index: 1 !important;
+    visibility: visible;
   }
 
-  /* Hover "curl" hint */
-  .book-page:not(.flipped):hover::after {
-    content: "";
-    position: absolute;
-    top: 0; right: 0;
-    width: 50px; height: 50px;
-    background: linear-gradient(135deg, transparent 50%, rgba(255,255,255,0.2) 100%);
-    pointer-events: none;
+  /* Reset visibility for pages deep in the "flipped" stack */
+  .book-page.flipped.buried {
+    visibility: hidden;
+  }
+
+  .book-page.flipped {
+    transform: rotateY(-180deg);
   }
 
   .page-face {
     position: absolute;
     width: 100%; height: 100%;
     backface-visibility: hidden;
-    background: rgba(255,255,255,0.01); /* Nearly invisible */
-    border: 2px solid #333;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.4);
     padding: 30px;
     box-sizing: border-box;
-    overflow: hidden;
   }
 
-  .page-back { transform: rotateY(180deg); border-style: dotted; }
-  .profile-link { font-weight: bold; margin-bottom: 12px; display: block; }
-  .desc-area { font-size: 0.95em; line-height: 1.5; color: #444; }
+  .page-back { transform: rotateY(180deg); }
+
+  .profile-link, .desc-area { 
+    color: #fff; 
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
+  }
 </style>
 
-<div class="book-container">
-  <div class="book" id="myBook">
-    <!-- Pages with manual Z-offset for "spread" -->
-    <div class="book-page p1" onclick="this.classList.toggle('flipped')">
+<div class="book-container" id="container">
+  <div class="book">
+    <!-- PAGE 1 -->
+    <div class="book-page active-page p1" onclick="flip(this)">
       <div class="page-face page-front">
         <a class="profile-link" href="https://bzflag.org">BZFlag: red rider</a>
+        <p class="desc-area">Click to flip. The book will move right to show both sides clearly.</p>
       </div>
-      <div class="page-face page-back"><p class="desc-area">Back of BZFlag...</p></div>
+      <div class="page-face page-back">
+        <p class="desc-area">Back side of BZFlag profile description.</p>
+      </div>
     </div>
-    <div class="book-page p2" onclick="this.classList.toggle('flipped')">
+    <!-- PAGE 2 -->
+    <div class="book-page p2" onclick="flip(this)">
       <div class="page-face page-front">
         <a class="profile-link" href="https://github.com">GitHub: TheSilverStone</a>
+        <p class="desc-area">The text below this was hidden until you flipped the first page.</p>
       </div>
-      <div class="page-face page-back"><p class="desc-area">Back of GitHub...</p></div>
+      <div class="page-face page-back"></div>
     </div>
-    <!-- Additional pages follow same pattern -->
-    <div class="book-page p3" onclick="this.classList.toggle('flipped')">
+    <!-- PAGE 3 -->
+    <div class="book-page p3" onclick="flip(this)">
       <div class="page-face page-front">
         <a class="profile-link" href="https://wikipedia.org">Wikipedia: Aeonovyli</a>
+        <p class="desc-area">No more jumbled text or overlapping words.</p>
       </div>
       <div class="page-face page-back"></div>
     </div>
-    <div class="book-page p4" onclick="this.classList.toggle('flipped')">
-      <div class="page-face page-front">
-        <a class="profile-link" href="https://reddit.com">Reddit: knaTZB</a>
-      </div>
-      <div class="page-face page-back"></div>
-    </div>
+
   </div>
 </div>
 
-<nav class="nav">
-  <a href="/">Home</a>
-  <a href="/page1">Interests</a>
-  <a href="/page2">Contact me</a>
-</nav>
+<script>
+function flip(el) {
+  const container = document.getElementById('container');
+  const pages = Array.from(document.querySelectorAll('.book-page'));
+  const index = pages.indexOf(el);
+
+  // Toggle the flip
+  el.classList.toggle('flipped');
+
+  // Shift container right if any page is flipped
+  const anyFlipped = pages.some(p => p.classList.contains('flipped'));
+  container.classList.toggle('shifted', anyFlipped);
+
+  // Visibility Logic: 
+  // 1. Find the next page to show
+  pages.forEach((p, i) => {
+    p.classList.remove('active-page', 'buried');
+    
+    // Hide flipped pages that are covered by the current flipped page
+    if (p.classList.contains('flipped') && i < index) {
+      p.classList.add('buried');
+    }
+  });
+
+  // Show the next page in the stack
+  const nextP = pages.find(p => !p.classList.contains('flipped'));
+  if (nextP) nextP.classList.add('active-page');
+}
+</script>

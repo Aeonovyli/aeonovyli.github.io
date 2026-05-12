@@ -3,118 +3,28 @@ layout: default
 title: Profiles
 ---
 
-<style>
-  .book-container {
-    perspective: 2000px;
-    display: flex;
-    justify-content: center;
-    padding: 80px 0;
-    transition: transform 1s ease-in-out;
-  }
+## My profiles span quite a large breach of the internet, but the ones I most frequently inhabit are listed below.
 
-  .book-container.shifted {
-    transform: translateX(175px); 
-  }
+• BZFlag profile, [red rider](https://forums.bzflag.org/memberlist.php?mode=viewprofile&u=60550)
+• GitHub profile, [TheSilverStone](https://github.com/TheSilverStone)
+• Wikipedia profile, [Aeonovyli](https://en.wikipedia.org/wiki/User:Aeonovyli)
+• Reddit profile, [knaTZB](https://www.reddit.com/user/knaTZB/)
+• Luanti profile, [red rider](https://forum.luanti.org/memberlist.php?mode=viewprofile&u=52979)
+• ContentDB (Luanti mods) [Aeonovyli](https://content.luanti.org/users/red_rider/)
+• Scratch3 profile, [knaTZB](https://scratch.mit.edu/users/knaTZB/)
+• Chess.com profile, [knaTZB](https://www.chess.com/member/knatzb)
 
-  .book {
-    position: relative;
-    width: 350px;
-    height: 500px;
-    transform-style: preserve-3d;
-  }
+### Recently I decided to start changing my usernames to Aeonovyli, which is unique to me. 
+### These profiles are ranked by how often I use them. Have fun looking me up!
 
-  .book-page {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    transform-origin: left center;
-    transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
-    transform-style: preserve-3d;
-    cursor: pointer;
-    visibility: hidden;
-  }
 
-  .book-page.active-page,
-  .book-page.flipped {
-    visibility: visible;
-  }
 
-  .book-page.buried {
-    visibility: hidden;
-  }
 
-  .book-page.flipped {
-    transform: rotateY(-180deg);
-  }
 
-  .page-face {
-    position: absolute;
-    width: 100%; height: 100%;
-    backface-visibility: hidden;
-    background: transparent;
-    border: 2px solid rgba(255, 255, 255, 0.4);
-    padding: 30px;
-    box-sizing: border-box;
-  }
-
-  .page-back { transform: rotateY(180deg); }
-
-  .profile-link, .desc-area { 
-    color: #fff; 
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
-  }
-</style>
-
-<div class="book-container" id="container">
-  <div class="book">
-    <div class="book-page active-page p1" onclick="flip(this)">
-      <div class="page-face page-front">
-        <a class="profile-link" href="https://bzflag.org">BZFlag: red rider</a>
-      </div>
-      <div class="page-face page-back">
-        <p class="desc-area">Back side of BZFlag profile description.</p>
-      </div>
-    </div>
-    <div class="book-page p2" onclick="flip(this)">
-      <div class="page-face page-front">
-        <a class="profile-link" href="https://github.com">GitHub: TheSilverStone</a>
-      </div>
-      <div class="page-face page-back"></div>
-    </div>
-    <div class="book-page p3" onclick="flip(this)">
-      <div class="page-face page-front">
-        <a class="profile-link" href="https://wikipedia.org">Wikipedia: Aeonovyli</a>
-      </div>
-      <div class="page-face page-back"></div>
-    </div>
-  </div>
-</div>
-
-<script>
-function flip(el) {
-  const container = document.getElementById('container');
-  const pages = Array.from(document.querySelectorAll('.book-page'));
-  
-  el.classList.toggle('flipped');
-
-  const flippedPages = pages.filter(p => p.classList.contains('flipped'));
-  const lastFlippedIndex = flippedPages.length > 0 ? pages.indexOf(flippedPages[flippedPages.length - 1]) : -1;
-  const firstUnflippedIndex = pages.findIndex(p => !p.classList.contains('flipped'));
-
-  container.classList.toggle('shifted', flippedPages.length > 0);
-
-  pages.forEach((p, i) => {
-    p.classList.remove('active-page', 'buried');
-    
-    if (i === lastFlippedIndex || i === firstUnflippedIndex) {
-      p.classList.add('active-page');
-    } else if (p.classList.contains('flipped') && i < lastFlippedIndex) {
-      p.classList.add('buried');
-    } else if (!p.classList.contains('flipped') && i > firstUnflippedIndex) {
-      p.style.visibility = 'hidden';
-    } else {
-      p.style.visibility = '';
-    }
-  });
-}
-</script>
+<nav class="nav">
+<a href="/">Home</a>
+<a href="/page1">Interests</a>
+<a href="/page2">Contact me</a>
+<a href="/page4">Eiriaoloth</a>
+<a href="/page5">Games</a>
+</nav>

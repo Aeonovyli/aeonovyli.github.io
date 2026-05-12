@@ -1,12 +1,10 @@
 ---
 layout: default
-title: Digital Codex | Profiles
+title: Profiles
 ---
 
 <div id="book-wrapper">
   <div id="my-book">
-    
-    <!-- PAGE 1: THE FRONTISPIECE -->
     <div class="page" data-density="hard">
       <div class="page-content center">
         <div class="shimmer-border"></div>
@@ -17,8 +15,6 @@ title: Digital Codex | Profiles
         <div class="instruction">Drag a corner to begin</div>
       </div>
     </div>
-
-    <!-- PAGE 2: PRIMARY NETWORK NODES -->
     <div class="page">
       <div class="page-content">
         <h3 class="gold-subtitle">Primary Nodes</h3>
@@ -36,8 +32,6 @@ title: Digital Codex | Profiles
         </div>
       </div>
     </div>
-
-    <!-- PAGE 3: GAMING & ENGINE MODS -->
     <div class="page">
       <div class="page-content">
         <h3 class="gold-subtitle">Creative & Gaming</h3>
@@ -55,8 +49,6 @@ title: Digital Codex | Profiles
         </div>
       </div>
     </div>
-
-    <!-- PAGE 4: LOGIC & ARCHIVE -->
     <div class="page">
       <div class="page-content">
         <h3 class="gold-subtitle">Logic & Strategy</h3>

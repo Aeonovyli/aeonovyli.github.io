@@ -11,7 +11,6 @@ title: Profiles
         <div class="decorative-line"></div>
         <p class="flavor-text">A bridge across the digital breach.</p>
         <p class="signature">Aeonovyli</p>
-        <div class="instruction">Drag a corner to begin</div>
       </div>
     </div>
     <div class="page">

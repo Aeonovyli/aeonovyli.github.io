@@ -107,7 +107,7 @@ title: Flash
             </tr>
         </tfoot>
     </table>
-    <button class="btn-reset" onclick="confirm('Clear board?') && window.location.reload()">New Game</button>
+    <button class="btn-reset" onclick="confirm('Clear board?') && window.location.reload()">Reload Page</button>
 </div>
 
 <script>
@@ -116,14 +116,34 @@ let pLimit = 0;
 function updateCount() {
     const inputs = document.querySelectorAll('.name-input');
     pLimit = Array.from(inputs).filter(i => i.value.trim() !== "").length;
-    document.querySelectorAll('#scoresheet input').forEach(i => val(i));
+    // Check all boxes against new player count
+    document.querySelectorAll('#scoresheet input[type="number"]').forEach(i => val(i, true));
 }
 
-function val(el) {
+function val(el, isRefresh = false) {
     let v = parseInt(el.value);
     if (isNaN(v)) return calc();
+    
+    // 1. Rule: Score cannot be higher than number of players
     if (v > pLimit) el.value = pLimit;
-    if (v < 0) el.value = 0;
+    if (v <= 0) el.value = ""; 
+
+    // 2. Rule: Each chip (1-6) can only be used once per row
+    if (!isRefresh && el.value !== "") {
+        let rowInputs = el.closest('tr').querySelectorAll('input[type="number"]');
+        let isDuplicate = false;
+        rowInputs.forEach(input => {
+            if (input !== el && input.value === el.value) {
+                isDuplicate = true;
+            }
+        });
+        
+        if (isDuplicate) {
+            alert("Someone already claimed " + el.value + " for this combo!");
+            el.value = "";
+        }
+    }
+    
     calc();
 }
 

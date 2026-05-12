@@ -77,23 +77,30 @@ title: Profiles
 
 <style>
   #book-wrapper { 
-    display: flex; 
-    justify-content: center; 
-    align-items: center;
-    padding: 40px 0; 
-    z-index: 2; 
     position: relative;
-    min-height: 650px; /* Lock height so it doesn't jump */
-    touch-action: none; /* Crucial for mobile stability */
+    width: 100%;
+    height: 700px; /* Locked height */
+    z-index: 2; 
+    margin: 40px 0;
+    touch-action: none;
   }
   
+  #my-book {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); /* Hard centering */
+  }
+
   .page {
     background-color: #0d0d0d; 
     border: 2px solid #ffd700;
     padding: 40px;
     box-sizing: border-box;
     overflow: hidden;
+    /* Native fix for backwards text */
     backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden !important;
   }
 
   .page-content { 
@@ -101,11 +108,7 @@ title: Profiles
     font-family: 'Cormorant Garamond', serif; 
     font-style: italic; 
     height: 100%; 
-    opacity: 1; 
-    transition: opacity 0.2s ease;
   }
-
-  .flipping .page-content { opacity: 0; }
 
   .gold-title { font-family: 'Cinzel', serif; font-size: 2.6rem; text-align: center; margin: 0; }
   .gold-subtitle { font-family: 'Cinzel', serif; border-bottom: 1px solid rgba(255, 215, 0, 0.4); margin-bottom: 25px; font-size: 1.5rem; letter-spacing: 2px; }
@@ -123,29 +126,18 @@ title: Profiles
 <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
 <script>
   window.addEventListener('load', function() {
-    const bookElement = document.getElementById("my-book");
-    const pageFlip = new St.PageFlip(bookElement, {
+    const pageFlip = new St.PageFlip(document.getElementById("my-book"), {
       width: 450, 
       height: 600,
-      size: "fixed", // Force same spot
-      minWidth: 450,
-      minHeight: 600,
-      maxWidth: 450,
-      maxHeight: 600,
+      size: "fixed", 
+      autoSize: false, // Prevents library from resizing and jumping
       showCover: true,
       drawShadow: false, 
       flippingTime: 800,
       usePortrait: true,
-      mobileScrollSupport: false // Prevents the whole page from scrolling
+      mobileScrollSupport: false 
     });
 
     pageFlip.loadFromHTML(document.querySelectorAll(".page"));
-
-    pageFlip.on('flip', (e) => {
-        bookElement.classList.add("flipping");
-        setTimeout(() => {
-            bookElement.classList.remove("flipping");
-        }, 800); 
-    });
   });
 </script>

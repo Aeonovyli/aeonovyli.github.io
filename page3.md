@@ -79,17 +79,17 @@ title: Profiles
   #book-wrapper { 
     position: relative;
     width: 100%;
-    height: 700px; /* Locked height */
+    height: 650px; 
+    margin: 20px auto;
     z-index: 2; 
-    margin: 40px 0;
-    touch-action: none;
+    overflow: visible;
   }
   
   #my-book {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%); /* Hard centering */
+    margin: 0 auto;
+    /* Prevents flicker by locking 3D rendering */
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
   }
 
   .page {
@@ -98,7 +98,7 @@ title: Profiles
     padding: 40px;
     box-sizing: border-box;
     overflow: hidden;
-    /* Native fix for backwards text */
+    /* Prevents the 'backwards' text glitch */
     backface-visibility: hidden !important;
     -webkit-backface-visibility: hidden !important;
   }
@@ -108,6 +108,9 @@ title: Profiles
     font-family: 'Cormorant Garamond', serif; 
     font-style: italic; 
     height: 100%; 
+    /* Static text visibility - let backface-visibility handle the turn */
+    opacity: 1 !important; 
+    pointer-events: auto;
   }
 
   .gold-title { font-family: 'Cinzel', serif; font-size: 2.6rem; text-align: center; margin: 0; }
@@ -123,19 +126,26 @@ title: Profiles
   .closing-note { margin-top: auto; border-top: 1px solid rgba(255, 215, 0, 0.2); padding-top: 15px; font-size: 0.95rem; }
 </style>
 
-<script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
+<script src="https://jsdelivr.net"></script>
 <script>
   window.addEventListener('load', function() {
     const pageFlip = new St.PageFlip(document.getElementById("my-book"), {
       width: 450, 
       height: 600,
       size: "fixed", 
-      autoSize: false, // Prevents library from resizing and jumping
+      minWidth: 450,
+      minHeight: 600,
+      maxWidth: 450,
+      maxHeight: 600,
       showCover: true,
       drawShadow: false, 
       flippingTime: 800,
       usePortrait: true,
-      mobileScrollSupport: false 
+      startPage: 0,
+      // CRITICAL: Stop the library from hijacking the page scroll
+      mobileScrollSupport: false, 
+      clickEventForward: false,
+      useMouseEvents: true
     });
 
     pageFlip.loadFromHTML(document.querySelectorAll(".page"));

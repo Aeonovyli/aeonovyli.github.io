@@ -35,7 +35,7 @@ title: Flash
         width: 100%; 
         height: 100%;
         border: none; 
-        text-align: center; 
+        text-align: center; /* This centers the text inside the boxes */
         font-size: 1.2rem; 
         outline: none !important; 
         background: #00000000 !important; 
@@ -52,8 +52,16 @@ title: Flash
     input[type="number"]::-webkit-inner-spin-button,
     input[type="number"]::-webkit-outer-spin-button { display: none; }
 
-    .name-input { font-weight: bold; text-transform: uppercase; }
-    .name-input::placeholder { color: #ffd700; opacity: 0.7; }
+    .name-input { 
+        font-weight: bold; 
+        text-transform: uppercase; 
+        text-align: center; /* Specifically centers the placeholder 'NAME' */
+    }
+    .name-input::placeholder { 
+        color: #ffd700; 
+        opacity: 0.7; 
+        text-align: center; 
+    }
 
     .category-col { text-align: left; font-weight: bold; width: 135px; }
     .total-row { font-weight: bold; font-size: 1.3rem; }
@@ -104,15 +112,12 @@ let pLimit = 0;
 
 function updateCount() {
     const inputs = document.querySelectorAll('.name-input');
-    // Start at 0, every typed name adds 1
     pLimit = Array.from(inputs).filter(i => i.value.trim() !== "").length;
-    // Re-check all boxes against new limit
     document.querySelectorAll('#scoresheet input').forEach(i => val(i));
 }
 
 function val(el) {
     let v = parseInt(el.value);
-    // If no names are typed, pLimit is 0, so no number can be entered
     if (isNaN(v)) return calc();
     if (v > pLimit) el.value = pLimit;
     if (v < 0) el.value = 0;

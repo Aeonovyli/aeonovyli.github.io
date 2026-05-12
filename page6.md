@@ -7,7 +7,7 @@ title: Flash
 
 <style>
     .flash-wrapper { 
-        background: transparent; 
+        background: #00000000; 
         padding: 15px; 
         border-radius: 8px; 
         font-family: sans-serif; 
@@ -20,7 +20,7 @@ title: Flash
         width: 100%; 
         border-collapse: collapse; 
         min-width: 600px; 
-        background: transparent;
+        background: #00000000;
     }
 
     th, td { 
@@ -38,7 +38,7 @@ title: Flash
         text-align: center; 
         font-size: 1.2rem; 
         outline: none !important; 
-        background: transparent !important; 
+        background: #00000000 !important; 
         color: #ffd700; 
         box-shadow: none !important;
         -webkit-tap-highlight-color: transparent;
@@ -46,7 +46,7 @@ title: Flash
     
     input:focus { 
         outline: none !important; 
-        background: transparent !important; 
+        background: #00000000 !important; 
     }
 
     input[type="number"]::-webkit-inner-spin-button,

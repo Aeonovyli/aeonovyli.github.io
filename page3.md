@@ -4,13 +4,14 @@ title: Profiles
 ---
 
 <div id="book-wrapper">
-  <div id="my-book">
+  <div id="my-book" style="visibility: hidden;">
     <div class="page" data-density="hard">
       <div class="page-content center">
         <h1 class="gold-title">Digital Codex</h1>
         <div class="decorative-line"></div>
         <p class="flavor-text">A bridge across the digital breach.</p>
         <p class="signature">Aeonovyli</p>
+        <div class="instruction">Drag a corner to begin</div>
       </div>
     </div>
     <div class="page">
@@ -66,87 +67,86 @@ title: Profiles
   </div>
 </div>
 
-<nav class="nav">
-  <a href="/">Home</a>
-  <a href="/page1">Interests</a>
-  <a href="/page2">Contact me</a>
-  <a href="/page4">Eiriaoloth</a>
-  <a href="/page5">Games</a>
-</nav>
+<div class="footer-nav">
+  <nav class="nav">
+    <a href="/">Home</a>
+    <a href="/page1">Interests</a>
+    <a href="/page2">Contact me</a>
+    <a href="/page4">Eiriaoloth</a>
+    <a href="/page5">Games</a>
+  </nav>
+</div>
 
 <style>
   #book-wrapper { 
-    position: relative;
-    width: 100%;
-    height: 650px; 
-    margin: 20px auto;
+    display: flex; 
+    justify-content: center; 
+    padding: 40px 0; 
+    min-height: 620px; 
     z-index: 2; 
-    overflow: visible;
+    position: relative;
+    touch-action: pan-y;
   }
-  
-  #my-book {
-    margin: 0 auto;
-    /* Prevents flicker by locking 3D rendering */
+  #my-book { 
+    margin: 0 auto; 
     transform-style: preserve-3d;
     -webkit-transform-style: preserve-3d;
   }
-
   .page {
     background-color: #0d0d0d; 
     border: 2px solid #ffd700;
-    padding: 40px;
+    padding: 30px;
     box-sizing: border-box;
     overflow: hidden;
-    /* Prevents the 'backwards' text glitch */
     backface-visibility: hidden !important;
     -webkit-backface-visibility: hidden !important;
   }
-
-  .page-content { 
-    color: #ffd700; 
-    font-family: 'Cormorant Garamond', serif; 
-    font-style: italic; 
-    height: 100%; 
-    /* Static text visibility - let backface-visibility handle the turn */
-    opacity: 1 !important; 
-    pointer-events: auto;
-  }
-
-  .gold-title { font-family: 'Cinzel', serif; font-size: 2.6rem; text-align: center; margin: 0; }
-  .gold-subtitle { font-family: 'Cinzel', serif; border-bottom: 1px solid rgba(255, 215, 0, 0.4); margin-bottom: 25px; font-size: 1.5rem; letter-spacing: 2px; }
-  .decorative-line { height: 1px; width: 80%; background: #ffd700; margin: 20px auto; }
-  .profile-item { margin-bottom: 22px; }
-  .label { font-weight: bold; font-size: 1.2rem; display: block; margin-bottom: 4px; }
-  .desc { font-size: 0.95rem; color: rgba(255, 215, 0, 0.75); line-height: 1.4; margin: 0; }
-  .page-content a { color: #ffd700; text-decoration: underline; text-underline-offset: 3px; }
+  .page-content { color: #ffd700; font-family: 'Cormorant Garamond', serif; font-style: italic; height: 100%; }
+  .gold-title { font-family: 'Cinzel', serif; font-size: 2.2rem; text-align: center; margin: 0; }
+  .gold-subtitle { font-family: 'Cinzel', serif; border-bottom: 1px solid rgba(255, 215, 0, 0.4); margin-bottom: 20px; font-size: 1.3rem; }
+  .decorative-line { height: 1px; width: 80%; background: #ffd700; margin: 15px auto; }
+  .profile-item { margin-bottom: 15px; }
+  .label { font-weight: bold; font-size: 1.1rem; display: block; }
+  .desc { font-size: 0.9rem; color: rgba(255, 215, 0, 0.75); line-height: 1.3; margin: 0; }
+  .page-content a { color: #ffd700; text-decoration: underline; }
   .center { display: flex; flex-direction: column; justify-content: center; text-align: center; height: 100%; }
-  .signature { font-family: 'Cinzel', serif; font-size: 1.2rem; margin-top: 20px; letter-spacing: 4px; }
-  .instruction { font-size: 0.8rem; opacity: 0.4; margin-top: 40px; text-transform: uppercase; letter-spacing: 1px; }
-  .closing-note { margin-top: auto; border-top: 1px solid rgba(255, 215, 0, 0.2); padding-top: 15px; font-size: 0.95rem; }
+  .signature { font-family: 'Cinzel', serif; font-size: 1.1rem; margin-top: 15px; letter-spacing: 3px; }
+  .instruction { font-size: 0.7rem; opacity: 0.4; margin-top: 30px; text-transform: uppercase; }
+  .closing-note { margin-top: auto; border-top: 1px solid rgba(255, 215, 0, 0.2); padding-top: 10px; font-size: 0.9rem; }
+  
+  .footer-nav {
+    text-align: center;
+    margin-top: 40px;
+    padding-bottom: 40px;
+    position: relative;
+    z-index: 3;
+  }
+  .nav a {
+    color: #ffd700;
+    margin: 0 10px;
+    text-decoration: none;
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+  }
 </style>
 
 <script src="https://jsdelivr.net"></script>
 <script>
   window.addEventListener('load', function() {
-    const pageFlip = new St.PageFlip(document.getElementById("my-book"), {
-      width: 450, 
-      height: 600,
-      size: "fixed", 
-      minWidth: 450,
-      minHeight: 600,
-      maxWidth: 450,
-      maxHeight: 600,
+    const bookContainer = document.getElementById("my-book");
+    const pageFlip = new St.PageFlip(bookContainer, {
+      width: 400, 
+      height: 550,
+      size: "fixed",
       showCover: true,
-      drawShadow: false, 
-      flippingTime: 800,
+      drawShadow: false,
+      flippingTime: 1000,
       usePortrait: true,
-      startPage: 0,
-      // CRITICAL: Stop the library from hijacking the page scroll
-      mobileScrollSupport: false, 
-      clickEventForward: false,
-      useMouseEvents: true
+      mobileScrollSupport: false,
+      clickEventForward: false
     });
 
     pageFlip.loadFromHTML(document.querySelectorAll(".page"));
+    bookContainer.style.visibility = "visible";
   });
 </script>

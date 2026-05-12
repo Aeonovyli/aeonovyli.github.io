@@ -113,7 +113,7 @@ title: Profiles
   .closing-note { margin-top: auto; border-top: 1px solid rgba(255, 215, 0, 0.2); padding-top: 15px; font-size: 0.95rem; }
 </style>
 
-<script src="https://jsdelivr.net"></script>
+<script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
 <script>
   window.addEventListener('load', function() {
     const pageFlip = new St.PageFlip(document.getElementById("my-book"), {

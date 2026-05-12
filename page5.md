@@ -7,4 +7,5 @@ title: Games
 <a href="/">Home</a>
 <a href="/page6">Flash</a>
 <a href="/page7">BZFlag</a>
+<a href="/page8">Chess</a>
 </nav>

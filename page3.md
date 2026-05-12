@@ -64,7 +64,6 @@ title: Profiles
         </div>
       </div>
     </div>
-
   </div>
 </div>
 
@@ -77,10 +76,19 @@ title: Profiles
 </nav>
 
 <style>
-  #book-wrapper { display: flex; justify-content: center; padding: 60px 0; z-index: 2; position: relative; }
+  #book-wrapper { 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    padding: 40px 0; 
+    z-index: 2; 
+    position: relative;
+    min-height: 650px; /* Lock height so it doesn't jump */
+    touch-action: none; /* Crucial for mobile stability */
+  }
   
   .page {
-    background-color: #0d0d0d; /* Matches your site background exactly */
+    background-color: #0d0d0d; 
     border: 2px solid #ffd700;
     padding: 40px;
     box-sizing: border-box;
@@ -88,16 +96,15 @@ title: Profiles
     backface-visibility: hidden !important;
   }
 
-  /* We keep content visible by default to prevent "blank boxes" if JS is slow */
   .page-content { 
     color: #ffd700; 
     font-family: 'Cormorant Garamond', serif; 
     font-style: italic; 
     height: 100%; 
     opacity: 1; 
+    transition: opacity 0.2s ease;
   }
 
-  /* During the flip animation, we hide it to prevent "backward text" ghosting */
   .flipping .page-content { opacity: 0; }
 
   .gold-title { font-family: 'Cinzel', serif; font-size: 2.6rem; text-align: center; margin: 0; }
@@ -116,25 +123,29 @@ title: Profiles
 <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
 <script>
   window.addEventListener('load', function() {
-    const pageFlip = new St.PageFlip(document.getElementById("my-book"), {
+    const bookElement = document.getElementById("my-book");
+    const pageFlip = new St.PageFlip(bookElement, {
       width: 450, 
       height: 600,
+      size: "fixed", // Force same spot
+      minWidth: 450,
+      minHeight: 600,
+      maxWidth: 450,
+      maxHeight: 600,
       showCover: true,
       drawShadow: false, 
-      flippingTime: 1000,
+      flippingTime: 800,
       usePortrait: true,
-      mobileScrollSupport: true
+      mobileScrollSupport: false // Prevents the whole page from scrolling
     });
 
-    const pages = document.querySelectorAll(".page");
-    pageFlip.loadFromHTML(pages);
+    pageFlip.loadFromHTML(document.querySelectorAll(".page"));
 
-    // Hide text during the flip action to keep the "invisible" look perfect
     pageFlip.on('flip', (e) => {
-        document.getElementById("my-book").classList.add("flipping");
+        bookElement.classList.add("flipping");
         setTimeout(() => {
-            document.getElementById("my-book").classList.remove("flipping");
-        }, 1000); // Matches flippingTime
+            bookElement.classList.remove("flipping");
+        }, 800); 
     });
   });
 </script>

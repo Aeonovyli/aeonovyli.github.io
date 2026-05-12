@@ -158,3 +158,9 @@ function calc() {
     }
 }
 </script>
+
+<nav class="nav">
+<a href="/">Home</a>
+<a href="/page5">Games</a>
+<a href="/page7">BZFlag</a>
+</nav>

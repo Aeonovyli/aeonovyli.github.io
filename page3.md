@@ -12,7 +12,6 @@ title: Profiles
     transition: transform 1s ease-in-out;
   }
 
-  /* Shift book right when a page is flipped to keep it centered */
   .book-container.shifted {
     transform: translateX(175px); 
   }
@@ -32,18 +31,15 @@ title: Profiles
     transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
     transform-style: preserve-3d;
     cursor: pointer;
-    /* Hide all pages by default to prevent bleed-through */
     visibility: hidden;
   }
 
-  /* Logic: Only the top-most un-flipped page and the last flipped page are visible */
   .book-page.active-page,
   .book-page.flipped {
     visibility: visible;
   }
 
-  /* Reset visibility for pages deep in the "flipped" stack */
-  .book-page.flipped.buried {
+  .book-page.buried {
     visibility: hidden;
   }
 
@@ -71,7 +67,6 @@ title: Profiles
 
 <div class="book-container" id="container">
   <div class="book">
-    <!-- PAGE 1 -->
     <div class="book-page active-page p1" onclick="flip(this)">
       <div class="page-face page-front">
         <a class="profile-link" href="https://bzflag.org">BZFlag: red rider</a>
@@ -80,21 +75,18 @@ title: Profiles
         <p class="desc-area">Back side of BZFlag profile description.</p>
       </div>
     </div>
-    <!-- PAGE 2 -->
     <div class="book-page p2" onclick="flip(this)">
       <div class="page-face page-front">
         <a class="profile-link" href="https://github.com">GitHub: TheSilverStone</a>
       </div>
       <div class="page-face page-back"></div>
     </div>
-    <!-- PAGE 3 -->
     <div class="book-page p3" onclick="flip(this)">
       <div class="page-face page-front">
         <a class="profile-link" href="https://wikipedia.org">Wikipedia: Aeonovyli</a>
       </div>
       <div class="page-face page-back"></div>
     </div>
-
   </div>
 </div>
 
@@ -102,28 +94,27 @@ title: Profiles
 function flip(el) {
   const container = document.getElementById('container');
   const pages = Array.from(document.querySelectorAll('.book-page'));
-  const index = pages.indexOf(el);
-
-  // Toggle the flip
+  
   el.classList.toggle('flipped');
 
-  // Shift container right if any page is flipped
-  const anyFlipped = pages.some(p => p.classList.contains('flipped'));
-  container.classList.toggle('shifted', anyFlipped);
+  const flippedPages = pages.filter(p => p.classList.contains('flipped'));
+  const lastFlippedIndex = flippedPages.length > 0 ? pages.indexOf(flippedPages[flippedPages.length - 1]) : -1;
+  const firstUnflippedIndex = pages.findIndex(p => !p.classList.contains('flipped'));
 
-  // Visibility Logic: 
-  // 1. Find the next page to show
+  container.classList.toggle('shifted', flippedPages.length > 0);
+
   pages.forEach((p, i) => {
     p.classList.remove('active-page', 'buried');
     
-    // Hide flipped pages that are covered by the current flipped page
-    if (p.classList.contains('flipped') && i < index) {
+    if (i === lastFlippedIndex || i === firstUnflippedIndex) {
+      p.classList.add('active-page');
+    } else if (p.classList.contains('flipped') && i < lastFlippedIndex) {
       p.classList.add('buried');
+    } else if (!p.classList.contains('flipped') && i > firstUnflippedIndex) {
+      p.style.visibility = 'hidden';
+    } else {
+      p.style.visibility = '';
     }
   });
-
-  // Show the next page in the stack
-  const nextP = pages.find(p => !p.classList.contains('flipped'));
-  if (nextP) nextP.classList.add('active-page');
 }
 </script>

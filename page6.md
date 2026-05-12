@@ -107,7 +107,7 @@ title: Flash
             </tr>
         </tfoot>
     </table>
-    <h4 onclick="confirm('Clear board?') && window.location.reload()" style="cursor:pointer; text-align:center; font-family: 'MedievalSharp', cursive; letter-spacing: 2px;">RELOAD PAGE</h4>
+    <div onclick="confirm('Clear board?') && window.location.reload()" style="cursor:pointer; text-align:center; color:#ffd700; font-family:'MedievalSharp', cursive; font-size:1.5rem; margin-top:20px; letter-spacing:2px; text-shadow: 1px 1px 4px #ff4500;">NEW GAME</div>
 </div>
 
 <script>

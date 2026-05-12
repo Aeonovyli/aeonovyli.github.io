@@ -7,10 +7,10 @@ title: Flash
 
 <style>
     .flash-wrapper { 
-        background: #00000000; 
+        background: transparent; 
         padding: 15px; 
         border-radius: 8px; 
-        font-family: sans-serif; 
+        font-family: 'Cormorant Garamond', serif; 
         overflow-x: auto; 
         max-width: 900px; 
         margin: auto; 
@@ -20,14 +20,14 @@ title: Flash
         width: 100%; 
         border-collapse: collapse; 
         min-width: 600px; 
-        background: #00000000;
+        background: transparent;
     }
 
     th, td { 
         border: 2px solid #ffd700; 
-        padding: 8px; 
+        padding: 0; /* Removed padding to allow input to fill the cell */
         text-align: center; 
-        height: 45px; 
+        height: 50px; 
         color: #ffd700; 
     }
     
@@ -35,18 +35,20 @@ title: Flash
         width: 100%; 
         height: 100%;
         border: none; 
-        text-align: center; /* This centers the text inside the boxes */
-        font-size: 1.2rem; 
+        text-align: center; 
+        font-size: 1.3rem; 
         outline: none !important; 
-        background: #00000000 !important; 
+        background: transparent !important; 
         color: #ffd700; 
+        font-family: inherit;
         box-shadow: none !important;
         -webkit-tap-highlight-color: transparent;
+        display: block;
     }
     
     input:focus { 
         outline: none !important; 
-        background: #00000000 !important; 
+        background: transparent !important; 
     }
 
     input[type="number"]::-webkit-inner-spin-button,
@@ -55,15 +57,15 @@ title: Flash
     .name-input { 
         font-weight: bold; 
         text-transform: uppercase; 
-        text-align: center; /* Specifically centers the placeholder 'NAME' */
-    }
-    .name-input::placeholder { 
-        color: #ffd700; 
-        opacity: 0.7; 
-        text-align: center; 
     }
 
-    .category-col { text-align: left; font-weight: bold; width: 135px; }
+    .category-col { 
+        text-align: left; 
+        font-weight: bold; 
+        width: 135px; 
+        padding-left: 10px; 
+    }
+    
     .total-row { font-weight: bold; font-size: 1.3rem; }
     
     .btn-reset { 
@@ -71,6 +73,7 @@ title: Flash
         color: #ffd700; border: 2px solid #ffd700; 
         cursor: pointer; width: 100%; font-weight: bold; border-radius: 4px;
         text-transform: uppercase;
+        font-family: 'MedievalSharp', cursive;
     }
 </style>
 
@@ -79,12 +82,12 @@ title: Flash
         <thead>
             <tr>
                 <th>Category</th>
-                <th><input type="text" placeholder="NAME" class="name-input" oninput="updateCount()"></th>
-                <th><input type="text" placeholder="NAME" class="name-input" oninput="updateCount()"></th>
-                <th><input type="text" placeholder="NAME" class="name-input" oninput="updateCount()"></th>
-                <th><input type="text" placeholder="NAME" class="name-input" oninput="updateCount()"></th>
-                <th><input type="text" placeholder="NAME" class="name-input" oninput="updateCount()"></th>
-                <th><input type="text" placeholder="NAME" class="name-input" oninput="updateCount()"></th>
+                <th><input type="text" class="name-input" oninput="updateCount()"></th>
+                <th><input type="text" class="name-input" oninput="updateCount()"></th>
+                <th><input type="text" class="name-input" oninput="updateCount()"></th>
+                <th><input type="text" class="name-input" oninput="updateCount()"></th>
+                <th><input type="text" class="name-input" oninput="updateCount()"></th>
+                <th><input type="text" class="name-input" oninput="updateCount()"></th>
             </tr>
         </thead>
         <tbody id="scoresheet">
@@ -99,7 +102,7 @@ title: Flash
         </tbody>
         <tfoot>
             <tr class="total-row">
-                <td>TOTAL</td>
+                <td class="category-col">TOTAL</td>
                 <td id="t0">0</td><td id="t1">0</td><td id="t2">0</td><td id="t3">0</td><td id="t4">0</td><td id="t5">0</td>
             </tr>
         </tfoot>

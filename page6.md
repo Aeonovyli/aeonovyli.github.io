@@ -8,44 +8,37 @@ title: Flash
 <style>
     .flash-wrapper { background: #fff; padding: 15px; border-radius: 8px; font-family: sans-serif; overflow-x: auto; border: 2px solid #000; max-width: 900px; margin: auto; }
     table { width: 100%; border-collapse: collapse; min-width: 600px; }
-    th, td { border: 1px solid #000; padding: 8px; text-align: center; }
+    th, td { border: 1px solid #000; padding: 8px; text-align: center; height: 40px; }
     
-    /* Removes all focus outlines and colored boxes */
+    /* This removes the yellow/blue box and the outline entirely */
     input { 
         width: 100%; 
+        height: 100%;
         border: none; 
         text-align: center; 
         font-size: 1.1rem; 
-        outline: none; 
-        background: transparent; 
-        box-shadow: none;
-        -webkit-appearance: none;
+        outline: none !important; 
+        background: transparent !important; 
+        box-shadow: none !important;
+        -webkit-tap-highlight-color: transparent; /* Fix for iPad/iPhone taps */
     }
     
-    /* Ensures no color change or border appears when clicking/typing */
+    /* Specifically target focus state to prevent background changes */
     input:focus { 
-        outline: none; 
-        background: transparent; 
+        outline: none !important; 
+        background-color: transparent !important; 
     }
 
     input[type="number"]::-webkit-inner-spin-button,
-    input[type="number"]::-webkit-outer-spin-button { 
-        display: none; 
-    }
+    input[type="number"]::-webkit-outer-spin-button { display: none; }
 
     .category-col { text-align: left; font-weight: bold; width: 130px; background: #fafafa; }
     .name-input { font-weight: bold; text-transform: uppercase; }
-    .total-row { font-weight: bold; background: #f9f9f9; font-size: 1.2rem; }
+    .total-row { font-weight: bold; font-size: 1.2rem; }
     
     .btn-reset { 
-        margin-top: 15px; 
-        padding: 12px; 
-        background: #333; 
-        color: white; 
-        border: none; 
-        cursor: pointer; 
-        width: 100%; 
-        font-weight: bold; 
+        margin-top: 15px; padding: 12px; background: #333; color: white; border: none; 
+        cursor: pointer; width: 100%; font-weight: bold; border-radius: 4px;
     }
 </style>
 

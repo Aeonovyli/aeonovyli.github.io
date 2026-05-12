@@ -81,7 +81,7 @@ title: Flash
     <table>
         <thead>
             <tr>
-                <th>Category</th>
+                <th>Category/Names</th>
                 <th><input type="text" class="name-input" oninput="updateCount()"></th>
                 <th><input type="text" class="name-input" oninput="updateCount()"></th>
                 <th><input type="text" class="name-input" oninput="updateCount()"></th>

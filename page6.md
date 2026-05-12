@@ -6,17 +6,47 @@ title: Flash
 ##### Flash is a 2-6 player dice rolling game. There are not teams; each player is given six colored dice, while six 'chips', 1-6 are placed in the center. On the count of three, all players roll their dice until their dice match the combo set for that round. Winner of last round chooses a combo that hasn't been used.
 
 <style>
-    .flash-wrapper { background: #fff; color: #333; padding: 15px; border-radius: 8px; font-family: sans-serif; overflow-x: auto; border: 2px solid #000; max-width: 900px; margin: auto; }
+    .flash-wrapper { background: #fff; padding: 15px; border-radius: 8px; font-family: sans-serif; overflow-x: auto; border: 2px solid #000; max-width: 900px; margin: auto; }
     table { width: 100%; border-collapse: collapse; min-width: 600px; }
     th, td { border: 1px solid #000; padding: 8px; text-align: center; }
-    th { background: #f4f4f4; }
+    
+    /* Removes all focus outlines and colored boxes */
+    input { 
+        width: 100%; 
+        border: none; 
+        text-align: center; 
+        font-size: 1.1rem; 
+        outline: none; 
+        background: transparent; 
+        box-shadow: none;
+        -webkit-appearance: none;
+    }
+    
+    /* Ensures no color change or border appears when clicking/typing */
+    input:focus { 
+        outline: none; 
+        background: transparent; 
+    }
+
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button { 
+        display: none; 
+    }
+
     .category-col { text-align: left; font-weight: bold; width: 130px; background: #fafafa; }
-    input { width: 100%; border: none; text-align: center; font-size: 1.1rem; outline: none; background: transparent; }
-    input[type="number"]::-webkit-inner-spin-button { display: none; }
-    input:focus { background: #fff9c4; }
-    .name-input { font-weight: bold; text-transform: uppercase; color: #d32f2f; border-bottom: 1px dashed #ccc; }
-    .total-row { font-weight: bold; background: #e3f2fd; font-size: 1.2rem; }
-    .btn-reset { margin-top: 15px; padding: 12px; background: #333; color: white; border: none; border-radius: 4px; cursor: pointer; width: 100%; font-weight: bold; }
+    .name-input { font-weight: bold; text-transform: uppercase; }
+    .total-row { font-weight: bold; background: #f9f9f9; font-size: 1.2rem; }
+    
+    .btn-reset { 
+        margin-top: 15px; 
+        padding: 12px; 
+        background: #333; 
+        color: white; 
+        border: none; 
+        cursor: pointer; 
+        width: 100%; 
+        font-weight: bold; 
+    }
 </style>
 
 <div class="flash-wrapper">

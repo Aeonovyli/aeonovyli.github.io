@@ -73,14 +73,12 @@ title: Profiles
     <div class="book-page p1" onclick="this.classList.toggle('flipped')">
       <div class="page-face page-front">
         <a class="profile-link" href="https://bzflag.org">BZFlag: red rider</a>
-        <p class="desc-area">Click this page to flip. Notice how the stack has "depth" like a real spine.</p>
       </div>
       <div class="page-face page-back"><p class="desc-area">Back of BZFlag...</p></div>
     </div>
     <div class="book-page p2" onclick="this.classList.toggle('flipped')">
       <div class="page-face page-front">
         <a class="profile-link" href="https://github.com">GitHub: TheSilverStone</a>
-        <p class="desc-area">The pages are stacked with translateZ to prevent flat-looking layers.</p>
       </div>
       <div class="page-face page-back"><p class="desc-area">Back of GitHub...</p></div>
     </div>
@@ -88,14 +86,12 @@ title: Profiles
     <div class="book-page p3" onclick="this.classList.toggle('flipped')">
       <div class="page-face page-front">
         <a class="profile-link" href="https://wikipedia.org">Wikipedia: Aeonovyli</a>
-        <p class="desc-area">If a description gets too long, manually move the extra words to the back face.</p>
       </div>
       <div class="page-face page-back"></div>
     </div>
     <div class="book-page p4" onclick="this.classList.toggle('flipped')">
       <div class="page-face page-front">
         <a class="profile-link" href="https://reddit.com">Reddit: knaTZB</a>
-        <p class="desc-area">A real book holds its place; this one will too.</p>
       </div>
       <div class="page-face page-back"></div>
     </div>

@@ -53,8 +53,13 @@ title: Chess
 
 .dark {
     border: 1px solid rgba(255, 215, 0, 0.6);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='w3.org' width='14' height='14'%3E%3Cline x1='0' y1='14' x2='14' y2='0' stroke='rgba(255,215,0,0.5)' stroke-width='2'/%3E%3C/svg%3E");
-    background-repeat: repeat;
+    background: repeating-linear-gradient(
+        135deg,
+        transparent,
+        transparent 8px,
+        rgba(255, 215, 0, 0.4) 8px,
+        rgba(255, 215, 0, 0.4) 10px
+    );
 }
 
 .selected {

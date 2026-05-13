@@ -151,7 +151,7 @@ title: Chess
     <button id="resetBtn">Reset Game</button>
 </div>
 
-<script src="cloudflare.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
 
 <script>
 window.addEventListener("load", () => {

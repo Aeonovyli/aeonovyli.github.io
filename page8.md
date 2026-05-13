@@ -33,6 +33,7 @@ title: Chess
     background: transparent; 
     border-radius: 4px;
     overflow: hidden;
+    position: relative; /* Base layer for relative positioning anchor */
 }
 
 .square {
@@ -72,9 +73,47 @@ title: Chess
     box-shadow: inset 0 0 10px #ff944d;
 }
 
-.square svg {
+.piece-container {
     width: 80%;
     height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.piece-container.gliding {
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 10;
+}
+
+/* Vapor Trail Particles Style */
+.trail-particle {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 5;
+    transform: translate(-50%, -50%);
+    animation: fadeAndShrink 0.5s ease-out forwards;
+}
+
+@keyframes fadeAndShrink {
+    0% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(0.1);
+        opacity: 0;
+    }
+}
+
+.square svg {
+    width: 100%;
+    height: 100%;
     filter: drop-shadow(0 0 2px rgba(0,0,0,0.5));
 }
 
@@ -112,7 +151,7 @@ title: Chess
     <button id="resetBtn">Reset Game</button>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+<script src="cloudflare.com"></script>
 
 <script>
 window.addEventListener("load", () => {
@@ -127,6 +166,7 @@ window.addEventListener("load", () => {
     const resetBtn = document.getElementById("resetBtn");
 
     let selected = null;
+    let isAnimating = false;
 
     const paths = {
         p: "M22,9C22,11.2 20.2,13 18,13C16.8,13 15.7,12.5 15,11.6L12,18H32L29,11.6C28.3,12.5 27.2,13 26,13C23.8,13 22,11.2 22,9M12,36H32V38H12V36M14,20H30V34H14V20Z",
@@ -144,9 +184,9 @@ window.addEventListener("load", () => {
         const stroke = isWhite ? "#ffd700" : "rgba(0, 240, 255, 0.4)";
         const strokeWidth = isWhite ? "2" : "1.5";
 
-        return `<svg viewBox="0 0 44 44">
+        return `<div class="piece-container"><svg viewBox="0 0 44 44">
             <path d="${pathData}" fill="${fill}" stroke="${stroke}" stroke-width="${strokeWidth}" stroke-linejoin="round" stroke-linecap="round"/>
-        </svg>`;
+        </svg></div>`;
     }
 
     function squareName(row, col) {
@@ -180,6 +220,7 @@ window.addEventListener("load", () => {
                 const coord = squareName(row, col);
 
                 square.classList.add("square");
+                square.id = "sq-" + coord;
                 square.classList.add((row + col) % 2 === 0 ? "light" : "dark");
 
                 if (coord === selected) square.classList.add("selected");
@@ -197,14 +238,80 @@ window.addEventListener("load", () => {
         updateStatus();
     }
 
+    function animateGlide(fromCoord, toCoord, isWhitePiece, callback) {
+        isAnimating = true;
+        const fromSq = document.getElementById("sq-" + fromCoord);
+        const piece = fromSq.querySelector(".piece-container");
+
+        if (!piece) {
+            callback();
+            return;
+        }
+
+        const toSq = document.getElementById("sq-" + toCoord);
+        const fromRect = fromSq.getBoundingClientRect();
+        const toRect = toSq.getBoundingClientRect();
+        const boardRect = boardEl.getBoundingClientRect();
+
+        const deltaX = toRect.left - fromRect.left;
+        const deltaY = toRect.top - fromRect.top;
+
+        // Choose trail color dynamically based on piece type/color match
+        const glowColor = isWhitePiece ? "rgba(255, 215, 0, 0.6)" : "rgba(0, 240, 255, 0.6)";
+        const shadowColor = isWhitePiece ? "#ff4500" : "#00f0ff";
+
+        // Real-time particle generation interval
+        const trailInterval = setInterval(() => {
+            const currentPieceRect = piece.getBoundingClientRect();
+            
+            // Calculate absolute center within the grid boundary coordinates
+            const x = (currentPieceRect.left + currentPieceRect.width / 2) - boardRect.left;
+            const y = (currentPieceRect.top + currentPieceRect.height / 2) - boardRect.top;
+
+            const particle = document.createElement("div");
+            particle.classList.add("trail-particle");
+            particle.style.left = `${x}px`;
+            particle.style.top = `${y}px`;
+            particle.style.background = glowColor;
+            particle.style.boxShadow = `0 0 10px ${shadowColor}, 0 0 20px ${glowColor}`;
+
+            boardEl.appendChild(particle);
+
+            // Auto clean DOM node after animation lifecycle finishes
+            setTimeout(() => particle.remove(), 500);
+        }, 20); // Drops a node every 20ms
+
+        piece.classList.add("gliding");
+        piece.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+
+        piece.addEventListener("transitionend", () => {
+            clearInterval(trailInterval); // Kill real-time emission loop
+            piece.classList.remove("gliding");
+            piece.style.transform = "";
+            isAnimating = false;
+            callback();
+        }, { once: true });
+    }
+
     function clickSquare(coord) {
+        if (isAnimating) return; 
+
         const clickedPiece = game.get(coord);
 
         if (selected) {
-            const move = game.move({ from: selected, to: coord, promotion: "q" });
+            const currentSelected = selected; 
+            const movingPiece = game.get(currentSelected);
+            const move = game.move({ from: currentSelected, to: coord, promotion: "q" });
+            
             if (move) {
+                game.undo(); 
                 selected = null;
-                renderBoard();
+                
+                const isWhitePiece = (movingPiece.color === 'w');
+                animateGlide(currentSelected, coord, isWhitePiece, () => {
+                    game.move({ from: currentSelected, to: coord, promotion: "q" }); 
+                    renderBoard();
+                });
                 return;
             }
             selected = (clickedPiece && clickedPiece.color === game.turn()) ? coord : null;
@@ -215,6 +322,7 @@ window.addEventListener("load", () => {
     }
 
     resetBtn.addEventListener("click", () => {
+        if (isAnimating) return;
         game.reset();
         selected = null;
         renderBoard();

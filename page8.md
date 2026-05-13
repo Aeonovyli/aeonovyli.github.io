@@ -4,7 +4,7 @@ title: Chess
 ---
 
 <style>
-/* Game Container Layout */
+/* Game Container - Outer Box Completely Stripped Clear */
 #game-wrap {
     display: flex;
     flex-direction: column;
@@ -12,10 +12,7 @@ title: Chess
     padding: 25px;
     margin: 20px auto;
     max-width: 600px;
-    background-color: rgba(34, 34, 34, 0.85);
-    border-radius: 8px;
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
-    border: 1px solid rgba(0, 240, 255, 0.3);
+    background: transparent;
 }
 
 #status {

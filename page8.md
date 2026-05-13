@@ -3,30 +3,36 @@ layout: default
 title: Chess
 ---
 
-<div id="chess-container" style="all: initial; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; font-family: 'Times New Roman', serif; background: transparent;">
+<!-- BARE BONES CONTAINER WITH CLASSIC VISIBILITY -->
+<div id="chess-container" style="display: flex; flex-direction: column; align-items: center; padding: 20px; font-family: sans-serif; background: #fff; color: #000;">
 
 <style>
-    #chess-container * { box-sizing: border-box; }
-    #status-msg { color: #ffcc00; margin-bottom: 15px; font-size: 24px; text-transform: uppercase; letter-spacing: 3px; text-align: center; font-family: 'Times New Roman', serif; }
-    #board-grid { display: grid; grid-template-columns: repeat(8, 50px); grid-template-rows: repeat(8, 50px); width: 400px; height: 400px; border: 3px solid #ffcc00; box-shadow: 0 0 15px rgba(255, 204, 0, 0.4); background: #000; }
-    .sq { width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; font-size: 38px; cursor: pointer; user-select: none; position: relative; }
-    .dark-sq { background-color: rgba(255, 204, 0, 0.15); }
+    #status-msg { margin-bottom: 15px; font-size: 20px; font-weight: bold; }
     
-    /* REVISED: Clean, clear visibility styling for both colors */
-    .p-white { color: #fff; filter: drop-shadow(0 0 4px #ffcc00); }
-    .p-black { color: #ffcc00; filter: drop-shadow(0 0 2px #000); }
+    /* STANDARD 8X8 GRID BOARD CHESS LAYOUT */
+    #board-grid { display: grid; grid-template-columns: repeat(8, 45px); grid-template-rows: repeat(8, 45px); border: 2px solid #333; }
     
-    .selected-sq { background-color: rgba(255, 255, 255, 0.25) !important; }
-    .hint::before { content: ""; position: absolute; width: 14px; height: 14px; background: rgba(255, 204, 0, 0.5); border-radius: 50%; z-index: 10; }
-    .reload-btn { margin-top: 30px; background: none; border: none; color: #ffcc00; font-family: 'Times New Roman', serif; font-style: italic; font-size: 24px; letter-spacing: 4px; cursor: pointer; text-transform: uppercase; }
+    .sq { width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; font-size: 32px; cursor: pointer; user-select: none; }
+    
+    /* TRADITIONAL HIGH CONTRAST SQUARES */
+    .light-sq { background-color: #f0d9b5; }
+    .dark-sq { background-color: #b58863; }
+    
+    /* FALLBACK SYSTEM TEXT PIECE SHADOWS */
+    .p-white { color: #fff; filter: drop-shadow(0px 0px 2px #000); }
+    .p-black { color: #000; filter: drop-shadow(0px 0px 1px #fff); }
+    
+    .selected-sq { background-color: #7b61ff !important; }
+    .hint { background-color: #33b5e5 !important; opacity: 0.8; }
+    .reload-btn { margin-top: 20px; padding: 10px 20px; font-size: 16px; cursor: pointer; }
 </style>
 
 <div id="status-msg">White to Move</div>
 <div id="board-grid"></div>
-<button class="reload-btn" onclick="location.reload()">RELOAD PAGE</button>
+<button class="reload-btn" onclick="location.reload()">Reset Game</button>
 
-<!-- Stable cloudflare alternative CDN file -->
-<script src="cloudflare.com"></script>
+<!-- CORRECTED BUNDLE SOURCE: Pulls active game logic rules into the window -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
 
 <script>
 (function() {
@@ -49,7 +55,9 @@ title: Chess
             for (let c = 0; c < 8; c++) {
                 const sq = document.createElement('div');
                 const coord = String.fromCharCode(97 + c) + (8 - r);
-                sq.className = 'sq' + ((r + c) % 2 ? ' dark-sq' : '');
+                
+                // Alternate board colors
+                sq.className = 'sq ' + ((r + c) % 2 ? 'dark-sq' : 'light-sq');
                 
                 if (selectedSq === coord) sq.classList.add('selected-sq');
                 if (moves.some(m => m.to === coord)) sq.classList.add('hint');

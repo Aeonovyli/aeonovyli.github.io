@@ -94,9 +94,7 @@ button:hover {
 
 <div id="game-wrap">
     <div id="status">Loading...</div>
-
     <div id="board"></div>
-
     <button id="resetBtn">Reset Game</button>
 </div>
 

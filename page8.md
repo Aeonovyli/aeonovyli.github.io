@@ -4,7 +4,7 @@ title: Chess
 ---
 
 <style>
-/* Game Container Styling matching .highlighted-section & .message-box */
+/* Game Container Layout */
 #game-wrap {
     display: flex;
     flex-direction: column;
@@ -18,7 +18,6 @@ title: Chess
     border: 1px solid rgba(0, 240, 255, 0.3);
 }
 
-/* Header Text Matching h1, h2, h3 */
 #status {
     font-family: 'MedievalSharp', cursive, serif;
     font-size: 28px;
@@ -27,66 +26,87 @@ title: Chess
     text-align: center;
     color: #ffd700;
     text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
-    transition: all 0.3s ease-in-out;
 }
 
-/* Chess Board Container */
 #board {
     display: grid;
     grid-template-columns: repeat(8, min(11vw, 65px));
     grid-template-rows: repeat(8, min(11vw, 65px));
     border: 3px solid #ffd700;
-    box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
-    background-color: rgba(20, 20, 20, 0.9);
+    box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
+    background: transparent;
     border-radius: 4px;
     overflow: hidden;
 }
 
-/* Individual Board Squares */
 .square {
     width: min(11vw, 65px);
     height: min(11vw, 65px);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: min(8vw, 44px);
+    font-size: min(9vw, 52px);
+    font-weight: bold;
     cursor: pointer;
     user-select: none;
-    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
 }
 
-/* Board Squares Color Palette */
+/* Light Squares: Only outlines like a scoresheet */
 .light {
-    background: rgba(235, 215, 180, 0.15); /* Soft translucent gold tint */
+    background: transparent;
+    border: 1px solid rgba(255, 215, 0, 0.2);
 }
 
+/* Dark Squares: Crosshatched with theme colors from top-left to bottom-right */
 .dark {
-    background: rgba(20, 20, 20, 0.85); /* Deep dark medieval contrast */
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    background: repeating-linear-gradient(
+        135deg,
+        rgba(20, 20, 20, 0.7) 0px,
+        rgba(20, 20, 20, 0.7) 6px,
+        rgba(255, 69, 0, 0.4) 7px,
+        rgba(0, 240, 255, 0.4) 8px,
+        rgba(20, 20, 20, 0.7) 9px,
+        rgba(20, 20, 20, 0.7) 14px
+    );
 }
 
-/* Game Interaction Overlays */
+/* Selection Overlays */
 .selected {
-    background: rgba(0, 240, 255, 0.35) !important; /* Cyan Glow Magic Layer */
-    box-shadow: inset 0 0 10px #00f0ff;
+    background: rgba(0, 240, 255, 0.3) !important;
+    box-shadow: inset 0 0 12px #00f0ff;
 }
 
 .move {
-    background: rgba(255, 148, 77, 0.3) !important; /* Orange Destination Layer */
-    box-shadow: inset 0 0 8px #ff944d;
+    background: rgba(255, 148, 77, 0.25) !important;
+    box-shadow: inset 0 0 10px #ff944d;
 }
 
-/* Chess Pieces Text Styling */
+/* White Pieces: Colored Gold Outlines Only */
 .white-piece {
-    color: #ffd700 !important; /* Pure Gold Pieces */
-    text-shadow: 0 0 4px #ff4500, 0 0 8px #ff4500;
+    color: transparent !important;
+    background: none;
+    -webkit-text-stroke: 1.5px #ffd700;
+    filter: drop-shadow(0 0 3px #ff4500);
 }
 
+/* Black Pieces: Crosshatched from top-right to bottom-left using Cyan lines */
 .black-piece {
-    color: #00f0ff !important; /* Cyan Ghostly Pieces */
-    text-shadow: 0 0 4px #00f0ff, 0 0 8px rgba(0, 240, 255, 0.6);
+    color: transparent !important;
+    background: repeating-linear-gradient(
+        45deg,
+        #00f0ff 0px,
+        #00f0ff 1.5px,
+        rgba(20, 20, 20, 0.3) 2px,
+        rgba(20, 20, 20, 0.3) 5px
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    filter: drop-shadow(0 0 2px rgba(0, 240, 255, 0.8));
 }
 
-/* Control Buttons Matching .submit-btn & Animations */
+/* Button UI */
 #resetBtn {
     margin-top: 25px;
     background-color: rgba(255, 215, 0, 0.1);
@@ -101,30 +121,22 @@ title: Chess
     transition: all 0.3s ease;
 }
 
-#resetBtn:hover, #resetBtn:focus {
-    outline: none;
+#resetBtn:hover {
     background-color: rgba(255, 215, 0, 0.2);
     box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
-    color: #fff3a0;
-    text-shadow: 2px 2px 6px #ff6347, 0 0 14px #87cefa, 0 0 20px #00f0ff;
-}
-
-#resetBtn:active {
-    animation: clickGlow 0.6s ease-in-out 1;
 }
 </style>
 
 <div id="game-wrap">
-    <div id="status">Loading Engine...</div>
+    <div id="status">Loading...</div>
     <div id="board"></div>
-    <button id="resetBtn">Reset Match</button>
+    <button id="resetBtn">Reset Game</button>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
 
 <script>
 window.addEventListener("load", () => {
-
     if (typeof Chess === "undefined") {
         document.getElementById("status").innerText = "Failed to load chess engine.";
         return;
@@ -147,16 +159,14 @@ window.addEventListener("load", () => {
     }
 
     function updateStatus() {
-        let text = (game.turn() === "w" ? "Gold" : "Cyan") + " to move";
-
+        let text = (game.turn() === "w" ? "White" : "Black") + " to move";
         if (game.in_checkmate()) {
-            text = "CHECKMATE — " + (game.turn() === "w" ? "Cyan" : "Gold") + " Victory";
+            text = "CHECKMATE — " + (game.turn() === "w" ? "Black" : "White") + " wins";
         } else if (game.in_draw()) {
-            text = "Stalemate — Draw";
+            text = "Draw";
         } else if (game.in_check()) {
-            text += " — Under Check";
+            text += " — CHECK";
         }
-
         statusEl.innerText = text;
     }
 

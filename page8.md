@@ -4,7 +4,7 @@ title: Chess
 ---
 
 <style>
-/* Game Container - Outer Box Completely Stripped Clear */
+/* Game Container */
 #game-wrap {
     display: flex;
     flex-direction: column;
@@ -47,15 +47,15 @@ title: Chess
     user-select: none;
 }
 
-/* Light Squares: Fully clear, only scoresheet outlines */
+/* Light Squares: Bright, solid gold grid lines */
 .light {
     background: transparent !important;
-    border: 1px solid rgba(255, 215, 0, 0.2);
+    border: 1px solid rgba(255, 215, 0, 0.6);
 }
 
-/* Dark Squares: Custom linear background crosshatch */
+/* Dark Squares: Bright gold grid lines with custom background crosshatch */
 .dark {
-    border: 1px solid rgba(255, 215, 0, 0.2);
+    border: 1px solid rgba(255, 215, 0, 0.6);
     background: repeating-linear-gradient(
         135deg,
         transparent 0px,

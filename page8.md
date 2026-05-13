@@ -84,7 +84,7 @@ title: Chess
 }
 
 .piece-container.gliding {
-    transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
     z-index: 10;
 }
 
@@ -96,13 +96,16 @@ title: Chess
     pointer-events: none;
     z-index: 5;
     transform: translate(-50%, -50%);
-    animation: fadeAndShrink 0.35s cubic-bezier(0.1, 0.8, 0.25, 1) forwards;
+    animation: fadeAndShrink 1.5s cubic-bezier(0.1, 0.8, 0.25, 1) forwards;
 }
 
 @keyframes fadeAndShrink {
     0% {
-        transform: translate(-50%, -50%) scale(2);
+        transform: translate(-50%, -50%) scale(2.5);
         opacity: 1;
+    }
+    15% {
+        opacity: 0.9;
     }
     100% {
         transform: translate(-50%, -50%) scale(0.1);
@@ -150,7 +153,7 @@ title: Chess
     <button id="resetBtn">Reset Game</button>
 </div>
 
-<!-- Fixed CDN library location -->
+<!-- Verified script tag source configuration with .js extension -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
 
 <script>
@@ -261,11 +264,11 @@ window.addEventListener("load", () => {
         const deltaX = toRect.left - fromRect.left;
         const deltaY = toRect.top - fromRect.top;
 
-        const glowColor = isWhitePiece ? "rgba(255, 215, 0, 0.8)" : "rgba(0, 240, 255, 0.8)";
+        const glowColor = isWhitePiece ? "rgba(255, 215, 0, 0.85)" : "rgba(0, 240, 255, 0.85)";
         const shadowColor = isWhitePiece ? "#ff4500" : "#00f0ff";
 
         const totalSparks = 300; 
-        const glideDuration = 450; 
+        const glideDuration = 500; 
 
         for (let i = 0; i < totalSparks; i++) {
             const progress = i / (totalSparks - 1);
@@ -274,8 +277,8 @@ window.addEventListener("load", () => {
             const posX = startX + (endX - startX) * easedProgress;
             const posY = startY + (endY - startY) * easedProgress;
 
-            const sprayJitterX = (Math.random() - 0.5) * 14;
-            const sprayJitterY = (Math.random() - 0.5) * 14;
+            const sprayJitterX = (Math.random() - 0.5) * 16;
+            const sprayJitterY = (Math.random() - 0.5) * 16;
 
             const dynamicDelay = progress * glideDuration;
 
@@ -287,10 +290,10 @@ window.addEventListener("load", () => {
                 particle.style.left = `${posX + sprayJitterX}px`;
                 particle.style.top = `${posY + sprayJitterY}px`;
                 particle.style.background = glowColor;
-                particle.style.boxShadow = `0 0 5px ${shadowColor}, 0 0 10px ${glowColor}`;
+                particle.style.boxShadow = `0 0 6px ${shadowColor}, 0 0 12px ${glowColor}`;
 
                 boardEl.appendChild(particle);
-                setTimeout(() => particle.remove(), 350);
+                setTimeout(() => particle.remove(), 1500);
             }, dynamicDelay);
         }
 

@@ -57,8 +57,8 @@ title: Chess
         135deg,
         transparent 0px,
         transparent 6px,
-        rgba(255, 69, 0, 0.4) 7px,
-        rgba(0, 240, 255, 0.4) 8px,
+        rgba(255, 215, 0, 0.2) 7px,
+        rgba(255, 215, 0, 0.4) 8px,
         transparent 9px,
         transparent 14px
     );

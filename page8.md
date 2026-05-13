@@ -33,7 +33,7 @@ title: Chess
     background: transparent; 
     border-radius: 4px;
     overflow: hidden;
-    position: relative; /* Base layer for relative positioning anchor */
+    position: relative; 
 }
 
 .square {
@@ -84,26 +84,25 @@ title: Chess
 }
 
 .piece-container.gliding {
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
     z-index: 10;
 }
 
-/* Vapor Trail Particles Style */
 .trail-particle {
     position: absolute;
-    width: 20px;
-    height: 20px;
+    width: 4px;
+    height: 4px;
     border-radius: 50%;
     pointer-events: none;
     z-index: 5;
     transform: translate(-50%, -50%);
-    animation: fadeAndShrink 0.5s ease-out forwards;
+    animation: fadeAndShrink 0.35s cubic-bezier(0.1, 0.8, 0.25, 1) forwards;
 }
 
 @keyframes fadeAndShrink {
     0% {
-        transform: translate(-50%, -50%) scale(1.2);
-        opacity: 0.8;
+        transform: translate(-50%, -50%) scale(2);
+        opacity: 1;
     }
     100% {
         transform: translate(-50%, -50%) scale(0.1);
@@ -151,6 +150,7 @@ title: Chess
     <button id="resetBtn">Reset Game</button>
 </div>
 
+<!-- Fixed CDN library location -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
 
 <script>
@@ -253,39 +253,51 @@ window.addEventListener("load", () => {
         const toRect = toSq.getBoundingClientRect();
         const boardRect = boardEl.getBoundingClientRect();
 
+        const startX = (fromRect.left + fromRect.width / 2) - boardRect.left;
+        const startY = (fromRect.top + fromRect.height / 2) - boardRect.top;
+        const endX = (toRect.left + toRect.width / 2) - boardRect.left;
+        const endY = (toRect.top + toRect.height / 2) - boardRect.top;
+
         const deltaX = toRect.left - fromRect.left;
         const deltaY = toRect.top - fromRect.top;
 
-        // Choose trail color dynamically based on piece type/color match
-        const glowColor = isWhitePiece ? "rgba(255, 215, 0, 0.6)" : "rgba(0, 240, 255, 0.6)";
+        const glowColor = isWhitePiece ? "rgba(255, 215, 0, 0.8)" : "rgba(0, 240, 255, 0.8)";
         const shadowColor = isWhitePiece ? "#ff4500" : "#00f0ff";
 
-        // Real-time particle generation interval
-        const trailInterval = setInterval(() => {
-            const currentPieceRect = piece.getBoundingClientRect();
-            
-            // Calculate absolute center within the grid boundary coordinates
-            const x = (currentPieceRect.left + currentPieceRect.width / 2) - boardRect.left;
-            const y = (currentPieceRect.top + currentPieceRect.height / 2) - boardRect.top;
+        const totalSparks = 300; 
+        const glideDuration = 450; 
 
-            const particle = document.createElement("div");
-            particle.classList.add("trail-particle");
-            particle.style.left = `${x}px`;
-            particle.style.top = `${y}px`;
-            particle.style.background = glowColor;
-            particle.style.boxShadow = `0 0 10px ${shadowColor}, 0 0 20px ${glowColor}`;
+        for (let i = 0; i < totalSparks; i++) {
+            const progress = i / (totalSparks - 1);
+            const easedProgress = 1 - Math.pow(1 - progress, 3); 
 
-            boardEl.appendChild(particle);
+            const posX = startX + (endX - startX) * easedProgress;
+            const posY = startY + (endY - startY) * easedProgress;
 
-            // Auto clean DOM node after animation lifecycle finishes
-            setTimeout(() => particle.remove(), 500);
-        }, 20); // Drops a node every 20ms
+            const sprayJitterX = (Math.random() - 0.5) * 14;
+            const sprayJitterY = (Math.random() - 0.5) * 14;
+
+            const dynamicDelay = progress * glideDuration;
+
+            setTimeout(() => {
+                if (!isAnimating) return; 
+
+                const particle = document.createElement("div");
+                particle.classList.add("trail-particle");
+                particle.style.left = `${posX + sprayJitterX}px`;
+                particle.style.top = `${posY + sprayJitterY}px`;
+                particle.style.background = glowColor;
+                particle.style.boxShadow = `0 0 5px ${shadowColor}, 0 0 10px ${glowColor}`;
+
+                boardEl.appendChild(particle);
+                setTimeout(() => particle.remove(), 350);
+            }, dynamicDelay);
+        }
 
         piece.classList.add("gliding");
         piece.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
 
         piece.addEventListener("transitionend", () => {
-            clearInterval(trailInterval); // Kill real-time emission loop
             piece.classList.remove("gliding");
             piece.style.transform = "";
             isAnimating = false;
@@ -322,7 +334,7 @@ window.addEventListener("load", () => {
     }
 
     resetBtn.addEventListener("click", () => {
-        if (isAnimating) return;
+        isAnimating = false;
         game.reset();
         selected = null;
         renderBoard();

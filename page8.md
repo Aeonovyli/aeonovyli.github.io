@@ -7,8 +7,8 @@ title: Chess
 body {
     margin: 0;
     padding: 0;
-    background: #ffd700;
-    color: #ffd700;
+    background: #111;
+    color: white;
     font-family: Arial, sans-serif;
 }
 

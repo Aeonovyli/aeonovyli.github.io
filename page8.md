@@ -34,7 +34,7 @@ title: Chess
     grid-template-rows: repeat(8, min(11vw, 65px));
     border: 3px solid #ffd700;
     box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
-    background: transparent;
+    background: transparent; 
     border-radius: 4px;
     overflow: hidden;
 }
@@ -45,68 +45,50 @@ title: Chess
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: min(9vw, 52px);
-    font-weight: bold;
+    box-sizing: border-box;
     cursor: pointer;
     user-select: none;
-    box-sizing: border-box;
 }
 
-/* Light Squares: Only outlines like a scoresheet */
+/* Light Squares: Fully clear, only scoresheet outlines */
 .light {
-    background: transparent;
+    background: transparent !important;
     border: 1px solid rgba(255, 215, 0, 0.2);
 }
 
-/* Dark Squares: Crosshatched with theme colors from top-left to bottom-right */
+/* Dark Squares: Custom linear background crosshatch */
 .dark {
     border: 1px solid rgba(255, 215, 0, 0.2);
     background: repeating-linear-gradient(
         135deg,
-        rgba(20, 20, 20, 0.7) 0px,
-        rgba(20, 20, 20, 0.7) 6px,
+        transparent 0px,
+        transparent 6px,
         rgba(255, 69, 0, 0.4) 7px,
         rgba(0, 240, 255, 0.4) 8px,
-        rgba(20, 20, 20, 0.7) 9px,
-        rgba(20, 20, 20, 0.7) 14px
+        transparent 9px,
+        transparent 14px
     );
 }
 
 /* Selection Overlays */
 .selected {
-    background: rgba(0, 240, 255, 0.3) !important;
+    background: rgba(0, 240, 255, 0.25) !important;
     box-shadow: inset 0 0 12px #00f0ff;
 }
 
 .move {
-    background: rgba(255, 148, 77, 0.25) !important;
+    background: rgba(255, 148, 77, 0.2) !important;
     box-shadow: inset 0 0 10px #ff944d;
 }
 
-/* White Pieces: Colored Gold Outlines Only */
-.white-piece {
-    color: transparent !important;
-    background: none;
-    -webkit-text-stroke: 1.5px #ffd700;
-    filter: drop-shadow(0 0 3px #ff4500);
+/* Vector Piece Sizing */
+.square svg {
+    width: 80%;
+    height: 80%;
+    filter: drop-shadow(0 0 2px rgba(0,0,0,0.5));
 }
 
-/* Black Pieces: Crosshatched from top-right to bottom-left using Cyan lines */
-.black-piece {
-    color: transparent !important;
-    background: repeating-linear-gradient(
-        45deg,
-        #00f0ff 0px,
-        #00f0ff 1.5px,
-        rgba(20, 20, 20, 0.3) 2px,
-        rgba(20, 20, 20, 0.3) 5px
-    );
-    -webkit-background-clip: text;
-    background-clip: text;
-    filter: drop-shadow(0 0 2px rgba(0, 240, 255, 0.8));
-}
-
-/* Button UI */
+/* Reset Button */
 #resetBtn {
     margin-top: 25px;
     background-color: rgba(255, 215, 0, 0.1);
@@ -126,6 +108,15 @@ title: Chess
     box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
 }
 </style>
+
+<!-- Global SVG Defs Pattern Library for crosshatching pieces -->
+<svg style="display:none;">
+  <defs>
+    <pattern id="pieceHatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#00f0ff" stroke-width="1.5" />
+    </pattern>
+  </defs>
+</svg>
 
 <div id="game-wrap">
     <div id="status">Loading...</div>
@@ -149,10 +140,26 @@ window.addEventListener("load", () => {
 
     let selected = null;
 
-    const pieces = {
-        p: "♟", r: "♜", n: "♞", b: "♝", q: "♛", k: "♚",
-        P: "♙", R: "♖", N: "♘", B: "♗", Q: "♕", K: "♔"
+    const paths = {
+        p: "M22,9C22,11.2 20.2,13 18,13C16.8,13 15.7,12.5 15,11.6L12,18H32L29,11.6C28.3,12.5 27.2,13 26,13C23.8,13 22,11.2 22,9M12,36H32V38H12V36M14,20H30V34H14V20Z",
+        r: "M12,9H16V13H20V9H24V13H28V9H32V17H12V9M14,20H30V34H14V20M12,36H32V38H12V36Z",
+        n: "M33,26.5C33,26.5 35,22.5 31,18C27,13.5 22,13.5 22,13.5C22,13.5 21.5,9.5 17,9.5C12.5,9.5 11,14 11,14C11,14 7.5,16.5 9.5,23C11.5,29.5 16,33 16,33L12,36H32L30,31C30,31 33,29.5 33,26.5Z",
+        b: "M22,9C22,9 15,14 15,22C15,27 18,34 18,34H26C26,34 29,27 29,22C29,14 22,9 22,9M12,36H32V38H12V36Z",
+        q: "M12,14L16,26L22,11L28,26L32,14L30,34H14L12,14M12,36H32V38H12V36Z",
+        k: "M12,18L16,14L22,18L28,14L32,18L30,34H14L12,18M22,6V11M19.5,8.5H24.5M12,36H32V38H12V36Z"
     };
+
+    function getPieceSVG(type, color) {
+        const pathData = paths[type.toLowerCase()];
+        const isWhite = (color === 'w');
+        const fill = isWhite ? "none" : "url(#pieceHatch)";
+        const stroke = isWhite ? "#ffd700" : "rgba(0, 240, 255, 0.4)";
+        const strokeWidth = isWhite ? "2" : "1.5";
+
+        return `<svg viewBox="0 0 44 44">
+            <path d="${pathData}" fill="${fill}" stroke="${stroke}" stroke-width="${strokeWidth}" stroke-linejoin="round" stroke-linecap="round"/>
+        </svg>`;
+    }
 
     function squareName(row, col) {
         return "abcdefgh"[col] + (8 - row);
@@ -185,27 +192,14 @@ window.addEventListener("load", () => {
                 const coord = squareName(row, col);
 
                 square.classList.add("square");
+                square.classList.add((row + col) % 2 === 0 ? "light" : "dark");
 
-                if ((row + col) % 2 === 0) {
-                    square.classList.add("light");
-                } else {
-                    square.classList.add("dark");
-                }
-
-                if (coord === selected) {
-                    square.classList.add("selected");
-                }
-
-                if (legalMoves.some(move => move.to === coord)) {
-                    square.classList.add("move");
-                }
+                if (coord === selected) square.classList.add("selected");
+                if (legalMoves.some(move => move.to === coord)) square.classList.add("move");
 
                 const piece = board[row][col];
-
                 if (piece) {
-                    const symbol = piece.color === "w" ? pieces[piece.type.toUpperCase()] : pieces[piece.type];
-                    square.textContent = symbol;
-                    square.classList.add(piece.color === "w" ? "white-piece" : "black-piece");
+                    square.innerHTML = getPieceSVG(piece.type, piece.color);
                 }
 
                 square.addEventListener("click", () => clickSquare(coord));
@@ -219,27 +213,15 @@ window.addEventListener("load", () => {
         const clickedPiece = game.get(coord);
 
         if (selected) {
-            const move = game.move({
-                from: selected,
-                to: coord,
-                promotion: "q"
-            });
-
+            const move = game.move({ from: selected, to: coord, promotion: "q" });
             if (move) {
                 selected = null;
                 renderBoard();
                 return;
             }
-
-            if (clickedPiece && clickedPiece.color === game.turn()) {
-                selected = coord;
-            } else {
-                selected = null;
-            }
+            selected = (clickedPiece && clickedPiece.color === game.turn()) ? coord : null;
         } else {
-            if (clickedPiece && clickedPiece.color === game.turn()) {
-                selected = coord;
-            }
+            if (clickedPiece && clickedPiece.color === game.turn()) selected = coord;
         }
         renderBoard();
     }

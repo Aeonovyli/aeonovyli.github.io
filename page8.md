@@ -4,7 +4,6 @@ title: Chess
 ---
 
 <style>
-/* Game Container */
 #game-wrap {
     display: flex;
     flex-direction: column;
@@ -47,13 +46,11 @@ title: Chess
     user-select: none;
 }
 
-/* Light Squares: Bright, solid gold grid lines */
 .light {
     background: transparent !important;
     border: 1px solid rgba(255, 215, 0, 0.6);
 }
 
-/* Dark Squares: Bright gold grid lines with custom background crosshatch */
 .dark {
     border: 1px solid rgba(255, 215, 0, 0.6);
     background: repeating-linear-gradient(
@@ -67,7 +64,6 @@ title: Chess
     );
 }
 
-/* Selection Overlays */
 .selected {
     background: rgba(0, 240, 255, 0.25) !important;
     box-shadow: inset 0 0 12px #00f0ff;
@@ -78,14 +74,12 @@ title: Chess
     box-shadow: inset 0 0 10px #ff944d;
 }
 
-/* Vector Piece Sizing */
 .square svg {
     width: 80%;
     height: 80%;
     filter: drop-shadow(0 0 2px rgba(0,0,0,0.5));
 }
 
-/* Reset Button */
 #resetBtn {
     margin-top: 25px;
     background-color: rgba(255, 215, 0, 0.1);
@@ -106,7 +100,6 @@ title: Chess
 }
 </style>
 
-<!-- Global SVG Defs Pattern Library for crosshatching pieces -->
 <svg style="display:none;">
   <defs>
     <pattern id="pieceHatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
@@ -230,5 +223,65 @@ window.addEventListener("load", () => {
     });
 
     renderBoard();
+});
+</script>
+<style>
+#undoBtn {
+    margin-top: 25px;
+    margin-right: 15px;
+    background-color: rgba(255, 215, 0, 0.1);
+    color: #ffd700;
+    border: 2px solid #ffd700;
+    padding: 10px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1em;
+    text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
+    transition: all 0.3s ease;
+}
+#undoBtn:not(:disabled):hover {
+    background-color: rgba(255, 215, 0, 0.2);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+}
+#undoBtn:disabled {
+    opacity: 0.25;
+    cursor: not-allowed;
+    border-color: rgba(255, 215, 0, 0.3);
+    color: rgba(255, 215, 0, 0.3);
+    text-shadow: none;
+}
+</style>
+
+<script>
+window.addEventListener("load", () => {
+    const gameWrap = document.getElementById("game-wrap");
+    const resetBtn = document.getElementById("resetBtn");
+    
+    const undoBtn = document.createElement("button");
+    undoBtn.id = "undoBtn";
+    undoBtn.innerText = "Undo Move";
+    undoBtn.disabled = true;
+
+    gameWrap.insertBefore(undoBtn, resetBtn);
+
+    window.addEventListener("click", () => {
+        if (typeof game !== "undefined") {
+            undoBtn.disabled = (game.history().length === 0);
+        }
+    });
+
+    undoBtn.addEventListener("click", () => {
+        if (typeof game !== "undefined") {
+            game.undo();
+            // Clear any active board piece selections
+            if (typeof selected !== "undefined") {
+                window.selected = null; 
+            }
+            if (typeof renderBoard === "function") {
+                renderBoard();
+            }
+        }
+    });
 });
 </script>

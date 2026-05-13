@@ -23,7 +23,8 @@ title: Chess
 <div id="board-grid"></div>
 <button class="reload-btn" onclick="location.reload()">RELOAD PAGE</button>
 
-<script src="https://cloudflare.com"></script>
+<!-- CORRECTED: Loads the actual chess.js bundle library from a CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
 
 <script>
 (function() {

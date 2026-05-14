@@ -11,9 +11,6 @@ title: Eiriaoloth
 
 #### Certainly not the meek inhabitants of Fornitas, or even the more powerful Guardians. The doom marches on, unchecked. But the Redeemer is still there, and Avenoria shall not fall while He still breathes. The question is, how long will that be?
 
-
-
-
 <nav class="nav">
 <a href="/">Home</a>
 <a href="/page1">Interests</a>

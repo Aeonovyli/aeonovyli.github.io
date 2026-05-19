@@ -262,7 +262,6 @@ title: Sudoku
     padding: 0;
     transition: transform 0.1s;
     line-height: 1;
-    touch-action: manipulation;
 }
 
 .input-pad button:hover {
@@ -329,15 +328,15 @@ title: Sudoku
         </div>
     </div>
     <div class="input-pad">
-        <div class="pad-btn-wrap" id="pad-w-1"><div class="pad-dot"></div><button onmousedown="startPadPress(event, 1)" onmouseup="endPadPress(event, 1)" ontouchstart="startPadPress(event, 1)" ontouchend="endPadPress(event, 1)">1</button></div>
-        <div class="pad-btn-wrap" id="pad-w-2"><div class="pad-dot"></div><button onmousedown="startPadPress(event, 2)" onmouseup="endPadPress(event, 2)" ontouchstart="startPadPress(event, 2)" ontouchend="endPadPress(event, 2)">2</button></div>
-        <div class="pad-btn-wrap" id="pad-w-3"><div class="pad-dot"></div><button onmousedown="startPadPress(event, 3)" onmouseup="endPadPress(event, 3)" ontouchstart="startPadPress(event, 3)" ontouchend="endPadPress(event, 3)">3</button></div>
-        <div class="pad-btn-wrap" id="pad-w-4"><div class="pad-dot"></div><button onmousedown="startPadPress(event, 4)" onmouseup="endPadPress(event, 4)" ontouchstart="startPadPress(event, 4)" ontouchend="endPadPress(event, 4)">4</button></div>
-        <div class="pad-btn-wrap" id="pad-w-5"><div class="pad-dot"></div><button onmousedown="startPadPress(event, 5)" onmouseup="endPadPress(event, 5)" ontouchstart="startPadPress(event, 5)" ontouchend="endPadPress(event, 5)">5</button></div>
-        <div class="pad-btn-wrap" id="pad-w-6"><div class="pad-dot"></div><button onmousedown="startPadPress(event, 6)" onmouseup="endPadPress(event, 6)" ontouchstart="startPadPress(event, 6)" ontouchend="endPadPress(event, 6)">6</button></div>
-        <div class="pad-btn-wrap" id="pad-w-7"><div class="pad-dot"></div><button onmousedown="startPadPress(event, 7)" onmouseup="endPadPress(event, 7)" ontouchstart="startPadPress(event, 7)" ontouchend="endPadPress(event, 7)">7</button></div>
-        <div class="pad-btn-wrap" id="pad-w-8"><div class="pad-dot"></div><button onmousedown="startPadPress(event, 8)" onmouseup="endPadPress(event, 8)" ontouchstart="startPadPress(event, 8)" ontouchend="endPadPress(event, 8)">8</button></div>
-        <div class="pad-btn-wrap" id="pad-w-9"><div class="pad-dot"></div><button onmousedown="startPadPress(event, 9)" onmouseup="endPadPress(event, 9)" ontouchstart="startPadPress(event, 9)" ontouchend="endPadPress(event, 9)">9</button></div>
+        <div class="pad-btn-wrap" id="pad-w-1"><div class="pad-dot"></div><button data-num="1">1</button></div>
+        <div class="pad-btn-wrap" id="pad-w-2"><div class="pad-dot"></div><button data-num="2">2</button></div>
+        <div class="pad-btn-wrap" id="pad-w-3"><div class="pad-dot"></div><button data-num="3">3</button></div>
+        <div class="pad-btn-wrap" id="pad-w-4"><div class="pad-dot"></div><button data-num="4">4</button></div>
+        <div class="pad-btn-wrap" id="pad-w-5"><div class="pad-dot"></div><button data-num="5">5</button></div>
+        <div class="pad-btn-wrap" id="pad-w-6"><div class="pad-dot"></div><button data-num="6">6</button></div>
+        <div class="pad-btn-wrap" id="pad-w-7"><div class="pad-dot"></div><button data-num="7">7</button></div>
+        <div class="pad-btn-wrap" id="pad-w-8"><div class="pad-dot"></div><button data-num="8">8</button></div>
+        <div class="pad-btn-wrap" id="pad-w-9"><div class="pad-dot"></div><button data-num="9">9</button></div>
     </div>
     <div class="new-game-container">
         <button class="new-game-btn" onclick="generateNewGame()">New Game</button>
@@ -353,8 +352,8 @@ title: Sudoku
   let notesMode = false;
   let hintsLeft = 3;
   let gameActive = true;
-  let padTimer = null;
-  let isLongPress = false;
+  let pressTimer = null;
+  let longPressed = false;
   
   let cellNotes = Array.from({ length: 81 }, () => Array(10).fill(false));
 
@@ -450,28 +449,26 @@ title: Sudoku
     document.getElementById('status').innerText = "Sudoku";
   }
 
-  function startPadPress(e, num) {
+  function handlePadStart(num) {
     if (!gameActive) return;
-    isLongPress = false;
-    if (padTimer) clearTimeout(padTimer);
-    padTimer = setTimeout(() => {
-        isLongPress = true;
-        triggerToolMode(num);
-    }, 450);
+    longPressed = false;
+    pressTimer = setTimeout(() => {
+      longPressed = true;
+      toggleNumberTool(num);
+    }, 2000);
   }
 
-  function endPadPress(e, num) {
+  function handlePadEnd(num) {
+    clearTimeout(pressTimer);
     if (!gameActive) return;
-    if (padTimer) clearTimeout(padTimer);
-    e.preventDefault();
-    if (!isLongPress) {
-        if (selectedCell && !selectedCell.classList.contains('clue')) {
-            executeCellInput(selectedCell, num);
-        }
+    if (!longPressed) {
+      if (selectedCell && !selectedCell.classList.contains('clue')) {
+        executeCellInput(selectedCell, num);
+      }
     }
   }
 
-  function triggerToolMode(num) {
+  function toggleNumberTool(num) {
     document.querySelectorAll('.pad-btn-wrap').forEach(w => w.classList.remove('tool-active'));
     if (selectedCell) {
         selectedCell.classList.remove('selected');
@@ -633,32 +630,6 @@ title: Sudoku
     applyVisualHighlights();
   }
 
-  function inputNumber(num) {
-    if (!gameActive || !selectedCell || selectedCell.classList.contains('clue')) return;
-    executeCellInput(selectedCell, num);
-  }
-
-  function eraseCell() {
-    if (!gameActive || !selectedCell || selectedCell.classList.contains('clue')) return;
-    const idx = parseInt(selectedCell.dataset.index);
-    const valDiv = selectedCell.querySelector('.cell-value');
-    
-    moveHistory.push({
-        type: 'erase',
-        cell: selectedCell,
-        index: idx,
-        prevValue: valDiv.innerText,
-        prevMistake: selectedCell.classList.contains('mistake'),
-        prevNotes: [...cellNotes[idx]]
-    });
-    
-    valDiv.innerText = '';
-    selectedCell.classList.remove('mistake');
-    cellNotes[idx] = Array(10).fill(false);
-    clearCellNotesDisplay(selectedCell);
-    applyVisualHighlights();
-  }
-
   function undoMove() {
     if (!gameActive || moveHistory.length === 0) return;
     const lastMove = moveHistory.pop();
@@ -690,6 +661,27 @@ title: Sudoku
             clearCellNotesDisplay(lastMove.cell);
         }
     }
+    applyVisualHighlights();
+  }
+
+  function eraseCell() {
+    if (!gameActive || !selectedCell || selectedCell.classList.contains('clue')) return;
+    const idx = parseInt(selectedCell.dataset.index);
+    const valDiv = selectedCell.querySelector('.cell-value');
+    
+    moveHistory.push({
+        type: 'erase',
+        cell: selectedCell,
+        index: idx,
+        prevValue: valDiv.innerText,
+        prevMistake: selectedCell.classList.contains('mistake'),
+        prevNotes: [...cellNotes[idx]]
+    });
+    
+    valDiv.innerText = '';
+    selectedCell.classList.remove('mistake');
+    cellNotes[idx] = Array(10).fill(false);
+    clearCellNotesDisplay(selectedCell);
     applyVisualHighlights();
   }
 
@@ -741,4 +733,45 @@ title: Sudoku
       }
     });
     
-    if (won)
+    if (won) {
+      gameActive = false; 
+      if (selectedCell) selectedCell.classList.remove('selected');
+      clearActiveNumberTool();
+      cells.forEach(c => c.classList.remove('highlight-cross', 'highlight-match'));
+      document.getElementById('board').classList.add('game-won');
+      document.getElementById('status').innerText = "VICTORY — Puzzle Solved!";
+    }
+  }
+
+  function bindPadEvents() {
+    for (let i = 1; i <= 9; i++) {
+      const btn = document.querySelector(`.input-pad button[data-num="${i}"]`);
+      if (btn) {
+        btn.addEventListener('mousedown', () => handlePadStart(i));
+        btn.addEventListener('touchstart', (e) => {
+          e.preventDefault();
+          handlePadStart(i);
+        });
+        
+        btn.addEventListener('mouseup', () => handlePadEnd(i));
+        btn.addEventListener('mouseleave', () => clearTimeout(pressTimer));
+        btn.addEventListener('touchend', () => handlePadEnd(i));
+      }
+    }
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (!gameActive) return;
+    if (e.key >= '1' && e.key <= '9') {
+      const val = parseInt(e.key);
+      if (selectedCell) {
+          executeCellInput(selectedCell, val);
+      }
+    } else if (e.key === 'Backspace' || e.key === 'Delete') {
+      eraseCell();
+    }
+  });
+
+  generateNewGame();
+  bindPadEvents();
+</script>

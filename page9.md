@@ -142,15 +142,12 @@ title: Sudoku
 
 <div id="game-wrap">
     <div id="status">Sudoku</div>
-    
     <div class="controls-row">
         <button class="action-btn" onclick="undoMove()">Undo</button>
         <button class="action-btn" onclick="eraseCell()">Erase</button>
         <button class="action-btn" onclick="generateNewGame()">New Game</button>
     </div>
-
     <div id="board"></div>
-
     <div class="input-pad">
         <button onclick="inputNumber(1)">1</button>
         <button onclick="inputNumber(2)">2</button>

@@ -3,141 +3,168 @@ layout: default
 title: Sudoku
 ---
 
-<div class="sudoku-wrapper-box">
-  <div id="sudoku-grid" class="sudoku-grid-board"></div>
-  
-  <div class="sudoku-action-row">
-    <button onclick="undoMove()">Undo</button>
-    <button onclick="eraseCell()">Erase</button>
-    <button onclick="generateNewGame()">New Game</button>
-  </div>
-
-  <div class="sudoku-input-pad">
-    <button onclick="inputNumber(1)">1</button>
-    <button onclick="inputNumber(2)">2</button>
-    <button onclick="inputNumber(3)">3</button>
-    <button onclick="inputNumber(4)">4</button>
-    <button onclick="inputNumber(5)">5</button>
-    <button onclick="inputNumber(6)">6</button>
-    <button onclick="inputNumber(7)">7</button>
-    <button onclick="inputNumber(8)">8</button>
-    <button onclick="inputNumber(9)">9</button>
-  </div>
-</div>
-
 <style>
-  .sudoku-wrapper-box {
-    max-width: 450px;
+#game-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 25px;
     margin: 20px auto;
-    background-color: rgba(34, 34, 34, 0.9);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
-    border: 3px solid #ffd700;
-    user-select: none;
-    -webkit-user-select: none;
-  }
-  .sudoku-grid-board {
+    max-width: 600px;
+    background: transparent;
+}
+
+#status {
+    font-family: 'MedievalSharp', cursive, serif;
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: #ffd700;
+    text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
+}
+
+#board {
     display: grid;
-    grid-template-columns: repeat(9, 1fr);
-    border-top: 3px solid #ffd700;
-    border-left: 3px solid #ffd700;
-    border-right: 3px solid #ffd700;
-    border-bottom: 3px solid #ffd700;
-    margin-bottom: 25px;
-    background-color: #141414;
+    grid-template-columns: repeat(9, min(9.5vw, 55px));
+    grid-template-rows: repeat(9, min(9.5vw, 55px));
+    border: 3px solid #ffd700;
+    box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
+    background: #141414; 
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
     gap: 0;
-  }
-  .sudoku-cell {
-    width: 100%;
-    aspect-ratio: 1;
+}
+
+.square {
+    width: min(9.5vw, 55px);
+    height: min(9.5vw, 55px);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.6rem;
-    font-family: 'Cormorant Garamond', serif !important;
     box-sizing: border-box;
-    background-color: #141414;
+    cursor: pointer;
+    user-select: none;
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 1.6rem;
     color: #00f0ff;
     text-shadow: 0 0 8px #00f0ff;
-    cursor: pointer;
-    transition: background-color 0.15s;
-    border-right: 1px solid #ffd700;
-    border-bottom: 1px solid #ffd700;
-  }
+    background-color: #141414;
+    border-right: 1px solid rgba(255, 215, 0, 0.3);
+    border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+}
 
-  .sudoku-grid-board > :nth-child(9n) { border-right: none; }
-  .sudoku-grid-board > :nth-child(n+73) { border-bottom: none; }
+#board > :nth-child(9n) { border-right: none; }
+#board > :nth-child(n+73) { border-bottom: none; }
 
-  .sudoku-grid-board > :nth-child(3n):not(:nth-child(9n)) { border-right: 3px solid #ffd700; }
-  .sudoku-grid-board > :nth-child(n+19):nth-child(-n+27),
-  .sudoku-grid-board > :nth-child(n+46):nth-child(-n+54) { border-bottom: 3px solid #ffd700; }
+#board > :nth-child(3n):not(:nth-child(9n)) { border-right: 3px solid #ffd700; }
+#board > :nth-child(n+19):nth-child(-n+27),
+#board > :nth-child(n+46):nth-child(-n+54) { border-bottom: 3px solid #ffd700; }
 
-  .sudoku-cell.clue {
+.clue {
     color: #ffd700;
     font-weight: bold;
     text-shadow: 1px 1px 4px #ff4500;
     background-color: rgba(45, 45, 45, 0.4);
-  }
-  
-  .sudoku-cell.selected {
-    background-color: rgba(255, 215, 0, 0.35) !important;
-  }
-  .sudoku-cell.highlight-cross {
-    background-color: rgba(0, 240, 255, 0.12);
-  }
-  .sudoku-cell.highlight-match {
-    background-color: rgba(0, 240, 255, 0.3);
-  }
-  .sudoku-cell.mistake {
+}
+
+.selected {
+    background: rgba(255, 215, 0, 0.25) !important;
+    box-shadow: inset 0 0 12px #ffd700;
+}
+
+.highlight-cross {
+    background-color: rgba(0, 240, 255, 0.08);
+}
+
+.highlight-match {
+    background-color: rgba(0, 240, 255, 0.25);
+}
+
+.mistake {
     color: #ff4500 !important;
     text-shadow: 0 0 8px #ff4500, 1px 1px 2px #000 !important;
-  }
+}
 
-  .sudoku-action-row {
+.controls-row {
     display: flex;
-    justify-content: space-around;
-    margin-bottom: 25px;
-  }
-  .sudoku-action-row button {
-    background: none;
-    border: 1px solid #ffd700;
-    color: #ffd700;
-    padding: 5px 15px;
-    border-radius: 4px;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1rem;
-    text-shadow: 1px 1px 4px #ff4500;
-    cursor: pointer;
-    transition: all 0.3s;
-  }
-  .sudoku-action-row button:hover {
-    background-color: rgba(255, 215, 0, 0.2);
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-  }
-  .sudoku-input-pad {
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 450px;
+}
+
+.input-pad {
     display: flex;
     justify-content: space-between;
-  }
-  .sudoku-input-pad button {
+    width: 100%;
+    max-width: 450px;
+    margin-top: 20px;
+}
+
+.input-pad button {
     background: none;
     border: none;
     color: #00f0ff;
     font-family: 'Cormorant Garamond', serif;
-    font-size: 2.5rem;
+    font-size: 2.3rem;
     text-shadow: 0 0 8px #00f0ff;
     cursor: pointer;
     flex: 1;
     padding: 5px 0;
     transition: transform 0.1s;
-  }
-  .sudoku-input-pad button:active {
+}
+
+.input-pad button:active {
     transform: scale(0.85);
     color: #ff944d;
-  }
+}
+
+.action-btn {
+    margin-top: 25px;
+    background-color: rgba(255, 215, 0, 0.1);
+    color: #ffd700;
+    border: 2px solid #ffd700;
+    padding: 10px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1em;
+    text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
+    transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+    background-color: rgba(255, 215, 0, 0.2);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+}
 </style>
 
-{% raw %}
+<div id="game-wrap">
+    <div id="status">Sudoku</div>
+    <div id="board"></div>
+    
+    <div class="controls-row">
+        <button class="action-btn" onclick="undoMove()">Undo</button>
+        <button class="action-btn" onclick="eraseCell()">Erase</button>
+        <button class="action-btn" onclick="generateNewGame()">New Game</button>
+    </div>
+
+    <div class="input-pad">
+        <button onclick="inputNumber(1)">1</button>
+        <button onclick="inputNumber(2)">2</button>
+        <button onclick="inputNumber(3)">3</button>
+        <button onclick="inputNumber(4)">4</button>
+        <button onclick="inputNumber(5)">5</button>
+        <button onclick="inputNumber(6)">6</button>
+        <button onclick="inputNumber(7)">7</button>
+        <button onclick="inputNumber(8)">8</button>
+        <button onclick="inputNumber(9)">9</button>
+    </div>
+</div>
+
 <script>
   let fullSolution = [];
   let puzzleLayout = [];
@@ -197,32 +224,31 @@ title: Sudoku
   function generateNewGame() {
     createRandomPuzzle();
     
-    const gridElement = document.getElementById('sudoku-grid');
-    gridElement.innerHTML = '';
+    const boardEl = document.getElementById('board');
+    boardEl.innerHTML = '';
     selectedCell = null;
     moveHistory = [];
     
     for (let r = 0; r < 9; r++) {
       for (let c = 0; c < 9; c++) {
         const cell = document.createElement('div');
-        cell.className = 'sudoku-cell';
+        cell.className = 'square';
         cell.dataset.row = r;
         cell.dataset.col = c;
         
         if (puzzleLayout[r][c] !== 0) {
           cell.innerText = puzzleLayout[r][c];
           cell.classList.add('clue');
-        } else {
-          cell.innerText = '';
         }
         
         cell.addEventListener('click', function() {
           selectCell(this);
         });
         
-        gridElement.appendChild(cell);
+        boardEl.appendChild(cell);
       }
     }
+    document.getElementById('status').innerText = "Sudoku";
   }
 
   function selectCell(cell) {
@@ -234,7 +260,7 @@ title: Sudoku
   }
 
   function applyVisualHighlights() {
-    const cells = document.querySelectorAll('.sudoku-cell');
+    const cells = document.querySelectorAll('.square');
     cells.forEach(c => {
       c.classList.remove('highlight-cross', 'highlight-match');
     });
@@ -282,6 +308,7 @@ title: Sudoku
       selectedCell.classList.add('mistake');
     } else {
       selectedCell.classList.remove('mistake');
+      checkWinCondition();
     }
 
     applyVisualHighlights();
@@ -313,6 +340,21 @@ title: Sudoku
     }
     
     selectCell(lastMove.cell);
+  }
+
+  function checkWinCondition() {
+    const cells = document.querySelectorAll('.square');
+    let won = true;
+    cells.forEach(c => {
+      const r = parseInt(c.dataset.row);
+      const col = parseInt(c.dataset.col);
+      if (parseInt(c.innerText) !== fullSolution[r][col]) {
+        won = false;
+      }
+    });
+    if (won) {
+      document.getElementById('status').innerText = "VICTORY — Puzzle Solved!";
+    }
   }
 
   document.addEventListener('keydown', (e) => {

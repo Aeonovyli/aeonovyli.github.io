@@ -8,9 +8,10 @@ title: Sudoku
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 25px;
-    margin: 20px auto;
-    max-width: 600px;
+    padding: 10px;
+    margin: 10px auto;
+    width: 95vw;
+    box-sizing: border-box;
     background: transparent;
 }
 
@@ -26,8 +27,10 @@ title: Sudoku
 
 #board {
     display: grid;
-    grid-template-columns: repeat(9, min(9.5vw, 55px));
-    grid-template-rows: repeat(9, min(9.5vw, 55px));
+    grid-template-columns: repeat(9, 1fr);
+    width: 95vw;
+    max-width: 500px;
+    aspect-ratio: 1 / 1;
     border: 3px solid #ffd700;
     box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
     background: transparent; 
@@ -39,8 +42,8 @@ title: Sudoku
 }
 
 .square {
-    width: min(9.5vw, 55px);
-    height: min(9.5vw, 55px);
+    width: 100%;
+    height: 100%;
     box-sizing: border-box;
     cursor: pointer;
     user-select: none;
@@ -48,7 +51,6 @@ title: Sudoku
     border-right: 1px solid rgba(255, 215, 0, 0.3);
     border-bottom: 1px solid rgba(255, 215, 0, 0.3);
     position: relative;
-    transition: all 0.3s ease;
 }
 
 #board > :nth-child(9n) { border-right: none; }
@@ -65,10 +67,9 @@ title: Sudoku
     align-items: center;
     justify-content: center;
     font-family: 'Cormorant Garamond', serif !important;
-    font-size: 1.8rem;
+    font-size: min(6vw, 1.8rem);
     color: #00f0ff;
     text-shadow: 0 0 8px #00f0ff;
-    transition: all 0.3s ease;
 }
 
 .clue .cell-value {
@@ -92,7 +93,7 @@ title: Sudoku
 
 .note-digit {
     font-family: sans-serif;
-    font-size: 0.65rem;
+    font-size: min(2vw, 0.65rem);
     color: rgba(0, 240, 255, 0.6);
     display: flex;
     align-items: center;
@@ -118,25 +119,10 @@ title: Sudoku
     text-shadow: 0 0 8px #ff4500, 1px 1px 2px #000 !important;
 }
 
-#board.game-won {
-    border-color: #104fa2;
-    box-shadow: 0 0 30px rgba(16, 79, 162, 0.6);
-}
-#board.game-won .square {
-    background-color: #104fa2 !important; 
-    border-color: transparent !important;   
-    box-shadow: none !important;
-}
-#board.game-won .cell-value {
-    color: #ffffff !important;             
-    text-shadow: none !important;
-    font-weight: normal !important;
-}
-
 .sudoku-controls-row {
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    width: 95vw;
     max-width: 450px;
     margin-top: 25px;
     padding: 0 10px;
@@ -221,7 +207,7 @@ title: Sudoku
 .input-pad {
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    width: 95vw;
     max-width: 450px;
     margin-top: 30px;
 }
@@ -255,23 +241,13 @@ title: Sudoku
     border: none;
     color: #00f0ff;
     font-family: 'Cormorant Garamond', serif;
-    font-size: 3rem;
+    font-size: min(10vw, 3rem);
     text-shadow: 0 0 8px #00f0ff;
     cursor: pointer;
     width: 100%;
     padding: 0;
     transition: transform 0.1s;
     line-height: 1;
-}
-
-.input-pad button:hover {
-    color: #ffd700;
-    text-shadow: 0 0 8px #ffd700;
-}
-
-.input-pad button:active {
-    transform: scale(0.85);
-    color: #ff944d;
 }
 
 .new-game-container {
@@ -407,6 +383,24 @@ title: Sudoku
     puzzleLayout = board;
   }
 
+  function checkToolVanishCondition(num) {
+    let correctCount = 0;
+    const squares = document.querySelectorAll('.square');
+    squares.forEach(s => {
+        const val = s.querySelector('.cell-value').innerText;
+        const r = parseInt(s.dataset.row);
+        const c = parseInt(s.dataset.col);
+        if (parseInt(val) === num && num === fullSolution[r][c]) {
+            correctCount++;
+        }
+    });
+    if (correctCount === 9) {
+        if (activeNumberTool === num) {
+            clearActiveNumberTool();
+        }
+    }
+  }
+
   function generateNewGame() {
     createRandomPuzzle();
     
@@ -469,6 +463,18 @@ title: Sudoku
   }
 
   function toggleNumberTool(num) {
+    let correctCount = 0;
+    const squares = document.querySelectorAll('.square');
+    squares.forEach(s => {
+        const val = s.querySelector('.cell-value').innerText;
+        const r = parseInt(s.dataset.row);
+        const c = parseInt(s.dataset.col);
+        if (parseInt(val) === num && num === fullSolution[r][c]) {
+            correctCount++;
+        }
+    });
+    if (correctCount === 9) return;
+
     document.querySelectorAll('.pad-btn-wrap').forEach(w => w.classList.remove('tool-active'));
     if (selectedCell) {
         selectedCell.classList.remove('selected');
@@ -625,6 +631,7 @@ title: Sudoku
     } else {
       cell.classList.remove('mistake');
       clearConflictingNotes(r, c, num);
+      checkToolVanishCondition(num);
       checkWinCondition();
     }
     applyVisualHighlights();

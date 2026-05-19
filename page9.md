@@ -137,7 +137,7 @@ title: Sudoku
   }
 </style>
 
-{% unparsed %}
+{% raw %}
 <script>
   let fullSolution = [];
   let puzzleLayout = [];
@@ -326,4 +326,3 @@ title: Sudoku
 
   generateNewGame();
 </script>
-{% endunparsed %}

@@ -17,11 +17,20 @@ title: Sudoku
 #status {
     font-family: 'MedievalSharp', cursive, serif;
     font-size: 28px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     font-weight: bold;
     text-align: center;
     color: #ffd700;
     text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
+}
+
+.controls-row {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 450px;
 }
 
 #board {
@@ -30,7 +39,7 @@ title: Sudoku
     grid-template-rows: repeat(9, min(9.5vw, 55px));
     border: 3px solid #ffd700;
     box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
-    background: transparent; /* Made transparent like the Flash page layout */
+    background: transparent; 
     border-radius: 4px;
     overflow: hidden;
     position: relative;
@@ -50,7 +59,7 @@ title: Sudoku
     font-size: 1.6rem;
     color: #00f0ff;
     text-shadow: 0 0 8px #00f0ff;
-    background: transparent; /* Made transparent */
+    background: transparent; 
     border-right: 1px solid rgba(255, 215, 0, 0.4);
     border-bottom: 1px solid rgba(255, 215, 0, 0.4);
 }
@@ -66,7 +75,7 @@ title: Sudoku
     color: #ffd700;
     font-weight: bold;
     text-shadow: 1px 1px 4px #ff4500;
-    background: transparent !important; /* Made transparent */
+    background: transparent !important;
 }
 
 .selected {
@@ -87,21 +96,12 @@ title: Sudoku
     text-shadow: 0 0 8px #ff4500, 1px 1px 2px #000 !important;
 }
 
-.controls-row {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 20px;
-    width: 100%;
-    max-width: 450px;
-}
-
 .input-pad {
     display: flex;
     justify-content: space-between;
     width: 100%;
     max-width: 450px;
-    margin-top: 20px;
+    margin-top: 25px;
 }
 
 .input-pad button {
@@ -123,33 +123,34 @@ title: Sudoku
 }
 
 .action-btn {
-    margin-top: 25px;
-    background-color: rgba(255, 215, 0, 0.1);
+    background: none;
     color: #ffd700;
-    border: 2px solid #ffd700;
-    padding: 10px 24px;
-    border-radius: 4px;
+    border: none;
     cursor: pointer;
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.1em;
     text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
     transition: all 0.3s ease;
+    padding: 5px 10px;
 }
 
 .action-btn:hover {
-    background-color: rgba(255, 215, 0, 0.2);
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+    color: #fff3a0;
+    text-shadow: 2px 2px 6px #ff6347, 0 0 14px #87cefa;
 }
 </style>
 
 <div id="game-wrap">
     <div id="status">Sudoku</div>
-    <div id="board"></div>
+    
     <div class="controls-row">
         <button class="action-btn" onclick="undoMove()">Undo</button>
         <button class="action-btn" onclick="eraseCell()">Erase</button>
         <button class="action-btn" onclick="generateNewGame()">New Game</button>
     </div>
+
+    <div id="board"></div>
+
     <div class="input-pad">
         <button onclick="inputNumber(1)">1</button>
         <button onclick="inputNumber(2)">2</button>

@@ -30,7 +30,7 @@ title: Sudoku
     grid-template-rows: repeat(9, min(9.5vw, 55px));
     border: 3px solid #ffd700;
     box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
-    background: #141414; 
+    background: transparent; /* Made transparent like the Flash page layout */
     border-radius: 4px;
     overflow: hidden;
     position: relative;
@@ -50,9 +50,9 @@ title: Sudoku
     font-size: 1.6rem;
     color: #00f0ff;
     text-shadow: 0 0 8px #00f0ff;
-    background-color: #141414;
-    border-right: 1px solid rgba(255, 215, 0, 0.3);
-    border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+    background: transparent; /* Made transparent */
+    border-right: 1px solid rgba(255, 215, 0, 0.4);
+    border-bottom: 1px solid rgba(255, 215, 0, 0.4);
 }
 
 #board > :nth-child(9n) { border-right: none; }
@@ -66,20 +66,20 @@ title: Sudoku
     color: #ffd700;
     font-weight: bold;
     text-shadow: 1px 1px 4px #ff4500;
-    background-color: rgba(45, 45, 45, 0.4);
+    background: transparent !important; /* Made transparent */
 }
 
 .selected {
-    background: rgba(255, 215, 0, 0.25) !important;
+    background: rgba(255, 215, 0, 0.2) !important;
     box-shadow: inset 0 0 12px #ffd700;
 }
 
 .highlight-cross {
-    background-color: rgba(0, 240, 255, 0.08);
+    background-color: rgba(0, 240, 255, 0.05);
 }
 
 .highlight-match {
-    background-color: rgba(0, 240, 255, 0.25);
+    background-color: rgba(0, 240, 255, 0.18);
 }
 
 .mistake {

@@ -28,7 +28,9 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
-    border: 1px solid #00f0ff;
+    border: 2px solid #ffd700;
+    user-select: none;
+    -webkit-user-select: none;
   }
   .sudoku-grid-board {
     display: grid;
@@ -41,20 +43,33 @@
   .sudoku-cell {
     width: 100%;
     aspect-ratio: 1;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 1.6rem;
     font-family: 'Cormorant Garamond', serif !important;
-    border: 1px solid rgba(0, 240, 255, 0.15);
     box-sizing: border-box;
-    padding: 0;
     background: transparent;
     color: #00f0ff;
     text-shadow: 0 0 8px #00f0ff;
-    caret-color: transparent;
     cursor: pointer;
     transition: background-color 0.15s;
+    
+    /* Hard, sharp, uniform grid borders */
+    border-right: 1px solid #ffd700;
+    border-bottom: 1px solid #ffd700;
   }
-  .sudoku-cell[readonly] {
+  
+  /* Remove outer bounds conflict with container grid border */
+  .sudoku-grid-board > :nth-child(9n) { border-right: none; }
+  .sudoku-grid-board > :nth-child(n+73) { border-bottom: none; }
+
+  /* Bold, thick grid separation lines for 3x3 zones */
+  .sudoku-grid-board > :nth-child(3n):not(:nth-child(9n)) { border-right: 3px solid #ffd700; }
+  .sudoku-grid-board > :nth-child(n+19):nth-child(-n+27),
+  .sudoku-grid-board > :nth-child(n+46):nth-child(-n+54) { border-bottom: 3px solid #ffd700; }
+
+  .sudoku-cell.clue {
     color: #ffd700;
     font-weight: bold;
     text-shadow: 1px 1px 4px #ff4500;
@@ -75,12 +90,6 @@
     color: #ff4500 !important;
     text-shadow: 0 0 8px #ff4500, 1px 1px 2px #000 !important;
   }
-  
-  /* Grid dividers */
-  .sudoku-grid-board > :nth-child(3n) { border-right: 2px solid #ffd700; }
-  .sudoku-grid-board > :nth-child(9n) { border-right: 3px solid #ffd700; }
-  .sudoku-grid-board > :nth-child(n+19):nth-child(-n+27),
-  .sudoku-grid-board > :nth-child(n+46):nth-child(-n+54) { border-bottom: 2px solid #ffd700; }
 
   .sudoku-action-row {
     display: flex;
@@ -131,7 +140,6 @@
   let selectedCell = null;
   let moveHistory = [];
 
-  // --- SUDOKU GENERATION ALGORITHM ---
   function isValid(board, r, c, val) {
     for (let i = 0; i < 9; i++) {
       if (board[r][i] === val || board[i][c] === val) return false;
@@ -166,14 +174,10 @@
   }
 
   function createRandomPuzzle() {
-    // Generate empty matrix
     let board = Array.from({ length: 9 }, () => Array(9).fill(0));
     fillBoard(board);
-    
-    // Save the absolute complete solution
     fullSolution = board.map(row => [...row]);
 
-    // Remove numbers to create the puzzle (~45 hidden cells for a balanced challenge)
     let attempts = 45;
     while (attempts > 0) {
       let r = Math.floor(Math.random() * 9);
@@ -185,7 +189,6 @@
     }
     puzzleLayout = board;
   }
-  // --- END ALGORITHM ---
 
   function generateNewGame() {
     createRandomPuzzle();
@@ -197,16 +200,16 @@
     
     for (let r = 0; r < 9; r++) {
       for (let c = 0; c < 9; c++) {
-        const cell = document.createElement('input');
-        cell.type = 'text';
-        cell.readOnly = true;
+        const cell = document.createElement('div');
         cell.className = 'sudoku-cell';
         cell.dataset.row = r;
         cell.dataset.col = c;
         
         if (puzzleLayout[r][c] !== 0) {
-          cell.value = puzzleLayout[r][c];
-          cell.setAttribute('readonly', true);
+          cell.innerText = puzzleLayout[r][c];
+          cell.classList.add('clue');
+        } else {
+          cell.innerText = '';
         }
         
         cell.addEventListener('click', function() {
@@ -236,7 +239,7 @@
 
     const targetRow = parseInt(selectedCell.dataset.row);
     const targetCol = parseInt(selectedCell.dataset.col);
-    const targetVal = selectedCell.value;
+    const targetVal = selectedCell.innerText;
     const targetBlockRow = Math.floor(targetRow / 3);
     const targetBlockCol = Math.floor(targetCol / 3);
 
@@ -246,32 +249,29 @@
       const blockRow = Math.floor(r / 3);
       const blockCol = Math.floor(col / 3);
 
-      // Highlight areas (row, column, box)
       if (r === targetRow || col === targetCol || (blockRow === targetBlockRow && blockCol === targetBlockCol)) {
         if (c !== selectedCell) {
           c.classList.add('highlight-cross');
         }
       }
 
-      // Highlight matches
-      if (targetVal !== '' && c.value === targetVal && c !== selectedCell) {
+      if (targetVal !== '' && c.innerText === targetVal && c !== selectedCell) {
         c.classList.add('highlight-match');
       }
     });
   }
 
   function inputNumber(num) {
-    if (!selectedCell || selectedCell.hasAttribute('readonly')) return;
+    if (!selectedCell || selectedCell.classList.contains('clue')) return;
     
     moveHistory.push({
       cell: selectedCell,
-      prevValue: selectedCell.value,
+      prevValue: selectedCell.innerText,
       prevMistake: selectedCell.classList.contains('mistake')
     });
     
-    selectedCell.value = num;
+    selectedCell.innerText = num;
     
-    // Auto check mistakes
     const r = parseInt(selectedCell.dataset.row);
     const c = parseInt(selectedCell.dataset.col);
     if (num !== fullSolution[r][c]) {
@@ -284,15 +284,15 @@
   }
 
   function eraseCell() {
-    if (!selectedCell || selectedCell.hasAttribute('readonly')) return;
+    if (!selectedCell || selectedCell.classList.contains('clue')) return;
     
     moveHistory.push({
       cell: selectedCell,
-      prevValue: selectedCell.value,
+      prevValue: selectedCell.innerText,
       prevMistake: selectedCell.classList.contains('mistake')
     });
     
-    selectedCell.value = '';
+    selectedCell.innerText = '';
     selectedCell.classList.remove('mistake');
     applyVisualHighlights();
   }
@@ -300,7 +300,7 @@
   function undoMove() {
     if (moveHistory.length === 0) return;
     const lastMove = moveHistory.pop();
-    lastMove.cell.value = lastMove.prevValue;
+    lastMove.cell.innerText = lastMove.prevValue;
     
     if (lastMove.prevMistake) {
       lastMove.cell.classList.add('mistake');
@@ -320,6 +320,5 @@
     }
   });
 
-  // Automatically generate first random layout
   generateNewGame();
 </script>

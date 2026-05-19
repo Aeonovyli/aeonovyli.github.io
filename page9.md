@@ -17,20 +17,11 @@ title: Sudoku
 #status {
     font-family: 'MedievalSharp', cursive, serif;
     font-size: 28px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     font-weight: bold;
     text-align: center;
     color: #ffd700;
     text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
-}
-
-.controls-row {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    margin-bottom: 20px;
-    width: 100%;
-    max-width: 450px;
 }
 
 #board {
@@ -44,24 +35,20 @@ title: Sudoku
     overflow: hidden;
     position: relative;
     gap: 0;
+    transition: all 0.5s ease;
 }
 
 .square {
     width: min(9.5vw, 55px);
     height: min(9.5vw, 55px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
     box-sizing: border-box;
     cursor: pointer;
     user-select: none;
-    font-family: 'Cormorant Garamond', serif !important;
-    font-size: 1.6rem;
-    color: #00f0ff;
-    text-shadow: 0 0 8px #00f0ff;
     background: transparent; 
-    border-right: 1px solid rgba(255, 215, 0, 0.4);
-    border-bottom: 1px solid rgba(255, 215, 0, 0.4);
+    border-right: 1px solid rgba(255, 215, 0, 0.3);
+    border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+    position: relative;
+    transition: all 0.3s ease;
 }
 
 #board > :nth-child(9n) { border-right: none; }
@@ -71,11 +58,43 @@ title: Sudoku
 #board > :nth-child(n+19):nth-child(-n+27),
 #board > :nth-child(n+46):nth-child(-n+54) { border-bottom: 3px solid #ffd700; }
 
-.clue {
+.cell-value {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 1.8rem;
+    color: #00f0ff;
+    text-shadow: 0 0 8px #00f0ff;
+    transition: all 0.3s ease;
+}
+
+.clue .cell-value {
     color: #ffd700;
     font-weight: bold;
     text-shadow: 1px 1px 4px #ff4500;
-    background: transparent !important;
+}
+
+.notes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    width: 100%;
+    height: 100%;
+    padding: 2px;
+    box-sizing: border-box;
+}
+
+.note-digit {
+    font-family: sans-serif;
+    font-size: 0.65rem;
+    color: rgba(0, 240, 255, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
 }
 
 .selected {
@@ -91,9 +110,109 @@ title: Sudoku
     background-color: rgba(0, 240, 255, 0.18);
 }
 
-.mistake {
+.mistake .cell-value {
     color: #ff4500 !important;
     text-shadow: 0 0 8px #ff4500, 1px 1px 2px #000 !important;
+}
+
+#board.game-won {
+    border-color: #104fa2;
+    box-shadow: 0 0 30px rgba(16, 79, 162, 0.6);
+}
+#board.game-won .square {
+    background-color: #104fa2 !important; 
+    border-color: transparent !important;   
+    box-shadow: none !important;
+}
+#board.game-won .cell-value {
+    color: #ffffff !important;             
+    text-shadow: none !important;
+    font-weight: normal !important;
+}
+
+.sudoku-controls-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 450px;
+    margin-top: 25px;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+.btn-item-wrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+.flat-btn {
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+    padding: 5px;
+}
+
+.flat-btn:active {
+    transform: scale(0.9);
+}
+
+.flat-btn svg {
+    width: 28px;
+    height: 28px;
+    fill: none;
+    stroke: #00f0ff;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 0 4px #00f0ff);
+}
+
+.flat-btn.active-toggle svg {
+    stroke: #ffd700;
+    filter: drop-shadow(0 0 4px #ffd700);
+}
+
+.btn-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    color: #00f0ff;
+    margin-top: 4px;
+    text-shadow: 0 0 4px #00f0ff;
+}
+
+.badge-pill {
+    position: absolute;
+    top: -5px;
+    right: 20%;
+    font-family: sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 1px 5px;
+    border-radius: 10px;
+    color: #fff;
+}
+
+.badge-off {
+    background-color: #555;
+    border: 1px solid #ffd700;
+}
+
+.badge-on {
+    background-color: #00f0ff;
+    color: #000;
+    box-shadow: 0 0 8px #00f0ff;
+}
+
+.badge-count {
+    background-color: #2980b9;
+    box-shadow: 0 0 8px #2980b9;
 }
 
 .input-pad {
@@ -101,7 +220,7 @@ title: Sudoku
     justify-content: space-between;
     width: 100%;
     max-width: 450px;
-    margin-top: 25px;
+    margin-top: 30px;
 }
 
 .input-pad button {
@@ -109,12 +228,18 @@ title: Sudoku
     border: none;
     color: #00f0ff;
     font-family: 'Cormorant Garamond', serif;
-    font-size: 2.3rem;
+    font-size: 3rem;
     text-shadow: 0 0 8px #00f0ff;
     cursor: pointer;
     flex: 1;
-    padding: 5px 0;
+    padding: 0;
     transition: transform 0.1s;
+    line-height: 1;
+}
+
+.input-pad button:hover {
+    color: #ffd700;
+    text-shadow: 0 0 8px #ffd700;
 }
 
 .input-pad button:active {
@@ -122,32 +247,62 @@ title: Sudoku
     color: #ff944d;
 }
 
-.action-btn {
-    background: none;
-    color: #ffd700;
-    border: none;
-    cursor: pointer;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1em;
-    text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
-    transition: all 0.3s ease;
-    padding: 5px 10px;
+.new-game-container {
+    margin-top: 25px;
 }
 
-.action-btn:hover {
-    color: #fff3a0;
-    text-shadow: 2px 2px 6px #ff6347, 0 0 14px #87cefa;
+.new-game-btn {
+    background: none;
+    border: 2px solid #ffd700;
+    border-radius: 4px;
+    padding: 6px 16px;
+    font-family: 'Cormorant Garamond', serif;
+    color: #ffd700;
+    font-size: 1.1rem;
+    text-shadow: 0 0 4px #ff4500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.new-game-btn:hover {
+    background: rgba(255, 215, 0, 0.1);
 }
 </style>
 
 <div id="game-wrap">
     <div id="status">Sudoku</div>
-    <div class="controls-row">
-        <button class="action-btn" onclick="undoMove()">Undo</button>
-        <button class="action-btn" onclick="eraseCell()">Erase</button>
-        <button class="action-btn" onclick="generateNewGame()">New Game</button>
-    </div>
+    
     <div id="board"></div>
+
+    <div class="sudoku-controls-row">
+        <div class="btn-item-wrap">
+            <button class="flat-btn" onclick="undoMove()" aria-label="Undo">
+                <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+            </button>
+            <div class="btn-label">Undo</div>
+        </div>
+        <div class="btn-item-wrap">
+            <button class="flat-btn" onclick="eraseCell()" aria-label="Erase">
+                <svg viewBox="0 0 24 24"><path d="M20 20H4"></path><path d="M18 12l-5-5L4 16v4h4l9-9z"></path></svg>
+            </button>
+            <div class="btn-label">Erase</div>
+        </div>
+        <div class="btn-item-wrap">
+            <button id="notes-btn" class="flat-btn" onclick="toggleNotes()" aria-label="Notes">
+                <svg viewBox="0 0 24 24"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+            </button>
+            <span id="notes-badge" class="badge-pill badge-off">OFF</span>
+            <div class="btn-label">Notes</div>
+        </div>
+        <div class="btn-item-wrap">
+            <button class="flat-btn" onclick="useHint()" aria-label="Hint">
+                <svg viewBox="0 0 24 24"><path d="M9 21h6"></path><path d="M9 18h6"></path><path d="M10 15H14C17 15 19 13 19 10C19 6.5 16 4 12 4C8 4 5 6.5 5 10C5 13 7 15 10 15Z"></path></svg>
+            </button>
+            <span id="hint-badge" class="badge-pill badge-count">3</span>
+            <div class="btn-label">Hint</div>
+        </div>
+    </div>
+
     <div class="input-pad">
         <button onclick="inputNumber(1)">1</button>
         <button onclick="inputNumber(2)">2</button>
@@ -159,6 +314,10 @@ title: Sudoku
         <button onclick="inputNumber(8)">8</button>
         <button onclick="inputNumber(9)">9</button>
     </div>
+
+    <div class="new-game-container">
+        <button class="new-game-btn" onclick="generateNewGame()">New Game</button>
+    </div>
 </div>
 
 <script>
@@ -166,6 +325,11 @@ title: Sudoku
   let puzzleLayout = [];
   let selectedCell = null;
   let moveHistory = [];
+  let notesMode = false;
+  let hintsLeft = 3;
+  let gameActive = true;
+  
+  let cellNotes = Array.from({ length: 81 }, () => Array(10).fill(false));
 
   function isValid(board, r, c, val) {
     for (let i = 0; i < 9; i++) {
@@ -221,9 +385,14 @@ title: Sudoku
     createRandomPuzzle();
     
     const boardEl = document.getElementById('board');
+    boardEl.className = ''; 
     boardEl.innerHTML = '';
     selectedCell = null;
     moveHistory = [];
+    cellNotes = Array.from({ length: 81 }, () => Array(10).fill(false));
+    hintsLeft = 3;
+    gameActive = true;
+    document.getElementById('hint-badge').innerText = hintsLeft;
     
     for (let r = 0; r < 9; r++) {
       for (let c = 0; c < 9; c++) {
@@ -231,13 +400,19 @@ title: Sudoku
         cell.className = 'square';
         cell.dataset.row = r;
         cell.dataset.col = c;
+        cell.dataset.index = (r * 9) + c;
+        
+        const valDiv = document.createElement('div');
+        valDiv.className = 'cell-value';
+        cell.appendChild(valDiv);
         
         if (puzzleLayout[r][c] !== 0) {
-          cell.innerText = puzzleLayout[r][c];
+          valDiv.innerText = puzzleLayout[r][c];
           cell.classList.add('clue');
         }
         
         cell.addEventListener('click', function() {
+          if (!gameActive) return;
           selectCell(this);
         });
         
@@ -248,10 +423,10 @@ title: Sudoku
   }
 
   function selectCell(cell) {
+    if (!gameActive) return;
     if (selectedCell) selectedCell.classList.remove('selected');
     selectedCell = cell;
     selectedCell.classList.add('selected');
-    
     applyVisualHighlights();
   }
 
@@ -261,11 +436,11 @@ title: Sudoku
       c.classList.remove('highlight-cross', 'highlight-match');
     });
 
-    if (!selectedCell) return;
+    if (!selectedCell || !gameActive) return;
 
     const targetRow = parseInt(selectedCell.dataset.row);
     const targetCol = parseInt(selectedCell.dataset.col);
-    const targetVal = selectedCell.innerText;
+    const targetVal = selectedCell.querySelector('.cell-value').innerText;
     const targetBlockRow = Math.floor(targetRow / 3);
     const targetBlockCol = Math.floor(targetCol / 3);
 
@@ -274,6 +449,7 @@ title: Sudoku
       const col = parseInt(c.dataset.col);
       const blockRow = Math.floor(r / 3);
       const blockCol = Math.floor(col / 3);
+      const valDiv = c.querySelector('.cell-value');
 
       if (r === targetRow || col === targetCol || (blockRow === targetBlockRow && blockCol === targetBlockCol)) {
         if (c !== selectedCell) {
@@ -281,22 +457,92 @@ title: Sudoku
         }
       }
 
-      if (targetVal !== '' && c.innerText === targetVal && c !== selectedCell) {
+      if (targetVal !== '' && valDiv && valDiv.innerText === targetVal && c !== selectedCell) {
         c.classList.add('highlight-match');
       }
     });
   }
 
+  function renderCellNotes(cell, idx) {
+    const valDiv = cell.querySelector('.cell-value');
+    valDiv.innerText = '';
+    
+    let notesGrid = cell.querySelector('.notes-grid');
+    if (!notesGrid) {
+        notesGrid = document.createElement('div');
+        notesGrid.className = 'notes-grid';
+        cell.appendChild(notesGrid);
+    }
+    notesGrid.innerHTML = '';
+    
+    for (let i = 1; i <= 9; i++) {
+        const digitDiv = document.createElement('div');
+        digitDiv.className = 'note-digit';
+        digitDiv.innerText = cellNotes[idx][i] ? i : '';
+        notesGrid.appendChild(digitDiv);
+    }
+  }
+
+  function clearCellNotesDisplay(cell) {
+      const notesGrid = cell.querySelector('.notes-grid');
+      if (notesGrid) notesGrid.remove();
+  }
+
+  function clearConflictingNotes(row, col, num) {
+    const blockRow = Math.floor(row / 3) * 3;
+    const blockCol = Math.floor(col / 3) * 3;
+    const cells = document.querySelectorAll('.square');
+
+    cells.forEach(c => {
+      const r = parseInt(c.dataset.row);
+      const oCol = parseInt(c.dataset.col);
+      const bR = Math.floor(r / 3) * 3;
+      const bC = Math.floor(oCol / 3) * 3;
+      const idx = parseInt(c.dataset.index);
+
+      if (r === row || oCol === col || (bR === blockRow && bC === blockCol)) {
+        if (cellNotes[idx][num]) {
+          cellNotes[idx][num] = false;
+          if (c.querySelector('.cell-value').innerText === '') {
+            renderCellNotes(c, idx);
+          }
+        }
+      }
+    });
+  }
+
   function inputNumber(num) {
-    if (!selectedCell || selectedCell.classList.contains('clue')) return;
+    if (!gameActive || !selectedCell || selectedCell.classList.contains('clue')) return;
+    const idx = parseInt(selectedCell.dataset.index);
+    const valDiv = selectedCell.querySelector('.cell-value');
+    
+    if (notesMode) {
+        if (valDiv.innerText !== '') return; 
+        
+        moveHistory.push({
+            type: 'note',
+            index: idx,
+            prevNotes: [...cellNotes[idx]]
+        });
+        
+        cellNotes[idx][num] = !cellNotes[idx][num]; 
+        renderCellNotes(selectedCell, idx);
+        return;
+    }
+    
+    clearCellNotesDisplay(selectedCell);
     
     moveHistory.push({
+      type: 'value',
       cell: selectedCell,
-      prevValue: selectedCell.innerText,
-      prevMistake: selectedCell.classList.contains('mistake')
+      index: idx,
+      prevValue: valDiv.innerText,
+      prevMistake: selectedCell.classList.contains('mistake'),
+      prevNotes: [...cellNotes[idx]]
     });
     
-    selectedCell.innerText = num;
+    valDiv.innerText = num;
+    cellNotes[idx] = Array(10).fill(false);
     
     const r = parseInt(selectedCell.dataset.row);
     const c = parseInt(selectedCell.dataset.col);
@@ -304,6 +550,7 @@ title: Sudoku
       selectedCell.classList.add('mistake');
     } else {
       selectedCell.classList.remove('mistake');
+      clearConflictingNotes(r, c, num);
       checkWinCondition();
     }
 
@@ -311,31 +558,96 @@ title: Sudoku
   }
 
   function eraseCell() {
-    if (!selectedCell || selectedCell.classList.contains('clue')) return;
+    if (!gameActive || !selectedCell || selectedCell.classList.contains('clue')) return;
+    const idx = parseInt(selectedCell.dataset.index);
+    const valDiv = selectedCell.querySelector('.cell-value');
     
     moveHistory.push({
-      cell: selectedCell,
-      prevValue: selectedCell.innerText,
-      prevMistake: selectedCell.classList.contains('mistake')
+        type: 'erase',
+        cell: selectedCell,
+        index: idx,
+        prevValue: valDiv.innerText,
+        prevMistake: selectedCell.classList.contains('mistake'),
+        prevNotes: [...cellNotes[idx]]
     });
     
-    selectedCell.innerText = '';
+    valDiv.innerText = '';
     selectedCell.classList.remove('mistake');
+    cellNotes[idx] = Array(10).fill(false);
+    clearCellNotesDisplay(selectedCell);
     applyVisualHighlights();
   }
 
   function undoMove() {
-    if (moveHistory.length === 0) return;
+    if (!gameActive || moveHistory.length === 0) return;
     const lastMove = moveHistory.pop();
-    lastMove.cell.innerText = lastMove.prevValue;
     
-    if (lastMove.prevMistake) {
-      lastMove.cell.classList.add('mistake');
-    } else {
-      lastMove.cell.classList.remove('mistake');
+    if (lastMove.type === 'note') {
+        cellNotes[lastMove.index] = lastMove.prevNotes;
+        const cell = document.querySelector(`[data-index='${lastMove.index}']`);
+        renderCellNotes(cell, lastMove.index);
+        selectCell(cell);
+    } else if (lastMove.type === 'value') {
+        lastMove.cell.querySelector('.cell-value').innerText = lastMove.prevValue;
+        cellNotes[lastMove.index] = lastMove.prevNotes;
+        if (lastMove.prevMistake) {
+          lastMove.cell.classList.add('mistake');
+        } else {
+          lastMove.cell.classList.remove('mistake');
+        }
+        if (lastMove.prevValue === '') {
+            let hasNotes = lastMove.prevNotes.some(n => n === true);
+            if (hasNotes) renderCellNotes(lastMove.cell, lastMove.index);
+        }
+        selectCell(lastMove.cell);
+    } else if (lastMove.type === 'erase') {
+        lastMove.cell.querySelector('.cell-value').innerText = lastMove.prevValue;
+        if (lastMove.prevMistake) lastMove.cell.classList.add('mistake');
+        cellNotes[lastMove.index] = lastMove.prevNotes;
+        
+        if (lastMove.prevValue === '') {
+            renderCellNotes(lastMove.cell, lastMove.index);
+        } else {
+            clearCellNotesDisplay(lastMove.cell);
+        }
+        selectCell(lastMove.cell);
     }
-    
-    selectCell(lastMove.cell);
+  }
+
+  function toggleNotes() {
+      if (!gameActive) return;
+      notesMode = !notesMode;
+      const btn = document.getElementById('notes-btn');
+      const badge = document.getElementById('notes-badge');
+      
+      if (notesMode) {
+          btn.classList.add('active-toggle');
+          badge.innerText = "ON";
+          badge.className = "badge-pill badge-on";
+      } else {
+          btn.classList.remove('active-toggle');
+          badge.innerText = "OFF";
+          badge.className = "badge-pill badge-off";
+      }
+  }
+
+  function useHint() {
+      if (!gameActive || !selectedCell || selectedCell.classList.contains('clue')) return;
+      if (hintsLeft <= 0) {
+          document.getElementById('status').innerText = "Out of hints!";
+          return;
+      }
+      
+      const r = parseInt(selectedCell.dataset.row);
+      const c = parseInt(selectedCell.dataset.col);
+      
+      const notesState = notesMode;
+      notesMode = false; 
+      inputNumber(fullSolution[r][c]);
+      notesMode = notesState;
+      
+      hintsLeft--;
+      document.getElementById('hint-badge').innerText = hintsLeft;
   }
 
   function checkWinCondition() {
@@ -344,17 +656,25 @@ title: Sudoku
     cells.forEach(c => {
       const r = parseInt(c.dataset.row);
       const col = parseInt(c.dataset.col);
-      if (parseInt(c.innerText) !== fullSolution[r][col]) {
+      const innerVal = c.querySelector('.cell-value').innerText;
+      if (innerVal === '' || parseInt(innerVal) !== fullSolution[r][col]) {
         won = false;
       }
     });
+    
     if (won) {
+      gameActive = false; 
+      if (selectedCell) selectedCell.classList.remove('selected');
+      
+      cells.forEach(c => c.classList.remove('highlight-cross', 'highlight-match'));
+      
+      document.getElementById('board').classList.add('game-won');
       document.getElementById('status').innerText = "VICTORY — Puzzle Solved!";
     }
   }
 
   document.addEventListener('keydown', (e) => {
-    if (!selectedCell) return;
+    if (!selectedCell || !gameActive) return;
     if (e.key >= '1' && e.key <= '9') {
       inputNumber(parseInt(e.key));
     } else if (e.key === 'Backspace' || e.key === 'Delete') {

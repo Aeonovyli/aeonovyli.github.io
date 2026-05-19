@@ -1,3 +1,8 @@
+---
+layout: default
+title: Sudoku
+---
+
 <div class="sudoku-wrapper-box">
   <div id="sudoku-grid" class="sudoku-grid-board"></div>
   
@@ -28,17 +33,20 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
-    border: 2px solid #ffd700;
+    border: 3px solid #ffd700;
     user-select: none;
     -webkit-user-select: none;
   }
   .sudoku-grid-board {
     display: grid;
     grid-template-columns: repeat(9, 1fr);
-    border: 3px solid #ffd700;
+    border-top: 3px solid #ffd700;
+    border-left: 3px solid #ffd700;
+    border-right: 3px solid #ffd700;
+    border-bottom: 3px solid #ffd700;
     margin-bottom: 25px;
-    background-color: rgba(20, 20, 20, 0.9);
-    box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+    background-color: #141414;
+    gap: 0;
   }
   .sudoku-cell {
     width: 100%;
@@ -49,22 +57,18 @@
     font-size: 1.6rem;
     font-family: 'Cormorant Garamond', serif !important;
     box-sizing: border-box;
-    background: transparent;
+    background-color: #141414;
     color: #00f0ff;
     text-shadow: 0 0 8px #00f0ff;
     cursor: pointer;
     transition: background-color 0.15s;
-    
-    /* Hard, sharp, uniform grid borders */
     border-right: 1px solid #ffd700;
     border-bottom: 1px solid #ffd700;
   }
-  
-  /* Remove outer bounds conflict with container grid border */
+
   .sudoku-grid-board > :nth-child(9n) { border-right: none; }
   .sudoku-grid-board > :nth-child(n+73) { border-bottom: none; }
 
-  /* Bold, thick grid separation lines for 3x3 zones */
   .sudoku-grid-board > :nth-child(3n):not(:nth-child(9n)) { border-right: 3px solid #ffd700; }
   .sudoku-grid-board > :nth-child(n+19):nth-child(-n+27),
   .sudoku-grid-board > :nth-child(n+46):nth-child(-n+54) { border-bottom: 3px solid #ffd700; }
@@ -76,15 +80,14 @@
     background-color: rgba(45, 45, 45, 0.4);
   }
   
-  /* Highlight Modes */
   .sudoku-cell.selected {
     background-color: rgba(255, 215, 0, 0.35) !important;
   }
   .sudoku-cell.highlight-cross {
-    background-color: rgba(0, 240, 255, 0.08);
+    background-color: rgba(0, 240, 255, 0.12);
   }
   .sudoku-cell.highlight-match {
-    background-color: rgba(0, 240, 255, 0.25);
+    background-color: rgba(0, 240, 255, 0.3);
   }
   .sudoku-cell.mistake {
     color: #ff4500 !important;
@@ -134,6 +137,7 @@
   }
 </style>
 
+{% unparsed %}
 <script>
   let fullSolution = [];
   let puzzleLayout = [];
@@ -322,3 +326,4 @@
 
   generateNewGame();
 </script>
+{% endunparsed %}

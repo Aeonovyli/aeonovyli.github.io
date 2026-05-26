@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Sudoku
+title: Chess
 ---
 
 <style>
@@ -26,109 +26,81 @@ title: Sudoku
 
 #board {
     display: grid;
-    grid-template-columns: repeat(9, min(9.5vw, 55px));
-    grid-template-rows: repeat(9, min(9.5vw, 55px));
+    grid-template-columns: repeat(8, min(11vw, 65px));
+    grid-template-rows: repeat(8, min(11vw, 65px));
     border: 3px solid #ffd700;
     box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
-    background: #141414; 
+    background: transparent; 
     border-radius: 4px;
     overflow: hidden;
-    position: relative;
-    gap: 0;
+    position: relative; 
 }
 
 .square {
-    width: min(9.5vw, 55px);
-    height: min(9.5vw, 55px);
+    width: min(11vw, 65px);
+    height: min(11vw, 65px);
     display: flex;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
     cursor: pointer;
     user-select: none;
-    font-family: 'Cormorant Garamond', serif !important;
-    font-size: 1.6rem;
-    color: #00f0ff;
-    text-shadow: 0 0 8px #00f0ff;
-    background-color: #141414;
-    border-right: 1px solid rgba(255, 215, 0, 0.3);
-    border-bottom: 1px solid rgba(255, 215, 0, 0.3);
 }
 
-/* Clear outer bounds overlapping container frames */
-#board > :nth-child(9n) { border-right: none; }
-#board > :nth-child(n+73) { border-bottom: none; }
+.light {
+    background: transparent !important;
+    border: 1px solid rgba(255, 215, 0, 0.6);
+}
 
-/* Thick internal 3x3 box separator grids */
-#board > :nth-child(3n):not(:nth-child(9n)) { border-right: 3px solid #ffd700; }
-#board > :nth-child(n+19):nth-child(-n+27),
-#board > :nth-child(n+46):nth-child(-n+54) { border-bottom: 3px solid #ffd700; }
-
-.clue {
-    color: #ffd700;
-    font-weight: bold;
-    text-shadow: 1px 1px 4px #ff4500;
-    background-color: rgba(45, 45, 45, 0.4);
+.dark {
+    border: 1px solid rgba(255, 215, 0, 0.6);
+    background: repeating-linear-gradient(
+        135deg,
+        transparent,
+        transparent 8px,
+        rgba(255, 215, 0, 0.4) 8px,
+        rgba(255, 215, 0, 0.4) 10px
+    );
 }
 
 .selected {
-    background: rgba(255, 215, 0, 0.25) !important;
-    box-shadow: inset 0 0 12px #ffd700;
+    background: rgba(0, 240, 255, 0.25) !important;
+    box-shadow: inset 0 0 12px #00f0ff;
 }
 
-.highlight-cross {
-    background-color: rgba(0, 240, 255, 0.08);
+.move {
+    background: rgba(255, 148, 77, 0.2) !important;
+    box-shadow: inset 0 0 10px #ff944d;
 }
 
-.highlight-match {
-    background-color: rgba(0, 240, 255, 0.25);
-}
-
-.mistake {
-    color: #ff4500 !important;
-    text-shadow: 0 0 8px #ff4500, 1px 1px 2px #000 !important;
-}
-
-.controls-row {
+/* Slide animation performance rules */
+.piece-container {
+    width: 80%;
+    height: 80%;
     display: flex;
+    align-items: center;
     justify-content: center;
-    gap: 15px;
-    margin-top: 20px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.piece-container.gliding {
+    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 10;
+}
+
+.square svg {
     width: 100%;
-    max-width: 450px;
+    height: 100%;
+    filter: drop-shadow(0 0 2px rgba(0,0,0,0.5));
 }
 
-.input-pad {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 450px;
-    margin-top: 20px;
-}
-
-.input-pad button {
-    background: none;
-    border: none;
-    color: #00f0ff;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.3rem;
-    text-shadow: 0 0 8px #00f0ff;
-    cursor: pointer;
-    flex: 1;
-    padding: 5px 0;
-    transition: transform 0.1s;
-}
-
-.input-pad button:active {
-    transform: scale(0.85);
-    color: #ff944d;
-}
-
-.action-btn {
+#resetBtn {
+    margin-top: 25px;
     background-color: rgba(255, 215, 0, 0.1);
     color: #ffd700;
     border: 2px solid #ffd700;
-    padding: 8px 20px;
+    padding: 10px 24px;
     border-radius: 4px;
     cursor: pointer;
     font-family: 'Cormorant Garamond', serif;
@@ -137,235 +109,182 @@ title: Sudoku
     transition: all 0.3s ease;
 }
 
-.action-btn:hover {
+#resetBtn:hover {
     background-color: rgba(255, 215, 0, 0.2);
     box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
 }
 </style>
 
-<div id="game-wrap">
-    <div id="status">Sudoku</div>
-    <div id="board"></div>
-    
-    <div class="controls-row">
-        <button class="action-btn" onclick="undoMove()">Undo</button>
-        <button class="action-btn" onclick="eraseCell()">Erase</button>
-        <button class="action-btn" onclick="generateNewGame()">New Game</button>
-    </div>
+<svg style="display:none;">
+  <defs>
+    <pattern id="pieceHatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#00f0ff" stroke-width="1.5" />
+    </pattern>
+  </defs>
+</svg>
 
-    <div class="input-pad">
-        <button onclick="inputNumber(1)">1</button>
-        <button onclick="inputNumber(2)">2</button>
-        <button onclick="inputNumber(3)">3</button>
-        <button onclick="inputNumber(4)">4</button>
-        <button onclick="inputNumber(5)">5</button>
-        <button onclick="inputNumber(6)">6</button>
-        <button onclick="inputNumber(7)">7</button>
-        <button onclick="inputNumber(8)">8</button>
-        <button onclick="inputNumber(9)">9</button>
-    </div>
+<div id="game-wrap">
+    <div id="status">Loading...</div>
+    <div id="board"></div>
+    <button id="resetBtn">Reset Game</button>
 </div>
 
+<!-- Corrected engine script source -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+
 <script>
-  let fullSolution = [];
-  let puzzleLayout = [];
-  let selectedCell = null;
-  let moveHistory = [];
-
-  function isValid(board, r, c, val) {
-    for (let i = 0; i < 9; i++) {
-      if (board[r][i] === val || board[i][c] === val) return false;
+window.addEventListener("load", () => {
+    if (typeof Chess === "undefined") {
+        document.getElementById("status").innerText = "Failed to load chess engine.";
+        return;
     }
-    let br = Math.floor(r / 3) * 3;
-    let bc = Math.floor(c / 3) * 3;
-    for (let i = 0; i < 3; i++) {
-      for (let j = 0; j < 3; j++) {
-        if (board[br + i][bc + j] === val) return false;
-      }
-    }
-    return true;
-  }
 
-  function fillBoard(board) {
-    for (let r = 0; r < 9; r++) {
-      for (let c = 0; c < 9; c++) {
-        if (board[r][c] === 0) {
-          let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9].sort(() => Math.random() - 0.5);
-          for (let num of numbers) {
-            if (isValid(board, r, c, num)) {
-              board[r][c] = num;
-              if (fillBoard(board)) return true;
-              board[r][c] = 0;
+    const game = new Chess();
+    const boardEl = document.getElementById("board");
+    const statusEl = document.getElementById("status");
+    const resetBtn = document.getElementById("resetBtn");
+
+    let selected = null;
+    let isAnimating = false;
+
+    const paths = {
+        p: "M22,9C22,11.2 20.2,13 18,13C16.8,13 15.7,12.5 15,11.6L12,18H32L29,11.6C28.3,12.5 27.2,13 26,13C23.8,13 22,11.2 22,9M12,36H32V38H12V36M14,20H30V34H14V20Z",
+        r: "M12,9H16V13H20V9H24V13H28V9H32V17H12V9M14,20H30V34H14V20M12,36H32V38H12V36Z",
+        n: "M33,26.5C33,26.5 35,22.5 31,18C27,13.5 22,13.5 22,13.5C22,13.5 21.5,9.5 17,9.5C12.5,9.5 11,14 11,14C11,14 7.5,16.5 9.5,23C11.5,29.5 16,33 16,33L12,36H32L30,31C30,31 33,29.5 33,26.5Z",
+        b: "M22,9C22,9 15,14 15,22C15,27 18,34 18,34H26C26,34 29,27 29,22C29,14 22,9 22,9M12,36H32V38H12V36Z",
+        q: "M12,14L16,26L22,11L28,26L32,14L30,34H14L12,14M12,36H32V38H12V36Z",
+        k: "M12,18L16,14L22,18L28,14L32,18L30,34H14L12,18M22,6V11M19.5,8.5H24.5M12,36H32V38H12V36Z"
+    };
+
+    function getPieceSVG(type, color) {
+        const pathData = paths[type.toLowerCase()];
+        const isWhite = (color === 'w');
+        const fill = isWhite ? "none" : "url(#pieceHatch)";
+        const stroke = isWhite ? "#ffd700" : "rgba(0, 240, 255, 0.4)";
+        const strokeWidth = isWhite ? "2" : "1.5";
+
+        return `<div class="piece-container"><svg viewBox="0 0 44 44">
+            <path d="${pathData}" fill="${fill}" stroke="${stroke}" stroke-width="${strokeWidth}" stroke-linejoin="round" stroke-linecap="round"/>
+        </svg></div>`;
+    }
+
+    function squareName(row, col) {
+        return "abcdefgh"[col] + (8 - row);
+    }
+
+    function updateStatus() {
+        let text = (game.turn() === "w" ? "White" : "Black") + " to move";
+        if (game.in_checkmate()) {
+            text = "CHECKMATE — " + (game.turn() === "w" ? "Black" : "White") + " wins";
+        } else if (game.in_draw()) {
+            text = "Draw";
+        } else if (game.in_check()) {
+            text += " — CHECK";
+        }
+        statusEl.innerText = text;
+    }
+
+    function renderBoard() {
+        boardEl.innerHTML = "";
+        const board = game.board();
+        let legalMoves = [];
+
+        if (selected) {
+            legalMoves = game.moves({ square: selected, verbose: true });
+        }
+
+        for (let row = 0; row < 8; row++) {
+            for (let col = 0; col < 8; col++) {
+                const square = document.createElement("div");
+                const coord = squareName(row, col);
+
+                square.classList.add("square");
+                square.id = "sq-" + coord;
+                square.classList.add((row + col) % 2 === 0 ? "light" : "dark");
+
+                if (coord === selected) square.classList.add("selected");
+                if (legalMoves.some(move => move.to === coord)) square.classList.add("move");
+
+                const piece = board[row][col];
+                if (piece) {
+                    square.innerHTML = getPieceSVG(piece.type, piece.color);
+                }
+
+                square.addEventListener("click", () => clickSquare(coord));
+                boardEl.appendChild(square);
             }
-          }
-          return false;
         }
-      }
+        updateStatus();
     }
-    return true;
-  }
 
-  function createRandomPuzzle() {
-    let board = Array.from({ length: 9 }, () => Array(9).fill(0));
-    fillBoard(board);
-    fullSolution = board.map(row => [...row]);
+    function animateGlide(fromCoord, toCoord, callback) {
+        isAnimating = true;
+        const fromSq = document.getElementById("sq-" + fromCoord);
+        const piece = fromSq.querySelector(".piece-container");
 
-    let attempts = 45;
-    while (attempts > 0) {
-      let r = Math.floor(Math.random() * 9);
-      let c = Math.floor(Math.random() * 9);
-      if (board[r][c] !== 0) {
-        board[r][c] = 0;
-        attempts--;
-      }
-    }
-    puzzleLayout = board;
-  }
-
-  function generateNewGame() {
-    createRandomPuzzle();
-    
-    const boardEl = document.getElementById('board');
-    boardEl.innerHTML = '';
-    selectedCell = null;
-    moveHistory = [];
-    
-    for (let r = 0; r < 9; r++) {
-      for (let c = 0; c < 9; c++) {
-        const cell = document.createElement('div');
-        cell.className = 'square';
-        cell.dataset.row = r;
-        cell.dataset.col = c;
-        
-        if (puzzleLayout[r][c] !== 0) {
-          cell.innerText = puzzleLayout[r][c];
-          cell.classList.add('clue');
+        if (!piece) {
+            callback();
+            return;
         }
-        
-        cell.addEventListener('click', function() {
-          selectCell(this);
-        });
-        
-        boardEl.appendChild(cell);
-      }
+
+        const toSq = document.getElementById("sq-" + toCoord);
+        const fromRect = fromSq.getBoundingClientRect();
+        const toRect = toSq.getBoundingClientRect();
+
+        const deltaX = toRect.left - fromRect.left;
+        const deltaY = toRect.top - fromRect.top;
+
+        piece.classList.add("gliding");
+        piece.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+
+        piece.addEventListener("transitionend", () => {
+            piece.classList.remove("gliding");
+            piece.style.transform = "";
+            isAnimating = false;
+            callback();
+        }, { once: true });
     }
-    document.getElementById('status').innerText = "Sudoku";
-  }
 
-  function selectCell(cell) {
-    if (selectedCell) selectedCell.classList.remove('selected');
-    selectedCell = cell;
-    selectedCell.classList.add('selected');
-    
-    applyVisualHighlights();
-  }
+    function clickSquare(coord) {
+        if (isAnimating) return; 
 
-  function applyVisualHighlights() {
-    const cells = document.querySelectorAll('.square');
-    cells.forEach(c => {
-      c.classList.remove('highlight-cross', 'highlight-match');
-    });
+        const clickedPiece = game.get(coord);
 
-    if (!selectedCell) return;
-
-    const targetRow = parseInt(selectedCell.dataset.row);
-    const targetCol = parseInt(selectedCell.dataset.col);
-    const targetVal = selectedCell.innerText;
-    const targetBlockRow = Math.floor(targetRow / 3);
-    const targetBlockCol = Math.floor(targetCol / 3);
-
-    cells.forEach(c => {
-      const r = parseInt(c.dataset.row);
-      const col = parseInt(c.dataset.col);
-      const blockRow = Math.floor(r / 3);
-      const blockCol = Math.floor(col / 3);
-
-      if (r === targetRow || col === targetCol || (blockRow === targetBlockRow && blockCol === targetBlockCol)) {
-        if (c !== selectedCell) {
-          c.classList.add('highlight-cross');
+        if (selected) {
+            const currentSelected = selected; 
+            const move = game.move({ from: currentSelected, to: coord, promotion: "q" });
+            
+            if (move) {
+                game.undo(); 
+                selected = null;
+                
+                animateGlide(currentSelected, coord, () => {
+                    game.move({ from: currentSelected, to: coord, promotion: "q" }); 
+                    renderBoard();
+                });
+                return;
+            }
+            selected = (clickedPiece && clickedPiece.color === game.turn()) ? coord : null;
+        } else {
+            if (clickedPiece && clickedPiece.color === game.turn()) selected = coord;
         }
-      }
-
-      if (targetVal !== '' && c.innerText === targetVal && c !== selectedCell) {
-        c.classList.add('highlight-match');
-      }
-    });
-  }
-
-  function inputNumber(num) {
-    if (!selectedCell || selectedCell.classList.contains('clue')) return;
-    
-    moveHistory.push({
-      cell: selectedCell,
-      prevValue: selectedCell.innerText,
-      prevMistake: selectedCell.classList.contains('mistake')
-    });
-    
-    selectedCell.innerText = num;
-    
-    const r = parseInt(selectedCell.dataset.row);
-    const c = parseInt(selectedCell.dataset.col);
-    if (num !== fullSolution[r][c]) {
-      selectedCell.classList.add('mistake');
-    } else {
-      selectedCell.classList.remove('mistake');
-      checkWinCondition();
+        renderBoard();
     }
 
-    applyVisualHighlights();
-  }
-
-  function eraseCell() {
-    if (!selectedCell || selectedCell.classList.contains('clue')) return;
-    
-    moveHistory.push({
-      cell: selectedCell,
-      prevValue: selectedCell.innerText,
-      prevMistake: selectedCell.classList.contains('mistake')
+    resetBtn.addEventListener("click", () => {
+        isAnimating = false;
+        game.reset();
+        selected = null;
+        renderBoard();
     });
-    
-    selectedCell.innerText = '';
-    selectedCell.classList.remove('mistake');
-    applyVisualHighlights();
-  }
 
-  function undoMove() {
-    if (moveHistory.length === 0) return;
-    const lastMove = moveHistory.pop();
-    lastMove.cell.innerText = lastMove.prevValue;
-    
-    if (lastMove.prevMistake) {
-      lastMove.cell.classList.add('mistake');
-    } else {
-      lastMove.cell.classList.remove('mistake');
-    }
-    
-    selectCell(lastMove.cell);
-  }
-
-  function checkWinCondition() {
-    const cells = document.querySelectorAll('.square');
-    let won = true;
-    cells.forEach(c => {
-      const r = parseInt(c.dataset.row);
-      const col = parseInt(c.dataset.col);
-      if (parseInt(c.innerText) !== fullSolution[r][col]) {
-        won = false;
-      }
-    });
-    if (won) {
-      document.getElementById('status').innerText = "VICTORY — Puzzle Solved!";
-    }
-  }
-
-  document.addEventListener('keydown', (e) => {
-    if (!selectedCell) return;
-    if (e.key >= '1' && e.key <= '9') {
-      inputNumber(parseInt(e.key));
-    } else if (e.key === 'Backspace' || e.key === 'Delete') {
-      eraseCell();
-    }
-  });
-
-  generateNewGame();
+    renderBoard();
+});
 </script>
+
+<nav class="nav">
+<a href="/">Home</a>
+<a href="/page5">Games</a>
+<a href="/page6">Flash</a>
+<a href="/page7">BZFlag</a>
+</nav>

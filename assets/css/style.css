@@ -39,14 +39,8 @@ body::after {
   box-shadow: 0 0 15px rgba(0,0,0,0.5);
 }
 
-h1, h2, h3, h4 {
+h1, h2, h3, h4, body {
   font-family: 'Cormorant Garamond', serif !important;
-  color: #ffd700;
-  text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
-}
-
-body {
-  font-family: 'MedievalSharp', cursive;
   color: #ffd700;
   text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
 }

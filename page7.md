@@ -8,7 +8,7 @@ title: BZFlag
 
 ### Tanks of five colors roar across the battlefields, guns blazing. Shells fly through the air, sometimes ricocheting off objects as the tanks... jump?
 
-### Yes, it's true. In BZFlag, tanks can jump—they fly 18 (19, really) WU (World Units) up into the air. But beware—these tanks are not equipped with space engines and propellers. They will continue moving as they were when they jump—effectively, anyone can tell where you're going to land. And they can spray bullets there. How about toast? May be riddled with shot, but...
+### Yes, it's true. In BZFlag, tanks can jump—they fly 18 (19, really) WU (World Units) up into the air. But beware—these tanks are not equipped with space engines and propellers. They will continue moving as they were when they jump—effectively, anyone can tell where you're going to land. And they can spray bullets there.
 
 ### Don't jump.
 
@@ -101,6 +101,8 @@ title: BZFlag
 
 ### mesh
 #### A mesh can be any shape. Most mapmakers use different 3D modelers to create an obj file, then use modeltool to convert it to a bzflag world (BZW).
+
+## But more than that, bzflag is fun because the community has drastically shaped the game; there are several active devolopers and players who have been around for decades... 
 
 # Why there's a devoted community
 

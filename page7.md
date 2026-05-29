@@ -4,7 +4,7 @@ title: BZFlag
 ---
 
 # BZFlag
-### BZFlag is a free, multi-player open-sorce 3D tank battle. 
+### BZFlag is a free, multi-player open-source 3D tank battle. 
 
 ### Tanks of five colors roar across the battlefields, guns blazing. Shells fly through the air, sometimes ricocheting off objects as the tanks... jump?
 
@@ -78,7 +78,7 @@ title: BZFlag
 ### Wings	
 #### Tank can drive in midair.
 
-### Now, through with that, you think that you have a fairly compentant understanding of the game? Think again.
+### Now, through with that, you think that you have a fairly competent understanding of the game? Think again.
 
 # Objects
 
@@ -91,7 +91,7 @@ title: BZFlag
 #### A pyramid is a four sided cone with a blue marble texture. It ricochets shots in odd angles, and some maps, such as Two Tanks, use trick shots from pyramids.
 
 ### teleporter
-#### A teleporter is a strange and futuristic travel vortex. Map makers can link teleporters to each other; driving through one will cause a yellow veil to go acrosd your screen until you drive out the other side. Teleporters have a black and yellow striped border.
+#### A teleporter is a strange and futuristic travel vortex. Map makers can link teleporters to each other; driving through one will cause a yellow veil to go across your screen until you drive out the other side. Teleporters have a black and yellow striped border.
 
 ### meshpyr
 #### A meshpyr has better capacities then a pyramid, but is slightly worse at textures, having them twisted on one side.
@@ -144,8 +144,6 @@ title: BZFlag
 ##### Send to Nemisis
 ##### Hunt
 ##### Radar zoom
-
-# Note that once you're in there's no point of return. BZFlag will hold you forever, so it might be a good idea to get used to your new permanant—and possibly unwonted—home. 
 
 <nav class="nav">
 <a href="/">Home</a>

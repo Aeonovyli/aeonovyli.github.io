@@ -36,10 +36,6 @@ title: Home page
 
 #### God sets the lonely in families, he leads the prisoners out with singing."
 
-
-
-
-
 <nav class="nav">
 <a href="/page1">Interests</a>
 <a href="/page2">Contact me</a>

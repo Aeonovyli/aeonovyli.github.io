@@ -18,18 +18,6 @@ body::before, body::after {
   z-index: -1;
 }
 
-body::before {
-  top: 0;
-  left: 0;
-  background: radial-gradient(circle at top left, rgba(255,140,0,0.6), transparent 60%);
-}
-
-body::after {
-  bottom: 0;
-  right: 0;
-  background: radial-gradient(circle at bottom right, rgba(173,216,230,0.6), transparent 60%);
-}
-
 .highlighted-section {
   background-color: rgba(34, 34, 34, 0.85);
   border-left: 4px solid #ffd700;

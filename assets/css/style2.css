@@ -259,7 +259,7 @@ p, li {
 }
 
 .cancel-btn {
-  color: gray; 
+  color: red; 
   background: none; 
   border: none; 
   cursor: pointer; 

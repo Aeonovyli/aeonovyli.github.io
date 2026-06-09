@@ -3,7 +3,7 @@ layout: default
 title: Interests
 ---
 
-My intrests are quiet varied, and of a weird sort. They include several old video games (Commander Keen among them) and a lot of Lego—building sorts.
+My intrests are quite varied, and of a weird sort. They include several old video games (Commander Keen among them) and a lot of Lego—building sorts.
 
 A full list would be hard to achieve, but here's my try.
 
@@ -25,7 +25,7 @@ A full list would be hard to achieve, but here's my try.
 • Lore for books
 • Dragons
 • Sci-fi elements
-• High-powered devices (Seriously, an device that would make objects explode if it was aimed at them. AI seemes to think it wouldn't work. Sad, though. I would love to finally make my own g[...]
+• High-powered devices (Seriously, an device that would make objects explode if it was aimed at them. AI seemes to think it wouldn't work. Sad, though. I would love to finally make my own glass)
 • Taking things apart
 • Making electronic circuits
 • Creating in general; hence Luanti in creative and packed with mods.

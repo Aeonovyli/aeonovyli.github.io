@@ -16,91 +16,91 @@ title: BZFlag
 
 ---
 
-#### To most people, having a fun time consists of driving around the battlefield, dodging glowing bullets and firing off some of their own. But to others, BZFlag is simply an epic mind game. But that's not all...
+To most people, having a fun time consists of driving around the battlefield, dodging glowing bullets and firing off some of their own. But to others, BZFlag is simply an epic mind game. But that's not all...
 
 ---
 
-#### Flag Alert! The warning flashes red above your 'mousebox', the brown square within which your mouse resides. Flag alert? How? What about it...? 
-#### Well, it's time you knew about the complex world of flags. All good (or useless, as the case may be) flags are below, along with the description of them you see ingame.
+Flag Alert! The warning flashes red above your 'mousebox', the brown square within which your mouse resides. Flag alert? How? What about it...? 
+Well, it's time you knew about the complex world of flags. All good (or useless, as the case may be) flags are below, along with the description of them you see ingame.
 
 ### Agility
-#### Tank is quick and nimble making it easier to dodge.
+Tank is quick and nimble making it easier to dodge.
 ### Burrow	
-#### Tank burrows underground, impervious to normal shots, but can be steamrolled by anyone!
+Tank burrows underground, impervious to normal shots, but can be steamrolled by anyone!
 ### Cloaking	
-#### Makes your tank invisible out-the-window. Still visible on radar.
+Makes your tank invisible out-the-window. Still visible on radar.
 ### Genocide	
-#### Killing one tank kills that tank's whole team.
+Killing one tank kills that tank's whole team.
 ### Guided Missile	
-#### Shots track a target. Lock on with right button. Can lock on or retarget after firing.
+Shots track a target. Lock on with right button. Can lock on or retarget after firing.
 ### High Speed	
-#### Tank moves faster. Outrun bad guys.
+Tank moves faster. Outrun bad guys.
 ### Identify	
-#### Identifies type of nearest flag.
+Identifies type of nearest flag.
 ### Invisible Bullet	
-#### Your shots don't appear on other radars. Can still see them out window.
+Your shots don't appear on other radars. Can still see them out window.
 ### Laser	
-#### Shoots a laser. Infinite speed and range but long reload time.
+Shoots a laser. Infinite speed and range but long reload time.
 ### Machine Gun	
-#### Very fast reload and very short range.
+Very fast reload and very short range.
 ### Masquerade	
-#### In opponent's hud, you appear as a teammate.
+In opponent's hud, you appear as a teammate.
 ### Narrow	
-#### Tank is super thin. Very hard to hit from front but is normal size from side. Can get through small openings.
+Tank is super thin. Very hard to hit from front but is normal size from side. Can get through small openings.
 ### Oscillation Overthruster	
-#### Can drive through buildings. Can't back up or shoot while inside.
+Can drive through buildings. Can't back up or shoot while inside.
 ### Phantom Zone	
-#### Teleporting toggles Zoned effect. Zoned tank can drive through buildings. Zoned tank shoots Zoned bullets and can't be shot (except by superbullet, shock wave, and other Zoned tanks).
+Teleporting toggles Zoned effect. Zoned tank can drive through buildings. Zoned tank shoots Zoned bullets and can't be shot (except by superbullet, shock wave, and other Zoned tanks).
 ### Quick Turn	
-#### Tank turns faster. Good for dodging.
+Tank turns faster. Good for dodging.
 ### Rapid Fire	
-#### Shoots more often. Shells go faster but not as far.
+Shoots more often. Shells go faster but not as far.
 ### Ricochet	
-#### Shots bounce off walls. Don't shoot yourself!
+Shots bounce off walls. Don't shoot yourself!
 ### Seer	
-#### See stealthed, cloaked and masquerading tanks as normal.
+See stealthed, cloaked and masquerading tanks as normal.
 ### Shield	
-#### Getting hit only drops flag. Flag flies an extra-long time.
+Getting hit only drops flag. Flag flies an extra-long time.
 ### Shock Wave	
-#### Firing destroys all tanks nearby. Don't kill teammates! Can kill tanks on/in buildings.
+Firing destroys all tanks nearby. Don't kill teammates! Can kill tanks on/in buildings.
 ### Stealth	
-#### Tank is invisible on radar. Shots are still visible. Sneak up behind enemies!
+Tank is invisible on radar. Shots are still visible. Sneak up behind enemies!
 ### Steamroller	
-#### Destroys tanks you touch but you have to get really close.
+Destroys tanks you touch but you have to get really close.
 ### Super Bullet	
-#### Shoots through buildings. Can kill Phantom Zone.
+Shoots through buildings. Can kill Phantom Zone.
 ### Thief	
-#### Steal flags. Small and fast but can't kill.
+Steal flags. Small and fast but can't kill.
 ### Tiny	
-#### Tank is small and can get through small openings. Very hard to hit.
+Tank is small and can get through small openings. Very hard to hit.
 ### Useless	
-#### You have found the useless flag. Use it wisely.
+You have found the useless flag. Use it wisely.
 ### Wings	
-#### Tank can drive in midair.
+Tank can drive in midair.
 
 ### Now, through with that, you think that you have a fairly competent understanding of the game? Think again.
 
 # Objects
 
-#### There are several 'objects', obstacles tanks can run into. They are as follows. Bullets and tanks are not classified because bullets have rather dramatic effects and tanks can drive through each other.
+There are several 'objects', obstacles tanks can run into. They are as follows. Bullets and tanks are not classified because bullets have rather dramatic effects and tanks can drive through each other.
 
 ### box
-#### A box is a simple cube, the heartblood of many maps.
+A box is a simple cube, the heartblood of many maps.
 
 ### pyramid
-#### A pyramid is a four sided cone with a blue marble texture. It ricochets shots in odd angles, and some maps, such as Two Tanks, use trick shots from pyramids.
+A pyramid is a four sided cone with a blue marble texture. It ricochets shots in odd angles, and some maps, such as Two Tanks, use trick shots from pyramids.
 
 ### teleporter
-#### A teleporter is a strange and futuristic travel vortex. Map makers can link teleporters to each other; driving through one will cause a yellow veil to go across your screen until you drive out the other side. Teleporters have a black and yellow striped border.
+A teleporter is a strange and futuristic travel vortex. Map makers can link teleporters to each other; driving through one will cause a yellow veil to go across your screen until you drive out the other side. Teleporters have a black and yellow striped border.
 
 ### meshpyr
-#### A meshpyr has better capacities then a pyramid, but is slightly worse at textures, having them twisted on one side.
+A meshpyr has better capacities then a pyramid, but is slightly worse at textures, having them twisted on one side.
 
 ### meshbox
-#### A more enhanced version of a box, much like a meshpyr.
+A more enhanced version of a box, much like a meshpyr.
 
 ### mesh
-#### A mesh can be any shape. Most mapmakers use different 3D modelers to create an obj file, then use modeltool to convert it to a bzflag world (BZW).
+A mesh can be any shape. Most mapmakers use different 3D modelers to create an obj file, then use modeltool to convert it to a bzflag world (BZW).
 
 ## But more than that, bzflag is fun because the community has drastically shaped the game; there are several active devolopers and players who have been around for decades... 
 
@@ -108,27 +108,27 @@ title: BZFlag
 
 ### To quote myself, from a PM (Private Message; sometimes Direct Message);
 
-#### 'You do not get this in minecraft.
+'You do not get this in minecraft.
 
-#### Nor do you get this sense of old and new, old players who are fun to play around and players who have departed—literally. [redacted], for example. She’s still around, but she no longer plays——and some people miss that. I miss [redacted]. I don’t know whether he gave it up, stopped playing, for a bit or longer, or something happened to him.
+Nor do you get this sense of old and new, old players who are fun to play around and players who have departed—literally. [redacted], for example. She's still around, but she no longer plays——and some people miss that. I miss [redacted]. I don't know whether he gave it up, stopped playing, for a bit or longer, or something happened to him.
 
-#### Anyone can make maps, then play on them.
+Anyone can make maps, then play on them.
 
-#### In Minecraft you play by making and destroying the environment.
+In Minecraft you play by making and destroying the environment.
 
-#### Anyone can submit code, talk to players, play a match.
+Anyone can submit code, talk to players, play a match.
 
-#### There’s hardly any competition in Minecraft, you can’t make friends as easily (nothing like a L swap and then emoji all around), and they certainly don’t want you to see the base code.'
+There's hardly any competition in Minecraft, you can't make friends as easily (nothing like a L swap and then emoji all around), and they certainly don't want you to see the base code.'
 
-#### There's also the small matter of the 
+There's also the small matter of the 
 
 # Radar
 
-#### Ooh, a radar panel! That makes a nice addition to the window, right?
-#### Wrong. As you may have discovered, your radar provides a 360° view, while your window provides a pitiful 60°.
-#### You can count yourself an experienced player if you use your radar more than your window; it should only be used for L, to deal with the occasional ST, and a few other things.
+Ooh, a radar panel! That makes a nice addition to the window, right?
+Wrong. As you may have discovered, your radar provides a 360° view, while your window provides a pitiful 60°.
+You can count yourself an experienced player if you use your radar more than your window; it should only be used for L, to deal with the occasional ST, and a few other things.
 
-#### BZFlag is easy, fun to play, and at the same time extremely complex. But those are just the basics. Now we'll be getting into 
+BZFlag is easy, fun to play, and at the same time extremely complex. But those are just the basics. Now we'll be getting into 
 
 # Tactics
 

@@ -101,6 +101,12 @@ a:active {
   animation: clickGlow 0.6s ease-in-out 1;
 }
 
+.nav {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
 .nav a {
   color: #ffd700;
   text-decoration: none;

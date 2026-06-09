@@ -4,7 +4,7 @@ title: Contact me
 ---
 
 # Contact me
-##### Leave a message below. Only logged-in github users can use this feature.
+Leave a message below. Only logged-in github users can use this feature.
 
 <div class="message-box">
   <div id="auth-ui" style="margin-bottom: 20px; padding: 15px; background: rgba(20, 20, 20, 0.6); border-radius: 8px; border: 1px solid #00f0ff;">

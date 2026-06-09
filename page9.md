@@ -513,4 +513,3 @@ title: Sudoku
   generateNewGame();
   bindPadEvents();
 </script>
-

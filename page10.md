@@ -46,10 +46,11 @@ Join my mailing list to receive updates and interesting content directly in your
 .newsletter-form {
   max-width: 500px;
   margin: 30px 0;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #f9f9f9;
+  padding: 24px;
+  border: 1px solid #00ffff;
+  border-radius: 12px;
+  background-color: rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
 }
 
 .form-group {
@@ -61,42 +62,70 @@ Join my mailing list to receive updates and interesting content directly in your
 .form-group label {
   margin-bottom: 8px;
   font-weight: bold;
-  color: #333;
+  color: #ffd700;
 }
 
 .form-group input {
-  padding: 10px;
-  border: 1px solid #bbb;
-  border-radius: 4px;
+  padding: 12px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 1px solid #00ffff;
+  border-radius: 8px;
+  color: #ffffff;
   font-size: 14px;
   font-family: inherit;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .form-group input:focus {
   outline: none;
-  border-color: #4CAF50;
-  box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+  border-color: #ffd700;
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+}
+
+.form-group input::placeholder {
+  color: #555555;
 }
 
 .submit-btn {
-  padding: 12px 30px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 4px;
+  width: auto;
+  padding: 10px 20px;
+  background-color: transparent;
+  color: #ffd700;
+  border: 2px solid #ffd700;
+  border-radius: 8px;
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .submit-btn:hover {
-  background-color: #45a049;
+  background-color: #ffd700;
+  color: #000000;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
 }
 
 .submit-btn:disabled {
-  background-color: #cccccc;
+  border-color: #444444;
+  color: #444444;
   cursor: not-allowed;
+}
+
+.admin-btn {
+  padding: 10px 20px;
+  background-color: #ffd700;
+  color: #000000;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: opacity 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-btn:hover {
+  opacity: 0.9;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 }
 </style>
 

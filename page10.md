@@ -20,7 +20,7 @@ Join my mailing list to receive updates and interesting content directly in your
   </div>
   
   <div class="form-group">
-    <label for="name">Name (Optional):</label>
+    <label for="name">First Name (Optional):</label>
     <input 
       type="text" 
       id="name" 
@@ -29,7 +29,7 @@ Join my mailing list to receive updates and interesting content directly in your
     >
   </div>
   
-  <button type="submit" class="submit-btn">Subscribe</button>
+  <button type="submit" class="submit-btn" id="submitBtn">Subscribe</button>
   <p id="formMessage" class="form-message"></p>
 </form>
 
@@ -85,6 +85,11 @@ Join my mailing list to receive updates and interesting content directly in your
   background-color: #45a049;
 }
 
+.submit-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
 .form-message {
   margin-top: 15px;
   padding: 10px;
@@ -108,35 +113,71 @@ Join my mailing list to receive updates and interesting content directly in your
 </style>
 
 <script>
+// Configuration - REPLACE THESE WITH YOUR MAILCHIMP DETAILS
+const MAILCHIMP_SERVER = "us1"; // e.g., us1, us2, us5, etc. - check your Mailchimp account
+const MAILCHIMP_LIST_ID = "YOUR_MAILCHIMP_LIST_ID"; // Get this from Mailchimp > Audience > Settings > Audience name and defaults
+const MAILCHIMP_USER_ID = "YOUR_MAILCHIMP_USER_ID"; // Get this from your Mailchimp API key (the part after the dash)
+
 document.getElementById('newsletterForm').addEventListener('submit', function(e) {
   e.preventDefault();
   
   const email = document.getElementById('email').value;
-  const name = document.getElementById('name').value || 'Subscriber';
+  const name = document.getElementById('name').value || '';
   const messageEl = document.getElementById('formMessage');
+  const submitBtn = document.getElementById('submitBtn');
   
-  // Store email data (you'll need to set up backend processing)
-  const subscriptionData = {
-    email: email,
-    name: name,
-    subscribedAt: new Date().toISOString()
+  // Disable submit button during request
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Subscribing...';
+  messageEl.classList.remove('success', 'error');
+  messageEl.textContent = '';
+  
+  // Mailchimp API endpoint for JSONP callback
+  const mailchimpUrl = `https://${MAILCHIMP_SERVER}.api.mailchimp.com/3.0/lists/${MAILCHIMP_LIST_ID}/members/`;
+  
+  // Prepare the data
+  const data = {
+    email_address: email,
+    status: 'pending', // Sets to pending (requires email confirmation) - use 'subscribed' for automatic subscription
+    merge_fields: {
+      FNAME: name
+    }
   };
   
-  // Log to console (replace with actual backend call)
-  console.log('Newsletter Subscription:', subscriptionData);
+  // Use the JSONP method (available without authentication for limited operations)
+  const jsonpCallback = `callback_${Date.now()}`;
   
-  // Show success message
-  messageEl.textContent = `Thank you for subscribing, ${name}! Check your email to confirm.`;
-  messageEl.classList.remove('error');
-  messageEl.classList.add('success');
+  window[jsonpCallback] = function(response) {
+    if (response.status === 'pending' || response.status === 'subscribed') {
+      messageEl.textContent = `Thank you for subscribing${name ? ', ' + name : ''}! Check your email to confirm your subscription.`;
+      messageEl.classList.add('success');
+      document.getElementById('newsletterForm').reset();
+      
+      // Re-enable button after 5 seconds
+      setTimeout(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Subscribe';
+      }, 5000);
+    } else {
+      messageEl.textContent = 'An error occurred. Please try again.';
+      messageEl.classList.add('error');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Subscribe';
+    }
+  };
   
-  // Reset form
-  this.reset();
+  // Create and send the JSONP request
+  const script = document.createElement('script');
+  script.src = mailchimpUrl + '?email_address=' + encodeURIComponent(email) + '&status=pending&merge_fields_FNAME=' + encodeURIComponent(name) + '&c=' + jsonpCallback;
   
-  // Clear message after 5 seconds
-  setTimeout(() => {
-    messageEl.classList.remove('success');
-  }, 5000);
+  script.onerror = function() {
+    messageEl.textContent = 'Error connecting to mailing list. Please check your configuration.';
+    messageEl.classList.add('error');
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Subscribe';
+  };
+  
+  document.head.appendChild(script);
 });
 </script>
 
@@ -152,4 +193,5 @@ document.getElementById('newsletterForm').addEventListener('submit', function(e)
 <a href="/page7">BZFlag</a>
 <a href="/page8">Chess</a>
 <a href="/page9">Sudoku</a>
+<a href="/page10">Newsletter</a>
 </nav>

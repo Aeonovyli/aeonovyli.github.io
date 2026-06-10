@@ -4,11 +4,11 @@ title: BZFlag
 ---
 
 # BZFlag
-### BZFlag is a free, multi-player open-source 3D tank battle. 
+BZFlag is a free, multi-player open-source 3D tank battle. 
 
-### Tanks of five colors roar across the battlefields, guns blazing. Shells fly through the air, sometimes ricocheting off objects as the tanks... jump?
+Tanks of five colors roar across the battlefields, guns blazing. Shells fly through the air, sometimes ricocheting off objects as the tanks... jump?
 
-### Yes, it's true. In BZFlag, tanks can jump—they fly 18 (19, really) WU (World Units) up into the air. But beware—these tanks are not equipped with space engines and propellers. They will continue moving as they were when they jump—effectively, anyone can tell where you're going to land. And they can spray bullets there.
+Yes, it's true. In BZFlag, tanks can jump—they fly 18 (19, really) WU (World Units) up into the air. But beware—these tanks are not equipped with space engines and propellers. They will continue moving as they were when they jump—effectively, anyone can tell where you're going to land. And they can spray bullets there.
 
 ### Don't jump.
 

@@ -7,7 +7,7 @@ title: Newsletter
 
 Join my mailing list to receive updates and interesting content directly in your inbox!
 
-<form id="newsletterForm" class="newsletter-form">
+<form id="newsletterForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="newsletter-form">
   <div class="form-group">
     <label for="email">Email Address:</label>
     <input 
@@ -29,9 +29,18 @@ Join my mailing list to receive updates and interesting content directly in your
     >
   </div>
   
-  <button type="submit" class="submit-btn" id="submitBtn">Subscribe</button>
-  <p id="formMessage" class="form-message"></p>
+  <button type="submit" class="submit-btn">Subscribe</button>
 </form>
+
+<p style="margin-top: 20px; font-size: 14px; color: #666;">
+  <strong>Setup Instructions:</strong><br>
+  1. Go to <a href="https://formspree.io" target="_blank">formspree.io</a><br>
+  2. Sign up (free)<br>
+  3. Create a new form<br>
+  4. Copy your form ID (looks like: abc123)<br>
+  5. Replace "YOUR_FORM_ID" in the form action above with your actual ID<br>
+  6. Done! Your newsletter form is now active.
+</p>
 
 <style>
 .newsletter-form {
@@ -89,97 +98,7 @@ Join my mailing list to receive updates and interesting content directly in your
   background-color: #cccccc;
   cursor: not-allowed;
 }
-
-.form-message {
-  margin-top: 15px;
-  padding: 10px;
-  border-radius: 4px;
-  display: none;
-}
-
-.form-message.success {
-  display: block;
-  background-color: #d4edda;
-  color: #155724;
-  border: 1px solid #c3e6cb;
-}
-
-.form-message.error {
-  display: block;
-  background-color: #f8d7da;
-  color: #721c24;
-  border: 1px solid #f5c6cb;
-}
 </style>
-
-<script>
-// Configuration - REPLACE THESE WITH YOUR MAILCHIMP DETAILS
-const MAILCHIMP_SERVER = "us1"; // e.g., us1, us2, us5, etc. - check your Mailchimp account
-const MAILCHIMP_LIST_ID = "YOUR_MAILCHIMP_LIST_ID"; // Get this from Mailchimp > Audience > Settings > Audience name and defaults
-const MAILCHIMP_USER_ID = "YOUR_MAILCHIMP_USER_ID"; // Get this from your Mailchimp API key (the part after the dash)
-
-document.getElementById('newsletterForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  
-  const email = document.getElementById('email').value;
-  const name = document.getElementById('name').value || '';
-  const messageEl = document.getElementById('formMessage');
-  const submitBtn = document.getElementById('submitBtn');
-  
-  // Disable submit button during request
-  submitBtn.disabled = true;
-  submitBtn.textContent = 'Subscribing...';
-  messageEl.classList.remove('success', 'error');
-  messageEl.textContent = '';
-  
-  // Mailchimp API endpoint for JSONP callback
-  const mailchimpUrl = `https://${MAILCHIMP_SERVER}.api.mailchimp.com/3.0/lists/${MAILCHIMP_LIST_ID}/members/`;
-  
-  // Prepare the data
-  const data = {
-    email_address: email,
-    status: 'pending', // Sets to pending (requires email confirmation) - use 'subscribed' for automatic subscription
-    merge_fields: {
-      FNAME: name
-    }
-  };
-  
-  // Use the JSONP method (available without authentication for limited operations)
-  const jsonpCallback = `callback_${Date.now()}`;
-  
-  window[jsonpCallback] = function(response) {
-    if (response.status === 'pending' || response.status === 'subscribed') {
-      messageEl.textContent = `Thank you for subscribing${name ? ', ' + name : ''}! Check your email to confirm your subscription.`;
-      messageEl.classList.add('success');
-      document.getElementById('newsletterForm').reset();
-      
-      // Re-enable button after 5 seconds
-      setTimeout(() => {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Subscribe';
-      }, 5000);
-    } else {
-      messageEl.textContent = 'An error occurred. Please try again.';
-      messageEl.classList.add('error');
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Subscribe';
-    }
-  };
-  
-  // Create and send the JSONP request
-  const script = document.createElement('script');
-  script.src = mailchimpUrl + '?email_address=' + encodeURIComponent(email) + '&status=pending&merge_fields_FNAME=' + encodeURIComponent(name) + '&c=' + jsonpCallback;
-  
-  script.onerror = function() {
-    messageEl.textContent = 'Error connecting to mailing list. Please check your configuration.';
-    messageEl.classList.add('error');
-    submitBtn.disabled = false;
-    submitBtn.textContent = 'Subscribe';
-  };
-  
-  document.head.appendChild(script);
-});
-</script>
 
 ---
 

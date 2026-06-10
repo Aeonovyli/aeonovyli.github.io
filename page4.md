@@ -9,8 +9,12 @@ Certainly not the meek inhabitants of Fornitas, or even the more powerful Guardi
 
 <nav class="nav">
 <a href="/">Home</a>
-<a href="/page1">Interests</a>
 <a href="/page2">Contact me</a>
 <a href="/page3">Profiles</a>
 <a href="/page5">Games</a>
+<a href="/page6">Flash</a>
+<a href="/page7">BZFlag</a>
+<a href="/page8">Chess</a>
+<a href="/page9">Sudoku</a>
+<a href="/page10">Newsletter</a>
 </nav>

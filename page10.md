@@ -32,8 +32,8 @@ Join my mailing list to receive updates and interesting content directly in your
   <button type="submit" class="submit-btn">Subscribe</button>
 </form>
 
-<p style="margin-top: 20px; font-size: 14px; color: #888;">
-  📧 <strong>Newsletter Schedule:</strong> Sent weekly on Mondays
+<p style="margin-top: 20px; font-size: 14px; color: #ffd700;">
+  <strong>Newsletter Schedule:</strong> Sent weekly on Mondays
 </p>
 
 <div id="admin-section" style="display:none; margin-top: 40px; padding: 20px; background: rgba(255, 215, 0, 0.1); border: 2px solid #ffd700; border-radius: 8px;">

@@ -184,5 +184,4 @@ TheSilverStone`);
 <a href="/page7">BZFlag</a>
 <a href="/page8">Chess</a>
 <a href="/page9">Sudoku</a>
-<a href="/page10">Newsletter</a>
 </nav>

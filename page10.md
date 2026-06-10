@@ -7,7 +7,7 @@ title: Newsletter
 
 Join my mailing list to receive updates and interesting content directly in your inbox!
 
-<form id="newsletterForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="newsletter-form">
+<form action="https://formspree.io/f/xgobzdnk" method="POST" class="newsletter-form">
   <div class="form-group">
     <label for="email">Email Address:</label>
     <input 
@@ -31,16 +31,6 @@ Join my mailing list to receive updates and interesting content directly in your
   
   <button type="submit" class="submit-btn">Subscribe</button>
 </form>
-
-<p style="margin-top: 20px; font-size: 14px; color: #666;">
-  <strong>Setup Instructions:</strong><br>
-  1. Go to <a href="https://formspree.io" target="_blank">formspree.io</a><br>
-  2. Sign up (free)<br>
-  3. Create a new form<br>
-  4. Copy your form ID (looks like: abc123)<br>
-  5. Replace "YOUR_FORM_ID" in the form action above with your actual ID<br>
-  6. Done! Your newsletter form is now active.
-</p>
 
 <style>
 .newsletter-form {

@@ -3,6 +3,118 @@ layout: default
 title: Chess
 ---
 
+<style>
+#game-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 25px;
+    margin: 20px auto;
+    max-width: 600px;
+    background: transparent;
+}
+
+#status {
+    font-family: 'MedievalSharp', cursive, serif;
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: #ffd700;
+    text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
+}
+
+#board {
+    display: grid;
+    grid-template-columns: repeat(8, min(11vw, 65px));
+    grid-template-rows: repeat(8, min(11vw, 65px));
+    border: 3px solid #ffd700;
+    box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
+    background: transparent; 
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative; 
+}
+
+.square {
+    width: min(11vw, 65px);
+    height: min(11vw, 65px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    cursor: pointer;
+    user-select: none;
+}
+
+.light {
+    background: transparent !important;
+    border: 1px solid rgba(255, 215, 0, 0.6);
+}
+
+.dark {
+    border: 1px solid rgba(255, 215, 0, 0.6);
+    background: repeating-linear-gradient(
+        135deg,
+        transparent,
+        transparent 8px,
+        rgba(255, 215, 0, 0.4) 8px,
+        rgba(255, 215, 0, 0.4) 10px
+    );
+}
+
+.selected {
+    background: rgba(0, 240, 255, 0.25) !important;
+    box-shadow: inset 0 0 12px #00f0ff;
+}
+
+.move {
+    background: rgba(255, 148, 77, 0.2) !important;
+    box-shadow: inset 0 0 10px #ff944d;
+}
+
+/* Slide animation performance rules */
+.piece-container {
+    width: 80%;
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.piece-container.gliding {
+    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 10;
+}
+
+.square svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 2px rgba(0,0,0,0.5));
+}
+
+#resetBtn {
+    margin-top: 25px;
+    background-color: rgba(255, 215, 0, 0.1);
+    color: #ffd700;
+    border: 2px solid #ffd700;
+    padding: 10px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1em;
+    text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
+    transition: all 0.3s ease;
+}
+
+#resetBtn:hover {
+    background-color: rgba(255, 215, 0, 0.2);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+}
+</style>
+
 <svg style="display:none;">
   <defs>
     <pattern id="pieceHatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
@@ -175,4 +287,5 @@ window.addEventListener("load", () => {
 <a href="/page5">Games</a>
 <a href="/page6">Flash</a>
 <a href="/page7">BZFlag</a>
+<a href="/page9">Sudoku</a>
 </nav>

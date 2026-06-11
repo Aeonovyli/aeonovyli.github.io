@@ -3,7 +3,7 @@ layout: default
 title: Interests
 ---
 
-My intrests are quite varied, and of a weird sort. They include several old video games (Commander Keen among them) and a lot of Lego—building sorts.
+My interests are quite varied, and of a weird sort. They include several old video games (Commander Keen among them) and a lot of Lego—building sorts.
 
 A full list would be hard to achieve, but here's my try.
 
@@ -31,14 +31,11 @@ A full list would be hard to achieve, but here's my try.
 • Creating in general; hence Luanti in creative and packed with mods.
 • Photography
 • Climbing
-• Fires (I am a (okay, not certified) pyromaniac. ***Don't come into my house. Ever***)
+• Fires (I am a (okay, not certified) pyromaniac. *Don't come into my house. Ever*)
 • Reading
 • Curling up in weird places and going to sleep (This seems to be a non-personal favorite. It's not.)
 
 On second thoughts, it would almost be better to state what I *don't* like, but I'm not going into that here. 
-
-
-
 
 <nav class="nav">
 <a href="/">Home</a>

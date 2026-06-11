@@ -37,11 +37,10 @@ Give us aid against the enemy, for human help is worthless.
 God sets the lonely in families, he leads the prisoners out with singing."
 
 <nav class="nav">
-<a href="/mapviewer6/mapviewer.html">Map Viewer</a>
 <a href="/page2">Contact me</a>
 <a href="/page3">Profiles</a>
 <a href="/page4">Eiriaoloth</a>
-<a href="/page5">Games</a>
+<a href="/page5.html">BZFlag Map Editor</a>
 <a href="/page6">Flash</a>
 <a href="/page7">BZFlag</a>
 <a href="/page8">Chess</a>

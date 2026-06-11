@@ -3,6 +3,8 @@ layout: default
 title: Interests
 ---
 
+# Interests
+
 My interests are quite varied, and of a weird sort. They include several old video games (Commander Keen among them) and a lot of Lego—building sorts.
 
 A full list would be hard to achieve, but here's my try.

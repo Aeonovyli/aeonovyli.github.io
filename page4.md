@@ -11,7 +11,7 @@ Certainly not the meek inhabitants of Fornitas, or even the more powerful Guardi
 <a href="/">Home</a>
 <a href="/page2">Contact me</a>
 <a href="/page3">Profiles</a>
-<a href="/page5">Games</a>
+<a href="/page5">BZFlag Map Editor</a>
 <a href="/page6">Flash</a>
 <a href="/page7">BZFlag</a>
 <a href="/page8">Chess</a>

@@ -3,6 +3,10 @@ layout: default
 title: Chess
 ---
 
+# Chess
+
+Everyone knows chess, even if they don't know how to play it. Try this.
+
 <style>
 #game-wrap {
     display: flex;

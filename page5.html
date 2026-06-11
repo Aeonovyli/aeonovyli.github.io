@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Games</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="manifest" href="/site.webmanifest">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Cormorant+Garamond&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/particles.js" defer></script>
+  <script src="https://keepandroidopen.org/banner.js" defer></script>
+  <link rel="stylesheet" href="/assets/css/style2.css">
+  <style>
+    #particles-js { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+    body { position: relative; z-index: 1; }
+    .editor-container {
+      position: relative; z-index: 2;
+      max-width: 1100px; margin: 20px auto;
+      background: rgba(0,0,0,0.75);
+      border: 1px solid #ffd700;
+      border-radius: 8px;
+      box-shadow: 0 0 30px rgba(255,215,0,0.15);
+      overflow: hidden;
+    }
+    .editor-titlebar {
+      background: rgba(255,215,0,0.08);
+      border-bottom: 1px solid #ffd700;
+      padding: 10px 16px;
+      font-family: 'Cinzel', serif;
+      color: #ffd700;
+      font-size: 0.9em;
+      letter-spacing: 0.05em;
+      text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
+    }
+    .editor-frame { width: 100%; height: 680px; border: none; display: block; background: #000; }
+  </style>
+</head>
+<body>
+  <div id="particles-js"></div>
+  <nav class="nav">
+    <a href="/">Home</a>
+    <a href="/page6">Flash</a>
+    <a href="/page7">BZFlag</a>
+    <a href="/page8">Chess</a>
+    <a href="/page9">Sudoku</a>
+  </nav>
+  <h1>Map Editor</h1>
+  <div class="editor-container">
+    <div class="editor-titlebar">Map Viewer 6</div>
+    <iframe class="editor-frame" src="/page5/mapviewer6" title="Map Editor" allowfullscreen></iframe>
+  </div>
+  <script>
+    particlesJS("particles-js", {
+      particles: { number: {value:70}, size: {value:2}, move: {speed:0.3,direction:"top",random:true,out_mode:"out"}, opacity: {value:0.3,random:true}, color: {value:["#4da6ff","#ff944d","#ffffff"]}, line_linked: {enable:false} },
+      interactivity: { events: { onhover: { enable: false } } },
+      retina_detect: true
+    });
+  </script>
+</body>
+</html>

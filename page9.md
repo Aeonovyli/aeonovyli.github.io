@@ -3,6 +3,10 @@ layout: default
 title: Sudoku
 ---
 
+# Sudoku
+
+Sudoku is a classic mind game. Currently this has no set rules (meaning at times it will be unsolvable) but I'll fix it at some point...
+
 <style>
 #game-wrap {
     display: flex;

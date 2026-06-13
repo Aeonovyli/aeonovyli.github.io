@@ -20,7 +20,7 @@ I am interested in Luanti, BZFlag, and making mods/maps for both, provided I hav
 
 I am a 3D modeler, who works best in blender (That's where I "develop" my 3D brain.) If you need models for pretty much anything besides commercial use, contact me and I'll try to make them, charge free, though please do note that it will take me several months to get back to you.
 
-Religion is a hard one. Simply, to Man, religion is why the universe is what it is—the truth to hinself. But there is only one Truth and Life and Spirit. These extracts from the rightfully most famous Book of all time explain some things I thought I'd like to point out.
+Religion is a hard one. Simply, to Man, religion is why the universe is what it is—the truth to himself. But there is only one Truth and Life and Spirit. These extracts from the rightfully most famous Book of all time explain some things I thought I'd like to point out.
 
 "The fool says in his heart, 'There is no God.' They are corrupt, and their ways vile; there is no one who does good.
 

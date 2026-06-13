@@ -33,7 +33,7 @@ Join my mailing list to receive updates and interesting content directly in your
 </form>
 
 <p style="margin-top: 20px; font-size: 14px; color: #ffd700;">
-  <strong>Newsletter Schedule:</strong> Sent weekly on Mondays
+  <strong>Newsletter Schedule:</strong> Sent every other week on Sundays.
 </p>
 
 <div id="admin-section" style="display:none; margin-top: 40px; padding: 20px; background: rgba(255, 215, 0, 0.1); border: 2px solid #ffd700; border-radius: 8px;">

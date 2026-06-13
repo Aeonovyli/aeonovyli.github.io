@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keep Android Open</title>
+  
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <!-- Google Fonts -->
+  <link href="https://googleapis.com" rel="stylesheet">
+
+  <!-- Particles.js -->
+  <script src="https://jsdelivr.net"></script>
+
+  <style>
+    /* Base Page Reset and Typography */
+    body {
+      background: #000019;
+      color: #ffffff;
+      margin: 0;
+      padding: 20px;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      position: relative;
+      overflow-y: auto;
+    }
+
+    /* Structural Layers (Background vs Content) */
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .main-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    /* Neon Headers */
+    h1, h2, h3, h4 {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: #ffd700;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    }
+
+    h2:hover {
+      text-shadow: 2px 2px 6px #ff6347, 0 0 12px #87cefa;
+      transition: all 0.3s ease-in-out;
+    }
+
+    p, li {
+      text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Global Hyperlinks & Keyframes */
+    @keyframes clickGlow {
+      0%, 100% { text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff; }
+      50% { text-shadow: 1px 1px 8px #ffffff, 0 0 16px #ffffff; }
+    }
+
+    a, a:link, a:visited {
+      color: #ffd700;
+      text-decoration: none;
+      text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
+      transition: all 0.3s ease-in-out;
+      outline: none;
+    }
+
+    a:hover, a:focus {
+      color: #fff3a0;
+      text-shadow: 2px 2px 6px #ff6347, 0 0 14px #87cefa, 0 0 20px #00f0ff;
+      outline: none;
+    }
+
+    a:active {
+      animation: clickGlow 0.6s ease-in-out 1;
+    }
+
+    /* Navigation Layout */
+    .nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .nav a {
+      cursor: pointer;
+    }
+
+    /* Container Sections */
+    .highlighted-section {
+      background-color: rgba(34, 34, 34, 0.85);
+      border-left: 4px solid #ffd700;
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .message-box {
+      background-color: rgba(34, 34, 34, 0.9);
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 20px;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    }
+
+    /* Input Fields and Interactive Forms */
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      color: #ffd700;
+      font-weight: bold;
+      text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .edit-textarea {
+      width: 100%;
+      padding: 10px;
+      background-color: rgba(20, 20, 20, 0.8);
+      color: #ffd700;
+      border: 2px solid #00f0ff;
+      border-radius: 4px;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-size: 1em;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    .edit-textarea {
+      margin-top: 10px;
+      border-width: 1px;
+      padding: 8px;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .edit-textarea:focus {
+      outline: none;
+      border-color: #ff944d;
+      box-shadow: 0 0 10px rgba(255, 148, 77, 0.6);
+    }
+
+    /* Action Buttons & Glow States */
+    .submit-btn, .save-btn {
+      background-color: rgba(255, 215, 0, 0.1);
+      color: #ffd700;
+      border: 2px solid #ffd700;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1em;
+      text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
+      transition: all 0.3s ease;
+    }
+
+    .save-btn {
+      color: #00f0ff;
+      border-color: #00f0ff;
+      margin-top: 5px;
+      padding: 4px 12px;
+      font-size: 0.9em;
+    }
+
+    .submit-btn:hover, .save-btn:hover {
+      background-color: rgba(255, 215, 0, 0.2);
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+    }
+
+    .cancel-btn {
+      color: #ff4500;
+      background: none;
+      border: none;
+      cursor: pointer;
+      margin-left: 10px;
+      font-weight: bold;
+      transition: text-shadow 0.2s;
+    }
+
+    .cancel-btn:hover {
+      text-shadow: 0 0 8px #ff4500;
+    }
+
+    /* Admin/Moderator Action Bars */
+    @keyframes banClickGlow {
+      0%, 100% { text-shadow: 1px 1px 4px #ff0000, 0 0 8px #ff4500; }
+      50% { text-shadow: 1px 1px 15px #ff0000, 0 0 25px #ff0000; }
+    }
+
+    .ban-btn {
+      background: none;
+      border: 1px solid #ff4500;
+      color: #ff4500;
+      cursor: pointer;
+      font-size: 0.7em;
+      border-radius: 3px;
+      padding: 2px 5px;
+      transition: all 0.2s;
+    }
+
+    .ban-btn:hover {
+      background: rgba(255, 69, 0, 0.2);
+      box-shadow: 0 0 8px #ff4500;
+    }
+
+    .ban-btn:active {
+      animation: banClickGlow 0.6s ease-in-out 1;
+    }
+
+    /* Campaign Dynamic Feed/Wall Display */
+    .messages-display {
+      margin-top: 30px;
+      max-height: 400px;
+      overflow-y: auto;
+      padding: 15px;
+      background-color: rgba(20, 20, 20, 0.6);
+      border-radius: 4px;
+      border: 1px solid #00f0ff;
+    }
+
+    .message-item {
+      background-color: rgba(34, 34, 34, 0.8);
+      padding: 12px;
+      margin-bottom: 10px;
+      border-radius: 4px;
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+    }
+
+    .message-item strong {
+      color: #ff944d;
+    }
+
+    .message-item .timestamp {
+      color: rgba(255, 215, 0, 0.6);
+      font-size: 0.85em;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Dust Layer -->
+  <div id="particles-js"></div>
+
+  <!-- Campaign Banner Area -->
+  <div id="keep-android-open-banner"></div>
+
+  <!-- Main Campaign Page Content Area -->
+  <main class="main-content">
+    {{ content }}
+  </main>
+
+  <!-- Particle Settings Configuration -->
+  <script>
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 70 },
+        size: { value: 2 },
+        move: {
+          speed: 0.3,
+          direction: "top",
+          random: true,
+          out_mode: "out"
+        },
+        opacity: {
+          value: 0.3,
+          random: true
+        },
+        color: { value: ["#4da6ff", "#ff944d", "#ffffff"] },
+        line_linked: { enable: false }
+      },
+      interactivity: { events: { onhover: { enable: false } } },
+      retina_detect: true
+    });
+  </script>
+
+  <!-- External Campaign Logic -->
+  <script src="https://keepandroidopen.org" defer></script>
+
+</body>
+</html>

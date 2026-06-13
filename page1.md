@@ -44,7 +44,7 @@ On second thoughts, it would almost be better to state what I *don't* like, but 
 <a href="/page2">Contact me</a>
 <a href="/page3">Profiles</a>
 <a href="/page4">Eiriaoloth</a>
-<a href="/page5">BZFlag Map Editor</a>
+<a href="/page5">BZFlag map editor</a>
 <a href="/page6">Flash</a>
 <a href="/page7">BZFlag</a>
 <a href="/page8">Chess</a>

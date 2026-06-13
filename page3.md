@@ -3,7 +3,8 @@ layout: default
 title: Profiles
 ---
 
-## My profiles span quite a large "breach" of the internet, but the ones I most frequently inhabit are listed below.
+# Profiles
+My profiles span quite a large "breach" of the internet, but the ones I most frequently inhabit are listed below.
 
 • BZFlag profile, [red rider](https://forums.bzflag.org/memberlist.php?mode=viewprofile&u=60550)
 • GitHub profile, [TheSilverStone](https://github.com/TheSilverStone)

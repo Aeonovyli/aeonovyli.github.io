@@ -156,6 +156,7 @@ Well, maybe you should go and take a look. It'll be better if you can see some v
 <a href="/page4">Eiriaoloth</a>
 <a href="/page5">BZFlag map editor</a>
 <a href="/page6">Flash</a>
+<a href="/page7">BZFlag</a>
 <a href="/page8">Chess</a>
 <a href="/page9">Sudoku</a>
 <a href="/page10">Newsletter</a>

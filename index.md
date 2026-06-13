@@ -46,5 +46,5 @@ God sets the lonely in families, he leads the prisoners out with singing."
 <a href="/page8">Chess</a>
 <a href="/page9">Sudoku</a>
 <a href="/page10">Newsletter</a>
-<a href="/page12">Keep android open</a
+<a href="/page12">Keep android open</a>
 </nav>

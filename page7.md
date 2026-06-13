@@ -132,7 +132,7 @@ BZFlag is easy, fun to play, and at the same time extremely complex. But those a
 
 # Tactics
 
-### Using a mouse for BZFlag is strongly recommended. You can map the mouse wheel to firing shots. Keys for control, that is, commands that you can bind to keys, are below.
+Using a mouse for BZFlag is strongly recommended. You can map the mouse wheel to firing shots. Keys for control, that is, commands that you can bind to keys, are below.
 
 ##### Binoculars
 ##### Lock on
@@ -147,12 +147,14 @@ BZFlag is easy, fun to play, and at the same time extremely complex. But those a
 ##### Hunt
 ##### Radar zoom
 
+Well, maybe you should go and take a look. It'll be better if you can see some videos/screenshots; go take a look on YouTube.
+
 <nav class="nav">
 <a href="/">Home</a>
 <a href="/page2">Contact me</a>
 <a href="/page3">Profiles</a>
 <a href="/page4">Eiriaoloth</a>
-<a href="/page5">BZFlag Map Editor</a>
+<a href="/page5">BZFlag map editor</a>
 <a href="/page6">Flash</a>
 <a href="/page8">Chess</a>
 <a href="/page9">Sudoku</a>

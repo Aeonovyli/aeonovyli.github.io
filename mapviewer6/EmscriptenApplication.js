@@ -26,63 +26,28 @@
 
 "use strict"; /* it summons the Cthulhu in a proper way, they say */
 
-/* Remap macOS Command+key to Ctrl+key so the Emscripten/WASM module receives
-   standard shortcut events (copy, paste, cut, undo, select-all, etc.) on Mac.
-   Installed on both the canvas and the document so it fires regardless of
-   which element has focus. */
-function installMacOSKeyRemap(canvas) {
-    function remapMetaKey(e) {
-        if (!e.metaKey) return;
-        /* Let the browser handle Command+Tab, Command+Space, etc. */
-        const passThrough = ['Tab', 'Space', ' '];
-        if (passThrough.indexOf(e.key) !== -1) return;
-
-        e.stopImmediatePropagation();
-        e.preventDefault();
-
-        const remapped = new KeyboardEvent(e.type, {
-            key: e.key,
-            code: e.code,
-            keyCode: e.keyCode,
-            which: e.which,
-            ctrlKey: true,
-            altKey: e.altKey,
-            shiftKey: e.shiftKey,
-            metaKey: false,
-            bubbles: e.bubbles,
-            cancelable: e.cancelable,
-            composed: e.composed
-        });
-
-        (e.target || canvas).dispatchEvent(remapped);
-    }
-
-    canvas.addEventListener('keydown', remapMetaKey, true);
-    canvas.addEventListener('keyup',   remapMetaKey, true);
-    document.addEventListener('keydown', remapMetaKey, true);
-    document.addEventListener('keyup',   remapMetaKey, true);
-
-    /* Also forward browser paste events (Command+V triggers a native 'paste'
-       event on macOS; synthesise an equivalent Ctrl+V so the WASM editor
-       picks it up even if it only listens for keydown). */
-    function forwardPaste(e) {
-        const pasteKey = new KeyboardEvent('keydown', {
-            key: 'v',
-            code: 'KeyV',
-            keyCode: 86,
-            which: 86,
+/* On macOS, Command+C/V fire native browser 'copy'/'paste' events rather than
+   keydowns that Emscripten sees. This forwards those events to the canvas as
+   synthetic Ctrl+C / Ctrl+V keydowns so the WASM editor can handle them.
+   Normal typing is completely unaffected — we only react to 'copy'/'paste'. */
+function installMacOSClipboardForward(canvas) {
+    function syntheticKey(key, code, keyCode) {
+        canvas.dispatchEvent(new KeyboardEvent('keydown', {
+            key: key,
+            code: code,
+            keyCode: keyCode,
+            which: keyCode,
             ctrlKey: true,
             altKey: false,
             shiftKey: false,
             metaKey: false,
             bubbles: true,
             cancelable: true
-        });
-        canvas.dispatchEvent(pasteKey);
+        }));
     }
 
-    canvas.addEventListener('paste', forwardPaste, true);
-    document.addEventListener('paste', forwardPaste, true);
+    document.addEventListener('paste', function() { syntheticKey('v', 'KeyV', 86); });
+    document.addEventListener('copy',  function() { syntheticKey('c', 'KeyC', 67); });
 }
 
 function createMagnumModule(init) {
@@ -117,7 +82,7 @@ function createMagnumModule(init) {
 
         setStatus: function(message) {
             /* Emscripten calls setStatus("") after a timeout even if the app
-               aborts. That would erase the crash message, so don't allow that */
+                aborts. That would erase the crash message, so don't allow that */
             if(module.status && module.status.innerHTML != "Oops :(")
                 module.status.innerHTML = message;
         },
@@ -142,9 +107,9 @@ function createMagnumModule(init) {
         }
     });
 
-    /* Install macOS Command→Ctrl key remapping once the canvas is available */
+    /* Forward macOS copy/paste events (Command+C/V) to the canvas as Ctrl+C/V */
     module.postRun.push(function() {
-        installMacOSKeyRemap(module.canvas);
+        installMacOSClipboardForward(module.canvas);
     });
 
     /* Parse arguments, e.g. /app/?foo=bar&fizz&buzz=3 goes to the app as

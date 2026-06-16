@@ -1,0 +1,60 @@
+{
+    "index": {
+        "ahs3": {
+            "maps": [
+                {
+                    "name": "INCOMING!",
+                    "file": "ahs3_INCOMING.bzw",
+                    "license": "CC BY 4.0"
+                },
+                {
+                    "name": "Ironside Battlefield",
+                    "file": "ahs3_Ironside_Battlefield.bzw",
+                    "license": "GPL3"
+                },
+                {
+                    "name": "Paradise Valley",
+                    "file": "ahs3_Paradise_Valley.bzw",
+                    "license": "CC BY 4.0"
+                },
+                {
+                    "name": "XUG",
+                    "file": "ahs3_XUG_FFA.bzw",
+                    "license": "CC BY 4.0"
+                }
+            ]
+        },
+        "Ian": {
+            "maps": [
+                {
+                    "name": "Fairground",
+                    "file": "ian_fairground.bzw",
+                    "license": "Open / unspecified"
+                }
+            ]
+        },
+        "DucatiWannabe": {
+            "maps": [
+                {
+                    "name": "Missile War 2.3",
+                    "file": "dw_missilewar2.3.bzw",
+                    "license": "Ask author to host"
+                },
+                {
+                    "name": "Missile War 3",
+                    "file": "dw_missilewar3.bzw",
+                    "license": "Ask author to host"
+                }
+            ]
+        },
+        "Winny": {
+            "maps": [
+                {
+                    "name": "Rat's Nest",
+                    "file": "winny_ratsnest.bzw",
+                    "license": "CC BY-NC-SA 2.5 CA Deed"
+                }
+            ]
+        }
+    }
+}

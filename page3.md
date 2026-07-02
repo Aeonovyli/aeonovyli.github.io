@@ -10,10 +10,10 @@ My profiles span quite a large "breach" of the internet, but the ones I most fre
 • GitHub profile, [TheSilverStone](https://github.com/TheSilverStone)
 • Wikipedia profile, [Aeonovyli](https://en.wikipedia.org/wiki/User:Aeonovyli)
 • Reddit profile, [knaTZB](https://www.reddit.com/user/knaTZB/)
-• Luanti profile, [red rider](https://forum.luanti.org/memberlist.php?mode=viewprofile&u=52979)
+• Luanti profile, [Aeonovyli](https://forum.luanti.org/memberlist.php?mode=viewprofile&u=52979)
 • ContentDB (Luanti mods) [Aeonovyli](https://content.luanti.org/users/red_rider/)
 • Scratch3 profile, [knaTZB](https://scratch.mit.edu/users/knaTZB/)
-• Chess.com profile, [knaTZB](https://www.chess.com/member/knatzb)
+• Chess.com profile, [Aeonovyli](https://www.chess.com/member/aeonovyli)
 
 ### Recently I decided to start changing my usernames to Aeonovyli, which is unique to me. 
 ### These profiles are ranked by how often I use them. Have fun looking me up!

@@ -77,7 +77,6 @@ Everyone knows chess, even if they don't know how to play it. Try this.
     box-shadow: inset 0 0 10px #ff944d;
 }
 
-/* Slide animation performance rules */
 .piece-container {
     width: 80%;
     height: 80%;
@@ -133,7 +132,6 @@ Everyone knows chess, even if they don't know how to play it. Try this.
     <button id="resetBtn">Reset Game</button>
 </div>
 
-<!-- Corrected engine script source -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
 
 <script>
@@ -288,12 +286,14 @@ window.addEventListener("load", () => {
 
 <nav class="nav">
 <a href="/">Home</a>
+<a href="/page1">Interests</a>
 <a href="/page2">Contact me</a>
 <a href="/page3">Profiles</a>
 <a href="/page4">Eiriaoloth</a>
-<a href="/page5">BZFlag map editor</a>
+<a href="https://bz-next.github.io/mapviewer6/mapviewer.html">BZFlag map editor</a>
 <a href="/page6">Flash</a>
 <a href="/page7">BZFlag</a>
 <a href="/page9">Sudoku</a>
 <a href="/page10">Newsletter</a>
+<a href="/page11">Keep android open</a>
 </nav>

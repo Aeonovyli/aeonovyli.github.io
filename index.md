@@ -38,6 +38,7 @@ Give us aid against the enemy, for human help is worthless.
 God sets the lonely in families, he leads the prisoners out with singing."
 
 <nav class="nav">
+<a href="/page1">Interests</a>
 <a href="/page2">Contact me</a>
 <a href="/page3">Profiles</a>
 <a href="/page4">Eiriaoloth</a>
@@ -47,6 +48,5 @@ God sets the lonely in families, he leads the prisoners out with singing."
 <a href="/page8">Chess</a>
 <a href="/page9">Sudoku</a>
 <a href="/page10">Newsletter</a>
-<a href="/page11">Keep Android Open</a>
-<a href="/page12">Keep android open</a>
+<a href="/page11">Keep android open</a>
 </nav>

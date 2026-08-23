@@ -23,10 +23,11 @@ These profiles are ranked by how often I use them. Have fun looking me up!
 <a href="/page1">Interests</a>
 <a href="/page2">Contact me</a>
 <a href="/page4">Eiriaoloth</a>
-<a href="/page5">BZFlag map editor</a>
+<a href="https://bz-next.github.io/mapviewer6/mapviewer.html">BZFlag map editor</a>
 <a href="/page6">Flash</a>
 <a href="/page7">BZFlag</a>
 <a href="/page8">Chess</a>
 <a href="/page9">Sudoku</a>
 <a href="/page10">Newsletter</a>
+<a href="/page11">Keep android open</a>
 </nav>

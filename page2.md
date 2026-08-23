@@ -339,5 +339,4 @@ Leave a message below. Only logged-in github users can use this feature.
 <a href="/page9">Sudoku</a>
 <a href="/page10">Newsletter</a>
 <a href="/page11">Keep Android Open</a>
-<a href="/page12">Keep android open</a>
 </nav>

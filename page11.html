@@ -5,21 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Keep Android Open</title>
   
-  <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="manifest" href="/site.webmanifest">
 
-  <!-- Google Fonts -->
   <link href="https://googleapis.com" rel="stylesheet">
 
-  <!-- Particles.js -->
   <script src="https://jsdelivr.net"></script>
 
   <style>
-    /* Base Page Reset and Typography */
     body {
       background: #000019;
       color: #ffffff;
@@ -31,7 +27,6 @@
       overflow-y: auto;
     }
 
-    /* Structural Layers (Background vs Content) */
     #particles-js {
       position: fixed;
       top: 0;
@@ -50,7 +45,6 @@
       padding: 40px 20px;
     }
 
-    /* Neon Headers */
     h1, h2, h3, h4 {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
       color: #ffd700;
@@ -66,7 +60,6 @@
       text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.6);
     }
 
-    /* Global Hyperlinks & Keyframes */
     @keyframes clickGlow {
       0%, 100% { text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff; }
       50% { text-shadow: 1px 1px 8px #ffffff, 0 0 16px #ffffff; }
@@ -90,7 +83,6 @@
       animation: clickGlow 0.6s ease-in-out 1;
     }
 
-    /* Navigation Layout */
     .nav {
       display: flex;
       justify-content: center;
@@ -102,7 +94,6 @@
       cursor: pointer;
     }
 
-    /* Container Sections */
     .highlighted-section {
       background-color: rgba(34, 34, 34, 0.85);
       border-left: 4px solid #ffd700;
@@ -120,7 +111,6 @@
       box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
     }
 
-    /* Input Fields and Interactive Forms */
     .form-group {
       margin-bottom: 15px;
     }
@@ -162,7 +152,6 @@
       box-shadow: 0 0 10px rgba(255, 148, 77, 0.6);
     }
 
-    /* Action Buttons & Glow States */
     .submit-btn, .save-btn {
       background-color: rgba(255, 215, 0, 0.1);
       color: #ffd700;
@@ -202,7 +191,6 @@
       text-shadow: 0 0 8px #ff4500;
     }
 
-    /* Admin/Moderator Action Bars */
     @keyframes banClickGlow {
       0%, 100% { text-shadow: 1px 1px 4px #ff0000, 0 0 8px #ff4500; }
       50% { text-shadow: 1px 1px 15px #ff0000, 0 0 25px #ff0000; }
@@ -228,7 +216,6 @@
       animation: banClickGlow 0.6s ease-in-out 1;
     }
 
-    /* Campaign Dynamic Feed/Wall Display */
     .messages-display {
       margin-top: 30px;
       max-height: 400px;
@@ -260,19 +247,15 @@
 
 <body>
 
-  <!-- Dust Layer -->
   <div id="particles-js"></div>
 
-  <!-- Campaign Banner Area -->
   <div id="keep-android-open-banner"></div>
 
-  <!-- Main Campaign Page Content Area -->
   <main class="main-content">
     <h1>Android will become a locked down platform.</h1>
     <p>Read about it at keepandroidopen.com</p>
   </main>
 
-  <!-- Particle Settings Configuration -->
   <script>
     particlesJS("particles-js", {
       particles: {
@@ -296,7 +279,6 @@
     });
   </script>
 
-  <!-- External Campaign Logic -->
   <script src="https://keepandroidopen.org" defer></script>
 
 </body>

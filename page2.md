@@ -99,7 +99,7 @@ Leave a message below. Only logged-in github users can use this feature.
     const user = currentSession?.user;
     const userMeta = user?.user_metadata;
     
-    const isAdmin = userMeta?.full_name === 'TheSilverStone' || userMeta?.user_name === 'TheSilverStone' || userMeta?.nickname === 'TheSilverStone' || userMeta?.name === 'TheSilverStone';
+    const isAdmin = userMeta?.full_name === 'Aeonovyli' || userMeta?.user_name === 'Aeonovyli' || userMeta?.nickname === 'Aeonovyli' || userMeta?.name === 'Aeonovyli';
     const isOwner = user?.id === msg.user_id;
 
     const div = document.createElement('div');
@@ -208,9 +208,6 @@ Leave a message below. Only logged-in github users can use this feature.
 
   checkUser();
 </script>
-
-
-<!-- Ban logic -->
 
 <style>
   @keyframes banClickGlow {

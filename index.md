@@ -1,24 +1,25 @@
 ---
 layout: default
-title: Home page
+title: Home Page | Aeonovyli's personal website
 ---
 
 # Welcome
 Hello, welcome to the complex world of my brain. If you've been here before you know that I sit like a spider in a vast web of spaghetti code, ready to trap intruders as best as I might with my petty scripts.
 
-I am a teenager who's addicted to coding, communities and, unfortunately, dropping icicles on the floor and watching them shatter (which never happens because I live near the equator.)
+I am a teenager who's addicted to coding, communities and, unfortunately, watching ice shatter (which never happens because I live near the equator. I think some people would have something to say if I didn't.)
 
 I am mostly interested in two things; creativeness and my book—not counting, of course, BZFlag.
 
-I know a small bit of python, a reasonable (read virtually non-existant) knowledge of lua and C++, and a reasonable chance of surprising myself at any computer language—mainly by exactly how little I know about it.
+I know a small bit of python, a reasonable (read virtually non-existant) knowledge of lua and C++, and a reasonable chance of surprising myself at any computer language—mainly by exactly how little I know about it. (I have been reading a C++ book. I only made a small snippet of code, though. Check out my [pyramid run](https://gist.github.com/Aeonovyli/b7828048a462c539b34fd809620abd6e) game.)
 
 I am a fan of Legos and have created several (at least, to me) masterpieces including a futuristic sci-fi phantom fighter.
 
-I moved to Saudi at seven, when I started thinking of a book, which now exists elsewhere than my head. At least, mostly.
+I moved to the Western Middle East (seriously? How can that even exist?) at seven, when I started thinking of some adventure scenes involving dragons, which now exist elsewhere than my head. At least, most of them.
 
-I am interested in Luanti, BZFlag, and making mods/maps for both, provided I have time and a few croissants in sight.
+I am interested in VoxeLibre, a clone of Minecraft very similar yet free, BZFlag, an old yet very fun tank game from 1993, and making mods/maps for both, provided I have time––
+and ideas. Most of the time I don't.
 
-I am a 3D modeler, who works best in blender (That's where I "develop" my 3D brain.) If you need models for pretty much anything besides commercial use, contact me and I'll try to make them, charge free, though please do note that it will take me several months to get back to you.
+I am not an experienced 3D modeler, but I can make simple animations and sometimes complicated objects. I work best in blender (I mean, that's the only modeler I can even start to manage.) If you need models for pretty much anything besides commercial use, [contact me](https://aeonovyli.github.io) and I'll try to make them, charge free, though please do note that it will take me several months to get back to you.
 
 Religion is a hard one. Simply, to Man, religion is why the universe is what it is—the truth to himself. But there is only one Truth and Life and Spirit. These extracts from the rightfully most famous Book of all time explain some things I thought I'd like to point out.
 

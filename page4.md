@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Eiriaoloth
+title: Eiriaoloth | Aeonovyli's personal website
 ---
 
 # Eiriaoloth
@@ -8,6 +8,9 @@ title: Eiriaoloth
 My book is *Eiriaoloth*, an epic fantasy through the beautiful and lush land, soon to be ruined by the rising flood and the central conquest of the Sword. The Destroyer is coming, ready to clasp Avenoria in his claws. Who can stop him now?
 
 Certainly not the meek inhabitants of Fornitas, or even the more powerful Guardians. The doom marches on, unchecked. But the Redeemer is still there, and Avenoria shall not fall while He still breaths. The question is, how long will that be?
+
+I think I'd like to put the first chapter or a little less of my book here, on this page.
+Please, use the [contact me](https://aeonovyli.github.io/page2) to tell me what you think of my idea. 
 
 <nav class="nav">
 <a href="/">Home</a>

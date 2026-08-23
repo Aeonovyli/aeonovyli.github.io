@@ -15,11 +15,12 @@ My profiles span quite a large "breach" of the internet, but the ones I most fre
 ##### • Scratch3 profile, [knaTZB](https://scratch.mit.edu/users/knaTZB/)
 ##### • Wikipedia profile, [Aeonovyli](https://en.wikipedia.org/wiki/User:Aeonovyli)
 
-### Recently I decided to start changing my usernames to Aeonovyli, which is unique to me. 
-### These profiles are ranked by how often I use them. Have fun looking me up!
+Recently I decided to start changing my usernames to Aeonovyli, which is unique to me. 
+These profiles are ranked by how often I use them. Have fun looking me up!
 
 <nav class="nav">
 <a href="/">Home</a>
+<a href="/page1">Interests</a>
 <a href="/page2">Contact me</a>
 <a href="/page4">Eiriaoloth</a>
 <a href="/page5">BZFlag map editor</a>

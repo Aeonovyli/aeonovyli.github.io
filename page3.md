@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Profiles
+title: Profiles | Aeonovyli's personal website
 ---
 
 # Profiles

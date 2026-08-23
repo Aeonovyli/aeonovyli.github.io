@@ -10,16 +10,18 @@ My book is *Eiriaoloth*, an epic fantasy through the beautiful and lush land, so
 Certainly not the meek inhabitants of Fornitas, or even the more powerful Guardians. The doom marches on, unchecked. But the Redeemer is still there, and Avenoria shall not fall while He still breaths. The question is, how long will that be?
 
 I think I'd like to put the first chapter or a little less of my book here, on this page.
-Please, use the [contact me](https://aeonovyli.github.io/page2) to tell me what you think of my idea. 
+Please, use the [contact me](https://aeonovyli.github.io/page2) page to tell me what you think of my idea. 
 
 <nav class="nav">
 <a href="/">Home</a>
+<a href="/page1">Interests</a>
 <a href="/page2">Contact me</a>
 <a href="/page3">Profiles</a>
-<a href="/page5">BZFlag map editor</a>
+<a href="https://bz-next.github.io/mapviewer6/mapviewer.html">BZFlag map editor</a>
 <a href="/page6">Flash</a>
 <a href="/page7">BZFlag</a>
 <a href="/page8">Chess</a>
 <a href="/page9">Sudoku</a>
 <a href="/page10">Newsletter</a>
+<a href="/page11">Keep android open</a>
 </nav>

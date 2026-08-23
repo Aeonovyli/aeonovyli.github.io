@@ -1,6 +1,6 @@
 ---
 layout: default
-title: BZFlag
+title: BZFlag | Aeonovyli's personal website
 ---
 
 # BZFlag

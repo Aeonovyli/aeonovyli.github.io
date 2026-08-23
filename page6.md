@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Flash
+title: Flash | Aeonovyli's personal website
 ---
 
 # Flash scoresheet

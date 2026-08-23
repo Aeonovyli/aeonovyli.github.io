@@ -16,7 +16,7 @@ My maps are available for download on my [bzflag](https://thesilverstone.github.
 
 ### On messaging
 
-Most of the people messaging on this website are trusted friends. I haven't seen anyone who isn't, at least. I was required to wipe the database recently though, so I can't be positive. If you see any bad words, take it I haven't seen them yet. And in the near future I may add a 'report' button.
+Most of the people messaging on this website are trusted friends. I haven't seen anyone who isn't, at least. I was required to wipe the database recently though, so I can't be positive...
 
 ### On chess playing
 
@@ -34,4 +34,4 @@ Okay, enough of that. I always get that stuck in my head when I look at my websi
 
 I like the yellow, and if you look at my [old style](https://github.com/TheSilverStone/TheSilverStone.github.io/blob/main/assets/css/styleold.css) you can see what I mean by 'shiny'. (I mean, if you could preview it. Sorry)
 
-If you want more, I can make a page ⏲️.
+If you want more information, I can make a page for this.

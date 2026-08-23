@@ -27,7 +27,7 @@ Flash is a 2-6 player dice rolling game. There are not teams; each player is giv
 
     th, td { 
         border: 2px solid #ffd700; 
-        padding: 0; /* Removed padding to allow input to fill the cell */
+        padding: 0;
         text-align: center; 
         height: 50px; 
         color: #ffd700; 
@@ -118,7 +118,6 @@ let pLimit = 0;
 function updateCount() {
     const inputs = document.querySelectorAll('.name-input');
     pLimit = Array.from(inputs).filter(i => i.value.trim() !== "").length;
-    // Check all boxes against new player count
     document.querySelectorAll('#scoresheet input[type="number"]').forEach(i => val(i, true));
 }
 
@@ -126,11 +125,9 @@ function val(el, isRefresh = false) {
     let v = parseInt(el.value);
     if (isNaN(v)) return calc();
     
-    // 1. Rule: Score cannot be higher than number of players
     if (v > pLimit) el.value = pLimit;
     if (v <= 0) el.value = ""; 
 
-    // 2. Rule: Each chip (1-6) can only be used once per row
     if (!isRefresh && el.value !== "") {
         let rowInputs = el.closest('tr').querySelectorAll('input[type="number"]');
         let isDuplicate = false;
@@ -163,12 +160,14 @@ function calc() {
 
 <nav class="nav">
 <a href="/">Home</a>
+<a href="/page1">Interests</a>
 <a href="/page2">Contact me</a>
 <a href="/page3">Profiles</a>
 <a href="/page4">Eiriaoloth</a>
-<a href="/page5">BZFlag map editor</a>
+<a href="https://bz-next.github.io/mapviewer6/mapviewer.html">BZFlag map editor</a>
 <a href="/page7">BZFlag</a>
 <a href="/page8">Chess</a>
 <a href="/page9">Sudoku</a>
 <a href="/page10">Newsletter</a>
+<a href="/page11">Keep android open</a>
 </nav>

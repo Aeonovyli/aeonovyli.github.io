@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Contact me
+title: Contact me | Aeonovyli's personal website
 ---
 
 # Contact me

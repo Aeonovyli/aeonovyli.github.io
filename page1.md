@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Interests
+title: Interests | Aeonovyli's personal website
 ---
 
 # Interests

@@ -171,37 +171,6 @@ a:hover {
   text-shadow: 0 0 8px var(--neon-lime), 0 0 15px var(--neon-lime);
 }
 
-a::before, a::after {
-  content: '';
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  border: 2px solid var(--neon-magenta);
-  transition: all 0.3s ease;
-  opacity: 0;
-}
-
-a::before {
-  top: -2px;
-  left: -2px;
-  border-right: none;
-  border-bottom: none;
-}
-
-a::after {
-  bottom: -2px;
-  right: -2px;
-  border-left: none;
-  border-top: none;
-}
-
-a:hover::before, a:hover::after {
-  opacity: 1;
-  width: calc(100% + 4px);
-  height: calc(100% + 4px);
-  box-shadow: 0 0 10px var(--neon-magenta), 0 0 20px var(--neon-magenta);
-}
-
 a::after {
   content: '';
   position: absolute;
@@ -249,14 +218,6 @@ a:hover::after {
   height: 2px;
   background: linear-gradient(90deg, var(--neon-lime), var(--neon-magenta));
   box-shadow: 0 0 10px var(--neon-lime);
-}
-
-.highlighted-section::before, .highlighted-section::after {
-  transition: height 0.3s ease;
-}
-
-.highlighted-section:hover::before, .highlighted-section:hover::after {
-  height: 4px;
 }
 
 .message-box {
@@ -342,24 +303,24 @@ a:hover::after {
   margin-top: 10px;
   box-shadow: 0 0 20px var(--neon-cyan), 0 0 40px var(--neon-magenta);
   position: relative;
+  z-index: 1;
 }
 
 .submit-btn::before {
   content: '';
   position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   border: 2px solid var(--neon-lime);
-  transition: all 0.3s ease;
-  opacity: 0.5;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  box-shadow: 0 0 15px var(--neon-lime);
 }
 
 .submit-btn:hover::before {
   opacity: 1;
-  box-shadow: 0 0 20px var(--neon-lime), 0 0 40px var(--neon-lime);
-  transform: scale(1.02);
 }
 
 .submit-btn:hover {
@@ -444,23 +405,24 @@ a:hover::after {
   transition: all 0.3s;
   box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
   position: relative;
+  z-index: 1;
 }
 
 .ban-btn::before {
   content: '';
   position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   border: 1px solid #ff0000;
-  opacity: 0.5;
-  transition: all 0.3s;
+  opacity: 0;
+  transition: opacity 0.3s;
+  box-shadow: 0 0 15px #ff0000;
 }
 
 .ban-btn:hover::before {
   opacity: 1;
-  box-shadow: 0 0 15px #ff0000;
 }
 
 .ban-btn:hover {
@@ -494,23 +456,24 @@ a:hover::after {
   transition: all 0.3s;
   box-shadow: 0 0 10px rgba(57, 255, 20, 0.2);
   position: relative;
+  z-index: 1;
 }
 
 .save-btn::before {
   content: '';
   position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   border: 1px solid var(--neon-lime);
-  opacity: 0.5;
-  transition: all 0.3s;
+  opacity: 0;
+  transition: opacity 0.3s;
+  box-shadow: 0 0 15px var(--neon-lime);
 }
 
 .save-btn:hover::before {
   opacity: 1;
-  box-shadow: 0 0 15px var(--neon-lime);
 }
 
 .save-btn:hover {

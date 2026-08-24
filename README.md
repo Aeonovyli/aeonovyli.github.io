@@ -22,7 +22,7 @@ Most of the people messaging on this website are trusted friends. I haven't seen
 
 I am a weird, quirky person. But more importantly, I like shiny.
 
-*'Shiny, watch my sparkle like a diamond in the rough!
+*'Shiny, watch me sparkle like a diamond in the rough!
 Send your armies but they'll never be enough!
 My shell's too tough!'*
 

@@ -274,3 +274,17 @@ For everyone: Email regulators, contact MEPs, share information, and support org
 > ![XMPP Standards Foundation](https://www.google.com/s2/favicons?sz=64&domain=xmpp.org) [XMPP Standards Foundation](https://xmpp.org)
 
 *Source; keepandroidopen.com, keepandroidopen.org*
+
+<nav class="nav">
+<a href="/">Home</a>
+<a href="/page1">Interests</a>
+<a href="/page2">Contact me</a>
+<a href="/page3">Profiles</a>
+<a href="/page4">Eiriaoloth</a>
+<a href="https://bz-next.github.io/mapviewer6/mapviewer.html">BZFlag map editor</a>
+<a href="/page6">Flash</a>
+<a href="/page7">BZFlag</a>
+<a href="/page8">Chess</a>
+<a href="/page9">Sudoku</a>
+<a href="/page10">Newsletter</a>
+</nav>

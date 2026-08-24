@@ -1,11 +1,11 @@
 ---
 layout: default
-title: Sudoku
+title: Sudoku | Aeonovyli's personal website
 ---
 
 # Sudoku
 
-Sudoku is a classic mind game. Currently this has no set rules (meaning at times it will be unsolvable) but I'll fix it at some point...
+Sudoku is a classic mind game. Recently I fixed the numbering, so they should all be solvable. Again, [contact me](https://aeonovyli.github.io/page2) if something isn't working.
 
 <style>
 #game-wrap {
@@ -370,6 +370,44 @@ Sudoku is a classic mind game. Currently this has no set rules (meaning at times
     return true;
   }
 
+  function solveBoard(board) {
+    for (let r = 0; r < 9; r++) {
+      for (let c = 0; c < 9; c++) {
+        if (board[r][c] === 0) {
+          for (let num = 1; num <= 9; num++) {
+            if (isValid(board, r, c, num)) {
+              board[r][c] = num;
+              if (solveBoard(board)) return true;
+              board[r][c] = 0;
+            }
+          }
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  function countSolutions(board) {
+    let count = 0;
+    for (let r = 0; r < 9; r++) {
+      for (let c = 0; c < 9; c++) {
+        if (board[r][c] === 0) {
+          for (let num = 1; num <= 9; num++) {
+            if (isValid(board, r, c, num)) {
+              board[r][c] = num;
+              count += countSolutions(board);
+              if (count > 1) return count;
+              board[r][c] = 0;
+            }
+          }
+          return count;
+        }
+      }
+    }
+    return 1;
+  }
+
   function createRandomPuzzle() {
     let board = Array.from({ length: 9 }, () => Array(9).fill(0));
     fillBoard(board);
@@ -381,7 +419,13 @@ Sudoku is a classic mind game. Currently this has no set rules (meaning at times
       let c = Math.floor(Math.random() * 9);
       if (board[r][c] !== 0) {
         board[r][c] = 0;
-        attempts--;
+        let tempBoard = board.map(row => [...row]);
+        let solutions = countSolutions(tempBoard);
+        if (solutions === 1) {
+          attempts--;
+        } else {
+          board[r][c] = fullSolution[r][c];
+        }
       }
     }
     puzzleLayout = board;

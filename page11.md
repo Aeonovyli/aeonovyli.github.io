@@ -36,13 +36,13 @@ For everyone: Email regulators, contact MEPs, share information, and support org
 
 ## Letter to google below;
 
-> Date: February 24, 2026
-> To: Sundar Pichai, Chief Executive Officer, Google
-> To: Sergey Brin, Founder and Board Member, Google
-> To: Larry Page, Founder and Board Member, Google
-> To: Vijaya Kaza, General Manager for App & Ecosystem Trust, Google
-> CC: Regulatory authorities, policymakers, and the Android developer community
-> Re: Mandatory Developer Registration for Android App Distribution
+> ##### Date: February 24, 2026
+> ##### To: Sundar Pichai, Chief Executive Officer, Google
+> ##### To: Sergey Brin, Founder and Board Member, Google
+> ##### To: Larry Page, Founder and Board Member, Google
+> ##### To: Vijaya Kaza, General Manager for App & Ecosystem Trust, Google
+> ##### CC: Regulatory authorities, policymakers, and the Android developer community
+> ##### Re: Mandatory Developer Registration for Android App Distribution
 > We, the undersigned organizations representing civil society, nonprofit institutions, and technology companies, write to express our strong opposition to Google's announced policy requiring al[...]
 
 > While we do recognize the importance of platform security and user safety, the Android platform already includes multiple security mechanisms that do not require central registration. Forcibly i[...]

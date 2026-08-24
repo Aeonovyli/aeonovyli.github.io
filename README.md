@@ -18,10 +18,6 @@ My maps are available for download on my [bzflag](https://aeonovyli.github.io/pa
 
 Most of the people messaging on this website are trusted friends. I haven't seen anyone who isn't, at least. I was required to wipe the database recently though, so I can't be positive...
 
-### On chess playing
-
-The chess set was more of a 'I'm going to see if I can do this, yay I can this site needs to have everything!' than a 'I put hours into this'. Same for the Sudoku page.
-
 ### On the queer aethsetics
 
 I am a weird, quirky person. But more importantly, I like shiny.
@@ -30,7 +26,7 @@ I am a weird, quirky person. But more importantly, I like shiny.
 Send your armies but they'll never be enough!
 My shell's too tough!'*
 
-Okay, enough of that. I always get that stuck in my head when I look at my website. I like the space background, because unlike in [Endless Sky](https://github.com/endless-sky/endless-sky) I'm focusing on things other than a not brightly colored (or shaped like a dinosaur, sorry ['Disgust'](https://en.wikipedia.org/wiki/Inside_Out_(franchise)#Cast_and_characters)) in the middle of a black, hard on my eyes, void. What could go wrong?
+Okay, enough of that. I always get that stuck in my head when I think of that word. I like the space background, because unlike in [Endless Sky](https://github.com/endless-sky/endless-sky) I'm focusing on things other than a not brightly colored (or shaped like a dinosaur, sorry ['Disgust'](https://en.wikipedia.org/wiki/Inside_Out_(franchise)#Cast_and_characters)) in the middle of a black, hard on my eyes, void. What could go wrong?
 
 I like the yellow, and if you look at my [old style](https://github.com/TheSilverStone/TheSilverStone.github.io/blob/main/assets/css/styleold.css) you can see what I mean by 'shiny'. (I mean, if you could preview it. Sorry)
 

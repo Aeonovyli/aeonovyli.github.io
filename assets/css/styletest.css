@@ -171,6 +171,37 @@ a:hover {
   text-shadow: 0 0 8px var(--neon-lime), 0 0 15px var(--neon-lime);
 }
 
+a::before, a::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--neon-magenta);
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+
+a::before {
+  top: -2px;
+  left: -2px;
+  border-right: none;
+  border-bottom: none;
+}
+
+a::after {
+  bottom: -2px;
+  right: -2px;
+  border-left: none;
+  border-top: none;
+}
+
+a:hover::before, a:hover::after {
+  opacity: 1;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  box-shadow: 0 0 10px var(--neon-magenta), 0 0 20px var(--neon-magenta);
+}
+
 a::after {
   content: '';
   position: absolute;
@@ -209,6 +240,25 @@ a:hover::after {
   box-shadow: 0 0 10px var(--neon-cyan);
 }
 
+.highlighted-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--neon-lime), var(--neon-magenta));
+  box-shadow: 0 0 10px var(--neon-lime);
+}
+
+.highlighted-section::before, .highlighted-section::after {
+  transition: height 0.3s ease;
+}
+
+.highlighted-section:hover::before, .highlighted-section:hover::after {
+  height: 4px;
+}
+
 .message-box {
   background: var(--glass-panel);
   backdrop-filter: blur(12px);
@@ -217,6 +267,29 @@ a:hover::after {
   padding: 25px;
   margin: 30px 0;
   box-shadow: 0 0 20px rgba(255, 0, 255, 0.15);
+  position: relative;
+}
+
+.message-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-lime));
+  box-shadow: 0 0 10px var(--neon-cyan);
+}
+
+.message-box::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--neon-lime), var(--neon-cyan));
+  box-shadow: 0 0 10px var(--neon-lime);
 }
 
 .form-group {
@@ -268,6 +341,25 @@ a:hover::after {
   transition: all 0.3s ease;
   margin-top: 10px;
   box-shadow: 0 0 20px var(--neon-cyan), 0 0 40px var(--neon-magenta);
+  position: relative;
+}
+
+.submit-btn::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border: 2px solid var(--neon-lime);
+  transition: all 0.3s ease;
+  opacity: 0.5;
+}
+
+.submit-btn:hover::before {
+  opacity: 1;
+  box-shadow: 0 0 20px var(--neon-lime), 0 0 40px var(--neon-lime);
+  transform: scale(1.02);
 }
 
 .submit-btn:hover {
@@ -287,6 +379,29 @@ a:hover::after {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+  position: relative;
+}
+
+.messages-display::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--neon-magenta), var(--neon-lime));
+  box-shadow: 0 0 10px var(--neon-magenta);
+}
+
+.messages-display::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--neon-lime), var(--neon-magenta));
+  box-shadow: 0 0 10px var(--neon-lime);
 }
 
 .message-item {
@@ -328,6 +443,24 @@ a:hover::after {
   cursor: pointer;
   transition: all 0.3s;
   box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+  position: relative;
+}
+
+.ban-btn::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border: 1px solid #ff0000;
+  opacity: 0.5;
+  transition: all 0.3s;
+}
+
+.ban-btn:hover::before {
+  opacity: 1;
+  box-shadow: 0 0 15px #ff0000;
 }
 
 .ban-btn:hover {
@@ -360,6 +493,24 @@ a:hover::after {
   letter-spacing: 0.1em;
   transition: all 0.3s;
   box-shadow: 0 0 10px rgba(57, 255, 20, 0.2);
+  position: relative;
+}
+
+.save-btn::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border: 1px solid var(--neon-lime);
+  opacity: 0.5;
+  transition: all 0.3s;
+}
+
+.save-btn:hover::before {
+  opacity: 1;
+  box-shadow: 0 0 15px var(--neon-lime);
 }
 
 .save-btn:hover {
@@ -419,4 +570,5 @@ li {
   .nav { flex-direction: column; }
   .nav a { width: 100%; text-align: center; border-right: none; border-bottom: 1px solid var(--glass-border); }
   .highlighted-section, .message-box { padding: 20px; }
-  .submit-btn { width: 1
+  .submit-btn { width: 100%; }
+}

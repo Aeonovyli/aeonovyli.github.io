@@ -314,116 +314,116 @@ For everyone: Email regulators, contact MEPs, share information, and support org
 > JMP.chat
 > jmp.chat🇨🇦
 
-KDE e.V. logo
-KDE e.V.
-kde.org🇩🇪
+> KDE e.V. logo
+> KDE e.V.
+> kde.org🇩🇪
 
-LineageOS logo
-LineageOS
-lineageos.org🇺🇸
+> LineageOS logo
+> LineageOS
+> lineageos.org🇺🇸
 
-MetaBrainz Foundation logo
-MetaBrainz Foundation
-metabrainz.org🇺🇸
+> MetaBrainz Foundation logo
+> MetaBrainz Foundation
+> metabrainz.org🇺🇸
 
-microG logo
-microG
-microg.org
+> microG logo
+> microG
+> microg.org
 
-Molly logo
-Molly
-molly.im
+> Molly logo
+> Molly
+> molly.im
 
-Nextcloud logo
-Nextcloud
-nextcloud.com🇩🇪
+> Nextcloud logo
+> Nextcloud
+> nextcloud.com🇩🇪
 
-Open Web Advocacy logo
-Open Web Advocacy
-open-web-advocacy.org
+> Open Web Advocacy logo
+> Open Web Advocacy
+> open-web-advocacy.org
 
-OW2 logo
-OW2
-ow2.org🇫🇷
+> OW2 logo
+> OW2
+> ow2.org🇫🇷
 
-Obtainium logo
-Obtainium
-obtainium.imranr.dev
+> Obtainium logo
+> Obtainium
+> obtainium.imranr.dev
 
-OpenMedia logo
-OpenMedia
-openmedia.org🇨🇦
+> OpenMedia logo
+> OpenMedia
+> openmedia.org🇨🇦
 
-The OpenStreetMap Foundation (OSMF) logo
-The OpenStreetMap Foundation (OSMF)
-osmfoundation.org🇬🇧
+> The OpenStreetMap Foundation (OSMF) logo
+> The OpenStreetMap Foundation (OSMF)
+> osmfoundation.org🇬🇧
 
-Open Rights Group (ORG) logo
-Open Rights Group (ORG)
-openrightsgroup.org🇬🇧
+> Open Rights Group (ORG) logo
+> Open Rights Group (ORG)
+> openrightsgroup.org🇬🇧
 
-Osservatorio Nessuno OdV logo
-Osservatorio Nessuno OdV
-osservatorionessuno.org🇮🇹
+> Osservatorio Nessuno OdV logo
+> Osservatorio Nessuno OdV
+> osservatorionessuno.org🇮🇹
 
-Privacy Guides logo
-Privacy Guides
-privacyguides.org🇺🇸
+> Privacy Guides logo
+> Privacy Guides
+> privacyguides.org🇺🇸
 
-Proton AG logo
-Proton AG
-proton.me🇨🇭
+> Proton AG logo
+> Proton AG
+> proton.me🇨🇭
 
-La Quadrature du Net logo
-La Quadrature du Net
-laquadrature.net🇫🇷
+> La Quadrature du Net logo
+> La Quadrature du Net
+> laquadrature.net🇫🇷
 
-Rocky Linux logo
-Rocky Linux
-rockylinux.org🇺🇸
+> Rocky Linux logo
+> Rocky Linux
+> rockylinux.org🇺🇸
 
-Rossmann Group logo
-Rossmann Group
-rossmanngroup.com🇺🇸
+> Rossmann Group logo
+> Rossmann Group
+> rossmanngroup.com🇺🇸
 
-Software Liberty Association of Taiwan logo
-Software Liberty Association of Taiwan
-slat.org.tw🇹🇼
+> Software Liberty Association of Taiwan logo
+> Software Liberty Association of Taiwan
+> slat.org.tw🇹🇼
 
-Software Freedom Conservancy logo
-Software Freedom Conservancy
-sfconservancy.org🇺🇸
+> Software Freedom Conservancy logo
+> Software Freedom Conservancy
+> sfconservancy.org🇺🇸
 
-Techlore logo
-Techlore
-techlore.tech🇺🇸
+> Techlore logo
+> Techlore
+> techlore.tech🇺🇸
 
-Technopolice Bruxelles logo
-Technopolice Bruxelles
-technopolice.be🇧🇪
+> Technopolice Bruxelles logo
+> Technopolice Bruxelles
+> technopolice.be🇧🇪
 
-The Tor Project logo
-The Tor Project
-torproject.org🇺🇸
+> The Tor Project logo
+> The Tor Project
+> torproject.org🇺🇸
 
-Tuta Mail logo
-Tuta Mail
-tuta.com🇩🇪
+> Tuta Mail logo
+> Tuta Mail
+> tuta.com🇩🇪
 
-UnifiedPush logo
-UnifiedPush
-unifiedpush.org🇫🇷
+> UnifiedPush logo
+> UnifiedPush
+> unifiedpush.org🇫🇷
 
-VideoLAN logo
-VideoLAN
-videolan.org🇫🇷
+> VideoLAN logo
+> VideoLAN
+> videolan.org🇫🇷
 
-Vivaldi Technologies AS logo
-Vivaldi Technologies AS
-vivaldi.com🇳🇴
-> 
-XMPP Standards Foundation logo
-XMPP Standards Foundation
-xmpp.org
+> Vivaldi Technologies AS logo
+> Vivaldi Technologies AS
+> vivaldi.com🇳🇴
+
+> XMPP Standards Foundation logo
+> XMPP Standards Foundation
+> xmpp.org
 
 *Source; keepandroidopen.com, keepandroidopen.org*

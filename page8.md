@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Chess
+title: Chess | Aeonovyli's personal website
 ---
 
 # Chess

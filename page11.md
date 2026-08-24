@@ -1,3 +1,8 @@
+---
+layout: page11
+title: Keep Android Open | Aeonovyli's personal website
+---
+
 # Keep Android Open
 
 Google is locking down Android. By September 2026, sideloading apps will require developer registration, payment, and government ID handed to Google.

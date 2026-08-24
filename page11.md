@@ -13,15 +13,15 @@ Google is locking down Android. By September 2026, sideloading apps will require
 ## Common questions
 
 ##### Isn't this just about security?
-Google frames it as protecting users from malicious apps. But Android already has Google Play Protect scanning, runtime permissions, sandboxing, and user warnings for sideloaded apps. This isn't s[...]
+Google frames it as protecting users from malicious apps. But Android already has Google Play Protect scanning, runtime permissions, sandboxing, and user warnings for sideloaded apps. This isn't security — it's control. Real security doesn't require developers to hand over government IDs and signing keys to a corporation.
 ##### Will this actually affect me?
-If you've ever installed an app from outside the Play Store — an ad blocker, a custom launcher, an app from F-Droid, a beta version, an enterprise tool — yes. After September 2026, those apps [...]
+If you've ever installed an app from outside the Play Store — an ad blocker, a custom launcher, an app from F-Droid, a beta version, an enterprise tool — yes. After September 2026, those apps won't install unless the developer has registered with Google.
 ##### What about the "advanced user flow" Google mentioned?
-In November 2025, Google vaguely mentioned a possible "advanced flow" for experienced users. No details, no commitments, no timeline. Even if implemented, requiring users to jump through extra hoo[...]
+In November 2025, Google vaguely mentioned a possible "advanced flow" for experienced users. No details, no commitments, no timeline. Even if implemented, requiring users to jump through extra hoops to exercise basic device ownership rights is a restriction, not a solution.
 ##### Does the EU actually read complaint emails?
-Yes. The DMA team is actively enforcing against Big Tech — they've already opened proceedings against Apple, Google, and Meta. Volume of complaints directly influences enforcement priority. Your[...]
+Yes. The DMA team is actively enforcing against Big Tech — they've already opened proceedings against Apple, Google, and Meta. Volume of complaints directly influences enforcement priority. Your email gets logged and counted. The DMA has real teeth: fines up to 10% of global turnover.
 ##### I'm not in the EU. Can I still help?
-Absolutely. Share on social media. If you're a developer, refuse the early access program and distribute via F-Droid or direct APK. If you're in a country with competition authorities, file a comp[...]
+Absolutely. Share on social media. If you're a developer, refuse the early access program and distribute via F-Droid or direct APK. If you're in a country with competition authorities, file a complaint there too. EU enforcement sets global precedent.
 ##### What are the alternatives?
 For users: Support custom ROMs (LineageOS, GrapheneOS, CalyxOS), use F-Droid for open-source apps, and make your voice heard before September 2026.
 
@@ -30,7 +30,6 @@ For developers: Distribute via F-Droid, offer direct APK downloads, refuse the e
 For everyone: Email regulators, contact MEPs, share information, and support organizations fighting for digital rights.
 
 ## Letter to google below;
-
 
 > Date: February 24, 2026
 > To: Sundar Pichai, Chief Executive Officer, Google

@@ -127,216 +127,301 @@ For everyone: Email regulators, contact MEPs, share information, and support org
 > Signatories
 > 71 organizations from 23 countries
 
-AdGuard logo
-AdGuard
-adguard.com🇨🇾
-The App Fair Project logo
-The App Fair Project
-appfair.org🇫🇷
-April logo
-April
-april.org🇫🇷
-ARTICLE 19 logo
-ARTICLE 19
-article19.org🇬🇧
-Associação Nacional para o Software Livre (ANSOL) logo
-Associação Nacional para o Software Livre (ANSOL)
-ansol.org🇵🇹
-Aurora Store logo
-Aurora Store
-auroraoss.com🇮🇳
-The European Consumer Organisation (BEUC) logo
-The European Consumer Organisation (BEUC)
-beuc.eu🇪🇺
-Brave logo
-Brave
-brave.com🇺🇸
-The Calyx Institute logo
-The Calyx Institute
-calyx.org🇺🇸
-The Center for Digital Progress (D64) logo
-The Center for Digital Progress (D64)
-d-64.org🇩🇪
-The Chaos Computer Club (CCC) logo
-The Chaos Computer Club (CCC)
-ccc.de🇩🇪
-Codeberg e.V. logo
-Codeberg e.V.
-codeberg.org🇩🇪
-CryptPad logo
-CryptPad
-cryptpad.org🇫🇷
-Cryptee logo
-Cryptee
-crypt.ee🇪🇪
-Data Rights logo
-Data Rights
-datarights.ngo🇪🇺
-Digitale Gesellschaft logo
-Digitale Gesellschaft
-digitale-gesellschaft.ch🇨🇭
-The Digital Rights Foundation logo
-The Digital Rights Foundation
-digitalrightsfoundation.pk🇵🇰
-Digital Rights Watch logo
-Digital Rights Watch
-digitalrightswatch.org.au🇦🇺
-epicenter.works – for digital rights logo
-epicenter.works – for digital rights
-epicenter.works🇦🇹
-/e/ Foundation logo
-/e/ Foundation
-e.foundation🇫🇷
-European Digital Rights (EDRi) logo
-European Digital Rights (EDRi)
-edri.org🇧🇪
-The Electronic Frontier Foundation (EFF) logo
-The Electronic Frontier Foundation (EFF)
-eff.org🇺🇸
-FACiL logo
-FACiL
-facil.qc.ca🇨🇦
-Fastmail logo
-Fastmail
-fastmail.com🇦🇺
-Forbrukerrådet logo
-Forbrukerrådet
-forbrukerradet.no🇳🇴
-FOSDEM logo
-FOSDEM
-fosdem.org🇧🇪
-FULU Foundation logo
-FULU Foundation
-fulu.org🇺🇸
-FUTO logo
-FUTO
-futo.org🇺🇸
-Fundación Karisma logo
-Fundación Karisma
-karisma.org.co🇨🇴
-F-Droid logo
-F-Droid
-f-droid.org🇳🇱
-Fedimedia logo
-Fedimedia
-fedimedia.it🇮🇹
-The Free Software Foundation (FSF) logo
-The Free Software Foundation (FSF)
-fsf.org🇺🇸
-The Free Software Foundation Europe (FSFE) logo
-The Free Software Foundation Europe (FSFE)
-fsfe.org🇩🇪
-Ghostery logo
-Ghostery
-ghostery.com🇩🇪
-GitHub Store logo
-GitHub Store
-github-store.org
-GNOME Foundation logo
-GNOME Foundation
-gnome.org🇺🇸
-GNU/Linux València logo
-GNU/Linux València
-gnulinuxvalencia.org🇪🇸
-GrapheneOS Foundation logo
-GrapheneOS Foundation
-grapheneos.org🇨🇦
-The Guardian Project logo
-The Guardian Project
-guardianproject.info🇺🇸
-Italian Linux Society logo
-Italian Linux Society
-ils.org🇮🇹
-iodé logo
-iodé
-iode.tech🇫🇷
-IzzyOnDroid logo
-IzzyOnDroid
-izzyondroid.org
-JMP.chat logo
-JMP.chat
-jmp.chat🇨🇦
+> AdGuard logo
+> AdGuard
+> adguard.com🇨🇾
+> The App Fair Project logo
+> The App Fair Project
+> appfair.org🇫🇷
+> April logo, April
+> april.org🇫🇷
+
+
+> ARTICLE 19 logo
+> ARTICLE 19
+> article19.org🇬🇧
+
+
+> Associação Nacional para o Software Livre (ANSOL) logo
+> Associação Nacional para o Software Livre (ANSOL)
+> ansol.org🇵🇹
+
+
+> Aurora Store logo
+> Aurora Store
+> auroraoss.com🇮🇳
+
+
+> The European Consumer Organisation (BEUC) logo
+> The European Consumer Organisation (BEUC)
+> beuc.eu🇪🇺
+
+
+> Brave logo
+> Brave
+> brave.com🇺🇸
+
+
+> The Calyx Institute logo
+> The Calyx Institute
+> calyx.org🇺🇸
+
+
+> The Center for Digital Progress (D64) logo
+> The Center for Digital Progress (D64)
+> d-64.org🇩🇪
+
+
+> The Chaos Computer Club (CCC) logo
+> The Chaos Computer Club (CCC)
+> ccc.de🇩🇪
+
+
+> Codeberg e.V. logo
+> Codeberg e.V.
+> codeberg.org🇩🇪
+
+
+> CryptPad logo
+> CryptPad
+> cryptpad.org🇫🇷
+
+
+> Cryptee logo
+> Cryptee
+> crypt.ee🇪🇪
+
+
+> Data Rights logo
+> Data Rights
+> datarights.ngo🇪🇺
+
+
+> Digitale Gesellschaft logo
+> Digitale Gesellschaft
+> digitale-gesellschaft.ch🇨🇭
+
+
+> The Digital Rights Foundation logo
+> The Digital Rights Foundation
+> digitalrightsfoundation.pk🇵🇰
+
+
+> Digital Rights Watch logo
+> Digital Rights Watch
+> digitalrightswatch.org.au🇦🇺
+> epicenter.works – for digital rights logo
+> epicenter.works – for digital rights
+> epicenter.works🇦🇹
+
+
+> /e/ Foundation logo
+> /e/ Foundation
+> e.foundation🇫🇷
+
+
+> European Digital Rights (EDRi) logo
+> European Digital Rights (EDRi)
+> edri.org🇧🇪
+
+
+> The Electronic Frontier Foundation (EFF) logo
+> The Electronic Frontier Foundation (EFF)
+> eff.org🇺🇸
+
+> FACiL logo
+> FACiL
+> facil.qc.ca🇨🇦
+
+> Fastmail logo
+> Fastmail
+> fastmail.com🇦🇺
+
+> Forbrukerrådet logo
+> Forbrukerrådet
+> forbrukerradet.no🇳🇴
+
+> FOSDEM logo
+> FOSDEM
+> fosdem.org🇧🇪
+
+> FULU Foundation logo
+> FULU Foundation
+> fulu.org🇺🇸
+
+> FUTO logo
+> FUTO
+> futo.org🇺🇸
+
+> Fundación Karisma logo
+> Fundación Karisma
+> karisma.org.co🇨🇴
+
+> F-Droid logo
+> F-Droid
+> f-droid.org🇳🇱
+
+> Fedimedia logo
+> Fedimedia
+> fedimedia.it🇮🇹
+
+> The Free Software Foundation (FSF) logo
+> The Free Software Foundation (FSF)
+> fsf.org🇺🇸
+
+> The Free Software Foundation Europe (FSFE) logo
+> The Free Software Foundation Europe (FSFE)
+> fsfe.org🇩🇪
+
+> Ghostery logo
+> Ghostery
+> ghostery.com🇩🇪
+
+> GitHub Store logo
+> GitHub Store
+> github-store.org
+
+> GNOME Foundation logo
+> GNOME Foundation
+> gnome.org🇺🇸
+
+> GNU/Linux València logo
+> GNU/Linux València
+> gnulinuxvalencia.org🇪🇸
+
+> GrapheneOS Foundation logo
+> GrapheneOS Foundation
+> grapheneos.org🇨🇦
+
+
+> The Guardian Project logo
+> The Guardian Project
+> guardianproject.info🇺🇸
+
+> Italian Linux Society logo
+> Italian Linux Society
+> ils.org🇮🇹
+
+> iodé logo
+> iodé
+> iode.tech🇫🇷
+
+> IzzyOnDroid logo
+> IzzyOnDroid
+> izzyondroid.org
+
+> JMP.chat logo
+> JMP.chat
+> jmp.chat🇨🇦
+
 KDE e.V. logo
 KDE e.V.
 kde.org🇩🇪
+
 LineageOS logo
 LineageOS
 lineageos.org🇺🇸
+
 MetaBrainz Foundation logo
 MetaBrainz Foundation
 metabrainz.org🇺🇸
+
 microG logo
 microG
 microg.org
+
 Molly logo
 Molly
 molly.im
+
 Nextcloud logo
 Nextcloud
 nextcloud.com🇩🇪
+
 Open Web Advocacy logo
 Open Web Advocacy
 open-web-advocacy.org
+
 OW2 logo
 OW2
 ow2.org🇫🇷
+
 Obtainium logo
 Obtainium
 obtainium.imranr.dev
+
 OpenMedia logo
 OpenMedia
 openmedia.org🇨🇦
+
 The OpenStreetMap Foundation (OSMF) logo
 The OpenStreetMap Foundation (OSMF)
 osmfoundation.org🇬🇧
+
 Open Rights Group (ORG) logo
 Open Rights Group (ORG)
 openrightsgroup.org🇬🇧
+
 Osservatorio Nessuno OdV logo
 Osservatorio Nessuno OdV
 osservatorionessuno.org🇮🇹
+
 Privacy Guides logo
 Privacy Guides
 privacyguides.org🇺🇸
+
 Proton AG logo
 Proton AG
 proton.me🇨🇭
+
 La Quadrature du Net logo
 La Quadrature du Net
 laquadrature.net🇫🇷
+
 Rocky Linux logo
 Rocky Linux
 rockylinux.org🇺🇸
+
 Rossmann Group logo
 Rossmann Group
 rossmanngroup.com🇺🇸
+
 Software Liberty Association of Taiwan logo
 Software Liberty Association of Taiwan
 slat.org.tw🇹🇼
+
 Software Freedom Conservancy logo
 Software Freedom Conservancy
 sfconservancy.org🇺🇸
+
 Techlore logo
 Techlore
 techlore.tech🇺🇸
+
 Technopolice Bruxelles logo
 Technopolice Bruxelles
 technopolice.be🇧🇪
+
 The Tor Project logo
 The Tor Project
 torproject.org🇺🇸
+
 Tuta Mail logo
 Tuta Mail
 tuta.com🇩🇪
+
 UnifiedPush logo
 UnifiedPush
 unifiedpush.org🇫🇷
+
 VideoLAN logo
 VideoLAN
 videolan.org🇫🇷
+
 Vivaldi Technologies AS logo
 Vivaldi Technologies AS
 vivaldi.com🇳🇴
+> 
 XMPP Standards Foundation logo
 XMPP Standards Foundation
 xmpp.org

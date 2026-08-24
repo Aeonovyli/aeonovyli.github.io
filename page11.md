@@ -128,75 +128,145 @@ For everyone: Email regulators, contact MEPs, share information, and support org
 > 71 organizations from 23 countries
 
 > ![AdGuard](https://www.google.com/s2/favicons?sz=64&domain=adguard.com) [AdGuard](https://adguard.com)
+
 > ![The App Fair Project](https://www.google.com/s2/favicons?sz=64&domain=appfair.org) [The App Fair Project](https://appfair.org)
+
 > ![April](https://www.google.com/s2/favicons?sz=64&domain=april.org) [April](https://april.org)
+
 > ![ARTICLE 19](https://www.google.com/s2/favicons?sz=64&domain=article19.org) [ARTICLE 19](https://article19.org)
+
 > ![Associação Nacional para o Software Livre (ANSOL)](https://www.google.com/s2/favicons?sz=64&domain=ansol.org) [Associação Nacional para o Software Livre (ANSOL)](https://ansol.org)
+
 > ![Aurora Store](https://www.google.com/s2/favicons?sz=64&domain=auroraoss.com) [Aurora Store](https://auroraoss.com)
+
 > ![The European Consumer Organisation (BEUC)](https://www.google.com/s2/favicons?sz=64&domain=beuc.eu) [The European Consumer Organisation (BEUC)](https://beuc.eu)
+
 > ![Brave](https://www.google.com/s2/favicons?sz=64&domain=brave.com) [Brave](https://brave.com)
+
 > ![The Calyx Institute](https://www.google.com/s2/favicons?sz=64&domain=calyx.org) [The Calyx Institute](https://calyx.org)
+
 > ![The Center for Digital Progress (D64)](https://www.google.com/s2/favicons?sz=64&domain=d-64.org) [The Center for Digital Progress (D64)](https://d-64.org)
+
 > ![The Chaos Computer Club (CCC)](https://www.google.com/s2/favicons?sz=64&domain=ccc.de) [The Chaos Computer Club (CCC)](https://ccc.de)
+
 > ![Codeberg e.V.](https://www.google.com/s2/favicons?sz=64&domain=codeberg.org) [Codeberg e.V.](https://codeberg.org)
+
 > ![CryptPad](https://www.google.com/s2/favicons?sz=64&domain=cryptpad.org) [CryptPad](https://cryptpad.org)
+
 > ![Cryptee](https://www.google.com/s2/favicons?sz=64&domain=crypt.ee) [Cryptee](https://crypt.ee)
+
 > ![Data Rights](https://www.google.com/s2/favicons?sz=64&domain=datarights.ngo) [Data Rights](https://datarights.ngo)
+
 > ![Digitale Gesellschaft](https://www.google.com/s2/favicons?sz=64&domain=digitale-gesellschaft.ch) [Digitale Gesellschaft](https://digitale-gesellschaft.ch)
+
 > ![The Digital Rights Foundation](https://www.google.com/s2/favicons?sz=64&domain=digitalrightsfoundation.pk) [The Digital Rights Foundation](https://digitalrightsfoundation.pk)
+
 > ![Digital Rights Watch](https://www.google.com/s2/favicons?sz=64&domain=digitalrightswatch.org.au) [Digital Rights Watch](https://digitalrightswatch.org.au)
+
 > ![epicenter.works – for digital rights](https://www.google.com/s2/favicons?sz=64&domain=epicenter.works) [epicenter.works – for digital rights](https://epicenter.works)
+
 > ![/e/ Foundation](https://www.google.com/s2/favicons?sz=64&domain=e.foundation) [/e/ Foundation](https://e.foundation)
+
 > ![European Digital Rights (EDRi)](https://www.google.com/s2/favicons?sz=64&domain=edri.org) [European Digital Rights (EDRi)](https://edri.org)
+
 > ![The Electronic Frontier Foundation (EFF)](https://www.google.com/s2/favicons?sz=64&domain=eff.org) [The Electronic Frontier Foundation (EFF)](https://eff.org)
+
 > ![FACiL](https://www.google.com/s2/favicons?sz=64&domain=facil.qc.ca) [FACiL](https://facil.qc.ca)
+
 > ![Fastmail](https://www.google.com/s2/favicons?sz=64&domain=fastmail.com) [Fastmail](https://fastmail.com)
+
 > ![Forbrukerrådet](https://www.google.com/s2/favicons?sz=64&domain=forbrukerradet.no) [Forbrukerrådet](https://forbrukerradet.no)
+
 > ![FOSDEM](https://www.google.com/s2/favicons?sz=64&domain=fosdem.org) [FOSDEM](https://fosdem.org)
+
 > ![FULU Foundation](https://www.google.com/s2/favicons?sz=64&domain=fulu.org) [FULU Foundation](https://fulu.org)
+
 > ![FUTO](https://www.google.com/s2/favicons?sz=64&domain=futo.org) [FUTO](https://futo.org)
+
 > ![Fundación Karisma](https://www.google.com/s2/favicons?sz=64&domain=karisma.org.co) [Fundación Karisma](https://karisma.org.co)
+
 > ![F-Droid](https://www.google.com/s2/favicons?sz=64&domain=f-droid.org) [F-Droid](https://f-droid.org)
+
 > ![Fedimedia](https://www.google.com/s2/favicons?sz=64&domain=fedimedia.it) [Fedimedia](https://fedimedia.it)
+
 > ![The Free Software Foundation (FSF)](https://www.google.com/s2/favicons?sz=64&domain=fsf.org) [The Free Software Foundation (FSF)](https://fsf.org)
+
 > ![The Free Software Foundation Europe (FSFE)](https://www.google.com/s2/favicons?sz=64&domain=fsfe.org) [The Free Software Foundation Europe (FSFE)](https://fsfe.org)
+
 > ![Ghostery](https://www.google.com/s2/favicons?sz=64&domain=ghostery.com) [Ghostery](https://ghostery.com)
+
 > ![GitHub Store](https://www.google.com/s2/favicons?sz=64&domain=github-store.org) [GitHub Store](https://github-store.org)
+
 > ![GNOME Foundation](https://www.google.com/s2/favicons?sz=64&domain=gnome.org) [GNOME Foundation](https://gnome.org)
+
 > ![GNU/Linux València](https://www.google.com/s2/favicons?sz=64&domain=gnulinuxvalencia.org) [GNU/Linux València](https://gnulinuxvalencia.org)
+
 > ![GrapheneOS Foundation](https://www.google.com/s2/favicons?sz=64&domain=grapheneos.org) [GrapheneOS Foundation](https://grapheneos.org)
+
 > ![The Guardian Project](https://www.google.com/s2/favicons?sz=64&domain=guardianproject.info) [The Guardian Project](https://guardianproject.info)
+
 > ![Italian Linux Society](https://www.google.com/s2/favicons?sz=64&domain=ils.org) [Italian Linux Society](https://ils.org)
+
 > ![iodé](https://www.google.com/s2/favicons?sz=64&domain=iode.tech) [iodé](https://iode.tech)
+
 > ![IzzyOnDroid](https://www.google.com/s2/favicons?sz=64&domain=izzyondroid.org) [IzzyOnDroid](https://izzyondroid.org)
+
 > ![JMP.chat](https://www.google.com/s2/favicons?sz=64&domain=jmp.chat) [JMP.chat](https://jmp.chat)
+
 > ![KDE e.V.](https://www.google.com/s2/favicons?sz=64&domain=kde.org) [KDE e.V.](https://kde.org)
+
 > ![LineageOS](https://www.google.com/s2/favicons?sz=64&domain=lineageos.org) [LineageOS](https://lineageos.org)
+
 > ![MetaBrainz Foundation](https://www.google.com/s2/favicons?sz=64&domain=metabrainz.org) [MetaBrainz Foundation](https://metabrainz.org)
+
 > ![microG](https://www.google.com/s2/favicons?sz=64&domain=microg.org) [microG](https://microg.org)
+
 > ![Molly](https://www.google.com/s2/favicons?sz=64&domain=molly.im) [Molly](https://molly.im)
+
 > ![Nextcloud](https://www.google.com/s2/favicons?sz=64&domain=nextcloud.com) [Nextcloud](https://nextcloud.com)
+
 > ![Open Web Advocacy](https://www.google.com/s2/favicons?sz=64&domain=open-web-advocacy.org) [Open Web Advocacy](https://open-web-advocacy.org)
+
 > ![OW2](https://www.google.com/s2/favicons?sz=64&domain=ow2.org) [OW2](https://ow2.org)
+
 > ![Obtainium](https://www.google.com/s2/favicons?sz=64&domain=obtainium.imranr.dev) [Obtainium](https://obtainium.imranr.dev)
+
 > ![OpenMedia](https://www.google.com/s2/favicons?sz=64&domain=openmedia.org) [OpenMedia](https://openmedia.org)
+
 > ![The OpenStreetMap Foundation (OSMF)](https://www.google.com/s2/favicons?sz=64&domain=osmfoundation.org) [The OpenStreetMap Foundation (OSMF)](https://osmfoundation.org)
+
 > ![Open Rights Group (ORG)](https://www.google.com/s2/favicons?sz=64&domain=openrightsgroup.org) [Open Rights Group (ORG)](https://openrightsgroup.org)
+
 > ![Osservatorio Nessuno OdV](https://www.google.com/s2/favicons?sz=64&domain=osservatorionessuno.org) [Osservatorio Nessuno OdV](https://osservatorionessuno.org)
+
 > ![Privacy Guides](https://www.google.com/s2/favicons?sz=64&domain=privacyguides.org) [Privacy Guides](https://privacyguides.org)
+
 > ![Proton AG](https://www.google.com/s2/favicons?sz=64&domain=proton.me) [Proton AG](https://proton.me)
+
 > ![La Quadrature du Net](https://www.google.com/s2/favicons?sz=64&domain=laquadrature.net) [La Quadrature du Net](https://laquadrature.net)
+
 > ![Rocky Linux](https://www.google.com/s2/favicons?sz=64&domain=rockylinux.org) [Rocky Linux](https://rockylinux.org)
+
 > ![Rossmann Group](https://www.google.com/s2/favicons?sz=64&domain=rossmanngroup.com) [Rossmann Group](https://rossmanngroup.com)
+
 > ![Software Liberty Association of Taiwan](https://www.google.com/s2/favicons?sz=64&domain=slat.org.tw) [Software Liberty Association of Taiwan](https://slat.org.tw)
+
 > ![Software Freedom Conservancy](https://www.google.com/s2/favicons?sz=64&domain=sfconservancy.org) [Software Freedom Conservancy](https://sfconservancy.org)
+
 > ![Techlore](https://www.google.com/s2/favicons?sz=64&domain=techlore.tech) [Techlore](https://techlore.tech)
+
 > ![Technopolice Bruxelles](https://www.google.com/s2/favicons?sz=64&domain=technopolice.be) [Technopolice Bruxelles](https://technopolice.be)
+
 > ![The Tor Project](https://www.google.com/s2/favicons?sz=64&domain=torproject.org) [The Tor Project](https://torproject.org)
+
 > ![Tuta Mail](https://www.google.com/s2/favicons?sz=64&domain=tuta.com) [Tuta Mail](https://tuta.com)
+
 > ![UnifiedPush](https://www.google.com/s2/favicons?sz=64&domain=unifiedpush.org) [UnifiedPush](https://unifiedpush.org)
+
 > ![VideoLAN](https://www.google.com/s2/favicons?sz=64&domain=videolan.org) [VideoLAN](https://videolan.org)
+
 > ![Vivaldi Technologies AS](https://www.google.com/s2/favicons?sz=64&domain=vivaldi.com) [Vivaldi Technologies AS](https://vivaldi.com)
+
 > ![XMPP Standards Foundation](https://www.google.com/s2/favicons?sz=64&domain=xmpp.org) [XMPP Standards Foundation](https://xmpp.org)
 
 *Source; keepandroidopen.com, keepandroidopen.org*

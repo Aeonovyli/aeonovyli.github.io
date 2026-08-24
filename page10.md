@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Newsletter
+title: Newsletter | Aeonovyli's personal website
 ---
 
 # Subscribe to My Newsletter

@@ -12,7 +12,7 @@ I have 21 servers running for the enjoyment of the masses, and I have at least t
 Yes, bzflag is more than twenty years old. It started in 1993, with a simple computer project. I like bzflag because practically anyone who plays it is trustworthy, and not given to swearing. Of course we all have our favorite 'that was mean' phrases, but they're not dirty.
 My favorite one is ':(' or ':)' or even ':D' if it was a good shot. 
 
-My maps are available for download on my [bzflag](https://thesilverstone.github.io/page7) page. (If you want the main game [look here](https://bzflag.org).)
+My maps are available for download on my [bzflag](https://aeonovyli.github.io/page7) page. (If you want the main game [look here](https://bzflag.org).)
 
 ### On messaging
 

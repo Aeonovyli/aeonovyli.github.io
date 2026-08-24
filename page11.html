@@ -14,7 +14,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
   
-  <!-- Correct Custom Script -->
   <script src="https://keepandroidopen.org/banner.js"></script>
 
   <link rel="stylesheet" href="/assets/css/style.css">
@@ -30,22 +29,20 @@
       pointer-events: none;
     }
     
-    /* Banner styling fixes */
     #banner-js {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      /* Changed from 1% to auto or a specific height to ensure visibility */
       height: auto; 
       min-height: 40px; 
-      z-index: 1000; /* Ensure it sits above particles */
-      pointer-events: auto; /* Allow interaction if needed */
+      z-index: 1000;
+      pointer-events: auto;
       display: flex;
       justify-content: center;
       align-items: center;
-      background: rgba(0, 0, 0, 0.5); /* Optional: Dark background for contrast */
-      color: #ffd700; /* Optional: Gold text */
+      background: rgba(0, 0, 0, 0.5);
+      color: #ffd700;
       font-family: 'Cinzel', serif;
       font-size: 14px;
     }
@@ -54,7 +51,6 @@
       position: relative;
       z-index: 1;
       min-height: 100vh;
-      /* Add padding to body if banner overlaps content */
       padding-top: 60px; 
     }
   </style>
@@ -64,7 +60,6 @@
 
   <div id="particles-js"></div>
 
-  <!-- The Banner Container -->
   <div id="banner-js"></div>
 
   {{ content }}

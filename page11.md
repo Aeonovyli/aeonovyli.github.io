@@ -273,7 +273,7 @@ For everyone: Email regulators, contact MEPs, share information, and support org
 
 > ![XMPP Standards Foundation](https://www.google.com/s2/favicons?sz=64&domain=xmpp.org) [XMPP Standards Foundation](https://xmpp.org)
 
-*Source; keepandroidopen.com, keepandroidopen.org*
+*Source; [keepandroidopen.com](https;//keepandroidopen.com), [keepandroidopen.org](https://keepandroidopen.org)*
 
 <nav class="nav">
 <a href="/">Home</a>

@@ -4,7 +4,7 @@ title: Contact me | Aeonovyli's personal website
 ---
 
 # Contact me
-Leave a message below. Only verified logged-in users can use this feature.
+Leave a message below. Only logged-in users can use this feature.
 
 <div class="message-box">
   <div id="auth-ui" style="margin-bottom: 20px; padding: 15px; background: rgba(20, 20, 20, 0.6); border-radius: 8px; border: 1px solid #00f0ff;">
@@ -16,7 +16,6 @@ Leave a message below. Only verified logged-in users can use this feature.
       <img id="user-avatar" src="" style="width:35px; border-radius:50%; border: 1px solid #ffd700;">
       <div style="display: flex; flex-direction: column; align-items: flex-start;">
         <span id="user-name" style="font-weight:bold; display:block; color: #ffd700; font-family: 'Cormorant Garamond', serif;"></span>
-        <span id="verification-status" style="font-size: 0.8em; color: #ff4500; margin-top: 2px;">Verifying...</span>
         <button onclick="logout()" style="background:none; border:none; color:#ff4500; cursor:pointer; text-decoration:underline; padding:0; font-size: 0.8em; font-family: 'Cormorant Garamond', serif;">Logout</button>
       </div>
     </div>
@@ -39,58 +38,17 @@ Leave a message below. Only verified logged-in users can use this feature.
   const loginOptions = document.getElementById('login-options');
   const userInfo = document.getElementById('user-info');
   const messagesList = document.getElementById('messagesList');
-  const submitBtn = document.getElementById('submitBtn');
-  const verificationStatus = document.getElementById('verification-status');
   let currentSession = null;
-  let isVerified = false;
 
   async function recordUserLogin(user) {
-    const metadata = user.user_metadata || {};
-    const uniqueId = user.id;
-    const username = metadata.full_name || metadata.user_name || metadata.login || metadata.email || 'Anonymous';
-    const avatarUrl = metadata.avatar_url || metadata.picture || 'https://via.placeholder.com/35';
-    const userEmail = metadata.email || null;
     const { error } = await _supabase.from('user_visits').upsert([{
-      github_user_id: uniqueId,
-      github_username: username,
-      full_name: metadata.full_name || username,
-      avatar_url: avatarUrl,
-      email: userEmail,
-      updated_at: new Date().toISOString()
+      github_user_id: user.id,
+      github_username: user.user_metadata.user_name || user.user_metadata.login,
+      full_name: user.user_metadata.full_name,
+      avatar_url: user.user_metadata.avatar_url,
+      last_login: new Date().toISOString()
     }], { onConflict: 'github_user_id' });
     if (error) console.error('Error recording login:', error);
-  }
-
-  async function checkVerification() {
-    if (!currentSession) {
-      isVerified = false;
-      verificationStatus.style.display = 'none';
-      return;
-    }
-    const userId = currentSession.user.id;
-    verificationStatus.style.display = 'block';
-    verificationStatus.innerText = 'Verifying...';
-    verificationStatus.style.color = '#ffd700';
-    
-    const { data, error } = await _supabase
-      .from('user_verified')
-      .select('user_id')
-      .eq('user_id', userId)
-      .single();
-
-    if (error || !data) {
-      isVerified = false;
-      verificationStatus.innerText = 'Not Verified';
-      verificationStatus.style.color = '#ff4500';
-      messageForm.style.display = 'none';
-      submitBtn.disabled = true;
-    } else {
-      isVerified = true;
-      verificationStatus.innerText = 'Verified';
-      verificationStatus.style.color = '#00f0ff';
-      messageForm.style.display = 'block';
-      submitBtn.disabled = false;
-    }
   }
 
   async function checkUser() {
@@ -101,21 +59,16 @@ Leave a message below. Only verified logged-in users can use this feature.
       await recordUserLogin(user);
       loginOptions.style.display = 'none';
       userInfo.style.display = 'flex';
-      const name = user.user_metadata.full_name || user.user_metadata.user_name || user.user_metadata.email || "User";
+      messageForm.style.display = 'block';
+      const name = user.user_metadata.full_name || user.user_metadata.user_name || "GitHub User";
       document.getElementById('user-name').innerText = name;
-      document.getElementById('user-avatar').src = user.user_metadata.avatar_url || user.user_metadata.picture || 'https://via.placeholder.com/35';
-      await checkVerification();
+      document.getElementById('user-avatar').src = user.user_metadata.avatar_url;
     } else {
       loginOptions.style.display = 'flex';
       userInfo.style.display = 'none';
       messageForm.style.display = 'none';
-      isVerified = false;
-      verificationStatus.style.display = 'none';
     }
     loadMessages();
-    if (document.getElementById('profileList').style.display === 'block') {
-      fetchAllVisitors();
-    }
   }
 
   async function loadMessages() {
@@ -152,31 +105,25 @@ Leave a message below. Only verified logged-in users can use this feature.
   messageForm.onsubmit = async (e) => {
     e.preventDefault();
     if (!currentSession) return alert("Please log in first!");
-    if (!isVerified) return alert("You must be verified to post a message. Please check your email or contact the admin.");
     const btn = document.getElementById('submitBtn');
     const content = document.getElementById('userMessage').value;
     const user = currentSession.user;
     btn.disabled = true;
     btn.innerText = "Posting...";
-    const username = user.user_metadata.full_name || user.user_metadata.user_name || user.user_metadata.email || 'Anonymous';
-    const { error } = await _supabase.from('messages').insert([{ content: content, username: username, user_id: user.id }]);
+    const { error } = await _supabase.from('messages').insert([{ content: content, username: user.user_metadata.full_name || user.user_metadata.user_name, user_id: user.id }]);
     if (error) {
       alert("Error posting: " + error.message);
-      btn.disabled = false;
-      btn.innerText = "Post Message";
     } else {
       document.getElementById('userMessage').value = '';
-      loadMessages();
-      btn.disabled = false;
-      btn.innerText = "Post Message";
     }
+    btn.disabled = false;
+    btn.innerText = "Post Message";
   };
 
   async function deleteMsg(id) {
     if (confirm("Are you sure you want to delete this message?")) {
       const { error } = await _supabase.from('messages').delete().eq('id', id);
       if (error) alert("Delete failed: " + error.message);
-      else loadMessages();
     }
   }
 
@@ -200,82 +147,7 @@ Leave a message below. Only verified logged-in users can use this feature.
     _supabase.auth.signOut().then(() => location.reload());
   }
 
-  async function banUser(username) {
-    const confirmBan = confirm(`Are you sure you want to ban "${username}"? This will cast "${username}" into the fiery void of dipleasure.`);
-    if (!confirmBan) return;
-    const { error: banError } = await _supabase.from('blacklist').insert([{ username: username }]);
-    if (banError) return alert("Error blacklisting: " + banError.message);
-    await _supabase.from('messages').delete().eq('username', username);
-    alert(username + " has been cast into the void.");
-    fetchAllVisitors();
-  }
-
-  async function fetchAllVisitors() {
-    const container = document.getElementById('profiles-container');
-    const { data: { session } } = await _supabase.auth.getSession();
-    const userMeta = session?.user?.user_metadata;
-    const currentUsername = userMeta?.full_name || userMeta?.user_name || userMeta?.email || 'Anonymous';
-    const isAdmin = userMeta?.full_name === 'Aeonovyli' || userMeta?.user_name === 'Aeonovyli' || userMeta?.nickname === 'Aeonovyli';
-    const visitsResponse = await _supabase.from('user_visits').select('github_user_id, github_username, full_name, avatar_url, email, updated_at');
-    const profilesResponse = await _supabase.from('profiles').select('user_id, username, avatar_url, email, updated_at');
-    const visitsData = visitsResponse.data || [];
-    const profilesData = profilesResponse.data || [];
-    if (visitsResponse.error) console.error('Error loading visits:', visitsResponse.error);
-    if (profilesResponse.error) console.error('Error loading profiles:', profilesResponse.error);
-    const userMap = new Map();
-    profilesData.forEach(profile => {
-      if (profile.username) {
-        userMap.set(profile.username.toLowerCase(), {
-          username: profile.username,
-          avatar_url: profile.avatar_url,
-          email: profile.email,
-          source: 'profiles'
-        });
-      }
-    });
-    visitsData.forEach(visitor => {
-      const displayUsername = visitor.github_username || visitor.full_name || 'Unknown';
-      if (displayUsername) {
-        userMap.set(displayUsername.toLowerCase(), {
-          username: displayUsername,
-          avatar_url: visitor.avatar_url,
-          email: visitor.email,
-          source: 'user_visits'
-        });
-      }
-    });
-    const uniqueVisitors = Array.from(userMap.values()).sort((a, b) => a.username.localeCompare(b.username));
-    if (uniqueVisitors.length === 0) {
-      container.innerHTML = '<p style="color:#888; text-align:center; padding:10px; font-family: \'Cormorant Garamond\', serif;">No visitors yet.</p>';
-      return;
-    }
-    container.innerHTML = uniqueVisitors.map(visitor => {
-      const visitorUsername = visitor.username;
-      const githubProfileUrl = `https://github.com/${visitor.username}`;
-      const canBanUser = isAdmin && visitor      Username !== currentUsername;
-      return `<div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-bottom: 1px solid rgba(0, 240, 255, 0.1); gap: 8px;"><div style="display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0;">${visitor.avatar_url ? `<img src="${visitor.avatar_url}" alt="${visitorUsername}" style="width: 24px; height: 24px; border-radius: 50%; border: 1px solid #ffd700;">` : ''}<a href="${githubProfileUrl}" target="_blank" style="color: #00f0ff; text-decoration: none; font-size: 0.85em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${visitorUsername}">${visitorUsername}</a></div>${canBanUser ? `<button class="ban-btn" onclick="banUser('${visitorUsername.replace(/'/g, "\\'")}')">BAN</button>` : ''}</div>`;
-    }).join('');
-  }
-
-  function toggleProfiles() {
-    const list = document.getElementById('profileList');
-    list.style.display = list.style.display === 'none' ? 'block' : 'none';
-    if (list.style.display === 'block') fetchAllVisitors();
-  }
-
   _supabase.channel('public:messages').on('postgres_changes', { event: '*', schema: 'public', table: 'messages' }, () => { loadMessages(); }).subscribe();
-  _supabase.channel('public:user_visits').on('postgres_changes', { event: '*', schema: 'public', table: 'user_visits' }, () => { const list = document.getElementById('profileList'); if (list.style.display === 'block') fetchAllVisitors(); }).subscribe();
-  
-  const originalOnSubmit = messageForm.onsubmit;
-  messageForm.onsubmit = async (e) => {
-    e.preventDefault();
-    const user = currentSession?.user;
-    const username = user?.user_metadata?.full_name || user?.user_metadata?.user_name;
-    const { data: isBanned } = await _supabase.from('blacklist').select('username').eq('username', username).single();
-    if (isBanned) return alert("Your access has been revoked by Aeonovyli. If you feel that you should not have been banned, start an issue on the github repository.");
-    await originalOnSubmit(e);
-  };
-
   checkUser();
 </script>
 <style>
@@ -305,6 +177,63 @@ Leave a message below. Only verified logged-in users can use this feature.
     </div>
   </div>
 </div>
+<script>
+  async function banUser(username) {
+    const confirmBan = confirm(`Are you sure you want to ban "${username}"? This will cast "${username}" into the fiery void of dipleasure.`);
+    if (!confirmBan) return;
+    const { error: banError } = await _supabase.from('blacklist').insert([{ username: username }]);
+    if (banError) return alert("Error blacklisting: " + banError.message);
+    await _supabase.from('messages').delete().eq('username', username);
+    alert(username + " has been cast into the void.");
+    fetchAllVisitors();
+  }
+  async function fetchAllVisitors() {
+    const container = document.getElementById('profiles-container');
+    const { data: { session } } = await _supabase.auth.getSession();
+    const userMeta = session?.user?.user_metadata;
+    const currentUsername = userMeta?.user_name || userMeta?.full_name;
+    const isAdmin = userMeta?.user_name === 'Aeonovyli' || userMeta?.full_name === 'Aeonovyli' || userMeta?.nickname === 'Aeonovyli';
+    const { data: visitors, error } = await _supabase.from('user_visits').select('github_user_id, github_username, full_name, avatar_url').order('github_username', { ascending: true });
+    if (error) {
+      container.innerHTML = '<p style="color:red; text-align:center; padding:10px; font-family: \'Cormorant Garamond\', serif;">Error loading visitors</p>';
+      console.error(error);
+      return;
+    }
+    const uniqueVisitors = [];
+    const seenIds = new Set();
+    visitors?.forEach(visitor => {
+      if (!seenIds.has(visitor.github_user_id)) {
+        uniqueVisitors.push(visitor);
+        seenIds.add(visitor.github_user_id);
+      }
+    });
+    if (uniqueVisitors.length === 0) {
+      container.innerHTML = '<p style="color:#888; text-align:center; padding:10px; font-family: \'Cormorant Garamond\', serif;">No visitors yet.</p>';
+      return;
+    }
+    container.innerHTML = uniqueVisitors.map(visitor => {
+      const visitorUsername = visitor.github_username || visitor.full_name || 'Unknown User';
+      const githubProfileUrl = `https://github.com/${visitor.github_username}`;
+      const canBanUser = isAdmin && visitorUsername !== currentUsername;
+      return `<div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-bottom: 1px solid rgba(0, 240, 255, 0.1); gap: 8px;"><div style="display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0;">${visitor.avatar_url ? `<img src="${visitor.avatar_url}" alt="${visitorUsername}" style="width: 24px; height: 24px; border-radius: 50%; border: 1px solid #ffd700;">` : ''}<a href="${githubProfileUrl}" target="_blank" style="color: #00f0ff; text-decoration: none; font-size: 0.85em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${visitorUsername}">${visitorUsername}</a></div>${canBanUser ? `<button class="ban-btn" onclick="banUser('${visitorUsername}')">BAN</button>` : ''}</div>`;
+    }).join('');
+  }
+  function toggleProfiles() {
+    const list = document.getElementById('profileList');
+    list.style.display = list.style.display === 'none' ? 'block' : 'none';
+    if (list.style.display === 'block') fetchAllVisitors();
+  }
+  _supabase.channel('public:user_visits').on('postgres_changes', { event: '*', schema: 'public', table: 'user_visits' }, () => { const list = document.getElementById('profileList'); if (list.style.display === 'block') fetchAllVisitors(); }).subscribe();
+  const originalOnSubmit = messageForm.onsubmit;
+  messageForm.onsubmit = async (e) => {
+    e.preventDefault();
+    const user = currentSession?.user;
+    const username = user?.user_metadata?.full_name || user?.user_metadata?.user_name;
+    const { data: isBanned } = await _supabase.from('blacklist').select('username').eq('username', username).single();
+    if (isBanned) return alert("Your access has been revoked by Aeonovyli. If you feel that you should not have been banned, start an issue on the github repository.");
+    await originalOnSubmit(e);
+  };
+</script>
 <nav class="nav">
 <a href="/">Home</a>
 <a href="/page1">Interests</a>

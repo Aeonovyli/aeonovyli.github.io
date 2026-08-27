@@ -19,7 +19,7 @@ title: Sign Up | Aeonovyli's personal website
   <div id="auth-status" style="margin-top: 20px; font-size: 0.9em; color: #aaa;"></div>
 
   <div style="margin-top: 20px;">
-    <a href="/contact-me" style="color: #00f0ff; text-decoration: none; font-size: 0.9em;">Back to Contact Page</a>
+    <a href="/page2" style="color: #00f0ff; text-decoration: none; font-size: 0.9em;">Back to Contact Page</a>
   </div>
 </div>
 
@@ -43,7 +43,7 @@ title: Sign Up | Aeonovyli's personal website
     const { error } = await _supabase.auth.signInWithOtp({
       email: email,
       options: {
-        emailRedirectTo: window.location.origin + '/contact-me'
+        emailRedirectTo: window.location.origin + '/page2'
       }
     });
 

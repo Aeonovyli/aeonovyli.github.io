@@ -41,7 +41,7 @@ Leave a message below. Only logged-in users can use this feature.
   let currentSession = null;
 
   async function recordUserLogin(user) {
-    const { error } = await _supabase.from('user_visits').upsert([{
+    const { error } = await _supabase.from('profiles').upsert([{
       github_user_id: user.id,
       github_username: user.user_metadata.user_name || user.user_metadata.login,
       full_name: user.user_metadata.full_name,

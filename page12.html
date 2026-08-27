@@ -9,17 +9,17 @@ title: Sign Up | Aeonovyli's personal website
 
   <form id="signupForm" style="display: flex; flex-direction: column; gap: 15px;">
     <input type="email" id="emailInput" placeholder="Enter your email" required 
-           style="padding: 12px; border-radius: 4px; border: 1px solid #00f0ff; background: rgba(20, 20, 20, 0.8); color: #ffd700; font-size: 1em;">
+           style="padding: 12px; border-radius: 4px; border: 1px solid #00f0ff; background: rgba(20, 20, 20, 0.8); color: #ffd700; font-size: 1em; font-family: 'Cormorant Garamond', serif;">
     
-    <button type="submit" class="submit-btn" style="background: #28a745; color: #fff; border: 1px solid #28a745; padding: 12px 24px; cursor: pointer; border-radius: 4px; font-size: 1.1em;">
+    <button type="submit" style="background: transparent; color: #ffd700; border: 1px solid #ffd700; padding: 12px 24px; cursor: pointer; border-radius: 4px; font-size: 1.1em; font-family: 'Cormorant Garamond', serif; font-weight: bold; transition: all 0.3s ease;">
       Send Magic Link
     </button>
   </form>
 
-  <div id="auth-status" style="margin-top: 20px; font-size: 0.9em; color: #aaa;"></div>
+  <div id="auth-status" style="margin-top: 20px; font-size: 0.9em; color: #aaa; font-family: 'Cormorant Garamond', serif;"></div>
 
   <div style="margin-top: 20px;">
-    <a href="/page2" style="color: #00f0ff; text-decoration: none; font-size: 0.9em;">Back to Contact Page</a>
+    <a href="/page2" style="color: #00f0ff; text-decoration: none; font-size: 0.9em; font-family: 'Cormorant Garamond', serif;">Back to Contact Page</a>
   </div>
 </div>
 
@@ -56,3 +56,10 @@ title: Sign Up | Aeonovyli's personal website
     }
   };
 </script>
+
+<style>
+  button:hover {
+    background: rgba(255, 215, 0, 0.1);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+  }
+</style>

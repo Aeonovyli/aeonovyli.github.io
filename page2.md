@@ -171,7 +171,7 @@ Leave a message below. Only logged-in users can use this feature.
     Profiles' History
   </button>
   <div id="profileList" style="display: none; background: rgba(10, 10, 10, 0.95); border: 1px solid #00f0ff; border-radius: 4px; width: 280px; max-height: 400px; overflow-y: auto; position: absolute; bottom: 50px; right: 0; box-shadow: 0 0 20px rgba(0,0,0,0.5);">
-    <div style="padding: 10px; border-bottom: 1px solid #00f0ff; background: rgba(0, 240, 255, 0.1); color: #ffd700; font-size: 0.9em; font-weight: bold; position: sticky; top: 0;">User Directory (All-Time)</div>
+    <div style="padding: 10px; border-bottom: 1px solid #00f0ff; background: rgba(0, 240, 255, 0.1); color: #ffd700; font-size: 0.9em; font-weight: bold; position: sticky; top: 0;">All Time User Directory</div>
     <div id="profiles-container" style="padding: 5px 0;">
        <p style="color: #888; text-align: center; font-size: 0.8em; padding: 10px;">Loading...</p>
     </div>

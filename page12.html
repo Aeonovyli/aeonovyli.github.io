@@ -1,31 +1,22 @@
 ---
 layout: default
-title: Sign In | Aeonovyli's personal website
+title: Sign Up | Aeonovyli's personal website
 ---
 
 <div style="max-width: 500px; margin: 50px auto; padding: 30px; background: rgba(20, 20, 20, 0.9); border: 1px solid #00f0ff; border-radius: 8px; text-align: center; color: #ffd700; font-family: 'Cormorant Garamond', serif;">
-  <h2 style="color: #ffd700; margin-bottom: 20px;">Sign In</h2>
-  <p style="margin-bottom: 30px;">Sign in with Email/Password or GitHub.</p>
+  <h2 style="color: #ffd700; margin-bottom: 20px;">Sign Up</h2>
+  <p style="margin-bottom: 30px;">Enter your email to receive a magic link.</p>
 
-  <div id="auth-status" style="margin-bottom: 20px; font-size: 0.9em; color: #aaa; font-family: 'Cormorant Garamond', serif;"></div>
-
-  <div id="email-login-section" style="display: flex; flex-direction: column; gap: 15px;">
-    <input type="email" id="emailInput" placeholder="Email Address" required 
+  <form id="signupForm" style="display: flex; flex-direction: column; gap: 15px;">
+    <input type="email" id="emailInput" placeholder="Enter your email" required 
            style="padding: 12px; border-radius: 4px; border: 1px solid #00f0ff; background: rgba(20, 20, 20, 0.8); color: #ffd700; font-size: 1em; font-family: 'Cormorant Garamond', serif;">
     
-    <input type="password" id="passwordInput" placeholder="Password" required 
-           style="padding: 12px; border-radius: 4px; border: 1px solid #00f0ff; background: rgba(20, 20, 20, 0.8); color: #ffd700; font-size: 1em; font-family: 'Cormorant Garamond', serif;">
-    
-    <button id="emailLoginBtn" type="button" style="background: transparent; color: #ffd700; border: 1px solid #ffd700; padding: 12px 24px; cursor: pointer; border-radius: 4px; font-size: 1.1em; font-family: 'Cormorant Garamond', serif; font-weight: bold; transition: all 0.3s ease;">
-      Sign In with Email
+    <button type="submit" style="background: transparent; color: #ffd700; border: 1px solid #ffd700; padding: 12px 24px; cursor: pointer; border-radius: 4px; font-size: 1.1em; font-family: 'Cormorant Garamond', serif; font-weight: bold; transition: all 0.3s ease;">
+      Send Magic Link
     </button>
-  </div>
+  </form>
 
-  <div style="margin: 20px 0; border-top: 1px solid #00f0ff; width: 100%;"></div>
-
-  <button id="githubLoginBtn" style="background: transparent; color: #ffd700; border: 1px solid #ffd700; padding: 12px 24px; cursor: pointer; border-radius: 4px; font-size: 1.1em; font-family: 'Cormorant Garamond', serif; font-weight: bold; transition: all 0.3s ease; width: 100%;">
-    Sign In with GitHub
-  </button>
+  <div id="auth-status" style="margin-top: 20px; font-size: 0.9em; color: #aaa; font-family: 'Cormorant Garamond', serif;"></div>
 
   <div style="margin-top: 20px;">
     <a href="/page2" style="color: #00f0ff; text-decoration: none; font-size: 0.9em; font-family: 'Cormorant Garamond', serif;">Back to Contact Page</a>
@@ -38,74 +29,32 @@ title: Sign In | Aeonovyli's personal website
   const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsd2Jjcm1qZHVsYWVmaXloZGtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0MzU3NjksImV4cCI6MjA5MzAxMTc2OX0.zQDAVn4ZhW7QSC_WajxinnBHvg5Ry09xOZjxHOVMK2A';
   const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-  const emailLoginBtn = document.getElementById('emailLoginBtn');
-  const githubLoginBtn = document.getElementById('githubLoginBtn');
+  const form = document.getElementById('signupForm');
   const statusDiv = document.getElementById('auth-status');
   const emailInput = document.getElementById('emailInput');
-  const passwordInput = document.getElementById('passwordInput');
-  const emailLoginSection = document.getElementById('email-login-section');
 
-  async function checkSession() {
-    const { data: { session } } = await _supabase.auth.getSession();
-    if (session) {
-      statusDiv.innerHTML = `<span style="color: #00ff00;">Already logged in.</span><br>Redirecting...`;
-      setTimeout(() => {
-        window.location.href = '/page2';
-      }, 2000);
-      return true;
-    }
-    return false;
-  }
-
-  emailLoginBtn.onclick = async () => {
-    const isLogged = await checkSession();
-    if (isLogged) return;
-
+  form.onsubmit = async (e) => {
+    e.preventDefault();
     const email = emailInput.value;
-    const password = passwordInput.value;
+    
+    statusDiv.innerHTML = "Sending link...";
+    form.style.display = 'none';
 
-    if (!email || !password) {
-      statusDiv.innerHTML = `<span style="color: #ff4500;">Please enter both email and password.</span>`;
-      return;
-    }
-
-    statusDiv.innerHTML = "Signing in...";
-    emailLoginSection.style.display = 'none';
-
-    const { data, error } = await _supabase.auth.signInWithPassword({
+    const { error } = await _supabase.auth.signInWithOtp({
       email: email,
-      password: password
-    });
-
-    if (error) {
-      statusDiv.innerHTML = `<span style="color: #ff4500;">Error: ${error.message}</span>`;
-      emailLoginSection.style.display = 'flex';
-    } else {
-      statusDiv.innerHTML = `<span style="color: #00ff00;">Signed in successfully!</span>`;
-      setTimeout(() => {
-        window.location.href = '/page2';
-      }, 1000);
-    }
-  };
-
-  githubLoginBtn.onclick = async () => {
-    const isLogged = await checkSession();
-    if (isLogged) return;
-
-    statusDiv.innerHTML = "Redirecting to GitHub...";
-    const { error } = await _supabase.auth.signInWithOAuth({
-      provider: 'github',
       options: {
-        redirectTo: window.location.origin + '/page2'
+        emailRedirectTo: window.location.origin + '/page2'
       }
     });
 
     if (error) {
       statusDiv.innerHTML = `<span style="color: #ff4500;">Error: ${error.message}</span>`;
+      form.style.display = 'flex';
+    } else {
+      statusDiv.innerHTML = `<span style="color: #00ff00;">Check your email for the login link!</span>`;
+      emailInput.value = '';
     }
   };
-
-  checkSession();
 </script>
 
 <style>

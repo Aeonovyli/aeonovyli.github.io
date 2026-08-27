@@ -1,0 +1,60 @@
+---
+layout: default
+title: Sign In | Aeonovyli's personal website
+---
+
+<div style="max-width: 500px; margin: 50px auto; padding: 30px; background: rgba(20, 20, 20, 0.9); border: 1px solid #00f0ff; border-radius: 8px; text-align: center; color: #ffd700; font-family: 'Cormorant Garamond', serif;">
+  <h2 style="color: #ffd700; margin-bottom: 20px;">Sign In</h2>
+  <p style="margin-bottom: 30px;">Sign in with GitHub to continue.</p>
+
+  <div id="auth-status" style="margin-bottom: 20px; font-size: 0.9em; color: #aaa;"></div>
+
+  <button id="githubLoginBtn" class="submit-btn" style="background: #333; color: #fff; border: 1px solid #ffd700; padding: 12px 24px; cursor: pointer; border-radius: 4px; font-size: 1.1em; width: 100%;">
+    Sign In with GitHub
+  </button>
+
+  <div style="margin-top: 20px;">
+    <a href="/page2" style="color: #00f0ff; text-decoration: none; font-size: 0.9em;">Back to Contact Page</a>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const supabaseUrl = 'https://flwbcrmjdulaefiyhdkh.supabase.co';
+  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsd2Jjcm1qZHVsYWVmaXloZGtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0MzU3NjksImV4cCI6MjA5MzAxMTc2OX0.zQDAVn4ZhW7QSC_WajxinnBHvg5Ry09xOZjxHOVMK2A';
+  const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+  const loginBtn = document.getElementById('githubLoginBtn');
+  const statusDiv = document.getElementById('auth-status');
+
+  async function checkSession() {
+    const { data: { session } } = await _supabase.auth.getSession();
+    if (session) {
+      statusDiv.innerHTML = `<span style="color: #00ff00;">Already logged in as ${session.user.user_metadata.login || session.user.email}.</span><br>Redirecting...`;
+      setTimeout(() => {
+        window.location.href = '/page2';
+      }, 2000);
+      return true;
+    }
+    return false;
+  }
+
+  loginBtn.onclick = async () => {
+    const isLogged = await checkSession();
+    if (isLogged) return;
+
+    statusDiv.innerHTML = "Redirecting to GitHub...";
+    const { error } = await _supabase.auth.signInWithOAuth({
+      provider: 'github',
+      options: {
+        redirectTo: window.location.origin + '/page2'
+      }
+    });
+
+    if (error) {
+      statusDiv.innerHTML = `<span style="color: #ff4500;">Error: ${error.message}</span>`;
+    }
+  };
+
+  checkSession();
+</script>

@@ -9,8 +9,8 @@ Leave a message below. Only logged-in users can use this feature.
 <div class="message-box">
   <div id="auth-ui" style="margin-bottom: 20px; padding: 15px; background: rgba(20, 20, 20, 0.6); border-radius: 8px; border: 1px solid #00f0ff;">
     <div id="login-options" style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 15px;">
-      <a href="/page12" style="display: inline-block; background: transparent; color: #ffd700; border: 1px solid #ffd700; padding: 5px 12px; text-decoration: none; border-radius: 4px; font-family: 'Cormorant Garamond', serif; font-weight: bold; font-size: 0.95em; transition: all 0.3s ease;">Sign Up</a>
       <a href="/page13" style="display: inline-block; background: transparent; color: #ffd700; border: 1px solid #ffd700; padding: 5px 12px; text-decoration: none; border-radius: 4px; font-family: 'Cormorant Garamond', serif; font-weight: bold; font-size: 0.95em; transition: all 0.3s ease;">Sign In</a>
+      <a href="/page12" style="display: inline-block; background: transparent; color: #ffd700; border: 1px solid #ffd700; padding: 5px 12px; text-decoration: none; border-radius: 4px; font-family: 'Cormorant Garamond', serif; font-weight: bold; font-size: 0.95em; transition: all 0.3s ease;">Sign Up</a>
     </div>
     <div id="user-info" style="display: none; align-items: flex-start; gap: 12px; margin-bottom: 15px;">
       <img id="user-avatar" src="" style="width:35px; border-radius:50%; border: 1px solid #ffd700;">

@@ -8,17 +8,13 @@ Leave a message below. Only logged-in users can use this feature.
 
 <div class="message-box">
   <div id="auth-ui" style="margin-bottom: 20px; padding: 15px; background: rgba(20, 20, 20, 0.6); border-radius: 8px; border: 1px solid #00f0ff; text-align: left; display: flex; flex-direction: column; align-items: flex-start; width: 100%;">
-    
-    <!-- Login Options -->
     <div id="login-options" style="width: 100%;">
       <p style="color: #ffd700; margin-bottom: 15px; font-size: 0.9em; font-family: 'Cormorant Garamond', serif;">Select a provider to sign in:</p>
       <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-        <a href="/page12" style="display: inline-block; background: #28a745; color: #fff; border: 1px solid #28a745; padding: 10px 20px; text-decoration: none; border-radius: 4px; font-family: 'Cormorant Garamond', serif; font-weight: bold; font-size: 1.1em; transition: all 0.3s ease;">Sign Up</a>
-        <a href="/page13" style="display: inline-block; background: #007bff; color: #fff; border: 1px solid #007bff; padding: 10px 20px; text-decoration: none; border-radius: 4px; font-family: 'Cormorant Garamond', serif; font-weight: bold; font-size: 1.1em; transition: all 0.3s ease;">Sign In</a>
+        <a href="/page12" style="display: inline-block; background: #28a745; color: #fff; border: 1px solid #28a745; padding: 10px 20px; text-decoration: none; border-radius: 4px; font-family: 'Cormorant Garamond', serif; font-weight: bold; font-size: 1.1em;">Sign Up</a>
+        <a href="/page13" style="display: inline-block; background: #007bff; color: #fff; border: 1px solid #007bff; padding: 10px 20px; text-decoration: none; border-radius: 4px; font-family: 'Cormorant Garamond', serif; font-weight: bold; font-size: 1.1em;">Sign In</a>
       </div>
     </div>
-
-    <!-- User Info (Aligned Left) -->
     <div id="user-info" style="display: none; width: 100%; align-items: flex-start; gap: 15px; margin-top: 10px;">
       <img id="user-avatar" src="" style="width: 45px; height: 45px; border-radius: 50%; border: 2px solid #ffd700; object-fit: cover;">
       <div style="display: flex; flex-direction: column; align-items: flex-start;">
@@ -27,14 +23,12 @@ Leave a message below. Only logged-in users can use this feature.
       </div>
     </div>
   </div>
-
   <form id="messageForm" style="display: none; margin-bottom: 30px; width: 100%;">
     <div class="form-group">
       <textarea id="userMessage" rows="4" required placeholder="Type your message..." style="width: 100%; padding: 12px; border-radius: 4px; border: 2px solid #00f0ff; background: rgba(20, 20, 20, 0.8); color: #ffd700; font-family: 'Cormorant Garamond', serif; font-size: 1.1em; resize: vertical;"></textarea>
     </div>
-    <button type="submit" id="submitBtn" style="margin-top: 15px; background: #00f0ff; color: #000; border: 1px solid #00f0ff; padding: 10px 25px; cursor: pointer; border-radius: 4px; font-family: 'Cormorant Garamond', serif; font-weight: bold; font-size: 1.1em; transition: all 0.3s ease;">Post Message</button>
+    <button type="submit" id="submitBtn" style="margin-top: 15px; background: #00f0ff; color: #000; border: 1px solid #00f0ff; padding: 10px 25px; cursor: pointer; border-radius: 4px; font-family: 'Cormorant Garamond', serif; font-weight: bold; font-size: 1.1em;">Post Message</button>
   </form>
-  
   <div id="messagesDisplay" class="messages-display" style="width: 100%;">
     <h3 style="color: #ffd700; font-family: 'Cormorant Garamond', serif; margin-bottom: 20px;">Live Messages:</h3>
     <div id="messagesList" style="display: flex; flex-direction: column; gap: 15px;">Messages loading...</div>

@@ -41,19 +41,22 @@ Leave a message below. Only logged-in users can use this feature.
   let currentSession = null;
 
   async function recordUserLogin(user) {
-  const metadata = user.user_metadata || {};
-  const userId = user.id;
-  const username = metadata.full_name || metadata.user_name || metadata.login || metadata.email || 'Anonymous';
-  const avatarUrl = metadata.avatar_url || metadata.picture || 'https://via.placeholder.com/35';
-  const { error } = await _supabase.from('user_visits').upsert([{
-    user_id: userId,
-    username: username,
-    avatar_url: avatarUrl,
-    email: metadata.email,
-    last_login: new Date().toISOString()
-  }], { onConflict: 'user_id' });
-  if (error) console.error('Error recording login:', error);
-}
+    const metadata = user.user_metadata || {};
+    const uniqueId = user.id;
+    const username = metadata.full_name || metadata.user_name || metadata.login || metadata.email || 'Anonymous';
+    const avatarUrl = metadata.avatar_url || metadata.picture || 'https://via.placeholder.com/35';
+    const userEmail = metadata.email || null;
+    const { error } = await _supabase.from('user_visits').upsert([{
+      github_user_id: uniqueId,
+      github_username: username,
+      full_name: metadata.full_name || username,
+      avatar_url: avatarUrl,
+      email: userEmail,
+      last_login: new Date().toISOString()
+    }], { onConflict: 'github_user_id' });
+    if (error) console.error('Error recording login:', error);
+  }
+
   async function checkUser() {
     const { data: { session } } = await _supabase.auth.getSession();
     currentSession = session;
@@ -63,9 +66,9 @@ Leave a message below. Only logged-in users can use this feature.
       loginOptions.style.display = 'none';
       userInfo.style.display = 'flex';
       messageForm.style.display = 'block';
-      const name = user.user_metadata.full_name || user.user_metadata.user_name || "GitHub User";
+      const name = user.user_metadata.full_name || user.user_metadata.user_name || user.user_metadata.email || "User";
       document.getElementById('user-name').innerText = name;
-      document.getElementById('user-avatar').src = user.user_metadata.avatar_url;
+      document.getElementById('user-avatar').src = user.user_metadata.avatar_url || user.user_metadata.picture || 'https://via.placeholder.com/35';
     } else {
       loginOptions.style.display = 'flex';
       userInfo.style.display = 'none';
@@ -113,7 +116,8 @@ Leave a message below. Only logged-in users can use this feature.
     const user = currentSession.user;
     btn.disabled = true;
     btn.innerText = "Posting...";
-    const { error } = await _supabase.from('messages').insert([{ content: content, username: user.user_metadata.full_name || user.user_metadata.user_name, user_id: user.id }]);
+    const username = user.user_metadata.full_name || user.user_metadata.user_name || user.user_metadata.email || 'Anonymous';
+    const { error } = await _supabase.from('messages').insert([{ content: content, username: username, user_id: user.id }]);
     if (error) {
       alert("Error posting: " + error.message);
     } else {
@@ -194,20 +198,14 @@ Leave a message below. Only logged-in users can use this feature.
     const container = document.getElementById('profiles-container');
     const { data: { session } } = await _supabase.auth.getSession();
     const userMeta = session?.user?.user_metadata;
-    const currentUsername = userMeta?.user_name || userMeta?.full_name || userMeta?.email;
-    const isAdmin = userMeta?.user_name === 'Aeonovyli' || userMeta?.full_name === 'Aeonovyli' || userMeta?.nickname === 'Aeonovyli';
-    const [visitsResponse, profilesResponse] = await Promise.all([
-      _supabase.from('user_visits').select('user_id, username, avatar_url, email, last_login'),
-      _supabase.from('profiles').select('user_id, username, avatar_url, email, updated_at')
-    ]);
+    const currentUsername = userMeta?.full_name || userMeta?.user_name || userMeta?.email || 'Anonymous';
+    const isAdmin = userMeta?.full_name === 'Aeonovyli' || userMeta?.user_name === 'Aeonovyli' || userMeta?.nickname === 'Aeonovyli';
+    const visitsResponse = await _supabase.from('user_visits').select('github_user_id, github_username, full_name, avatar_url, email, last_login');
+    const profilesResponse = await _supabase.from('profiles').select('user_id, username, avatar_url, email, updated_at');
     const visitsData = visitsResponse.data || [];
     const profilesData = profilesResponse.data || [];
-    if (visitsResponse.error) {
-      console.error('Error loading visits:', visitsResponse.error);
-    }
-    if (profilesResponse.error) {
-      console.error('Error loading profiles:', profilesResponse.error);
-    }
+    if (visitsResponse.error) console.error('Error loading visits:', visitsResponse.error);
+    if (profilesResponse.error) console.error('Error loading profiles:', profilesResponse.error);
     const userMap = new Map();
     profilesData.forEach(profile => {
       if (profile.username) {
@@ -215,19 +213,18 @@ Leave a message below. Only logged-in users can use this feature.
           username: profile.username,
           avatar_url: profile.avatar_url,
           email: profile.email,
-          source: 'profiles',
-          timestamp: profile.updated_at
+          source: 'profiles'
         });
       }
     });
     visitsData.forEach(visitor => {
-      if (visitor.username) {
-        userMap.set(visitor.username.toLowerCase(), {
-          username: visitor.username,
+      const displayUsername = visitor.github_username || visitor.full_name || 'Unknown';
+      if (displayUsername) {
+        userMap.set(displayUsername.toLowerCase(), {
+          username: displayUsername,
           avatar_url: visitor.avatar_url,
           email: visitor.email,
-          source: 'user_visits',
-          timestamp: visitor.last_login
+          source: 'user_visits'
         });
       }
     });
@@ -237,10 +234,10 @@ Leave a message below. Only logged-in users can use this feature.
       return;
     }
     container.innerHTML = uniqueVisitors.map(visitor => {
-      const visitorUsername = visitor.username || 'Unknown User';
+      const visitorUsername = visitor.username;
       const githubProfileUrl = `https://github.com/${visitor.username}`;
       const canBanUser = isAdmin && visitorUsername !== currentUsername;
-      return `<div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-bottom: 1px solid rgba(0, 240, 255, 0.1); gap: 8px;"><div style="display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0;">${visitor.avatar_url ? `<img src="${visitor.avatar_url}" alt="${visitorUsername}" style="width: 24px; height: 24px; border-radius: 50%; border: 1px solid #ffd700;">` : ''}<a href="${githubProfileUrl}" target="_blank" style="color: #00f0ff; text-decoration: none; font-size: 0.85em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${visitorUsername}">${visitorUsername}</a></div>${canBanUser ? `<button class="ban-btn" onclick="banUser('${visitorUsername}')">BAN</button>` : ''}</div>`;
+      return `<div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-bottom: 1px solid rgba(0, 240, 255, 0.1); gap: 8px;"><div style="display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0;">${visitor.avatar_url ? `<img src="${visitor.avatar_url}" alt="${visitorUsername}" style="width: 24px; height: 24px; border-radius: 50%; border: 1px solid #ffd700;">` : ''}<a href="${githubProfileUrl}" target="_blank" style="color: #00f0ff; text-decoration: none; font-size: 0.85em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${visitorUsername}">${visitorUsername}</a></div>${canBanUser ? `<button class="ban-btn" onclick="banUser('${visitorUsername.replace(/'/g, "\\'")}')">BAN</button>` : ''}</div>`;
     }).join('');
   }
   function toggleProfiles() {

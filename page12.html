@@ -5,14 +5,17 @@ title: Sign Up | Aeonovyli's personal website
 
 <div style="max-width: 500px; margin: 50px auto; padding: 30px; background: rgba(20, 20, 20, 0.9); border: 1px solid #00f0ff; border-radius: 8px; text-align: center; color: #ffd700; font-family: 'Cormorant Garamond', serif;">
   <h2 style="color: #ffd700; margin-bottom: 20px;">Sign Up</h2>
-  <p style="margin-bottom: 30px;">Enter your email to receive a magic link.</p>
+  <p style="margin-bottom: 30px;">Create your account.</p>
 
   <form id="signupForm" style="display: flex; flex-direction: column; gap: 15px;">
-    <input type="email" id="emailInput" placeholder="Enter your email" required 
+    <input type="email" id="emailInput" placeholder="Email Address" required 
+           style="padding: 12px; border-radius: 4px; border: 1px solid #00f0ff; background: rgba(20, 20, 20, 0.8); color: #ffd700; font-size: 1em; font-family: 'Cormorant Garamond', serif;">
+    
+    <input type="password" id="passwordInput" placeholder="Password" required 
            style="padding: 12px; border-radius: 4px; border: 1px solid #00f0ff; background: rgba(20, 20, 20, 0.8); color: #ffd700; font-size: 1em; font-family: 'Cormorant Garamond', serif;">
     
     <button type="submit" style="background: transparent; color: #ffd700; border: 1px solid #ffd700; padding: 12px 24px; cursor: pointer; border-radius: 4px; font-size: 1.1em; font-family: 'Cormorant Garamond', serif; font-weight: bold; transition: all 0.3s ease;">
-      Send Magic Link
+      Create Account
     </button>
   </form>
 
@@ -32,27 +35,57 @@ title: Sign Up | Aeonovyli's personal website
   const form = document.getElementById('signupForm');
   const statusDiv = document.getElementById('auth-status');
   const emailInput = document.getElementById('emailInput');
+  const passwordInput = document.getElementById('passwordInput');
 
   form.onsubmit = async (e) => {
     e.preventDefault();
     const email = emailInput.value;
-    
-    statusDiv.innerHTML = "Sending link...";
+    const password = passwordInput.value;
+    const username = email.split('@')[0];
+
+    statusDiv.innerHTML = "Creating account...";
     form.style.display = 'none';
 
-    const { error } = await _supabase.auth.signInWithOtp({
+    const { data: authData, error: authError } = await _supabase.auth.signUp({
       email: email,
+      password: password,
       options: {
-        emailRedirectTo: window.location.origin + '/page2'
+        data: {
+          username: username,
+          full_name: username,
+          avatar_url: `https://ui-avatars.com/api/?name=${encodeURIComponent(username)}&background=ffd700&color=000&size=128`
+        }
       }
     });
 
-    if (error) {
-      statusDiv.innerHTML = `<span style="color: #ff4500;">Error: ${error.message}</span>`;
+    if (authError) {
+      statusDiv.innerHTML = `<span style="color: #ff4500;">Error: ${authError.message}</span>`;
       form.style.display = 'flex';
-    } else {
-      statusDiv.innerHTML = `<span style="color: #00ff00;">Check your email for the login link!</span>`;
+      return;
+    }
+
+    if (authData.user) {
+      const { error: profileError } = await _supabase.from('profiles').upsert([{
+        id: authData.user.id,
+        username: username,
+        email: email,
+        full_name: username,
+        avatar_url: authData.user.user_metadata.avatar_url
+      }], { onConflict: 'id' });
+
+      if (profileError) {
+        statusDiv.innerHTML = `<span style="color: #ff4500;">Profile error: ${profileError.message}</span>`;
+        form.style.display = 'flex';
+        return;
+      }
+
+      statusDiv.innerHTML = `<span style="color: #00ff00;">Account created! You can now sign in.</span>`;
       emailInput.value = '';
+      passwordInput.value = '';
+      
+      setTimeout(() => {
+        window.location.href = '/page2';
+      }, 2000);
     }
   };
 </script>

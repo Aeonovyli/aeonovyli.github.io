@@ -42,7 +42,7 @@ Leave a message below. Only logged-in users can use this feature.
 
   async function recordUserLogin(user) {
     const { error } = await _supabase.from('user_visits').upsert([{
-      github_user_id: user.id,
+      github_user_id: user.id, // Stored as TEXT (no bigint cast)
       github_username: user.user_metadata.user_name || user.user_metadata.login,
       full_name: user.user_metadata.full_name,
       avatar_url: user.user_metadata.avatar_url,
@@ -54,12 +54,24 @@ Leave a message below. Only logged-in users can use this feature.
   async function checkUser() {
     const { data: { session } } = await _supabase.auth.getSession();
     currentSession = session;
-    if (session) {
+
+    if (session && session.user) {
       const user = session.user;
+      const isVerified = user.email_confirmed_at !== null;
+
+      if (!isVerified) {
+        loginOptions.style.display = 'flex';
+        userInfo.style.display = 'none';
+        messageForm.style.display = 'none';
+        alert("Please verify your email address before posting messages.");
+        return;
+      }
+
       await recordUserLogin(user);
       loginOptions.style.display = 'none';
       userInfo.style.display = 'flex';
       messageForm.style.display = 'block';
+
       const name = user.user_metadata.full_name || user.user_metadata.user_name || "GitHub User";
       document.getElementById('user-name').innerText = name;
       document.getElementById('user-avatar').src = user.user_metadata.avatar_url;
@@ -68,6 +80,7 @@ Leave a message below. Only logged-in users can use this feature.
       userInfo.style.display = 'none';
       messageForm.style.display = 'none';
     }
+
     loadMessages();
   }
 

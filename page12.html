@@ -65,7 +65,7 @@ title: Sign Up | Aeonovyli's personal website
     }
 
     if (authData.user) {
-      const { error: profileError } = await _supabase.from('profiles').upsert([{
+      const { error: profileError } = await _supabase.from('user_visits').upsert([{
         id: authData.user.id,
         username: username,
         email: email,

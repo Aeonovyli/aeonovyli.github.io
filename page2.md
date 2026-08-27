@@ -1,32 +1,42 @@
+---
+layout: default
+title: Contact me | Aeonovyli's personal website
+---
+
 # Contact me
 Leave a message below. Only logged-in users can use this feature.
 
 <div class="message-box">
-  <div id="auth-ui" style="margin-bottom: 20px; padding: 15px; background: rgba(20, 20, 20, 0.6); border-radius: 8px; border: 1px solid #00f0ff; text-align: center;">
-    <div id="login-options">
-      <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-        <a href="/page12" class="submit-btn" style="display: inline-block; background: #28a745; color: #fff; border: 1px solid #28a745; padding: 8px 16px; text-decoration: none; border-radius: 4px; cursor: pointer;">Sign Up</a>
-        <a href="/page13" class="submit-btn" style="display: inline-block; background: #28a745; color: #fff; border: 1px solid #28a745; padding: 8px 16px; text-decoration: none; border-radius: 4px; cursor: pointer;">Sign In</a>
+  <div id="auth-ui" style="margin-bottom: 20px; padding: 15px; background: rgba(20, 20, 20, 0.6); border-radius: 8px; border: 1px solid #00f0ff; text-align: left; display: flex; flex-direction: column; align-items: flex-start; width: 100%;">
+    
+    <!-- Login Options -->
+    <div id="login-options" style="width: 100%;">
+      <p style="color: #ffd700; margin-bottom: 15px; font-size: 0.9em; font-family: 'Cormorant Garamond', serif;">Select a provider to sign in:</p>
+      <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+        <a href="/page12" style="display: inline-block; background: #28a745; color: #fff; border: 1px solid #28a745; padding: 10px 20px; text-decoration: none; border-radius: 4px; font-family: 'Cormorant Garamond', serif; font-weight: bold; font-size: 1.1em; transition: all 0.3s ease;">Sign Up</a>
+        <a href="/page13" style="display: inline-block; background: #007bff; color: #fff; border: 1px solid #007bff; padding: 10px 20px; text-decoration: none; border-radius: 4px; font-family: 'Cormorant Garamond', serif; font-weight: bold; font-size: 1.1em; transition: all 0.3s ease;">Sign In</a>
       </div>
     </div>
-    <div id="user-info" style="display:none; align-items: center; gap: 12px; justify-content: center;">
-      <img id="user-avatar" src="" style="width:35px; border-radius:50%; border: 1px solid #ffd700;">
-      <div>
-        <span id="user-name" style="font-weight:bold; display:block; color: #ffd700;"></span>
-        <button onclick="logout()" style="background:none; border:none; color:#ff4500; cursor:pointer; text-decoration:underline; padding:0; font-size: 0.8em;">Logout</button>
+
+    <!-- User Info (Aligned Left) -->
+    <div id="user-info" style="display: none; width: 100%; align-items: flex-start; gap: 15px; margin-top: 10px;">
+      <img id="user-avatar" src="" style="width: 45px; height: 45px; border-radius: 50%; border: 2px solid #ffd700; object-fit: cover;">
+      <div style="display: flex; flex-direction: column; align-items: flex-start;">
+        <span id="user-name" style="font-weight: bold; color: #ffd700; font-size: 1.2em; font-family: 'Cormorant Garamond', serif;"></span>
+        <button onclick="logout()" style="background: none; border: none; color: #ff4500; cursor: pointer; text-decoration: underline; padding: 0; font-size: 0.9em; font-family: 'Cormorant Garamond', serif; margin-top: 5px;">Logout</button>
       </div>
     </div>
   </div>
 
-  <form id="messageForm" style="display:none; margin-bottom: 30px;">
+  <form id="messageForm" style="display: none; margin-bottom: 30px; width: 100%;">
     <div class="form-group">
-      <textarea id="userMessage" rows="4" required placeholder="Type your message..." style="width:100%; padding:10px; border-radius:4px; border:2px solid #00f0ff; background: rgba(20, 20, 20, 0.8); color: #ffd700; font-family: 'Cormorant Garamond', serif;"></textarea>
+      <textarea id="userMessage" rows="4" required placeholder="Type your message..." style="width: 100%; padding: 12px; border-radius: 4px; border: 2px solid #00f0ff; background: rgba(20, 20, 20, 0.8); color: #ffd700; font-family: 'Cormorant Garamond', serif; font-size: 1.1em; resize: vertical;"></textarea>
     </div>
-    <button type="submit" id="submitBtn" class="submit-btn" style="margin-top:10px;">Post Message</button>
+    <button type="submit" id="submitBtn" style="margin-top: 15px; background: #00f0ff; color: #000; border: 1px solid #00f0ff; padding: 10px 25px; cursor: pointer; border-radius: 4px; font-family: 'Cormorant Garamond', serif; font-weight: bold; font-size: 1.1em; transition: all 0.3s ease;">Post Message</button>
   </form>
   
-  <div id="messagesDisplay" class="messages-display">
-    <h3>Live Messages:</h3>
+  <div id="messagesDisplay" class="messages-display" style="width: 100%;">
+    <h3 style="color: #ffd700; font-family: 'Cormorant Garamond', serif; margin-bottom: 20px;">Live Messages:</h3>
     <div id="messagesList" style="display: flex; flex-direction: column; gap: 15px;">Messages loading...</div>
   </div>
 </div>
@@ -90,7 +100,7 @@ Leave a message below. Only logged-in users can use this feature.
     } else {
       messagesList.innerHTML = '';
       if (data.length === 0) {
-        messagesList.innerHTML = '<p style="color:gray;">No messages yet.</p>';
+        messagesList.innerHTML = '<p style="color:gray; font-family: \'Cormorant Garamond\', serif;">No messages yet.</p>';
       } else {
         data.forEach(msg => addMessageToUI(msg));
       }
@@ -107,17 +117,17 @@ Leave a message below. Only logged-in users can use this feature.
     const div = document.createElement('div');
     div.className = 'message-item';
     div.id = `msg-${msg.id}`;
-    div.style = "position:relative;";
+    div.style = "position: relative; background: rgba(30, 30, 30, 0.5); padding: 15px; border-radius: 6px; border: 1px solid #00f0ff;";
 
-    const editBtn = (isOwner || isAdmin) ? `<button onclick="toggleEdit('${msg.id}')" style="position:absolute; top:10px; right:75px; color:#ffd700; border:none; background:none; cursor:pointer; font-weight:bold;">Edit</button>` : '';
-    const deleteBtn = (isOwner || isAdmin) ? `<button onclick="deleteMsg('${msg.id}')" style="position:absolute; top:10px; right:10px; color:#ff4500; border:none; background:none; cursor:pointer; font-weight:bold;">Delete</button>` : '';
+    const editBtn = (isOwner || isAdmin) ? `<button onclick="toggleEdit('${msg.id}')" style="position:absolute; top:10px; right:75px; color:#ffd700; border:none; background:none; cursor:pointer; font-weight:bold; font-family: 'Cormorant Garamond', serif;">Edit</button>` : '';
+    const deleteBtn = (isOwner || isAdmin) ? `<button onclick="deleteMsg('${msg.id}')" style="position:absolute; top:10px; right:10px; color:#ff4500; border:none; background:none; cursor:pointer; font-weight:bold; font-family: 'Cormorant Garamond', serif;">Delete</button>` : '';
 
     div.innerHTML = `
       ${editBtn}
       ${deleteBtn}
-      <strong style="color:#ff944d;">${msg.username || 'Anonymous'}</strong> 
-      <small class="timestamp" style="margin-left:8px;">${new Date(msg.created_at).toLocaleString()}</small>
-      <p style="margin: 10px 0 0 0; color:#ffd700; line-height:1.5;"><span id="text-${msg.id}">${msg.content}</span></p>
+      <strong style="color:#ff944d; font-family: 'Cormorant Garamond', serif; font-size: 1.1em;">${msg.username || 'Anonymous'}</strong> 
+      <small class="timestamp" style="margin-left:10px; color: #aaa; font-family: 'Cormorant Garamond', serif; font-size: 0.9em;">${new Date(msg.created_at).toLocaleString()}</small>
+      <p style="margin: 12px 0 0 0; color:#ffd700; line-height:1.6; font-family: 'Cormorant Garamond', serif; font-size: 1.1em;"><span id="text-${msg.id}">${msg.content}</span></p>
     `;
     messagesList.appendChild(div);
   }
@@ -158,10 +168,10 @@ Leave a message below. Only logged-in users can use this feature.
     const textSpan = document.getElementById(`text-${id}`); 
     const currentContent = textSpan.innerText;
     textSpan.parentElement.innerHTML = `
-      <textarea id="edit-input-${id}" style="width:100%; margin-top:10px; background:rgba(20,20,20,0.8); color:#ffd700; border:1px solid #00f0ff; padding:8px; font-family:inherit;">${currentContent}</textarea>
+      <textarea id="edit-input-${id}" style="width:100%; margin-top:10px; background:rgba(20,20,20,0.8); color:#ffd700; border:1px solid #00f0ff; padding:8px; font-family: 'Cormorant Garamond', serif;">${currentContent}</textarea>
       <div style="margin-top:5px;">
-        <button onclick="saveEdit('${id}')" style="color:#00f0ff; background:none; border:1px solid #00f0ff; cursor:pointer; padding:2px 10px; border-radius:4px;">Save</button>
-        <button onclick="loadMessages()" style="color:ff4500; background:none; border:none; cursor:pointer; margin-left:10px;">Cancel</button>
+        <button onclick="saveEdit('${id}')" style="color:#00f0ff; background:none; border:1px solid #00f0ff; cursor:pointer; padding:2px 10px; border-radius:4px; font-family: 'Cormorant Garamond', serif;">Save</button>
+        <button onclick="loadMessages()" style="color:#ff4500; background:none; border:none; cursor:pointer; margin-left:10px; font-family: 'Cormorant Garamond', serif;">Cancel</button>
       </div>
     `;
   }

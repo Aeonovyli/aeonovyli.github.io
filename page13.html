@@ -92,7 +92,6 @@ title: Sign In | Aeonovyli's personal website
     const isLogged = await checkSession();
     if (isLogged) return;
 
-    statusDiv.innerHTML = "Redirecting to GitHub...";
     const { error } = await _supabase.auth.signInWithOAuth({
       provider: 'github',
       options: {

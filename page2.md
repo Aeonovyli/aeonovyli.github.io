@@ -52,11 +52,11 @@ Leave a message below. Only logged-in users can use this feature.
       full_name: metadata.full_name || username,
       avatar_url: avatarUrl,
       email: userEmail,
-      last_login: new Date().toISOString()
+      updated_at: new Date().toISOString() 
     }], { onConflict: 'github_user_id' });
     if (error) console.error('Error recording login:', error);
   }
-
+  
   async function checkUser() {
     const { data: { session } } = await _supabase.auth.getSession();
     currentSession = session;
@@ -193,18 +193,21 @@ Leave a message below. Only logged-in users can use this feature.
     await _supabase.from('messages').delete().eq('username', username);
     alert(username + " has been cast into the void.");
     fetchAllVisitors();
-  }
-  async function fetchAllVisitors() {
+  }  async function fetchAllVisitors() {
     const container = document.getElementById('profiles-container');
     const { data: { session } } = await _supabase.auth.getSession();
     const userMeta = session?.user?.user_metadata;
     const currentUsername = userMeta?.full_name || userMeta?.user_name || userMeta?.email || 'Anonymous';
     const isAdmin = userMeta?.full_name === 'Aeonovyli' || userMeta?.user_name === 'Aeonovyli' || userMeta?.nickname === 'Aeonovyli';
-    const visitsResponse = await _supabase.from('user_visits').select('github_user_id, github_username, full_name, avatar_url, email, last_login');
+    const visitsResponse = await _supabase.from('user_visits').select('github_user_id, github_username, full_name, avatar_url, email, updated_at');
     const profilesResponse = await _supabase.from('profiles').select('user_id, username, avatar_url, email, updated_at');
     const visitsData = visitsResponse.data || [];
     const profilesData = profilesResponse.data || [];
-    if (visitsResponse.error) console.error('Error loading visits:', visitsResponse.error);
+    if (visitsResponse.error) {
+      console.error('Error loading visits:', visitsResponse.error);
+      container.innerHTML = '<p style="color:red; text-align:center; padding:10px;">Error loading visitors. Check console.</p>';
+      return;
+    }
     if (profilesResponse.error) console.error('Error loading profiles:', profilesResponse.error);
     const userMap = new Map();
     profilesData.forEach(profile => {
@@ -240,21 +243,6 @@ Leave a message below. Only logged-in users can use this feature.
       return `<div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-bottom: 1px solid rgba(0, 240, 255, 0.1); gap: 8px;"><div style="display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0;">${visitor.avatar_url ? `<img src="${visitor.avatar_url}" alt="${visitorUsername}" style="width: 24px; height: 24px; border-radius: 50%; border: 1px solid #ffd700;">` : ''}<a href="${githubProfileUrl}" target="_blank" style="color: #00f0ff; text-decoration: none; font-size: 0.85em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${visitorUsername}">${visitorUsername}</a></div>${canBanUser ? `<button class="ban-btn" onclick="banUser('${visitorUsername.replace(/'/g, "\\'")}')">BAN</button>` : ''}</div>`;
     }).join('');
   }
-  function toggleProfiles() {
-    const list = document.getElementById('profileList');
-    list.style.display = list.style.display === 'none' ? 'block' : 'none';
-    if (list.style.display === 'block') fetchAllVisitors();
-  }
-  _supabase.channel('public:user_visits').on('postgres_changes', { event: '*', schema: 'public', table: 'user_visits' }, () => { const list = document.getElementById('profileList'); if (list.style.display === 'block') fetchAllVisitors(); }).subscribe();
-  const originalOnSubmit = messageForm.onsubmit;
-  messageForm.onsubmit = async (e) => {
-    e.preventDefault();
-    const user = currentSession?.user;
-    const username = user?.user_metadata?.full_name || user?.user_metadata?.user_name;
-    const { data: isBanned } = await _supabase.from('blacklist').select('username').eq('username', username).single();
-    if (isBanned) return alert("Your access has been revoked by Aeonovyli. If you feel that you should not have been banned, start an issue on the github repository.");
-    await originalOnSubmit(e);
-  };
 </script>
 <nav class="nav">
 <a href="/">Home</a>

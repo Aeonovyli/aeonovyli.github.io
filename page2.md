@@ -8,9 +8,9 @@ Leave a message below. Only logged-in users can use this feature.
 
 <div class="message-box">
   <div id="auth-ui" style="margin-bottom: 20px; padding: 15px; background: rgba(20, 20, 20, 0.6); border-radius: 8px; border: 1px solid #00f0ff; text-align: center;">
-    <div id="login-options" style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-bottom: 15px;">
-      <a href="/page12" style="display: inline-block; background: transparent; color: #ffd700; border: 1px solid #ffd700; padding: 10px 20px; text-decoration: none; border-radius: 4px; font-family: 'Cormorant Garamond', serif; font-weight: bold; font-size: 1.1em; transition: all 0.3s ease;">Sign Up</a>
-      <a href="/page13" style="display: inline-block; background: transparent; color: #ffd700; border: 1px solid #ffd700; padding: 10px 20px; text-decoration: none; border-radius: 4px; font-family: 'Cormorant Garamond', serif; font-weight: bold; font-size: 1.1em; transition: all 0.3s ease;">Sign In</a>
+    <div id="login-options" style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 15px;">
+      <a href="/page12" style="display: inline-block; background: transparent; color: #ffd700; border: 1px solid #ffd700; padding: 5px 12px; text-decoration: none; border-radius: 4px; font-family: 'Cormorant Garamond', serif; font-weight: bold; font-size: 0.95em; transition: all 0.3s ease;">Sign Up</a>
+      <a href="/page13" style="display: inline-block; background: transparent; color: #ffd700; border: 1px solid #ffd700; padding: 5px 12px; text-decoration: none; border-radius: 4px; font-family: 'Cormorant Garamond', serif; font-weight: bold; font-size: 0.95em; transition: all 0.3s ease;">Sign In</a>
     </div>
     <div id="user-info" style="display: none; align-items: center; justify-content: center; gap: 12px; margin-bottom: 15px;">
       <img id="user-avatar" src="" style="width:35px; border-radius:50%; border: 1px solid #ffd700;">
@@ -24,7 +24,7 @@ Leave a message below. Only logged-in users can use this feature.
     <div class="form-group">
       <textarea id="userMessage" rows="4" required placeholder="Type your message..." style="width:100%; padding:10px; border-radius:4px; border:2px solid #00f0ff; background: rgba(20, 20, 20, 0.8); color: #ffd700; font-family: 'Cormorant Garamond', serif;"></textarea>
     </div>
-    <button type="submit" id="submitBtn" style="margin-top:10px; background: transparent; color: #ffd700; border: 1px solid #ffd700; padding: 10px 25px; cursor: pointer; border-radius: 4px; font-family: 'Cormorant Garamond', serif; font-weight: bold; font-size: 1.1em;">Post Message</button>
+    <button type="submit" id="submitBtn" style="margin-top:10px; background: transparent; color: #ffd700; border: 1px solid #ffd700; padding: 8px 20px; cursor: pointer; border-radius: 4px; font-family: 'Cormorant Garamond', serif; font-weight: bold; font-size: 1em;">Post Message</button>
   </form>
   <div id="messagesDisplay" class="messages-display">
     <h3 style="color: #ffd700; font-family: 'Cormorant Garamond', serif;">Live Messages:</h3>
@@ -161,7 +161,7 @@ Leave a message below. Only logged-in users can use this feature.
     cursor: pointer; font-size: 0.7em; border-radius: 3px; padding: 2px 5px; font-family: 'Cormorant Garamond', serif;
   }
   .ban-btn:active { animation: banClickGlow 0.6s ease-in-out 1; }
-  .submit-btn:hover {
+  a:hover, button:hover {
     background: rgba(255, 215, 0, 0.1);
     box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
   }
@@ -208,4 +208,4 @@ Leave a message below. Only logged-in users can use this feature.
       }
     });
     if (uniqueVisitors.length === 0) {
-      container.innerHTML = '<p style="color:#888; text-align:center; padding:10px; font-family: \'Corm
+      container.innerHTML = '<p style="color:#888; text-align:center; padding:10px; font-family: \'Cormorant

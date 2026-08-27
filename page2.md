@@ -7,14 +7,14 @@ title: Contact me | Aeonovyli's personal website
 Leave a message below. Only logged-in users can use this feature.
 
 <div class="message-box">
-  <div id="auth-ui" style="margin-bottom: 20px; padding: 15px; background: rgba(20, 20, 20, 0.6); border-radius: 8px; border: 1px solid #00f0ff; text-align: center;">
+  <div id="auth-ui" style="margin-bottom: 20px; padding: 15px; background: rgba(20, 20, 20, 0.6); border-radius: 8px; border: 1px solid #00f0ff;">
     <div id="login-options" style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 15px;">
       <a href="/page12" style="display: inline-block; background: transparent; color: #ffd700; border: 1px solid #ffd700; padding: 5px 12px; text-decoration: none; border-radius: 4px; font-family: 'Cormorant Garamond', serif; font-weight: bold; font-size: 0.95em; transition: all 0.3s ease;">Sign Up</a>
       <a href="/page13" style="display: inline-block; background: transparent; color: #ffd700; border: 1px solid #ffd700; padding: 5px 12px; text-decoration: none; border-radius: 4px; font-family: 'Cormorant Garamond', serif; font-weight: bold; font-size: 0.95em; transition: all 0.3s ease;">Sign In</a>
     </div>
-    <div id="user-info" style="display: none; align-items: center; justify-content: center; gap: 12px; margin-bottom: 15px;">
+    <div id="user-info" style="display: none; align-items: flex-start; gap: 12px; margin-bottom: 15px;">
       <img id="user-avatar" src="" style="width:35px; border-radius:50%; border: 1px solid #ffd700;">
-      <div>
+      <div style="display: flex; flex-direction: column; align-items: flex-start;">
         <span id="user-name" style="font-weight:bold; display:block; color: #ffd700; font-family: 'Cormorant Garamond', serif;"></span>
         <button onclick="logout()" style="background:none; border:none; color:#ff4500; cursor:pointer; text-decoration:underline; padding:0; font-size: 0.8em; font-family: 'Cormorant Garamond', serif;">Logout</button>
       </div>
@@ -208,4 +208,42 @@ Leave a message below. Only logged-in users can use this feature.
       }
     });
     if (uniqueVisitors.length === 0) {
-      container.innerHTML = '<p style="color:#888; text-align:center; padding:10px; font-family: \'Cormorant
+      container.innerHTML = '<p style="color:#888; text-align:center; padding:10px; font-family: \'Cormorant Garamond\', serif;">No visitors yet.</p>';
+      return;
+    }
+    container.innerHTML = uniqueVisitors.map(visitor => {
+      const visitorUsername = visitor.github_username || visitor.full_name || 'Unknown User';
+      const githubProfileUrl = `https://github.com/${visitor.github_username}`;
+      const canBanUser = isAdmin && visitorUsername !== currentUsername;
+      return `<div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-bottom: 1px solid rgba(0, 240, 255, 0.1); gap: 8px;"><div style="display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0;">${visitor.avatar_url ? `<img src="${visitor.avatar_url}" alt="${visitorUsername}" style="width: 24px; height: 24px; border-radius: 50%; border: 1px solid #ffd700;">` : ''}<a href="${githubProfileUrl}" target="_blank" style="color: #00f0ff; text-decoration: none; font-size: 0.85em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${visitorUsername}">${visitorUsername}</a></div>${canBanUser ? `<button class="ban-btn" onclick="banUser('${visitorUsername}')">BAN</button>` : ''}</div>`;
+    }).join('');
+  }
+  function toggleProfiles() {
+    const list = document.getElementById('profileList');
+    list.style.display = list.style.display === 'none' ? 'block' : 'none';
+    if (list.style.display === 'block') fetchAllVisitors();
+  }
+  _supabase.channel('public:user_visits').on('postgres_changes', { event: '*', schema: 'public', table: 'user_visits' }, () => { const list = document.getElementById('profileList'); if (list.style.display === 'block') fetchAllVisitors(); }).subscribe();
+  const originalOnSubmit = messageForm.onsubmit;
+  messageForm.onsubmit = async (e) => {
+    e.preventDefault();
+    const user = currentSession?.user;
+    const username = user?.user_metadata?.full_name || user?.user_metadata?.user_name;
+    const { data: isBanned } = await _supabase.from('blacklist').select('username').eq('username', username).single();
+    if (isBanned) return alert("Your access has been revoked by Aeonovyli. If you feel that you should not have been banned, start an issue on the github repository.");
+    await originalOnSubmit(e);
+  };
+</script>
+<nav class="nav">
+<a href="/">Home</a>
+<a href="/page1">Interests</a>
+<a href="/page3">Profiles</a>
+<a href="/page4">Eiriaoloth</a>
+<a href="https://bz-next.github.io/mapviewer6/mapviewer.html">BZFlag map editor</a>
+<a href="/page6">Flash</a>
+<a href="/page7">BZFlag</a>
+<a href="/page8">Chess</a>
+<a href="/page9">Sudoku</a>
+<a href="/page10">Newsletter</a>
+<a href="/page11">Keep Android Open</a>
+</nav>

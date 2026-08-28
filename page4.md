@@ -9,6 +9,14 @@ My book is *Eiriaoloth*, an epic fantasy through the beautiful and lush land, so
 
 Certainly not the meek inhabitants of Fornitas, or even the more powerful Guardians. The doom marches on, unchecked. But the Redeemer is still there, and Avenoria shall not fall while He still breaths. The question is, how long will that be?
 
+Attempt to download the file here;
+
+<nav class="nav">
+<a href="/Eiriaoloth.html">Attempt download</a>
+</nav>
+
+Don't get it wrong or wait 12 hours.
+
 I think I'd like to put the first chapter or a little less of my book here, on this page.
 Please, use the [contact me](https://aeonovyli.github.io/page2) page to tell me what you think of my idea. 
 

@@ -210,7 +210,6 @@ function tryDecrypt() {
   downloadBtn.style.display = 'none';
 
   setTimeout(() => {
-    const correctHash = 'correct_hash_here';
     const userHash = CryptoJS.SHA256(password).toString();
 
     if (userHash === correctHash) {

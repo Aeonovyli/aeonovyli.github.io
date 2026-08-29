@@ -235,16 +235,16 @@ function tryDecrypt() {
 
     if (userHash === correctHash) {
       localStorage.setItem(LAST_ATTEMPT_KEY, now.toString());
-      localStorage.setItem(DECODER_DISABLED_KEY, (now + 12 * 60 * 60 * 1000).toString());
       showLoader(false);
       outputDiv.textContent = 'Access granted. Download available.';
       outputDiv.style.display = 'block';
       downloadBtn.style.display = 'block';
-      unlockSection.style.display = 'none';
     } else {
       localStorage.setItem(LAST_ATTEMPT_KEY, now.toString());
+      localStorage.setItem(DECODER_DISABLED_KEY, (now + 12 * 60 * 60 * 1000).toString());
       showLoader(false);
-      showError('!ACCESS DENIED: INCORRECT KEY!');
+      unlockSection.style.display = 'none';
+      showError('!ACCESS DENIED: INCORRECT KEY! Decoder disabled for 12 hours.');
     }
   }, 1500);
 }

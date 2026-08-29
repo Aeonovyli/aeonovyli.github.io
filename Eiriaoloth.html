@@ -10,25 +10,184 @@
 
     
 </script>
-    <style>
- body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; background: #000019; color: #1a1a1a; }
-        .box { background: white; padding: 30px; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); max-width: 500px; width: 90%; text-align: center; border: 1px solid #e2e8f0; }
-        input { width: 100%; padding: 14px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 16px; box-sizing: border-box; margin-bottom: 10px; }
-        input:focus { outline: none; border-color: #3b82f6; }
-        .checkbox-label { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 0.95rem; cursor: pointer; margin-bottom: 20px; color: #475569; }
-        .checkbox-label input[type="checkbox"] { width: 18px; height: 18px; margin: 0; cursor: pointer; }
-        
-        .btn-center { display: flex; justify-content: center; }
-        button.main-btn { width: 100%; max-width: 350px; padding: 14px; background: #3b82f6; color: white; border: none; border-radius: 10px; font-size: 16px; cursor: pointer; font-weight: bold; }
-        button.main-btn:hover { background: #2563eb; }
-        button.dl-btn { width: 100%; max-width: 350px; padding: 14px; background: #10b981; color: white; border: none; border-radius: 10px; font-size: 16px; cursor: pointer; font-weight: bold; margin-top: 15px; display: none; }
-        
-        #output { text-align: left; white-space: pre-wrap; margin-top: 20px; padding: 15px; background: #f8fafc; display: none; border-radius: 10px; font-family: monospace; word-break: break-all; border: 1px solid #e2e8f0; max-height: 400px; overflow-y: auto; }
-        .error { color: #dc2626; margin-top: 15px; display: none; font-weight: bold; }
-        #loader-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); color: white; z-index: 9999; display: none; flex-direction: column; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
-        .spinner { border: 4px solid rgba(255, 255, 255, 0.2); border-top: 4px solid #3b82f6; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin-bottom: 15px; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-    </style>
+<style>
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  background: #000019;
+  color: #ffd700;
+  line-height: 1.6;
+}
+
+.box {
+  background: rgba(34, 34, 34, 0.9);
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  border: 1px solid #ffd700;
+}
+
+input {
+  width: 100%;
+  padding: 14px;
+  background-color: rgba(20, 20, 20, 0.8);
+  color: #ffd700;
+  border: 2px solid #00f0ff;
+  border-radius: 10px;
+  font-size: 16px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: #ff944d;
+  box-shadow: 0 0 12px rgba(255, 148, 77, 0.6);
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  margin-bottom: 20px;
+  color: #ffd700;
+  text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  cursor: pointer;
+  accent-color: #00f0ff;
+}
+
+.btn-center {
+  display: flex;
+  justify-content: center;
+}
+
+button.main-btn {
+  width: 100%;
+  max-width: 350px;
+  padding: 14px;
+  background: rgba(255, 215, 0, 0.1);
+  color: #ffd700;
+  border: 2px solid #ffd700;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff;
+  transition: all 0.3s ease;
+}
+
+button.main-btn:hover {
+  background: rgba(255, 215, 0, 0.2);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+}
+
+@keyframes clickGlow {
+  0% { text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff; }
+  50% { text-shadow: 1px 1px 8px #ffffff, 0 0 16px #ffffff; }
+  100% { text-shadow: 1px 1px 4px #ff4500, 0 0 8px #00f0ff; }
+}
+
+button.main-btn:active {
+  animation: clickGlow 0.6s ease-in-out 1;
+}
+
+button.dl-btn {
+  width: 100%;
+  max-width: 350px;
+  padding: 14px;
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+  border: 2px solid #10b981;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 15px;
+  display: none;
+  text-shadow: 1px 1px 4px rgba(16, 185, 129, 0.5), 0 0 8px #00f0ff;
+  transition: all 0.3s ease;
+}
+
+button.dl-btn:hover {
+  background: rgba(16, 185, 129, 0.2);
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.6);
+}
+
+#output {
+  text-align: left;
+  white-space: pre-wrap;
+  margin-top: 20px;
+  padding: 15px;
+  background: rgba(20, 20, 20, 0.6);
+  display: none;
+  border-radius: 10px;
+  font-family: monospace;
+  word-break: break-all;
+  border: 1px solid #00f0ff;
+  max-height: 400px;
+  overflow-y: auto;
+  color: #00f0ff;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+}
+
+.error {
+  color: #ff4500;
+  margin-top: 15px;
+  display: none;
+  font-weight: bold;
+  text-shadow: 0 0 8px #ff4500;
+}
+
+#loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 15, 0.9);
+  color: #ffd700;
+  z-index: 9999;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+
+.spinner {
+  border: 4px solid rgba(0, 240, 255, 0.1);
+  border-top: 4px solid #00f0ff;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
+
 </head>
 <body>
     <div id="loader-overlay"><div class="spinner"></div><h2 style="margin:0;">Decrypting...</h2></div>

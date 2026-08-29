@@ -176,6 +176,7 @@
 const ATTEMPT_COOLDOWN_MS = 12 * 60 * 60 * 1000;
 const LAST_ATTEMPT_KEY = 'eiriaoloth_last_attempt';
 const DECODER_DISABLED_KEY = 'eiriaoloth_decoder_disabled_until';
+const DECODER_COOLDOWN_MS = 1 * 60 * 60 * 1000;
 
 const passwordInput = document.getElementById('password');
 const unlockBtn = document.querySelector('.main-btn');
@@ -241,10 +242,10 @@ function tryDecrypt() {
       downloadBtn.style.display = 'block';
     } else {
       localStorage.setItem(LAST_ATTEMPT_KEY, now.toString());
-      localStorage.setItem(DECODER_DISABLED_KEY, (now + 12 * 60 * 60 * 1000).toString());
+      localStorage.setItem(DECODER_DISABLED_KEY, (now + DECODER_COOLDOWN_MS).toString());
       showLoader(false);
       unlockSection.style.display = 'none';
-      showError('!ACCESS DENIED: INCORRECT KEY! Decoder disabled for 12 hours.');
+      showError('!ACCESS DENIED: INCORRECT KEY! Decoder disabled for 1 hour.');
     }
   }, 1500);
 }

@@ -1,269 +1,418 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eiriaoloth––Download | Aeonovyli's personal website</title>
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="manifest" href="/site.webmanifest">
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Cormorant+Garamond&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
-  <link rel="stylesheet" href="/assets/css/style.css">
-  <style>
-    #particles-js { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
-    #banner-js { position: fixed; top: 1; left: 0; width: 100%; height: 1%; z-index: 0; pointer-events: none; }
-    body { position: relative; z-index: 1; background: #000; color: #ffd700; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
-    .decryption-container { position: relative; z-index: 2; max-width: 500px; margin: 100px auto; padding: 40px; background: rgba(10, 10, 30, 0.85); border: 1px solid #00f3ff; border-radius: 16px; box-shadow: 0 0 20px rgba(0, 243, 255, 0.2); backdrop-filter: blur(5px); }
-    h1 { color: #ffd700; font-family: 'Cinzel', serif; text-align: center; margin-top: 0; font-size: 2rem; letter-spacing: 2px; text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
-    .input-group { margin-bottom: 20px; text-align: left; }
-    label { display: block; color: #00f3ff; margin-bottom: 8px; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; }
-    input[type="password"] { width: 100%; padding: 12px; background: rgba(0, 0, 0, 0.5); border: 1px solid #00f3ff; border-radius: 6px; color: #fff; font-size: 1rem; box-sizing: border-box; transition: border-color 0.3s, box-shadow 0.3s; }
-    input[type="password"]:focus { outline: none; border-color: #ffd700; box-shadow: 0 0 15px rgba(0, 243, 255, 0.4); }
-    .checkbox-wrapper { display: flex; align-items: center; justify-content: center; margin-bottom: 25px; }
-    .checkbox-wrapper input { width: 16px; height: 16px; margin-right: 8px; cursor: pointer; accent-color: #00f3ff; }
-    .checkbox-wrapper span { color: #ffd700; cursor: pointer; font-size: 0.9rem; }
-    button.main-btn { width: 100%; padding: 14px; background: #00f3ff; color: #000; border: none; border-radius: 6px; font-weight: bold; font-size: 1.1rem; cursor: pointer; transition: all 0.3s; box-shadow: 0 0 10px rgba(0, 243, 255, 0.3); }
-    button.main-btn:hover { background: #ffd700; box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); transform: translateY(-2px); }
-    button.dl-btn { width: 100%; padding: 14px; background: #00f3ff; color: #fff; border: none; border-radius: 6px; font-weight: bold; font-size: 1.1rem; cursor: pointer; margin-top: 15px; display: none; box-shadow: 0 0 10px rgba(16, 185, 129, 0.3); }
-    button.dl-btn:hover { background: #00f3ff; box-shadow: 0 0 15px rgba(16, 185, 129, 0.5); }
-    #output { text-align: left; white-space: pre-wrap; margin-top: 20px; padding: 15px; background: rgba(0, 0, 0, 0.6); border: 1px solid #ffd700; border-radius: 6px; font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; line-height: 1.6; color: #fff; display: none; max-height: 300px; overflow-y: auto; }
-    .error { color: #ff4444; margin-top: 15px; display: none; font-weight: bold; text-align: center; }
-    #loader-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); color: #ffd700; z-index: 1000; display: none; flex-direction: column; align-items: center; justify-content: center; }
-    .spinner { border: 4px solid rgba(0, 243, 255, 0.2); border-top: 4px solid #00f3ff; border-radius: 50%; width: 60px; height: 60px; animation: spin 1s linear infinite; margin-bottom: 20px; }
-    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-    .filename-display { background: rgba(0, 243, 255, 0.1); padding: 8px 15px; border-radius: 4px; border: 1px solid #00f3ff; color: #00f3ff; font-size: 0.9rem; margin: 15px 0; display: inline-block; letter-spacing: 1px; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eiriaoloth––Download | Aeonovyli's personal website</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="manifest" href="/site.webmanifest">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Cormorant+Garamond&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/argon2-browser@1.18.0/dist/index.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #000019;
+            color: #ffd700;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            padding-top: 80px;
+        }
+        
+        #banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 25, 0.95);
+            border-bottom: 2px solid #00f0ff;
+            padding: 20px;
+            text-align: center;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        #banner h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 30px;
+            background: rgba(34, 34, 34, 0.85);
+            border: 1px solid #00f0ff;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+        }
+        
+        h2 {
+            color: #ffd700;
+            font-family: 'Cinzel', serif;
+            text-align: center;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            color: #00f0ff;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        input[type="password"],
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #00f0ff;
+            border-radius: 6px;
+            color: #ffd700;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        input[type="password"]:focus,
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #ffd700;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+        }
+        
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+        
+        .checkbox-wrapper input {
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+            cursor: pointer;
+            accent-color: #00f0ff;
+        }
+        
+        .checkbox-wrapper span {
+            color: #ffd700;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        button.main-btn {
+            width: 100%;
+            padding: 14px;
+            background: transparent;
+            color: #ffd700;
+            border: 2px solid #ffd700;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            letter-spacing: 1px;
+        }
+        
+        button.main-btn:hover {
+            background: rgba(255, 215, 0, 0.1);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6), inset 0 0 20px rgba(255, 215, 0, 0.2);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+        }
+        
+        button.main-btn:active {
+            background: rgba(255, 215, 0, 0.2);
+        }
+        
+        button.return-btn {
+            width: 100%;
+            padding: 12px;
+            background: transparent;
+            color: #00f0ff;
+            border: 2px solid #00f0ff;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        button.return-btn:hover {
+            background: rgba(0, 240, 255, 0.1);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.6);
+        }
+        
+        button.dl-btn {
+            width: 100%;
+            padding: 14px;
+            background: rgba(0, 240, 255, 0.1);
+            color: #00f0ff;
+            border: 1px solid #00f0ff;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            display: none;
+            transition: all 0.3s;
+        }
+        
+        button.dl-btn:hover {
+            background: rgba(0, 240, 255, 0.2);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+        }
+        
+        #output {
+            text-align: left;
+            white-space: pre-wrap;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid #ffd700;
+            border-radius: 6px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #fff;
+            display: none;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .error {
+            color: #ff4444;
+            margin-top: 15px;
+            display: none;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        #loader-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+        
+        #loader-box {
+            background: rgba(34, 34, 34, 0.9);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid #00f0ff;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.4);
+        }
+        
+        .spinner {
+            border: 4px solid rgba(0, 240, 255, 0.2);
+            border-top: 4px solid #ffd700;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        #loader-overlay h2 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+    </style>
 </head>
 <body>
-  <div id="particles-js"></div>
-  <div id="banner-js"></div>
-
-  <div class="decryption-container">
-    <h1>Eiriaoloth</h1>
+    <div id="banner">
+        <h1>Eiriaoloth.docx</h1>
+    </div>
     
-    <div id="unlock-section">
-      <div class="filename-display">Eiriaoloth.docx</div>
-      <p style="color: #ccc; font-size: 0.9rem; text-align: center; margin-bottom: 20px;">Access requires the password!</p>
-      
-      <div class="input-group">
-        <label for="password">Enter Password</label>
-        <input type="password" id="password" placeholder="••••••••">
-      </div>
-      
-      <div class="checkbox-wrapper">
-        <input type="checkbox" id="showPw">
-        <span for="showPw">Show Password</span>
-      </div>
-      
-      <button class="main-btn" onclick="tryDecrypt()">Unlock Archive</button>
+    <div class="container">
+        <h2>Access Decoder</h2>
+        
+        <div id="unlock-section">
+            <p style="color: #ccc; font-size: 0.9rem; text-align: center; margin-bottom: 20px;">Enter the password to decrypt the file.</p>
+            
+            <div class="input-group">
+                <label for="password">Enter Password</label>
+                <input type="password" id="password" placeholder="••••••••">
+            </div>
+            
+            <div class="checkbox-wrapper">
+                <input type="checkbox" id="showPw">
+                <span for="showPw">Show Password</span>
+            </div>
+            
+            <div class="button-group">
+                <button class="main-btn" onclick="tryDecrypt()">Unlock Archive</button>
+                <a href="/" class="return-btn">Return to Eiriaoloth Page</a>
+            </div>
+        </div>
+        
+        <div id="error" class="error">!ACCESS DENIED: INCORRECT KEY!</div>
+        <div id="output"></div>
+        <button id="downloadBtn" class="dl-btn">Download File</button>
+    </div>
+    
+    <div id="loader-overlay">
+        <div id="loader-box">
+            <div class="spinner"></div>
+            <h2>Deriving Key...</h2>
+        </div>
     </div>
 
-    <div id="error" class="error">!ACCESS DENIED: INCORRECT KEY!</div>
-    <div id="output"></div>
-    
-    <button id="downloadBtn" class="dl-btn">Download File</button>
-  </div>
-
-  <div id="loader-overlay">
-    <div class="spinner"></div>
-    <h2>Deriving Key...</h2>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/argon2-browser@1.18.0/dist/index.umd.min.js"></script>
-  <script>
-    particlesJS("particles-js", {
-      particles: {
-        number: {
-          value: 150, 
-          density: {
-            enable: true,
-            value_area: 800
-          }
-        },
-        color: {
-          value: ["#ffd700", "#00f3ff", "#ffffff"] 
-        },
-        shape: {
-          type: "circle"
-        },
-        opacity: {
-          value: 0.5,
-          random: true,
-          anim: {
-            enable: true,
-            speed: 1,
-            opacity_min: 0.1,
-            sync: false
-          }
-        },
-        size: {
-          value: 2,
-          random: true,
-          anim: {
-            enable: false,
-            speed: 1,
-            size_min: 0.1,
-            sync: false
-          }
-        },
-        line_linked: {
-          enable: false,
-          distance: 150,
-          color: "#ffffff",
-          opacity: 0.4,
-          width: 1
-        },
-        move: {
-          enable: true,
-          speed: 0.5, 
-          direction: "none", 
-          random: true,
-          straight: false,
-          out_mode: "out",
-          bounce: false,
-          attract: {
-            enable: false,
-            rotateX: 600,
-            rotateY: 1200
-          }
-        }
-      },
-      interactivity: {
-        detect_on: "canvas",
-        events: {
-          onhover: {
-            enable: false
-          },
-          onclick: {
-            enable: false
-          },
-          resize: true
-        },
-        modes: {
-          grab: {
-            distance: 400,
-            line_linked: {
-              opacity: 1
+    <script>
+        const ATTEMPT_COOLDOWN_MS = 1 * 60 * 60 * 1000;
+        const LAST_ATTEMPT_KEY = 'eiriaoloth_last_attempt';
+        const DECODER_DISABLED_KEY = 'eiriaoloth_decoder_disabled_until';
+        
+        const passwordInput = document.getElementById('password');
+        const errorDiv = document.getElementById('error');
+        const outputDiv = document.getElementById('output');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const loaderOverlay = document.getElementById('loader-overlay');
+        const unlockSection = document.getElementById('unlock-section');
+        
+        document.getElementById('showPw').addEventListener('change', function () {
+            passwordInput.type = this.checked ? 'text' : 'password';
+        });
+        
+        function checkDecoderStatus() {
+            const disabledUntil = parseInt(localStorage.getItem(DECODER_DISABLED_KEY)) || 0;
+            const now = Date.now();
+            
+            if (now < disabledUntil) {
+                const remaining = disabledUntil - now;
+                const hours = Math.floor(remaining / (60 * 60 * 1000));
+                const minutes = Math.floor((remaining % (60 * 60 * 1000)) / (60 * 1000));
+                unlockSection.style.display = 'none';
+                showError(`Decoder disabled. Try again in ${hours}h ${minutes}m.`);
+                return false;
             }
-          },
-          bubble: {
-            distance: 400,
-            size: 40,
-            duration: 2,
-            opacity: 8,
-            speed: 3
-          },
-          repulse: {
-            distance: 200,
-            duration: 0.4
-          },
-          push: {
-            particles_nb: 4
-          },
-          remove: {
-            particles_nb: 2
-          }
+            return true;
         }
-      },
-      retina_detect: true
-    });
-  </script>
-  <script>
-const ATTEMPT_COOLDOWN_MS = 12 * 60 * 60 * 1000;
-const LAST_ATTEMPT_KEY = 'eiriaoloth_last_attempt';
-const DECODER_DISABLED_KEY = 'eiriaoloth_decoder_disabled_until';
-const DECODER_COOLDOWN_MS = 1 * 60 * 60 * 1000;
+        
+        async function tryDecrypt() {
+            if (!checkDecoderStatus()) {
+                return;
+            }
+            
+            const password = passwordInput.value.trim();
+            if (!password) {
+                showError('Password cannot be empty.');
+                return;
+            }
+            
+            const now = Date.now();
+            const lastAttempt = parseInt(localStorage.getItem(LAST_ATTEMPT_KEY)) || 0;
+            if (now - lastAttempt < ATTEMPT_COOLDOWN_MS) {
+                const remaining = ATTEMPT_COOLDOWN_MS - (now - lastAttempt);
+                const hours = Math.floor(remaining / (60 * 60 * 1000));
+                const minutes = Math.floor((remaining % (60 * 60 * 1000)) / (60 * 1000));
+                showError(`Try again in ${hours}h ${minutes}m.`);
+                return;
+            }
+            
+            showLoader(true);
+            errorDiv.style.display = 'none';
+            outputDiv.style.display = 'none';
+            downloadBtn.style.display = 'none';
+            
+            setTimeout(async () => {
+                try {
+                    const base64String = document.getElementById('encrypted-data-block').textContent.trim();
+                    const combined = base64ToUint8(base64String);
+                    
+                    if (combined[0] !== 0x53 || combined[1] !== 0x56) throw new Error("Invalid format.");
+                    if (combined[2] !== 6) throw new Error("Incorrect version.");
+                    
+                    const view = new DataView(combined.buffer);
+                    const nValue = view.getUint32(4, false);
+                    const argonTime = view.getUint32(8, false);
+                    
+                    const salt = combined.slice(12, 28);
+                    const iv = combined.slice(28, 40);
+                    const ciphertext = combined.slice(40);
+                    
+                    const key = await deriveArgonKey(password, salt, nValue, argonTime);
+                    const ptBuffer = await crypto.subtle.decrypt({ name: "AES-GCM", iv }, key, ciphertext);
+                    
+                    localStorage.setItem(LAST_ATTEMPT_KEY, now.toString());
+                    showLoader(false);
+                    outputDiv.textContent = 'Access granted. Download available.';
+                    outputDiv.style.display = 'block';
+                    downloadBtn.style.display = 'block';
+                } catch (e) {
+                    localStorage.setItem(LAST_ATTEMPT_KEY, now.toString());
+                    localStorage.setItem(DECODER_DISABLED_KEY, (now + ATTEMPT_COOLDOWN_MS).toString());
+                    showLoader(false);
+                    unlockSection.style.display = 'none';
+                    showError('!ACCESS DENIED: INCORRECT KEY! Decoder disabled for 1 hour.');
+                }
+            }, 1500);
+        }
+        
+        function base64ToUint8(base64) {
+            const binary = atob(base64);
+            const arr = new Uint8Array(binary.length);
+            for (let i = 0; i < binary.length; i++) arr[i] = binary.charCodeAt(i);
+            return arr;
+        }
+        
+        async function deriveArgonKey(pw, salt, nValue, argonTime) {
+            const argonResult = await argon2.hash({ pass: pw, salt: salt, time: argonTime, mem: nValue, hashLen: 32, type: argon2.Argon2id });
+            return await crypto.subtle.importKey("raw", argonResult.hash, { name: "AES-GCM", length: 256 }, false, ["decrypt"]);
+        }
+        
+        function showError(msg) {
+            errorDiv.textContent = msg;
+            errorDiv.style.display = 'block';
+        }
+        
+        function showLoader(show) {
+            loaderOverlay.style.display = show ? 'flex' : 'none';
+        }
+        
+        window.addEventListener('load', function() {
+            checkDecoderStatus();
+        });
+    </script>
 
-const passwordInput = document.getElementById('password');
-const unlockBtn = document.querySelector('.main-btn');
-const errorDiv = document.getElementById('error');
-const outputDiv = document.getElementById('output');
-const downloadBtn = document.getElementById('downloadBtn');
-const loaderOverlay = document.getElementById('loader-overlay');
-const unlockSection = document.getElementById('unlock-section');
-
-document.getElementById('showPw').addEventListener('change', function () {
-  passwordInput.type = this.checked ? 'text' : 'password';
-});
-
-function checkDecoderStatus() {
-  const disabledUntil = parseInt(localStorage.getItem(DECODER_DISABLED_KEY)) || 0;
-  const now = Date.now();
-  
-  if (now < disabledUntil) {
-    const remaining = disabledUntil - now;
-    const hours = Math.floor(remaining / (60 * 60 * 1000));
-    const minutes = Math.floor((remaining % (60 * 60 * 1000)) / (60 * 1000));
-    unlockSection.style.display = 'none';
-    showError(`Decoder disabled. Try again in ${hours}h ${minutes}m.`);
-    return false;
-  }
-  return true;
-}
-
-function tryDecrypt() {
-  if (!checkDecoderStatus()) {
-    return;
-  }
-
-  const password = passwordInput.value.trim();
-  if (!password) {
-    showError('Password cannot be empty.');
-    return;
-  }
-
-  const now = Date.now();
-  const lastAttempt = parseInt(localStorage.getItem(LAST_ATTEMPT_KEY)) || 0;
-  if (now - lastAttempt < ATTEMPT_COOLDOWN_MS) {
-    const remaining = ATTEMPT_COOLDOWN_MS - (now - lastAttempt);
-    const hours = Math.floor(remaining / (60 * 60 * 1000));
-    const minutes = Math.floor((remaining % (60 * 60 * 1000)) / (60 * 1000));
-    showError(`Try again in ${hours}h ${minutes}m.`);
-    return;
-  }
-
-  showLoader(true);
-  errorDiv.style.display = 'none';
-  outputDiv.style.display = 'none';
-  downloadBtn.style.display = 'none';
-
-  setTimeout(() => {
-    const userHash = CryptoJS.SHA256(password).toString();
-
-    if (userHash === correctHash) {
-      localStorage.setItem(LAST_ATTEMPT_KEY, now.toString());
-      showLoader(false);
-      outputDiv.textContent = 'Access granted. Download available.';
-      outputDiv.style.display = 'block';
-      downloadBtn.style.display = 'block';
-    } else {
-      localStorage.setItem(LAST_ATTEMPT_KEY, now.toString());
-      localStorage.setItem(DECODER_DISABLED_KEY, (now + DECODER_COOLDOWN_MS).toString());
-      showLoader(false);
-      unlockSection.style.display = 'none';
-      showError('!ACCESS DENIED: INCORRECT KEY! Decoder disabled for 1 hour.');
-    }
-  }, 1500);
-}
-
-function showError(msg) {
-  errorDiv.textContent = msg;
-  errorDiv.style.display = 'block';
-}
-
-function showLoader(show) {
-  loaderOverlay.style.display = show ? 'flex' : 'none';
-}
-
-window.addEventListener('load', function() {
-  checkDecoderStatus();
-});
-</script>
-
-  <script id="encrypted-data-block" type="text/plain">REmoved for the present==</script>
+    <script id="encrypted-data-block" type="text/plain">U1YGAAACAAAAAAADMLSxy05XS7UujeZ6VbKkCbTDCVJFnlnQjpvqyB5TW6oy/6Qu9lycw4dVGOEcc+aYKPD95aLXdLGuU9kDx3UC3SFhvfN/S1+zZXSsb4+8d1ENUeaLVWwJHRlkqDvDR</script>
 </body>
 </html>

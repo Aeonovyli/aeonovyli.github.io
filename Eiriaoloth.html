@@ -11,7 +11,7 @@
     
 </script>
     <style>
- body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; background: #f8f9fa; color: #1a1a1a; }
+ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; background: #000019; color: #1a1a1a; }
         .box { background: white; padding: 30px; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); max-width: 500px; width: 90%; text-align: center; border: 1px solid #e2e8f0; }
         input { width: 100%; padding: 14px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 16px; box-sizing: border-box; margin-bottom: 10px; }
         input:focus { outline: none; border-color: #3b82f6; }
@@ -34,11 +34,11 @@
     <div id="loader-overlay"><div class="spinner"></div><h2 style="margin:0;">Decrypting...</h2></div>
 
     <div class="box">
-        <h2 id="main-title">Eiriaoltoh</h2>
+        <h2 id="main-title">Eiriaoloth</h2>
         
         <div id="unlock-section">
-            <p style="color: #64748b;">Please enter the password to decrypt the content.</p>
-            <p style="background: #f8fafc; padding: 8px; border-radius: 6px; font-size: 0.9em; border: 1px solid #e2e8f0;"><b>Eiriaoloth.docx</b></p>
+            <p style="color: #64748b;">Please enter the password to decrypt the document.</p>
+            <p style="background: #00000000; padding: 8px; border-radius: 6px; font-size: 0.9em; border: 1px solid #ffd700;"><b>Eiriaoloth.docx</b></p>
             
             <input type="password" id="pw" placeholder="Enter password">
             <label class="checkbox-label">
@@ -55,7 +55,7 @@
         <img id="preview-img" style="max-width: 100%; border-radius: 8px; margin-top: 15px; display: none;">
         
         <div class="btn-center">
-            <button id="downloadBtn" class="dl-btn">💾 Save File</button>
+            <button id="downloadBtn" class="dl-btn">Save File</button>
         </div>
     </div>
 
@@ -114,7 +114,7 @@
                 const ptBuffer = await crypto.subtle.decrypt({ name: "AES-GCM", iv }, key, ciphertext);
                 
                 document.getElementById('unlock-section').style.display = 'none';
-                document.getElementById('main-title').innerText = type === 'text' ? '🔓 Decrypted Message' : '🔓 Decrypted File';
+                document.getElementById('main-title').innerText = type === 'text' ? 'Decrypted Message' : 'Decrypted File';
                 
                 if (type === 'text') {
                     outputEl.innerText = new TextDecoder().decode(ptBuffer);
@@ -135,7 +135,7 @@
                         img.style.display = 'block';
                     }
                     
-                    outputEl.innerHTML = "✅ <b>Successfully decrypted!</b>";
+                    outputEl.innerHTML = "<b>Successfully decrypted!</b>";
                     outputEl.style.display = 'block';
                     
                     const dlBtn = document.getElementById('downloadBtn');
@@ -146,7 +146,7 @@
                         document.body.appendChild(a); a.click(); document.body.removeChild(a);
                     };
                     
-                    if (!isImage) dlBtn.click(); // Autodownload if not image
+                    if (!isImage) dlBtn.click();
                 }
             } catch (e) {
                 console.error(e);

@@ -1,3 +1,147 @@
+const SHIP_PATHS = {
+    fighter: "M20,0 L0,40 L20,35 L40,40 Z",
+    capital: "M20,0 L0,30 L10,50 L20,45 L30,50 L40,30 Z M15,15 L25,15 L25,25 L15,25 Z"
+};
+
+class Starfield {
+    constructor(w, h) {
+        this.stars = [];
+        this.width = w;
+        this.height = h;
+        this.init();
+    }
+    init() {
+        this.stars = [];
+        for (let i = 0; i < 300; i++) {
+            this.stars.push({
+                x: Math.random() * this.width,
+                y: Math.random() * this.height,
+                z: Math.random() * 2 + 0.5,
+                s: Math.random() * 1.5 + 0.5
+            });
+        }
+    }
+    update(mult) {
+        this.stars.forEach(star => {
+            star.y += (star.z * 0.5) * mult;
+            if (star.y > this.height) {
+                star.y = -10;
+                star.x = Math.random() * this.width;
+            }
+        });
+    }
+    draw(ctx) {
+        this.stars.forEach(star => {
+            const alpha = star.z / 2.5;
+            ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+            ctx.beginPath();
+            ctx.arc(star.x, star.y, star.s, 0, Math.PI * 2);
+            ctx.fill();
+        });
+    }
+    resize(w, h) {
+        this.width = w;
+        this.height = h;
+        this.init();
+    }
+}
+
+class Particle {
+    constructor(x, y, c) {
+        this.x = x; this.y = y; this.c = c;
+        this.vx = (Math.random() - 0.5) * 8;
+        this.vy = (Math.random() - 0.5) * 8;
+        this.life = 1.0;
+        this.decay = Math.random() * 0.03 + 0.02;
+        this.size = Math.random() * 3 + 1;
+    }
+    update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.life -= this.decay;
+        this.size *= 0.95;
+    }
+    draw(ctx) {
+        ctx.globalAlpha = this.life;
+        ctx.fillStyle = this.c;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.globalAlpha = 1.0;
+    }
+}
+
+class Ship {
+    constructor(word, parent = null, speedMult = 1.0) {
+        this.word = word;
+        this.parent = parent;
+        this.x = parent ? parent.x : Math.random() * (window.innerWidth - 100) + 50;
+        this.y = parent ? parent.y + 40 : -50;
+        this.hp = word.length;
+        this.maxHp = word.length;
+        this.marked = false;
+        this.color = parent ? "#00ffcc" : `hsl(${Math.random() * 60 + 320}, 100%, 60%)`;
+        this.isCapital = word.length >= 5;
+        this.size = this.isCapital ? 30 + (word.length * 1.5) : 20;
+        this.speed = (parent ? 2.5 : 0.8) + (Math.random() * 0.4);
+        if (!parent) this.speed *= speedMult;
+        this.spawnTimer = 0;
+        this.spawned = false;
+    }
+
+    update(dt, speedMult) {
+        if (!this.parent) {
+            this.y += this.speed * (dt / 16) * speedMult;
+        }
+        if (this.y > window.innerHeight - 80 && !this.parent) {
+            this.marked = true;
+            return 'hit';
+        }
+        if (this.isCapital && !this.parent && !this.spawned) {
+            this.spawnTimer += dt;
+            if (this.spawnTimer > 3000 && this.hp > 2) {
+                this.spawned = true;
+                return 'spawn';
+            }
+        }
+        return null;
+    }
+
+    draw(ctx) {
+        const glow = this.isCapital ? 25 : 15;
+        ctx.shadowBlur = glow;
+        ctx.shadowColor = this.color;
+        ctx.fillStyle = this.color;
+        
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.scale(this.size / 20, this.size / 20);
+        
+        ctx.beginPath();
+        const pathData = this.isCapital ? SHIP_PATHS.capital : SHIP_PATHS.fighter;
+        const parts = pathData.split(' ');
+        ctx.moveTo(parseFloat(parts[1]), parseFloat(parts[2]));
+        for (let i = 3; i < parts.length; i += 3) {
+            const cmd = parts[i];
+            const x = parseFloat(parts[i+1]);
+            const y = parseFloat(parts[i+2]);
+            if (cmd === 'L') ctx.lineTo(x, y);
+            else if (cmd === 'M') ctx.moveTo(x, y);
+        }
+        ctx.closePath();
+        ctx.fill();
+        
+        ctx.fillStyle = '#fff';
+        ctx.font = `bold ${12 + (this.word.length * 1.5)}px Courier New`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(this.word, 0, 0);
+        
+        ctx.restore();
+        ctx.shadowBlur = 0;
+    }
+}
+
 class Game {
     constructor() {
         this.canvas = document.getElementById('gameCanvas');
@@ -62,7 +206,7 @@ class Game {
         await Promise.all(promises);
         this.wordList = Array.from(wordSet);
         if (this.wordList.length === 0) {
-            this.wordList = ["ship", "star", "laser", "fleet", "orbit", "pulse", "blast", "target", "vector", "warp", "alien", "droid", "system", "grid", "flux", "zone", "nova", "cyber", "quantum", "matrix", "logic"];
+            this.wordList = ["ship", "star", "laser", "fleet", "orbit", "pulse", "blast", "target", "vector", "warp", "alien", "droid", "system", "grid", "flux", "zone", "nova", "cyber", "quantum", "matrix", "logic", "power", "energy", "shield", "armor", "battle", "combat", "attack", "defend", "destroy", "engage", "launch", "missile", "radar", "sonar", "sensor", "scan", "lock", "track", "guide", "aim", "fire", "boom", "crash", "burn", "fury", "storm", "wind", "cloud", "rain", "snow", "ice", "heat", "cold", "dark", "light", "bright", "dim", "glow", "shine", "spark", "flash", "beam", "ray"];
         }
         this.start();
     }

@@ -80,7 +80,7 @@ class Ship {
         this.hp = word.length;
         this.maxHp = word.length;
         this.marked = false;
-        this.color = parent ? "#00ffcc" : `hsl(${Math.random() * 60 + 320}, 100%, 60%)`;
+        this.color = `hsl(${Math.random() * 60 + 320}, 100%, 60%)`;
         this.isCapital = word.length >= 5;
         this.size = this.isCapital ? 30 + (word.length * 1.5) : 20;
         this.speed = (parent ? 2.5 : 0.8) + (Math.random() * 0.4);
@@ -297,16 +297,14 @@ class Game {
     drawPlayer() {
         const cx = this.canvas.width / 2;
         const cy = this.canvas.height - 60;
-        this.ctx.fillStyle = '#00ffcc';
-        this.ctx.shadowBlur = 15;
-        this.ctx.shadowColor = '#00ffcc';
+        this.ctx.fillStyle = '#111';
+        this.ctx.shadowBlur = 0;
         this.ctx.beginPath();
         this.ctx.moveTo(cx, cy - 15);
         this.ctx.lineTo(cx - 15, cy + 15);
         this.ctx.lineTo(cx + 15, cy + 15);
         this.ctx.closePath();
         this.ctx.fill();
-        this.ctx.shadowBlur = 0;
 
         if (this.laserTimer > 0 && this.laserTarget && !this.laserTarget.marked) {
             this.shoot(cx, cy, this.laserTarget.x, this.laserTarget.y);

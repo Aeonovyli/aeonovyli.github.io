@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Typing Defender</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #0d1117;
+            font-family: 'Courier New', Courier, monospace;
+            color: #fff;
+            user-select: none;
+        }
+        #gameCanvas { display: block; }
+        #ui {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 24px;
+            pointer-events: none;
+        }
+        #input-area {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 32px;
+            color: #00ffcc;
+            text-shadow: 0 0 10px #00ffcc;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+        #game-over {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            display: none;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 20px;
+            background: #00ffcc;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="ui">
+        <div>Score: <span id="score">0</span></div>
+        <div>Lives: <span id="lives">3</span></div>
+        <div>Next Special: <span id="special-count">0</span> / 20</div>
+    </div>
+    <div id="input-area"></div>
+    <div id="game-over">
+        <h1 style="font-size: 60px; color: #ff4444;">MISSION FAILED</h1>
+        <p>Your ship was destroyed.</p>
+        <button onclick="restartGame()">Try Again</button>
+    </div>
+    <canvas id="gameCanvas"></canvas>
+    <script>
+        const WORD_LIST = ["ship","laser","space","star","planet","rocket","nexus","core","energy","shield","enemy","fleet","orbit","pulse","blast","target","vector","warp","alien","droid","system","grid","flux","zone","nova","cyber","quantum","matrix","logic"];
+        const CANVAS = document.getElementById('gameCanvas');
+        const CTX = CANVAS.getContext('2d');
+        const UI_SCORE = document.getElementById('score');
+        const UI_LIVES = document.getElementById('lives');
+        const UI_SPECIAL = document.getElementById('special-count');
+        const UI_INPUT = document.getElementById('input-area');
+        const UI_GAMEOVER = document.getElementById('game-over');
+        let width, height;
+        let ships = [];
+        let particles = [];
+        let score = 0;
+        let lives = 3;
+        let specialCharges = 0;
+        let gameActive = false;
+        let lastTime = 0;
+        let spawnTimer = 0;
+        let specialLaserActive = false;
+        let specialLaserTimer = 0;
+
+        function resize() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            CANVAS.width = width;
+            CANVAS.height = height;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Ship {
+            constructor(word) {
+                this.word = word;
+                this.x = Math.random() * (width - 100) + 50;
+                this.y = -50;
+                this.speed = Math.random() * 1.5 + 0.5;
+                this.color = '#ff4444';
+                this.hp = word.length;
+                this.maxHp = word.length;
+                this.markedForDeletion = false;
+            }
+            update(dt) {
+                this.y += this.speed * (dt / 16);
+                if (this.y > height - 100) {
+                    this.markedForDeletion = true;
+                    takeDamage();
+                }
+            }
+            draw() {
+                CTX.fillStyle = this.color;
+                CTX.beginPath();
+                CTX.moveTo(this.x, this.y);
+                CTX.lineTo(this.x - 15, this.y + 30);
+                CTX.lineTo(this.x + 15, this.y + 30);
+                CTX.closePath();
+                CTX.fill();
+                CTX.fillStyle = '#fff';
+                CTX.font = '16px Courier New';
+                CTX.textAlign = 'center';
+                CTX.fillText(this.word, this.x, this.y - 10);
+            }
+        }
+
+        class Particle {
+            constructor(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.color = color;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = Math.random() * 4 - 2;
+                this.speedY = Math.random() * 4 - 2;
+                this.life = 1.0;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.life -= 0.02;
+            }
+            draw() {
+                CTX.globalAlpha = this.life;
+                CTX.fillStyle = this.color;
+                CTX.beginPath();
+                CTX.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                CTX.fill();
+                CTX.globalAlpha = 1.0;
+            }
+        }
+
+        function spawnShip() {
+            const word = WORD_LIST[Math.floor(Math.random() * WORD_LIST.length)];
+            ships.push(new Ship(word));
+        }
+
+        function createExplosion(x, y, color) {
+            for (let i = 0; i < 15; i++) {
+                particles.push(new Particle(x, y, color));
+            }
+        }
+
+        function takeDamage() {
+            lives--;
+            UI_LIVES.innerText = lives;
+            createExplosion(width / 2, height - 80, '#00ffcc');
+            if (lives <= 0) endGame();
+        }
+
+        function fireSpecialLaser() {
+            specialLaserActive = true;
+            specialLaserTimer = 60;
+            specialCharges = 0;
+            updateUI();
+            ships.sort((a, b) => a.y - b.y);
+            const targets = ships.slice(0, 3);
+            targets.forEach(ship => {
+                ship.hp = 0;
+                createExplosion(ship.x, ship.y, '#00ffcc');
+            });
+        }
+
+        function updateUI() {
+            UI_SCORE.innerText = score;
+            UI_SPECIAL.innerText = specialCharges;
+            UI_SPECIAL.style.color = specialCharges >= 20 ? '#ffff00' : '#fff';
+        }
+
+        function handleInput(e) {
+            if (!gameActive) return;
+            const key = e.key;
+            let targetShip = null;
+            let minDist = Infinity;
+            ships.forEach(ship => {
+                if (ship.word.startsWith(key) && ship.hp > 0) {
+                    const dist = Math.abs(ship.y - (height - 100));
+                    if (dist < minDist) {
+                        minDist = dist;
+                        targetShip = ship;
+                    }
+                }
+            });
+            if (targetShip) {
+                targetShip.hp--;
+                UI_INPUT.innerText = targetShip.word.substr(0, targetShip.word.length - targetShip.hp) + '_';
+                if (targetShip.hp <= 0) {
+                    targetShip.markedForDeletion = true;
+                    createExplosion(targetShip.x, targetShip.y, targetShip.color);
+                    score++;
+                    specialCharges++;
+                    if (specialCharges >= 20) fireSpecialLaser();
+                    updateUI();
+                }
+            }
+        }
+
+        function drawPlayer() {
+            const cx = width / 2;
+            const cy = height - 80;
+            CTX.fillStyle = '#00ffcc';
+            CTX.beginPath();
+            CTX.moveTo(cx, cy - 20);
+            CTX.lineTo(cx - 20, cy + 20);
+            CTX.lineTo(cx + 20, cy + 20);
+            CTX.closePath();
+            CTX.fill();
+            if (specialLaserActive) {
+                CTX.strokeStyle = '#00ffcc';
+                CTX.lineWidth = 5;
+                CTX.beginPath();
+                CTX.moveTo(cx, cy);
+                CTX.lineTo(cx, 0);
+                CTX.stroke();
+                CTX.fillStyle = '#00ffcc';
+                CTX.globalAlpha = 0.3;
+                CTX.beginPath();
+                CTX.arc(cx, cy, 100, 0, Math.PI * 2);
+                CTX.fill();
+            }
+        }
+
+        function loop(timestamp) {
+            if (!gameActive) return;
+            const dt = timestamp - lastTime;
+            lastTime = timestamp;
+            CTX.clearRect(0, 0, width, height);
+            spawnTimer += dt;
+            if (spawnTimer > 1500) {
+                spawnShip();
+                spawnTimer = 0;
+            }
+            ships.forEach(ship => {
+                ship.update(dt);
+                ship.draw();
+            });
+            ships = ships.filter(ship => !ship.markedForDeletion);
+            particles.forEach((p, index) => {
+                p.update();
+                p.draw();
+                if (p.life <= 0) particles.splice(index, 1);
+            });
+            drawPlayer();
+            if (specialLaserActive) {
+                specialLaserTimer--;
+                if (specialLaserTimer <= 0) specialLaserActive = false;
+            }
+            requestAnimationFrame(loop);
+        }
+
+        function startGame() {
+            score = 0;
+            lives = 3;
+            specialCharges = 0;
+            ships = [];
+            particles = [];
+            gameActive = true;
+            UI_GAMEOVER.style.display = 'none';
+            updateUI();
+            lastTime = performance.now();
+            requestAnimationFrame(loop);
+        }
+
+        function endGame() {
+            gameActive = false;
+            UI_GAMEOVER.style.display = 'block';
+        }
+
+        function restartGame() {
+            startGame();
+        }
+
+        window.addEventListener('keydown', handleInput);
+        startGame();
+    </script>
+</body>
+</html>

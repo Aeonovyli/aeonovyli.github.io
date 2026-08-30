@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Type Defender</title>
+    <title>Type Defender: Zty.pe Clone</title>
     <style>
         body { margin: 0; overflow: hidden; background: #000; font-family: 'Courier New', monospace; color: #fff; user-select: none; }
+        canvas { display: block; }
         #ui { position: absolute; top: 20px; left: 20px; font-size: 20px; font-weight: bold; text-shadow: 0 0 10px #00ffcc; pointer-events: none; line-height: 1.6; }
         #input { position: absolute; bottom: 50px; left: 50%; transform: translateX(-50%); font-size: 36px; color: #00ffcc; text-shadow: 0 0 20px #00ffcc; pointer-events: none; min-height: 40px; }
         #over { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; display: none; background: rgba(0,0,0,0.9); padding: 40px; border: 2px solid #00ffcc; border-radius: 10px; box-shadow: 0 0 30px #00ffcc; }
@@ -44,7 +45,7 @@
 
         function initStars() {
             stars = [];
-            for(let i=0; i<200; i++) {
+            for(let i=0; i<300; i++) {
                 stars.push({
                     x: Math.random() * window.innerWidth,
                     y: Math.random() * window.innerHeight,
@@ -164,6 +165,7 @@
                 this.speed = (parent ? 2.5 : 0.8) + (Math.random() * 0.4);
                 if (!parent) this.speed *= speedMult;
                 this.spawnTimer = 0;
+                this.spawned = false;
             }
 
             update(dt) {

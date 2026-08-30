@@ -3,103 +3,316 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Type Defender: Infinite</title>
+    <title>Type Defender</title>
     <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-            background-color: #000;
-            font-family: 'Courier New', Courier, monospace;
-            color: #fff;
-            user-select: none;
-        }
-        canvas { display: block; }
-        #ui {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            font-size: 20px;
-            font-weight: bold;
-            text-shadow: 0 0 10px #00ffcc;
-            pointer-events: none;
-            line-height: 1.5;
-        }
-        #input-area {
-            position: absolute;
-            bottom: 50px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 36px;
-            color: #00ffcc;
-            text-shadow: 0 0 15px #00ffcc;
-            pointer-events: none;
-            white-space: nowrap;
-            letter-spacing: 3px;
-            min-height: 40px;
-        }
-        #game-over {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            display: none;
-            background: rgba(0, 0, 0, 0.85);
-            padding: 40px;
-            border: 2px solid #00ffcc;
-            border-radius: 10px;
-            box-shadow: 0 0 30px rgba(0, 255, 204, 0.3);
-        }
-        h1 {
-            font-size: 60px;
-            color: #ff4444;
-            text-shadow: 0 0 20px #ff0000;
-            margin: 0 0 10px 0;
-            text-transform: uppercase;
-        }
-        p {
-            font-size: 20px;
-            color: #ccc;
-            margin: 10px 0;
-        }
-        button {
-            padding: 15px 40px;
-            font-size: 22px;
-            background: #00ffcc;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-top: 20px;
-            font-weight: bold;
-            color: #000;
-            box-shadow: 0 0 20px #00ffcc;
-            transition: transform 0.1s, box-shadow 0.1s;
-            font-family: 'Courier New', Courier, monospace;
-        }
-        button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px #00ffcc;
-        }
-        button:active {
-            transform: scale(0.95);
-        }
+        body { margin: 0; overflow: hidden; background: #000; font-family: 'Courier New', monospace; color: #fff; user-select: none; }
+        #ui { position: absolute; top: 20px; left: 20px; font-size: 20px; font-weight: bold; text-shadow: 0 0 10px #00ffcc; pointer-events: none; line-height: 1.6; }
+        #input { position: absolute; bottom: 50px; left: 50%; transform: translateX(-50%); font-size: 36px; color: #00ffcc; text-shadow: 0 0 20px #00ffcc; pointer-events: none; min-height: 40px; }
+        #over { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; display: none; background: rgba(0,0,0,0.9); padding: 40px; border: 2px solid #00ffcc; border-radius: 10px; box-shadow: 0 0 30px #00ffcc; }
+        h1 { font-size: 60px; color: #ff4444; text-shadow: 0 0 20px #f00; margin: 0 0 20px 0; }
+        button { padding: 15px 40px; font-size: 22px; background: #00ffcc; border: none; cursor: pointer; border-radius: 5px; font-weight: bold; color: #000; box-shadow: 0 0 20px #00ffcc; margin-top: 20px; font-family: inherit; }
+        button:hover { transform: scale(1.05); box-shadow: 0 0 30px #00ffcc; }
     </style>
 </head>
 <body>
     <div id="ui">
-        <div>SCORE: <span id="score">0</span></div>
-        <div>LIVES: <span id="lives">3</span></div>
-        <div>WAVE: <span id="wave">1</span></div>
+        SCORE: <span id="s">0</span><br>
+        LIVES: <span id="l">3</span><br>
+        WAVE: <span id="w">1</span>
     </div>
-    <div id="input-area"></div>
-    <div id="game-over">
-        <h1>SYSTEM FAILURE</h1>
-        <p>FINAL SCORE: <span id="final-score">0</span></p>
-        <button onclick="restartGame()">REBOOT SYSTEM</button>
+    <div id="input"></div>
+    <div id="over">
+        <h1>CRITICAL FAILURE</h1>
+        <p>FINAL SCORE: <span id="fs">0</span></p>
+        <button onclick="reset()">REBOOT</button>
     </div>
-    <canvas id="gameCanvas"></canvas>
+    <canvas id="c"></canvas>
     <script>
-        const WORDS = {
-            small: ["at","be","by","do","go","he","if","in","is","it","me","my","no","of","on","or","so","to","up","us","we","an","as","am","or"],
-            medium: ["ship","laser","star","plan","core","beam","grid","node","code","data","flux","zone","nav","jet","run","set","top","web","key","log","mix","net","opt","pad","ram","run","sat","set","sys","tap","url","vox","web","xml","zone","alert","asset","audit","basis","batch","beam","blend","block","board","boost","brand","brief","brush","built","byte","cache","call","card","case","cash","cast","cell","chat","chip","city","club","coal","code","coin","cold","core","cost","crew","crop","cross","crowd","cube","cure","curve","data","date","deal","deck","debt","deep","demo","deny","desk","disk","dose","dual","dump","dust","duty","each","earn","ease","east","easy","edit","else","env","error","event","exam","exit","fact","fail","fair","fall","farm","fast","fault","feed","felt","file","fill","film","find","fine","firm","fish","flux","fold","font","food","foot","form","fort","four","free","from","fuel","full","fund","gain","game","gate","gear","gene","gift","girl","glow","goal","gold","good","gray","grid","grow","gulf","hair","half","hall","hand","hard","have","head","hear","heat","help","here","high","hill","hint","hire","hold","hole","home","hope","host","hour","huge","human","hunt","hurt","idea","icon","image","info","inch","into","iron","item","jack","jail","joint","judge","juice","jump","jury","just","keep","kept","kick","kill","kind","king","knee","know","lab","lack","lady","lake","land","lane","last","late","lead","left","less","life","lift","like","line","link","list","live","load","loan","lock","long","look","loop","lord","lose","loss","lost","love","luck","lunch","mail","main","make","male","mall","man","many","map","mark","mass","max","mean","meal","mean","meat","meet","menu","mere","mice","mid","mile","milk","mill","mind","mine","miss","mode","mom","money","month","moon","more","most","move","much","muscle","name","nav","near","neck","need","news","next","nice","night","nine","node","none","noon","north","nose","note","noun","novel","null","number","oak","object","obtain","occur","ocean","odd","offer","office","oil","one","only","open","oral","orbit","order","organ","other","ought","ounce","out","oven","over","owner","pace","pack","page","paid","pain","pair","panel","paper","park","part","pass","past","path","peak","peer","pen","penal","phase","phone","photo","pick","pie","piece","pin","pink","pipe","pitch","pizza","place","plan","plane","plant","plate","play","plot","plug","plus","pocket","point","pole","poll","pool","poor","pop","port","pose","post","pot","pound","power","press","price","pride","prime","print","prior","prize","probe","proof","prop","pull","pure","push","put","qual","quit","race","rail","rain","raise","rank","rare","rate","ratio","raw","read","real","rear","reason","recv","red","refer","reg","rein","rel","rem","rep","res","rest","ret","rev","rich","rid","ride","ring","riot","rise","risk","road","rock","role","roll","roof","room","root","rope","rose","rot","row","rub","ruby","rule","run","rush","sad","safe","said","sail","sale","salt","same","sand","save","scale","scan","scat","scen","school","score","screen","scrub","sea","search","seat","sec","seed","seek","seem","seen","self","sell","send","sent","seq","set","sex","shade","shaft","shake","shall","shape","share","sharp","shed","sheep","sheet","shelf","shell","shift","ship","shock","shoot","shop","shot","show","shut","sick","side","sign","site","size","skin","skip","sky","sled","slide","slot","slow","slug","smell","smile","smoke","snap","snow","so","soap","soccer","soft","soil","solar","sold","sole","solid","solo","some","song","soon","sort","soul","soup","source","south","space","span","spar","spare","speak","spec","speed","spell","spend","spent","spin","spit","spot","spray","spy","stack","staff","stage","stair","stake","stamp","stand","star","start","state","stay","steak","steal","steam","steel","step","stick","still","stock","stone","stood","stop","store","storm","story","strip","stub","stud","stuff","style","sub","sugar","suit","sum","sun","super","sup","sure","surf","swim","swing","switch","symbol","sync","system","table","tack","tag","tail","take","talk","tall","tank","tap","tape","target","task","tax","tea","teach","team","tear","tech","tell","ten","tend","tent","term","test","text","than","that","the","them","then","they","thin","this","thus","tile","time","tip","tire","title","to","toast","today","toe","together","toilet","tomato","ton","tone","too","tool","top","topic","total","touch","tough","tour","towel","tower","town","toy","track","trade","train","trap","trash","travel","tray","tree","trend","trial","tribe","trick","trip","troop","trouble","truck","true","trust","tube","tune","turn","tv","twist","two","type","typo","ugly","ultimate","uncle","under","undo","union","unit","unit","unity","univ","unix","unix","until","up","upon","upper","upset","urban","urge","use","used","user","usual","util","vacation","valley","valve","van","vanish","vapor","vast","vault","vc","vector","vein","vendor","vent","verb","verify","verse","version","vertex","vest","via","vice","video","view","viral","virus","visit","visual","vital","voice","volt","vote","vowel","wage","wait","wake","walk","wall","want","war","warm","warn","warp","wash","waste","watch","water","wave","way","weak","wealth","wear","web","wed","week","weep","weight","weird","well","west","wet","what","wheel","when","where","which","while","whip","white","who","why","wide","wife","wifi","wild","will","win","wind","wine","wing","wire","wise","wish","with","wolf","wood","word","work","world","worm","worry","worth","wrap","write","wrong","yard","year","yellow","yes","yesterday","yet","yield","you","young","your","zone","zoom"],
-            large: ["action","active","actor","adapt","admin","admit","adopt","adult","affect","after","again","agent","agree","ahead","alarm","album","alert","alien","align","alike","alive","allow","alone","along","alter","angel","anger","angle","angry","ankle","apple","apply","arena","argue","arise","armor","array","arrow","aspect","asset","audit","audio","audit","award","aware","baker","basic","basis","batch","beach","begin","beige","being","belly","below","bench","berry","birth","black","blade","blame","blank","blast","blend","blind","block","blood","blow","blue","board","boat","body","boil","bold","bolt","bomb","bond","bone","book","boost","border","boring","borrow","boss","both","bottle","bottom","bounce","bound","brain","brand","bread","break","brick","brief","bring","broad","brown","brush","bucket","build","bulk","bullet","bundle","burn","bush","busy","cabin","cable","cake","calc","call","calm","camera","camp","canal","cancel","candy","cane","canvas","cap","capital","captain","capture","card","care","cargo","carry","case","cash","cast","cat","catch","cause","ceiling","cell","chain","chair","chalk","chance","change","charge","chart","chase","cheap","check","cheek","cheese","chef","cherry","chest","chick","chief","child","chip","choc","choice","choose","chron","chunk","circuit","city","claim","clap","class","clean","clear","clerk","click","cliff","climb","clip","clock","close","cloth","cloud","club","clue","cluster","coach","coal","coast","coat","code","coil","coin","cold","collar","color","comb","come","comic","common","company","compare","compel","complex","concept","concern","concert","conduct","confirm","connect","consist","contact","contain","content","contest","context","control","convert","cook","cool","cope","copy","coral","core","corn","corner","cost","cotton","couch","could","count","county","couple","course","court","cousin","cover","crack","craft","crash","crazy","cream","create","credit","creek","crew","crick","crime","crisis","critic","crop","cross","crowd","crown","crude","crush","crust","crystal","cubic","cult","curve","cush","cut","cycle","daily","damage","damp","dance","danger","dare","dark","data","date","dawn","dead","deal","dear","death","debt","decade","decay","deck","deed","deep","deer","defeat","defend","define","degree","delay","delete","deliver","demand","demo","denial","dense","dental","deny","depart","depend","deposit","depth","deputy","derive","desc","desert","design","desk","detail","detect","device","devote","diagram","dial","diamond","diary","dice","died","diet","differ","digital","dignity","dilemma","dinner","dioxide","direct","dirt","disagree","discover","disease","dish","dismiss","disorder","display","distance","divert","divide","divorce","dizzy","doctor","document","dog","doll","dolphin","domain","donate","door","dose","double","doubt","dove","down","dozen","draft","drag","drain","drama","drank","draw","dream","dress","drift","drill","drink","drip","drive","drop","drum","dry","duck","due","dumb","dump","dune","during","dust","dutch","duty","dwarf","dynamic","early","earth","ease","east","easy","eat","echo","edge","edit","educate","effort","egg","eight","either","elbow","elder","elect","element","elephant","elevator","elite","else","email","embark","embody","embrace","emerge","emotion","employ","empty","enable","end","enemy","energy","engage","engine","enhance","enjoy","enlarge","enough","enroll","ensure","enter","entire","entry","envelope","episode","equal","equip","era","error","escape","essay","establish","estate","estimate","ethnic","evaluate","even","evening","event","ever","every","evidence","exact","exam","example","exceed","excel","except","excess","exchange","excite","exclude","excuse","execute","exercise","exhaust","exhibit","exile","exist","exit","exotic","expand","expect","expire","explain","expose","express","extend","extra","eye","face","fact","factor","fail","faint","fair","faith","fall","false","fame","familiar","family","famous","fan
+        const C = document.getElementById('c');
+        const X = C.getContext('2d');
+        const UI_S = document.getElementById('s');
+        const UI_L = document.getElementById('l');
+        const UI_W = document.getElementById('w');
+        const UI_IN = document.getElementById('input');
+        const UI_OV = document.getElementById('over');
+        const UI_FS = document.getElementById('fs');
+        
+        let W, H, ships = [], stars = [], parts = [], score = 0, lives = 3, wave = 1, running = false, last = 0, spawnT = 0, speedMult = 1.0;
+        let wordList = [];
+        let laserTimer = 0;
+        let laserTarget = null;
+
+        function initStars() {
+            stars = [];
+            for(let i=0; i<200; i++) {
+                stars.push({
+                    x: Math.random() * window.innerWidth,
+                    y: Math.random() * window.innerHeight,
+                    z: Math.random() * 2 + 0.5,
+                    s: Math.random() * 1.5 + 0.5
+                });
+            }
+        }
+
+        function fetchWords() {
+            const w = new Set();
+            const fetchWord = async (url) => {
+                try {
+                    const r = await fetch(url);
+                    const t = await r.text();
+                    const matches = t.match(/[a-z]{3,15}/g) || [];
+                    matches.forEach(m => {
+                        if (!m.includes('x') && !w.has(m)) w.add(m);
+                    });
+                } catch(e) { console.log('Fetch fallback'); }
+            };
+            const promises = [
+                fetchWord('https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt'),
+                fetchWord('https://raw.githubusercontent.com/first20hours/google-10000-english/master/20k.txt')
+            ];
+            Promise.all(promises).then(() => {
+                wordList = Array.from(w);
+                if (wordList.length === 0) wordList = ["ship", "star", "laser", "fleet", "orbit", "pulse", "blast", "target", "vector", "warp", "alien", "droid", "system", "grid", "flux", "zone", "nova", "cyber", "quantum", "matrix", "logic", "power", "energy", "shield", "armor", "battle", "combat", "attack", "defend", "destroy", "engage", "launch", "missile", "radar", "sonar", "sensor", "scan", "lock", "track", "guide", "aim", "fire", "boom", "crash", "burn", "fury", "storm", "wind", "cloud", "rain", "snow", "ice", "fire", "heat", "cold", "dark", "light", "bright", "dim", "glow", "shine", "spark", "flash", "beam", "ray", "ray", "ray", "ray"];
+                startGame();
+            });
+        }
+
+        function startGame() {
+            W = window.innerWidth;
+            H = window.innerHeight;
+            C.width = W;
+            C.height = H;
+            initStars();
+            ships = [];
+            parts = [];
+            score = 0;
+            lives = 3;
+            wave = 1;
+            speedMult = 1.0;
+            spawnT = 0;
+            running = true;
+            UI_OV.style.display = 'none';
+            UI_S.innerText = score;
+            UI_L.innerText = lives;
+            UI_W.innerText = wave;
+            last = performance.now();
+            requestAnimationFrame(loop);
+        }
+
+        function reset() { startGame(); }
+
+        class Star {
+            constructor() {
+                this.x = Math.random() * W;
+                this.y = Math.random() * H;
+                this.z = Math.random() * 2 + 0.5;
+                this.s = Math.random() * 1.5 + 0.5;
+            }
+            update(dt) {
+                this.y += (this.z * 0.5) * (dt / 16) * speedMult;
+                if (this.y > H) {
+                    this.y = -10;
+                    this.x = Math.random() * W;
+                }
+            }
+            draw() {
+                const alpha = this.z / 2.5;
+                X.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+                X.beginPath();
+                X.arc(this.x, this.y, this.s, 0, Math.PI * 2);
+                X.fill();
+            }
+        }
+
+        class Particle {
+            constructor(x, y, c) {
+                this.x = x; this.y = y; this.c = c;
+                this.vx = (Math.random() - 0.5) * 8;
+                this.vy = (Math.random() - 0.5) * 8;
+                this.life = 1.0;
+                this.decay = Math.random() * 0.03 + 0.02;
+                this.size = Math.random() * 3 + 1;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.life -= this.decay;
+                this.size *= 0.95;
+            }
+            draw() {
+                X.globalAlpha = this.life;
+                X.fillStyle = this.c;
+                X.beginPath();
+                X.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                X.fill();
+                X.globalAlpha = 1.0;
+            }
+        }
+
+        class Ship {
+            constructor(w, parent = null) {
+                this.word = w;
+                this.parent = parent;
+                this.x = parent ? parent.x : Math.random() * (W - 100) + 50;
+                this.y = parent ? parent.y + 40 : -50;
+                this.hp = w.length;
+                this.maxHp = w.length;
+                this.marked = false;
+                this.color = parent ? '#00ffcc' : `hsl(${Math.random() * 60 + 320}, 100%, 60%)`;
+                this.isCapital = w.length >= 5;
+                this.size = this.isCapital ? 25 + (w.length * 2) : 15;
+                this.speed = (parent ? 2.5 : 0.8) + (Math.random() * 0.4);
+                if (!parent) this.speed *= speedMult;
+                this.spawnTimer = 0;
+            }
+
+            update(dt) {
+                if (!this.parent) this.y += this.speed * (dt / 16);
+                if (this.y > H - 80 && !this.parent) {
+                    this.marked = true;
+                    takeHit();
+                }
+                if (this.isCapital && !this.parent && !this.spawned) {
+                    this.spawnTimer += dt;
+                    if (this.spawnTimer > 3000 && this.hp > 2) {
+                        this.spawned = true;
+                        const subW = wordList[Math.floor(Math.random() * wordList.length)];
+                        ships.push(new Ship(subW, this));
+                    }
+                }
+            }
+
+            draw() {
+                const glow = this.isCapital ? 20 : 10;
+                X.shadowBlur = glow;
+                X.shadowColor = this.color;
+                X.fillStyle = this.color;
+                
+                if (this.isCapital) {
+                    X.beginPath();
+                    X.moveTo(this.x, this.y - this.size);
+                    X.lineTo(this.x - this.size, this.y + this.size);
+                    X.lineTo(this.x + this.size, this.y + this.size);
+                    X.closePath();
+                    X.fill();
+                    X.fillStyle = '#fff';
+                    X.font = `bold ${14 + (this.word.length * 2)}px Courier New`;
+                    X.textAlign = 'center';
+                    X.fillText(this.word, this.x, this.y + 5);
+                } else {
+                    X.beginPath();
+                    X.moveTo(this.x, this.y);
+                    X.lineTo(this.x - 10, this.y + 20);
+                    X.lineTo(this.x + 10, this.y + 20);
+                    X.closePath();
+                    X.fill();
+                    X.fillStyle = '#fff';
+                    X.font = 'bold 14px Courier New';
+                    X.textAlign = 'center';
+                    X.fillText(this.word, this.x, this.y - 5);
+                }
+                X.shadowBlur = 0;
+            }
+        }
+
+        function takeHit() { lives--; UI_L.innerText = lives; boom(W/2, H-80, '#00ffcc'); if(lives<=0) endGame(); }
+        function boom(x, y, c) { for(let i=0; i<20; i++) parts.push(new Particle(x, y, c)); }
+        function shoot(x1, y1, x2, y2) {
+            X.strokeStyle = '#00ffcc';
+            X.lineWidth = 3;
+            X.shadowBlur = 10;
+            X.shadowColor = '#00ffcc';
+            X.beginPath();
+            X.moveTo(x1, y1);
+            X.lineTo(x2, y2);
+            X.stroke();
+            X.shadowBlur = 0;
+        }
+
+        function input(e) {
+            if (!running) return;
+            const k = e.key.toUpperCase();
+            let t = null;
+            let minD = Infinity;
+            ships.forEach(s => {
+                if (s.hp > 0) {
+                    const idx = s.word.length - s.hp;
+                    if (s.word[idx] === k) {
+                        const d = Math.abs(s.y - (H - 100));
+                        if (d < minD) { minD = d; t = s; }
+                    }
+                }
+            });
+            if (t) {
+                t.hp--;
+                const typed = t.word.substring(0, t.word.length - t.hp);
+                UI_IN.innerText = typed + '_';
+                laserTarget = t;
+                laserTimer = 5;
+                if (t.hp <= 0) {
+                    t.marked = true;
+                    boom(t.x, t.y, t.color);
+                    score += t.word.length;
+                    UI_S.innerText = score;
+                    if (score > wave * 100) {
+                        wave++;
+                        speedMult += 0.1;
+                        UI_W.innerText = wave;
+                    }
+                }
+            }
+        }
+
+        function drawPlayer() {
+            const cx = W / 2;
+            const cy = H - 60;
+            X.fillStyle = '#00ffcc';
+            X.shadowBlur = 15;
+            X.shadowColor = '#00ffcc';
+            X.beginPath();
+            X.moveTo(cx, cy - 15);
+            X.lineTo(cx - 15, cy + 15);
+            X.lineTo(cx + 15, cy + 15);
+            X.closePath();
+            X.fill();
+            X.shadowBlur = 0;
+            if (laserTimer > 0 && laserTarget && !laserTarget.marked) {
+                shoot(cx, cy, laserTarget.x, laserTarget.y);
+                laserTimer--;
+            }
+        }
+
+        function loop(now) {
+            if (!running) return;
+            const dt = now - last;
+            last = now;
+            X.clearRect(0, 0, W, H);
+            
+            stars.forEach(s => { s.update(dt); s.draw(); });
+            
+            spawnT += dt;
+            if (spawnT > Math.max(800, 2000 - wave * 100)) {
+                const w = wordList[Math.floor(Math.random() * wordList.length)];
+                ships.push(new Ship(w));
+                spawnT = 0;
+            }
+
+            ships.forEach(s => { s.update(dt); s.draw(); });
+            ships = ships.filter(s => !s.marked);
+            
+            parts.forEach((p, i) => {
+                p.update();
+                p.draw();
+                if (p.life <= 0) parts.splice(i, 1);
+            });
+
+            drawPlayer();
+            requestAnimationFrame(loop);
+        }
+
+        window.addEventListener('resize', () => { W = window.innerWidth; H = window.innerHeight; C.width = W; C.height = H; initStars(); });
+        window.addEventListener('keydown', input);
+        fetchWords();
+    </script>
+</body>
+</html>

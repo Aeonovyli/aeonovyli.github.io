@@ -157,4 +157,60 @@ class Game {
         this.ctx.shadowBlur = 15;
         this.ctx.shadowColor = '#00ffcc';
         this.ctx.beginPath();
-        this.ctx.moveTo(cx, cy
+        this.ctx.moveTo(cx, cy - 15);
+        this.ctx.lineTo(cx - 15, cy + 15);
+        this.ctx.lineTo(cx + 15, cy + 15);
+        this.ctx.closePath();
+        this.ctx.fill();
+        this.ctx.shadowBlur = 0;
+
+        if (this.laserTimer > 0 && this.laserTarget && !this.laserTarget.marked) {
+            this.shoot(cx, cy, this.laserTarget.x, this.laserTarget.y);
+            this.laserTimer--;
+        }
+    }
+
+    loop(now) {
+        if (!this.running) return;
+        const dt = now - this.lastTime;
+        this.lastTime = now;
+
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+        this.starfield.update(this.speedMult);
+        this.starfield.draw(this.ctx);
+
+        this.spawnTimer += dt;
+        const spawnRate = Math.max(800, 2000 - this.wave * 100);
+        if (this.spawnTimer > spawnRate) {
+            const w = this.wordList[Math.floor(Math.random() * this.wordList.length)];
+            this.ships.push(new Ship(w, null, this.speedMult));
+            this.spawnTimer = 0;
+        }
+
+        let newShips = [];
+        this.ships.forEach(ship => {
+            const action = ship.update(dt, this.speedMult);
+            if (action === 'spawn') {
+                const subW = this.wordList[Math.floor(Math.random() * this.wordList.length)];
+                newShips.push(new Ship(subW, ship, this.speedMult));
+            }
+        });
+        this.ships.push(...newShips);
+
+        this.ships.forEach(ship => ship.draw(this.ctx));
+        this.ships = this.ships.filter(s => !s.marked);
+
+        this.particles.forEach((p, i) => {
+            p.update();
+            p.draw(this.ctx);
+            if (p.life <= 0) this.particles.splice(i, 1);
+        });
+
+        this.drawPlayer();
+
+        requestAnimationFrame((t) => this.loop(t));
+    }
+}
+
+const game = new Game();

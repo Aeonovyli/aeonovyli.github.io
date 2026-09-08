@@ -17,4 +17,5 @@ Appel by Griffpatch has edits by me...
 <a href="/page8">Chess</a>
 <a href="/page9">Sudoku</a>
 <a href="/game">Appel by Griffpatch</a>
+<a href="/page15">Gaming Advice</a>
 </nav>

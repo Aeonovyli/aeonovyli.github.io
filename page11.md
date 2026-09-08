@@ -281,10 +281,6 @@ For everyone: Email regulators, contact MEPs, share information, and support org
 <a href="/page2">Contact me</a>
 <a href="/page3">Profiles</a>
 <a href="/page4">Eiriaoloth</a>
-<a href="https://bz-next.github.io/mapviewer6/mapviewer.html">BZFlag map editor</a>
-<a href="/page6">Flash</a>
-<a href="/page7">BZFlag</a>
-<a href="/page8">Chess</a>
-<a href="/page9">Sudoku</a>
 <a href="/page10">Newsletter</a>
+<a href="/page16">Gaming</a>
 </nav>

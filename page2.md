@@ -252,11 +252,7 @@ Leave a message below. Only logged-in users can use this feature.
 <a href="/page1">Interests</a>
 <a href="/page3">Profiles</a>
 <a href="/page4">Eiriaoloth</a>
-<a href="https://bz-next.github.io/mapviewer6/mapviewer.html">BZFlag map editor</a>
-<a href="/page6">Flash</a>
-<a href="/page7">BZFlag</a>
-<a href="/page8">Chess</a>
-<a href="/page9">Sudoku</a>
 <a href="/page10">Newsletter</a>
 <a href="/page11">Keep Android Open</a>
+<a href="/page16">Gaming</a>
 </nav>

@@ -5,9 +5,7 @@ title: Gaming | Aeonovyli's personal website
 
 # Gaming
 
-Hello! This page has links to the pages related to gaming one my website. Some (one) have games ready to play on them, others are simply advice or tools.
-
-Appel by Griffpatch has edits by me...
+Hello! This page has links to the pages related to gaming one my website. Some (one) have games ready to play on them, others are simply advice or tools. Not all of these are mine, Appel is not and the BZFlag map editor is not either.
 
 <nav class="nav">
 <a href="/">Return to Home Page</a>

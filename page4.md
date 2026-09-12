@@ -12,7 +12,7 @@ Certainly not the meek inhabitants of Fornitas, or even the more powerful Guardi
 Far away lie three islands, each home to a powerful force. Avanois contains a horrifying powerful dragon species called the Censarion who are corrupted Guardians who are supposed to have guarded the Pillars of Eiriaoloth and became traitors. Arinonia is the home to the Arinonians, a powerful dragon species who lives to help others and fight the Censarion
 The Iron Throne, home to the Sorcerer Pair.
 
-Elvonar is a cluster of islands in a giant sea. Far across the waves lie other island clusters, the Ice Realm, the Water Realm, Elvonar, the Fire Realm, Stone Realm, and one mystery island that has yet to be named by me. For each island cluster there is one main Guardian responsible to contain evil as best as the Guardian might with the help of that island's wizard. And somewhere, buried deep beneath the waves accessible only to Guardians or dragons, lies a mysterious weapon that corrupts Guardians ruins kingdoms, destroys planets, and is ultimately out to conquer Elvonar, with or without the Destroyer's help.
+Elvonar is a cluster of islands in a giant sea. Far across the waves lie other island clusters, the Ice Realm, the Water Realm, Elvonar the Fire Realm, Stone Realm, and one mystery island that has yet to be named by me. For each island cluster there is one main Guardian responsible to contain evil as best as the Guardian might with the help of that island's wizard. And somewhere, buried deep beneath the waves accessible only to Guardians or dragons, lies a mysterious weapon that corrupts Guardians ruins kingdoms, destroys planets, and is ultimately out to conquer Elvonar, with or without the Destroyer's help.
 
 > # Prelude
 > 

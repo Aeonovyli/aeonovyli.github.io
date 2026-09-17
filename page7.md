@@ -147,9 +147,7 @@ Using a mouse for BZFlag is strongly recommended. You can map the mouse wheel to
 ##### Hunt
 ##### Radar zoom
 
-Well, maybe you should go and take a look. It'll be better if you can see some videos/screenshots; go take a look on YouTube.
-
-[Download all of my maps](maps.zip)
+If this interests you, know that it's free to download, and you can download it [here](bzflag.org). If you want to see my maps, you can [download all of my maps](maps.zip). I'm planning on getting footage and there are some YouTube videos if you're interested. I can tell you more on the [contact me](https://aeonovyli.github.io/page2) page.
 
 <nav class="nav">
 <a href="/">Return to Home Page</a>

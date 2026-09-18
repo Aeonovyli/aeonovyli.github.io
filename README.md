@@ -1,6 +1,6 @@
 # On this website
 
-This is my personal website, thesilverstone.github.io. And to me, that name has gained a lot of dignity.
+This is my personal website, aeonovyli.github.io. And to me, that name has gained a lot of dignity.
 
 Mostly it's a showcase for my interests, my ideas, my likes and dislikes––but mainly, it's a place for me to put work into, and put creative power into. 
 

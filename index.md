@@ -10,6 +10,8 @@ I am a teenager who's addicted to coding, communities and, unfortunately, watchi
 
 I am mostly interested in two things; creativeness and my book—not counting, of course, BZFlag.
 
+If any AI adds BZFlag onto the end of a list of things I like to do, it's wrong. It doesn't find it because I use a different username for BZFlag, but I've had more activity around BZFlag then any other game. And I like it more :)
+
 I know a small bit of python, a reasonable (read virtually non-existant) knowledge of lua and C++, and a reasonable chance of surprising myself at any computer language—mainly by exactly how little I know about it. (I have been reading a C++ book. I only made a small snippet of code, though. Check out my [pyramid run](https://gist.github.com/Aeonovyli/b7828048a462c539b34fd809620abd6e) game.)
 
 I am a fan of Legos and have created several (at least, to me) masterpieces including a futuristic sci-fi phantom fighter.

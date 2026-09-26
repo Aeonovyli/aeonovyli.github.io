@@ -28,6 +28,4 @@ My shell's too tough!'*
 
 Okay, enough of that. I always get that stuck in my head when I think of that word. I like the space background, because unlike in [Endless Sky](https://github.com/endless-sky/endless-sky) I'm focusing on things other than a not brightly colored (or shaped like a dinosaur, sorry ['Disgust'](https://en.wikipedia.org/wiki/Inside_Out_(franchise)#Cast_and_characters)) in the middle of a black, hard on my eyes, void. What could go wrong?
 
-I like the yellow, and if you look at my [old style](https://aeonovyli.github.io/page17) you can see what I mean by 'shiny'. 
-
 If you want more information, I can make a page for this.

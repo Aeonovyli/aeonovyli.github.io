@@ -1,4 +1,15 @@
-body {
+  body {
+    min-height: 100vh;
+    margin: 0;
+    background-color: #08090c;
+    background-image: '/assets/background.png';
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+
+/* body {
   background: #000019;
   margin: 0;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -6,7 +17,7 @@ body {
   padding: 20px;
   position: relative;
   overflow-y: auto;
-}
+} */
 
 .nav {
   display: flex;

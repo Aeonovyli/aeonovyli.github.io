@@ -2,7 +2,7 @@
     min-height: 100vh;
     margin: 0;
     background-color: #08090c;
-    background-image: url("{{ '/assets/background.png' | relative_url }}");
+    background-image: '/assets/background.png';
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;

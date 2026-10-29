@@ -21,7 +21,7 @@ I moved to the Western Middle East (seriously? How can that even exist?) at seve
 I am interested in VoxeLibre, a clone of Minecraft very similar yet free, BZFlag, an old yet very fun tank game from 1993, and making mods/maps for both, provided I have time––
 and ideas. Most of the time I don't.
 
-I am not an experienced 3D modeler, but I can make simple animations and sometimes complicated objects. I work best in blender (I mean, that's the only modeler I can even start to manage.) If you need models for pretty much anything besides commercial use, [contact me](https://aeonovyli.github.io) and I'll try to make them, charge free, though please do note that it will take me several months to get back to you.
+I am not an experienced 3D modeler, but I can make simple animations and sometimes complicated objects. I work best in blender (I mean, that's the only modeler I can even start to manage.) If you need models for pretty much anything besides commercial use, [contact me](https://aeonovyli.github.io/page2) and I'll try to make them, charge free, though please do note that it will take me several months to get back to you.
 
 Religion is a hard one. Simply, to Man, religion is why the universe is what it is—the truth to himself. But there is only one Truth and Life and Spirit. These extracts from the rightfully most famous Book of all time explain some things I thought I'd like to point out.
 

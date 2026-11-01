@@ -12,7 +12,6 @@
   <link rel="manifest" href="/favicon/site.webmanifest">
 
   <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Cormorant+Garamond&display=swap" rel="stylesheet">
-
   <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
   <script src="https://keepandroidopen.org/banner.js"></script>
 
@@ -42,13 +41,36 @@
     body {
       position: relative;
       z-index: 1;
+      background: #000019;
       color: #ffd700;
+      --theme-text: #f4dcc0;
+      --theme-frame: #d9b97a;
+      --theme-panel: rgba(20, 20, 20, 0.9);
+      --theme-accent: #ffd700;
+      transition: background 0.2s ease, color 0.2s ease;
     }
 
-    body.background-png-mode,
-    body.background-png-mode * {
-      color: #ffffff !important;
+    body[data-theme="background"],
+    body[data-theme="background-image"],
+    body[data-theme="backgroundpng"],
+    body[data-theme="image"],
+    body[data-theme="default"] {
+      background: url('/assets/background.png') center center / cover no-repeat fixed;
+      color: var(--theme-text);
+      --theme-text: #f4e9dc;
+      --theme-frame: #d8b98b;
+      --theme-panel: rgba(10, 10, 10, 0.62);
+      --theme-accent: #f4e9dc;
+    }
+
+    body[data-theme="background"] *,
+    body[data-theme="background-image"] *,
+    body[data-theme="backgroundpng"] *,
+    body[data-theme="image"] *,
+    body[data-theme="default"] * {
+      color: var(--theme-text) !important;
       text-shadow: none !important;
+      border-color: var(--theme-frame) !important;
     }
 
     .settings-page {
@@ -58,24 +80,24 @@
     }
 
     .settings-panel {
-      background: rgba(20, 20, 20, 0.9);
-      border: 1px solid #ffffff;
+      background: var(--theme-panel);
+      border: 1px solid var(--theme-frame);
       border-radius: 10px;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.18);
       padding: 30px;
-      color: #ffffff;
+      color: var(--theme-text);
     }
 
     .settings-panel h1 {
       margin-top: 0;
       margin-bottom: 12px;
       font-size: clamp(2rem, 4vw, 2.8rem);
-      color: #ffffff;
+      color: var(--theme-text);
     }
 
     .settings-description {
       margin-bottom: 28px;
-      color: #ffffff;
+      color: var(--theme-text);
     }
 
     .settings-form {
@@ -88,24 +110,18 @@
       align-items: center;
       gap: 12px;
       padding: 12px 14px;
-      border: 1px solid #ffffff;
+      border: 1px solid var(--theme-frame);
       border-radius: 8px;
       background: rgba(255, 255, 255, 0.02);
       cursor: pointer;
-      color: #ffffff;
+      color: var(--theme-text);
     }
 
     .setting-option input {
-      accent-color: #ffffff;
+      accent-color: var(--theme-frame);
       width: 18px;
       height: 18px;
       margin: 0;
-    }
-
-    body.background-png-mode .settings-panel,
-    body.background-png-mode .setting-option {
-      border-color: #ffffff;
-      color: #ffffff !important;
     }
   </style>
 </head>
@@ -167,74 +183,95 @@
       const STORAGE_KEY = "aeonovyli-website-style";
       const themeLink = document.querySelector('link[data-style-theme]');
 
-      function readSavedStyle() {
-        try {
-          const saved = localStorage.getItem(STORAGE_KEY);
-          if (saved === "current" || saved === "old" || saved === "none") {
-            return saved;
-          }
-        } catch (error) {
-          return "none";
-        }
-        return "none";
+      function normalizeThemeName(name) {
+        if (!name) return "style";
+        return name.replace(/\.css$/i, "");
       }
 
-      function applySavedSiteStyle(mode) {
-        if (!themeLink) return;
+      function readSavedTheme() {
+        try {
+          const saved = localStorage.getItem(STORAGE_KEY);
+          return normalizeThemeName(saved || "style");
+        } catch (error) {
+          return "style";
+        }
+      }
 
-        document.body.classList.toggle("background-png-mode", mode === "none");
+      function applyTheme(name) {
+        const themeName = normalizeThemeName(name);
 
-        if (mode === "old") {
-          themeLink.href = "/assets/css/styleold.css";
-        } else {
-          themeLink.href = "/assets/css/style.css";
+        if (themeLink) {
+          const candidate = "/assets/css/" + themeName + ".css";
+          themeLink.href = candidate;
         }
 
-        const particles = document.getElementById("particles-js");
+        document.body.setAttribute("data-theme", themeName);
 
-        if (mode === "none") {
-          if (particles) particles.style.display = "none";
+        const isImageTheme = themeName === "background" || themeName === "background-image" || themeName === "backgroundpng" || themeName === "image" || themeName === "default";
+
+        if (isImageTheme) {
           document.body.style.background = "url('/assets/background.png') center center / cover no-repeat fixed";
-          document.body.style.backgroundColor = "#000000";
           document.body.style.backgroundAttachment = "fixed";
-          document.body.style.color = "#ffffff";
+          document.body.style.backgroundColor = "#000000";
+          document.body.style.color = "#f4e9dc";
+          document.body.style.setProperty("--theme-text", "#f4e9dc");
+          document.body.style.setProperty("--theme-frame", "#d8b98b");
+          document.body.style.setProperty("--theme-panel", "rgba(12, 12, 12, 0.62)");
+          document.body.style.setProperty("--theme-accent", "#f4e9dc");
+          const particles = document.getElementById("particles-js");
+          if (particles) particles.style.display = "none";
         } else {
-          if (particles) particles.style.display = "block";
           document.body.style.background = "#000019";
           document.body.style.backgroundImage = "none";
           document.body.style.backgroundAttachment = "scroll";
           document.body.style.color = "#ffd700";
+          document.body.style.setProperty("--theme-text", "#f4dcc0");
+          document.body.style.setProperty("--theme-frame", "#d9b97a");
+          document.body.style.setProperty("--theme-panel", "rgba(20, 20, 20, 0.9)");
+          document.body.style.setProperty("--theme-accent", "#ffd700");
+          const particles = document.getElementById("particles-js");
+          if (particles) particles.style.display = "block";
         }
       }
 
-      const initialStyle = readSavedStyle();
-      applySavedSiteStyle(initialStyle);
+      const initialTheme = readSavedTheme();
+      applyTheme(initialTheme);
 
-      window.applySavedSiteStyle = applySavedSiteStyle;
+      window.applyTheme = function (name) {
+        const themeName = normalizeThemeName(name);
+        try {
+          localStorage.setItem(STORAGE_KEY, themeName);
+        } catch (error) {
+        }
+        applyTheme(themeName);
+      };
     })();
   </script>
 
   <script>
     (function () {
-      const STORAGE_KEY = "aeonovyli-website-style";
       const form = document.getElementById("site-style-form");
-
       if (!form) return;
 
-      function selectedStyle() {
-        const selected = form.querySelector('input[name="site-style"]:checked');
-        return selected ? selected.value : "none";
+      function selectedValue() {
+        const checked = form.querySelector('input[name="site-style"]:checked');
+        return checked ? checked.value : "style";
       }
 
-      form.addEventListener("change", function () {
-        const value = selectedStyle();
-        try {
-          localStorage.setItem(STORAGE_KEY, value);
-        } catch (error) {
-        }
+      function syncSelection() {
+        const saved = localStorage.getItem("aeonovyli-website-style") || "style";
+        const radio = form.querySelector('input[name="site-style"][value="' + saved + '"]');
+        if (radio) radio.checked = true;
+      }
 
-        if (window.applySavedSiteStyle) {
-          window.applySavedSiteStyle(value);
+      syncSelection();
+
+      form.addEventListener("change", function () {
+        const value = selectedValue();
+        window.applyTheme(value);
+        try {
+          localStorage.setItem("aeonovyli-website-style", value);
+        } catch (error) {
         }
       });
     })();

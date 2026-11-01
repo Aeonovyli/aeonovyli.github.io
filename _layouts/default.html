@@ -46,6 +46,7 @@
 </head>
 
 <body>
+
   <div id="particles-js"></div>
 
   {{ content }}
@@ -159,20 +160,6 @@
         return name.replace(/\.css$/i, "");
       }
 
-      function applyTheme(themeName) {
-        const normalized = normalizeTheme(themeName);
-        if (stylesheet) {
-          stylesheet.href = "/assets/css/" + normalized + ".css";
-        }
-        document.body.setAttribute("data-theme", normalized);
-
-        if (normalized === "default") {
-          document.body.style.background = "url('/assets/background.png') center center / cover no-repeat fixed";
-        } else {
-          document.body.style.background = "";
-        }
-      }
-
       function readSavedTheme() {
         try {
           const saved = localStorage.getItem(STORAGE_KEY);
@@ -183,6 +170,13 @@
         return "style";
       }
 
+      function applyTheme(themeName) {
+        const normalized = normalizeTheme(themeName);
+        if (stylesheet) {
+          stylesheet.href = "/assets/css/" + normalized + ".css";
+        }
+      }
+
       const savedTheme = readSavedTheme();
       applyTheme(savedTheme);
 
@@ -191,6 +185,7 @@
         try {
           localStorage.setItem(STORAGE_KEY, normalized);
         } catch (error) {}
+
         applyTheme(normalized);
       };
     })();

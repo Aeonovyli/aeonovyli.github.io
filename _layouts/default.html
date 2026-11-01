@@ -13,9 +13,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Cormorant+Garamond&display=swap" rel="stylesheet">
 
   <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+  
   <script src="https://keepandroidopen.org/banner.js"></script>
 
-  <link rel="stylesheet" href="/assets/css/style.css" id="theme-stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css" data-style-theme="current">
 
   <style>
     #particles-js {
@@ -27,7 +28,7 @@
       z-index: 0;
       pointer-events: none;
     }
-
+    
     #banner-js {
       position: fixed;
       top: 1;
@@ -55,14 +56,14 @@
     particlesJS("particles-js", {
       particles: {
         number: {
-          value: 150,
+          value: 150, 
           density: {
             enable: true,
             value_area: 800
           }
         },
         color: {
-          value: ["#ffd700", "#00f3ff", "#ffffff"]
+          value: ["#ffd700", "#00f3ff", "#ffffff"] 
         },
         shape: {
           type: "circle"
@@ -96,8 +97,8 @@
         },
         move: {
           enable: true,
-          speed: 0.5,
-          direction: "none",
+          speed: 0.5, 
+          direction: "none", 
           random: true,
           straight: false,
           out_mode: "out",
@@ -153,41 +154,55 @@
   <script>
     (function () {
       const STORAGE_KEY = "aeonovyli-website-style";
-      const stylesheet = document.getElementById("theme-stylesheet");
+      const themeLink = document.querySelector('link[data-style-theme]');
 
-      function normalizeTheme(name) {
-        if (!name) return "style";
-        return name.replace(/\.css$/i, "");
-      }
-
-      function readSavedTheme() {
+      function readSavedStyle() {
         try {
           const saved = localStorage.getItem(STORAGE_KEY);
-          if (saved === "style" || saved === "styleold" || saved === "default") {
+          if (saved === "current" || saved === "old" || saved === "none") {
             return saved;
           }
-        } catch (error) {}
-        return "style";
+        } catch (error) {
+          return "none";
+        }
+        return "none";
       }
 
-      function applyTheme(themeName) {
-        const normalized = normalizeTheme(themeName);
-        if (stylesheet) {
-          stylesheet.href = "/assets/css/" + normalized + ".css";
+      function applySavedSiteStyle(mode) {
+        if (!themeLink) {
+          return;
+        }
+
+        if (mode === "old") {
+          themeLink.href = "/assets/css/styleold.css";
+        } else {
+          themeLink.href = "/assets/css/style.css";
+        }
+
+        const particles = document.getElementById("particles-js");
+
+        if (mode === "none") {
+          if (particles) {
+            particles.style.display = "none";
+          }
+
+          document.body.style.background = "url('/assets/background.png') center center / cover no-repeat fixed";
+          document.body.style.backgroundColor = "#000019";
+          document.body.style.backgroundAttachment = "fixed";
+        } else {
+          if (particles) {
+            particles.style.display = "block";
+          }
+
+          document.body.style.backgroundColor = "#000019";
+          document.body.style.backgroundImage = "none";
+          document.body.style.backgroundAttachment = "scroll";
         }
       }
 
-      const savedTheme = readSavedTheme();
-      applyTheme(savedTheme);
-
-      window.applyTheme = function (themeName) {
-        const normalized = normalizeTheme(themeName);
-        try {
-          localStorage.setItem(STORAGE_KEY, normalized);
-        } catch (error) {}
-
-        applyTheme(normalized);
-      };
+      const savedStyle = readSavedStyle();
+      applySavedSiteStyle(savedStyle);
+      window.applySavedSiteStyle = applySavedSiteStyle;
     })();
   </script>
 

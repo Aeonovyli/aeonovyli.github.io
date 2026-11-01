@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ page.title }}</title>
-
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
@@ -16,7 +15,7 @@
   <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
   <script src="https://keepandroidopen.org/banner.js"></script>
 
-  <link rel="stylesheet" href="/assets/css/style.css" id="theme-sheet">
+  <link rel="stylesheet" href="/assets/css/style.css" id="theme-stylesheet">
 
   <style>
     #particles-js {
@@ -42,69 +41,6 @@
     body {
       position: relative;
       z-index: 1;
-      background: #000019;
-      color: #ffd700;
-      transition: background 0.2s ease, color 0.2s ease;
-    }
-
-    body[data-theme="default"],
-    body[data-theme="background"],
-    body[data-theme="background-image"],
-    body[data-theme="backgroundpng"],
-    body[data-theme="image"] {
-      background: url('/assets/background.png') center center / cover no-repeat fixed;
-      color: #f4e9dc;
-    }
-
-    .settings-page {
-      max-width: 700px;
-      margin: 64px auto;
-      padding: 0 20px;
-    }
-
-    .settings-panel {
-      background: rgba(20, 20, 20, 0.9);
-      border: 1px solid var(--theme-frame, #d8b98b);
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.18);
-      padding: 30px;
-      color: #f4e9dc;
-    }
-
-    .settings-panel h1 {
-      margin-top: 0;
-      margin-bottom: 12px;
-      font-size: clamp(2rem, 4vw, 2.8rem);
-      color: inherit;
-    }
-
-    .settings-description {
-      margin-bottom: 28px;
-      color: inherit;
-    }
-
-    .settings-form {
-      display: grid;
-      gap: 16px;
-    }
-
-    .setting-option {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 14px;
-      border: 1px solid var(--theme-frame, #d8b98b);
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.02);
-      cursor: pointer;
-      color: inherit;
-    }
-
-    .setting-option input {
-      accent-color: var(--theme-frame, #d8b98b);
-      width: 18px;
-      height: 18px;
-      margin: 0;
     }
   </style>
 </head>
@@ -117,20 +53,46 @@
   <script>
     particlesJS("particles-js", {
       particles: {
-        number: { value: 150, density: { enable: true, value_area: 800 } },
-        color: { value: ["#ffd700", "#00f3ff", "#ffffff"] },
-        shape: { type: "circle" },
+        number: {
+          value: 150,
+          density: {
+            enable: true,
+            value_area: 800
+          }
+        },
+        color: {
+          value: ["#ffd700", "#00f3ff", "#ffffff"]
+        },
+        shape: {
+          type: "circle"
+        },
         opacity: {
           value: 0.5,
           random: true,
-          anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false }
+          anim: {
+            enable: true,
+            speed: 1,
+            opacity_min: 0.1,
+            sync: false
+          }
         },
         size: {
           value: 2,
           random: true,
-          anim: { enable: false, speed: 1, size_min: 0.1, sync: false }
+          anim: {
+            enable: false,
+            speed: 1,
+            size_min: 0.1,
+            sync: false
+          }
         },
-        line_linked: { enable: false, distance: 150, color: "#ffffff", opacity: 0.4, width: 1 },
+        line_linked: {
+          enable: false,
+          distance: 150,
+          color: "#ffffff",
+          opacity: 0.4,
+          width: 1
+        },
         move: {
           enable: true,
           speed: 0.5,
@@ -139,22 +101,48 @@
           straight: false,
           out_mode: "out",
           bounce: false,
-          attract: { enable: false, rotateX: 600, rotateY: 1200 }
+          attract: {
+            enable: false,
+            rotateX: 600,
+            rotateY: 1200
+          }
         }
       },
       interactivity: {
         detect_on: "canvas",
         events: {
-          onhover: { enable: false },
-          onclick: { enable: false },
+          onhover: {
+            enable: false
+          },
+          onclick: {
+            enable: false
+          },
           resize: true
         },
         modes: {
-          grab: { distance: 400, line_linked: { opacity: 1 } },
-          bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 },
-          repulse: { distance: 200, duration: 0.4 },
-          push: { particles_nb: 4 },
-          remove: { particles_nb: 2 }
+          grab: {
+            distance: 400,
+            line_linked: {
+              opacity: 1
+            }
+          },
+          bubble: {
+            distance: 400,
+            size: 40,
+            duration: 2,
+            opacity: 8,
+            speed: 3
+          },
+          repulse: {
+            distance: 200,
+            duration: 0.4
+          },
+          push: {
+            particles_nb: 4
+          },
+          remove: {
+            particles_nb: 2
+          }
         }
       },
       retina_detect: true
@@ -164,55 +152,42 @@
   <script>
     (function () {
       const STORAGE_KEY = "aeonovyli-website-style";
-      const themeSheet = document.getElementById("theme-sheet");
+      const stylesheet = document.getElementById("theme-stylesheet");
 
-      function normalizeThemeName(name) {
+      function normalizeTheme(name) {
         if (!name) return "style";
         return name.replace(/\.css$/i, "");
+      }
+
+      function applyTheme(themeName) {
+        const normalized = normalizeTheme(themeName);
+        if (stylesheet) {
+          stylesheet.href = "/assets/css/" + normalized + ".css";
+        }
+        document.body.setAttribute("data-theme", normalized);
+
+        if (normalized === "default") {
+          document.body.style.background = "url('/assets/background.png') center center / cover no-repeat fixed";
+        } else {
+          document.body.style.background = "";
+        }
       }
 
       function readSavedTheme() {
         try {
           const saved = localStorage.getItem(STORAGE_KEY);
-          return normalizeThemeName(saved || "style");
-        } catch (error) {
-          return "style";
-        }
+          if (saved === "style" || saved === "styleold" || saved === "default") {
+            return saved;
+          }
+        } catch (error) {}
+        return "style";
       }
 
-      function applyTheme(themeName) {
-        const normalized = normalizeThemeName(themeName);
+      const savedTheme = readSavedTheme();
+      applyTheme(savedTheme);
 
-        if (themeSheet) {
-          themeSheet.href = "/assets/css/" + normalized + ".css";
-        }
-
-        document.body.setAttribute("data-theme", normalized);
-
-        const isImageTheme = ["default", "background", "background-image", "backgroundpng", "image"].includes(normalized);
-
-        if (isImageTheme) {
-          document.body.style.background = "url('/assets/background.png') center center / cover no-repeat fixed";
-          document.body.style.backgroundColor = "#000000";
-          document.body.style.backgroundAttachment = "fixed";
-          document.body.style.color = "#f4e9dc";
-          const particles = document.getElementById("particles-js");
-          if (particles) particles.style.display = "none";
-        } else {
-          document.body.style.background = "#000019";
-          document.body.style.backgroundImage = "none";
-          document.body.style.backgroundAttachment = "scroll";
-          document.body.style.color = "#ffd700";
-          const particles = document.getElementById("particles-js");
-          if (particles) particles.style.display = "block";
-        }
-      }
-
-      const initialTheme = readSavedTheme();
-      applyTheme(initialTheme);
-
-      window.applyTheme = function (name) {
-        const normalized = normalizeThemeName(name);
+      window.applyTheme = function (themeName) {
+        const normalized = normalizeTheme(themeName);
         try {
           localStorage.setItem(STORAGE_KEY, normalized);
         } catch (error) {}
@@ -221,23 +196,5 @@
     })();
   </script>
 
-  <script>
-    (function () {
-      const form = document.getElementById("site-style-form");
-      if (!form) return;
-
-      function selectedValue() {
-        const checked = form.querySelector('input[name="site-style"]:checked');
-        return checked ? checked.value : "style";
-      }
-
-      form.addEventListener("change", function () {
-        const value = selectedValue();
-        if (window.applyTheme) {
-          window.applyTheme(value);
-        }
-      });
-    })();
-  </script>
 </body>
 </html>

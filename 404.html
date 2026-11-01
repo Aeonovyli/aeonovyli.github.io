@@ -11,50 +11,81 @@
   <link rel="manifest" href="/favicon/site.webmanifest">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Cormorant+Garamond&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/style.css" data-style-theme="current">
 </head>
 <body>
   <div id="particles-js"></div>
   <div class="message-box">
-      <h1>ERROR 404</h1>
-      <p>This page was not found! Try returning to the main page or looking at the github repository. Alternatively you could submit an issue to make this page.</p>
-      <div class="nav">
-          <a href="/">Main Page</a>
-          <a href="https://github.com/aeonovyli/aeonovyli.github.io/issues" target="_blank" rel="noopener noreferrer">Submit an Issue</a>
-      </div>
+    <h1>ERROR 404</h1>
+    <p>This page was not found! Try returning to the main page or looking at the github repository. Alternatively you could submit an issue to make this page.</p>
+    <div class="nav">
+      <a href="/">Main Page</a>
+      <a href="https://github.com/aeonovyli/aeonovyli.github.io/issues" target="_blank" rel="noopener noreferrer">Submit an Issue</a>
+    </div>
   </div>
+
+  <script>
+    (function () {
+      const STORAGE_KEY = "aeonovyli-website-style";
+      const themeLink = document.querySelector('link[data-style-theme]');
+
+      function normalizeThemeName(name) {
+        if (!name) return "style";
+        return name.replace(/\.css$/i, "");
+      }
+
+      function readSavedTheme() {
+        try {
+          const saved = localStorage.getItem(STORAGE_KEY);
+          return normalizeThemeName(saved || "style");
+        } catch (error) {
+          return "style";
+        }
+      }
+
+      function applyTheme(name) {
+        const themeName = normalizeThemeName(name);
+        if (themeLink) {
+          themeLink.href = "/assets/css/" + themeName + ".css";
+        }
+
+        const isImageTheme = themeName === "background" || themeName === "background-image" || themeName === "backgroundpng" || themeName === "image" || themeName === "default";
+        document.body.setAttribute("data-theme", themeName);
+
+        if (isImageTheme) {
+          document.body.style.background = "url('/assets/background.png') center center / cover no-repeat fixed";
+          document.body.style.backgroundAttachment = "fixed";
+          document.body.style.backgroundColor = "#000000";
+          document.body.style.color = "#f4e9dc";
+          const particles = document.getElementById("particles-js");
+          if (particles) particles.style.display = "none";
+        } else {
+          document.body.style.background = "#000019";
+          document.body.style.backgroundImage = "none";
+          document.body.style.backgroundAttachment = "scroll";
+          document.body.style.color = "#ffd700";
+          const particles = document.getElementById("particles-js");
+          if (particles) particles.style.display = "block";
+        }
+      }
+
+      const initialTheme = readSavedTheme();
+      applyTheme(initialTheme);
+    })();
+  </script>
+
   <script>
     particlesJS("particles-js", {
       particles: {
-        number: {
-          value: 70
-        },
-        size: {
-          value: 2
-        },
-        move: {
-          speed: 0.3,
-          direction: "top",
-          random: true,
-          out_mode: "out"
-        },
-        opacity: {
-          value: 0.3,
-          random: true
-        },
-        color: {
-          value: ["#4da6ff", "#ff944d", "#ffffff"]
-        },
-        line_linked: {
-          enable: false
-        }
+        number: { value: 70 },
+        size: { value: 2 },
+        move: { speed: 0.3, direction: "top", random: true, out_mode: "out" },
+        opacity: { value: 0.3, random: true },
+        color: { value: ["#4da6ff", "#ff944d", "#ffffff"] },
+        line_linked: { enable: false }
       },
       interactivity: {
-        events: {
-          onhover: {
-            enable: false
-          }
-        }
+        events: { onhover: { enable: false } }
       },
       retina_detect: true
     });

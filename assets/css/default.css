@@ -1,0 +1,83 @@
+:root {
+  --theme-bg-image: url('/assets/background.png');
+  --theme-text: #f4e9dc;
+  --theme-frame: #d8b98b;
+  --theme-panel: rgba(10, 10, 10, 0.68);
+  --theme-panel-strong: rgba(16, 16, 16, 0.9);
+  --theme-glow: rgba(216, 185, 139, 0.28);
+}
+
+body[data-theme="default"],
+body[data-theme="background"],
+body[data-theme="background-image"],
+body[data-theme="backgroundpng"],
+body[data-theme="image"] {
+  background: var(--theme-bg-image) center center / cover no-repeat fixed;
+  background-color: #000;
+  color: var(--theme-text);
+}
+
+body[data-theme="default"] *,
+body[data-theme="background"] *,
+body[data-theme="background-image"] *,
+body[data-theme="backgroundpng"] *,
+body[data-theme="image"] * {
+  color: inherit !important;
+  border-color: var(--theme-frame) !important;
+  text-shadow: none !important;
+}
+
+body[data-theme="default"] .settings-panel,
+body[data-theme="background"] .settings-panel,
+body[data-theme="background-image"] .settings-panel,
+body[data-theme="backgroundpng"] .settings-panel,
+body[data-theme="image"] .settings-panel,
+body[data-theme="default"] .message-box,
+body[data-theme="background"] .message-box,
+body[data-theme="background-image"] .message-box,
+body[data-theme="backgroundpng"] .message-box,
+body[data-theme="image"] .message-box,
+body[data-theme="default"] .setting-option,
+body[data-theme="background"] .setting-option,
+body[data-theme="background-image"] .setting-option,
+body[data-theme="backgroundpng"] .setting-option,
+body[data-theme="image"] .setting-option {
+  background: var(--theme-panel);
+  border: 1px solid var(--theme-frame);
+  box-shadow: 0 0 18px var(--theme-glow);
+  color: var(--theme-text);
+}
+
+body[data-theme="default"] .settings-panel,
+body[data-theme="background"] .settings-panel,
+body[data-theme="background-image"] .settings-panel,
+body[data-theme="backgroundpng"] .settings-panel,
+body[data-theme="image"] .settings-panel {
+  background: var(--theme-panel-strong);
+}
+
+body[data-theme="default"] .settings-panel h1,
+body[data-theme="background"] .settings-panel h1,
+body[data-theme="background-image"] .settings-panel h1,
+body[data-theme="backgroundpng"] .settings-panel h1,
+body[data-theme="image"] .settings-panel h1,
+body[data-theme="default"] h1,
+body[data-theme="background"] h1,
+body[data-theme="background-image"] h1,
+body[data-theme="backgroundpng"] h1,
+body[data-theme="image"] h1 {
+  color: var(--theme-text);
+}
+
+body[data-theme="default"] a,
+body[data-theme="background"] a,
+body[data-theme="background-image"] a,
+body[data-theme="backgroundpng"] a,
+body[data-theme="image"] a,
+body[data-theme="default"] button,
+body[data-theme="background"] button,
+body[data-theme="background-image"] button,
+body[data-theme="backgroundpng"] button,
+body[data-theme="image"] button {
+  color: var(--theme-text);
+}

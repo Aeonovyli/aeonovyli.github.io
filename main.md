@@ -35,18 +35,15 @@ title: Settings | Aeonovyli's personal website
     const status = document.getElementById("site-style-status");
     const saveButton = document.getElementById("save-site-style");
     const resetButton = document.getElementById("reset-site-style");
-
-    function getDefaultValue() {
+    function getDefaultValue() { 
       return "none";
     }
-
     function setSelection(value) {
       const radios = form.querySelectorAll('input[name="site-style"]');
       radios.forEach((radio) => {
         radio.checked = radio.value === value;
       });
     }
-
     function loadSelection() {
       let value = getDefaultValue();
       try {
@@ -60,38 +57,28 @@ title: Settings | Aeonovyli's personal website
       setSelection(value);
       return value;
     }
-
     function saveSelection(value) {
       try {
         localStorage.setItem(STORAGE_KEY, value);
       } catch (error) {
-        // Ignore storage failures in restricted browsers.
       }
-
       if (window.applySavedSiteStyle) {
         window.applySavedSiteStyle(value);
       }
-
       status.textContent = "Style saved.";
     }
-
     loadSelection();
-
     saveButton.addEventListener("click", function () {
       const selected = form.querySelector('input[name="site-style"]:checked');
       const value = selected ? selected.value : getDefaultValue();
       saveSelection(value);
     });
-
     resetButton.addEventListener("click", function () {
       const defaultValue = getDefaultValue();
-
       try {
         localStorage.removeItem(STORAGE_KEY);
       } catch (error) {
-        // Ignore storage failures in restricted browsers.
       }
-
       setSelection(defaultValue);
       if (window.applySavedSiteStyle) {
         window.applySavedSiteStyle(defaultValue);

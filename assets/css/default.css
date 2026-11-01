@@ -2,7 +2,7 @@
   --theme-bg-image: url('/assets/background.png');
   --theme-text: #f4e9dc;
   --theme-frame: #d8b98b;
-  --theme-panel: rgba(10, 10, 10, 0.68);
+  --theme-panel: rgba(12, 12, 12, 0.68);
   --theme-panel-strong: rgba(16, 16, 16, 0.9);
   --theme-glow: rgba(216, 185, 139, 0.28);
 }

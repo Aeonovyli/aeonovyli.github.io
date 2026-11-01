@@ -24,5 +24,4 @@ If you're interested in my bzflag maps, you can [find them here](maps.zip). When
 <a href="/page8">Chess</a>
 <a href="/page9">Sudoku</a>
 <a href="/game">Beyond</a>
-<a href="/page15">Gaming Advice</a>
 </nav>

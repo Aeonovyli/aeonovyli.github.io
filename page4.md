@@ -1,15 +1,15 @@
 ---
 layout: default
-title: Eiriaoloth | Aeonovyli's personal website
+title: Eirialoth | Aeonovyli's personal website
 ---
 
-# Eiriaoloth
+# Eirialoth
 
-My book is *Eiriaoloth*, an epic fantasy through the beautiful and lush land, soon to be ruined by the rising flood and the central conquest of the Sword. The Destroyer is coming, ready to clasp Elvonar in his claws. Who can stop him now?
+My book is *Eirialoth*, an epic fantasy through the beautiful and lush land, soon to be ruined by the rising flood and the central conquest of the Sword. The Destroyer is coming, ready to clasp Elvonar in his claws. Who can stop him now?
 
 Certainly not the meek inhabitants of Fornitas, or even the more powerful Guardians. The doom marches on, unchecked. But the Redeemer is still there, and Elvonar shall not fall while He still breaths. The question is, how long will that be?
 
-Far away lie three islands, each home to a powerful force. Avanois contains a horrifying powerful dragon species called the Censarion who are corrupted Guardians who are supposed to have guarded the Pillars of Eiriaoloth and became traitors. Arinonia is the home to the Arinonians, a powerful dragon species who lives to help others and fight the Censarion
+Far away lie three islands, each home to a powerful force. Avanois contains a horrifying powerful dragon species called the Censarion who are corrupted Guardians who are supposed to have guarded the Pillars of Eirialoth and became traitors. Arinonia is the home to the Arinonians, a powerful dragon species who lives to help others and fight the Censarion
 The Iron Throne, home to the Sorcerer Pair.
 
 Elvonar is a cluster of islands in a giant sea. Far across the waves lie other island clusters, the Ice Realm, the Water Realm, Elvonar the Fire Realm, Stone Realm, and one mystery island that has yet to be named by me. For each island cluster there is one main Guardian responsible to contain evil as best as the Guardian might with the help of that island's wizard. And somewhere, buried deep beneath the waves accessible only to Guardians or dragons, lies a mysterious weapon that corrupts Guardians ruins kingdoms, destroys planets, and is ultimately out to conquer Elvonar, with or without the Destroyer's help.
@@ -20,7 +20,7 @@ Elvonar is a cluster of islands in a giant sea. Far across the waves lie other i
 
 >  These were the Guardians.
 
->  The Guardians’ work was in vain, even within their one most sacred task—protecting the valley of Eiriaoloth, keeping it safe from the rampaging hordes of evil ones who sought to destroy it, the one valley of a last hope.
+>  The Guardians’ work was in vain, even within their one most sacred task—protecting the valley of Eirialoth, keeping it safe from the rampaging hordes of evil ones who sought to destroy it, the one valley of a last hope.
 >  For the water wished to invade the land, flooding it and taking it for its own. Something deeper and darker moved in the water, just as something light and holy called the Dragon Master, in his strength, to create the Pillars to stop it.
 >  These Pillars were given power and might to stop the Sea and strength to defend all Elvonar, saving it from destruction.
 >  But these Pillars could not protect themselves.
